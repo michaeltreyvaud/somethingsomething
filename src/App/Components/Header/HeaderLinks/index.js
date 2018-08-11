@@ -10,13 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import Grow from '@material-ui/core/Grow';
 import Hidden from '@material-ui/core/Hidden';
 import Popper from '@material-ui/core/Popper';
-
-import Person from '@material-ui/icons/Person';
 import Notifications from '@material-ui/icons/Notifications';
-import Dashboard from '@material-ui/icons/Dashboard';
-import Search from '@material-ui/icons/Search';
-
-import CustomInput from '../../CustomInput';
 import Button from '../../CustomButtons';
 
 import headerLinksStyle from './style';
@@ -62,55 +56,6 @@ class HeaderLinks extends React.Component {
     });
     return (
       <div className={wrapper}>
-        <CustomInput
-          rtlActive={rtlActive}
-          formControlProps={{
-            className: `${classes.top} ${classes.search}`,
-          }}
-          inputProps={{
-            placeholder: rtlActive ? 'بحث' : 'Search',
-            inputProps: {
-              'aria-label': rtlActive ? 'بحث' : 'Search',
-              className: classes.searchInput,
-            },
-          }}
-        />
-        <Button
-          color="white"
-          aria-label="edit"
-          justIcon
-          round
-          className={searchButton}
-        >
-          <Search
-            className={`${classes.headerLinksSvg} ${classes.searchIcon}`}
-          />
-        </Button>
-        <Button
-          color="transparent"
-          simple
-          aria-label="Dashboard"
-          justIcon
-          className={rtlActive ? classes.buttonLinkRTL : classes.buttonLink}
-          muiClasses={{
-            label: rtlActive ? classes.labelRTL : '',
-          }}
-        >
-          <Dashboard
-            className={
-              `${classes.headerLinksSvg
-              } ${
-                rtlActive
-                  ? `${classes.links} ${classes.linksRTL}`
-                  : classes.links}`
-            }
-          />
-          <Hidden mdUp implementation="css">
-            <span className={classes.linkText}>
-              {rtlActive ? 'لوحة القيادة' : 'Dashboard'}
-            </span>
-          </Hidden>
-        </Button>
         <div className={managerClasses}>
           <Button
             color="transparent"
@@ -168,37 +113,31 @@ class HeaderLinks extends React.Component {
                         onClick={this.handleClose}
                         className={dropdownItem}
                       >
-                        {rtlActive
-                          ? 'إجلاء أوزار الأسيوي حين بل, كما'
-                          : 'Mike John responded to your email'}
+                        {'Mike John responded to your email'}
                       </MenuItem>
                       <MenuItem
                         onClick={this.handleClose}
                         className={dropdownItem}
                       >
-                        {rtlActive
-                          ? 'شعار إعلان الأرضية قد ذلك'
-                          : 'You have 5 new tasks'}
+                        {'You have 5 new tasks'}
                       </MenuItem>
                       <MenuItem
                         onClick={this.handleClose}
                         className={dropdownItem}
                       >
-                        {rtlActive
-                          ? 'ثمّة الخاصّة و على. مع جيما'
-                          : "You're now friend with Andrew"}
+                        {"You're now friend with Andrew"}
                       </MenuItem>
                       <MenuItem
                         onClick={this.handleClose}
                         className={dropdownItem}
                       >
-                        {rtlActive ? 'قد علاقة' : 'Another Notification'}
+                        {'Another Notification'}
                       </MenuItem>
                       <MenuItem
                         onClick={this.handleClose}
                         className={dropdownItem}
                       >
-                        {rtlActive ? 'قد فاتّبع' : 'Another One'}
+                        {'Another One'}
                       </MenuItem>
                     </MenuList>
                   </ClickAwayListener>
@@ -207,30 +146,6 @@ class HeaderLinks extends React.Component {
             )}
           </Popper>
         </div>
-        <Button
-          color="transparent"
-          aria-label="Person"
-          justIcon
-          className={rtlActive ? classes.buttonLinkRTL : classes.buttonLink}
-          muiClasses={{
-            label: rtlActive ? classes.labelRTL : '',
-          }}
-        >
-          <Person
-            className={
-              `${classes.headerLinksSvg
-              } ${
-                rtlActive
-                  ? `${classes.links} ${classes.linksRTL}`
-                  : classes.links}`
-            }
-          />
-          <Hidden mdUp implementation="css">
-            <span className={classes.linkText}>
-              {rtlActive ? 'الملف الشخصي' : 'Profile'}
-            </span>
-          </Hidden>
-        </Button>
       </div>
     );
   }

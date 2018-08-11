@@ -135,7 +135,6 @@ class Sidebar extends React.Component {
         <div className={photo}>
           <img src={avatar} className={classes.avatarImg} alt="..." />
         </div>
-        <List className={classes.list}>
           <ListItem className={`${classes.item} ${classes.userItem}`}>
             <NavLink
               to="#"
@@ -143,81 +142,17 @@ class Sidebar extends React.Component {
               onClick={() => this.openCollapse('openAvatar')}
             >
               <ListItemText
-                primary={rtlActive ? 'تانيا أندرو' : 'Mike'}
+                primary={'Mike'}
                 secondary={(
                   <b
-                    className={
-                      `${caret
-                      } ${
-                        classes.userCaret
-                      } ${
-                        this.state.openAvatar ? classes.caretActive : ''}`
-                    }
+                    className=""
                   />
 )}
                 disableTypography
                 className={`${itemText} ${classes.userItemText}`}
               />
             </NavLink>
-            <Collapse in={this.state.openAvatar} unmountOnExit>
-              <List className={`${classes.list} ${classes.collapseList}`}>
-                <ListItem className={classes.collapseItem}>
-                  <NavLink
-                    to="#"
-                    className={
-                      `${classes.itemLink} ${classes.userCollapseLinks}`
-                    }
-                  >
-                    <span className={collapseItemMini}>
-                      {rtlActive ? 'مع' : 'MP'}
-                    </span>
-                    <ListItemText
-                      primary={rtlActive ? 'ملفي' : 'My Profile'}
-                      disableTypography
-                      className={collapseItemText}
-                    />
-                  </NavLink>
-                </ListItem>
-                <ListItem className={classes.collapseItem}>
-                  <NavLink
-                    to="#"
-                    className={
-                      `${classes.itemLink} ${classes.userCollapseLinks}`
-                    }
-                  >
-                    <span className={collapseItemMini}>
-                      {rtlActive ? 'هوع' : 'EP'}
-                    </span>
-                    <ListItemText
-                      primary={
-                        rtlActive ? 'تعديل الملف الشخصي' : 'Edit Profile'
-                      }
-                      disableTypography
-                      className={collapseItemText}
-                    />
-                  </NavLink>
-                </ListItem>
-                <ListItem className={classes.collapseItem}>
-                  <NavLink
-                    to="#"
-                    className={
-                      `${classes.itemLink} ${classes.userCollapseLinks}`
-                    }
-                  >
-                    <span className={collapseItemMini}>
-                      {rtlActive ? 'و' : 'S'}
-                    </span>
-                    <ListItemText
-                      primary={rtlActive ? 'إعدادات' : 'Settings'}
-                      disableTypography
-                      className={collapseItemText}
-                    />
-                  </NavLink>
-                </ListItem>
-              </List>
-            </Collapse>
           </ListItem>
-        </List>
       </div>
     );
     const links = (
