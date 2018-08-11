@@ -6,6 +6,7 @@ const noMatch = () => (<h1>No MAtch</h1>);
 
 const indexRoutes = [
   { path: '/', name: 'Main', component: DashBoard },
+  { path: '/CompanySettings', name: 'Company Profile', component: DashBoard },
 ];
 
 const AppRouter = () => (
