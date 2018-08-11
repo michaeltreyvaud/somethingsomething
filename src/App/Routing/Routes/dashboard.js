@@ -5,6 +5,7 @@ import Apps from '@material-ui/icons/Apps';
 
 // View Imports
 import CompanySettings from '../../Views/Settings/CompanySettings/index';
+import UserSettings from '../../Views/Settings/UserSettings/index';
 
 const testing = () => (<h1>testing</h1>);
 
@@ -34,7 +35,7 @@ const dashRoutes = [
       {
         path: '/UserSettings',
         name: 'User Settings',
-        component: 'UserSettings',
+        component: UserSettings,
       },
       {
         path: '/Authorisations',
