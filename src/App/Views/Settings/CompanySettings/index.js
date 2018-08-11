@@ -18,6 +18,7 @@ import Card from '../../../Components/Card/Card';
 import CardHeader from '../../../Components/Card/CardHeader';
 import CardIcon from '../../../Components/Card/CardIcon';
 import CardAvatar from '../../../Components/Card/CardAvatar';
+import ImageUpload from '../../../Components/CustomUpload/ImageUpload';
 
 import userProfileStyles from './style';
 
@@ -176,9 +177,21 @@ const CompanySettings = (props) => {
               <p className={classes.description}>
                   Treybro Studios
               </p>
-              <Button color="rose" round>
-                  Upload Photo
-              </Button>
+              <ImageUpload
+                avatar
+                addButtonProps={{
+                  color: 'rose',
+                  round: true,
+                }}
+                changeButtonProps={{
+                  color: 'rose',
+                  round: true,
+                }}
+                removeButtonProps={{
+                  color: 'danger',
+                  round: true,
+                }}
+              />
             </CardBody>
           </Card>
         </GridItem>
