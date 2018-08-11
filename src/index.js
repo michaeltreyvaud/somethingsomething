@@ -7,6 +7,9 @@ import AppRouter from './App/Routing';
 import configureStore from './App/Store/configureStore';
 import registerServiceWorker from './registerServiceWorker';
 
+//  eslint-disable-next-line
+import './App/Assets/Scss/material-dashboard-pro-react.css?v=1.3.0';
+
 const reduxStore = configureStore();
 const history = createBrowserHistory();
 ReactDOM.render(

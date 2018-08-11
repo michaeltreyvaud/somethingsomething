@@ -143,7 +143,7 @@ class Sidebar extends React.Component {
               onClick={() => this.openCollapse('openAvatar')}
             >
               <ListItemText
-                primary={rtlActive ? 'تانيا أندرو' : 'Tania Andrew'}
+                primary={rtlActive ? 'تانيا أندرو' : 'Mike'}
                 secondary={(
                   <b
                     className={
@@ -387,10 +387,10 @@ class Sidebar extends React.Component {
       })}`;
     const brand = (
       <div className={logoClasses}>
-        <a href="https://www.creative-tim.com" className={logoMini}>
+        <a href="#" className={logoMini}>
           <img src={logo} alt="logo" className={classes.img} />
         </a>
-        <a href="https://www.creative-tim.com" className={logoNormal}>
+        <a href="#" className={logoNormal}>
           {logoText}
         </a>
       </div>
