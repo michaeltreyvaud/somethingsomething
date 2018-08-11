@@ -1,14 +1,9 @@
 import React from 'react';
-// nodejs library that concatenates classes
 import classNames from 'classnames';
-// nodejs library to set properties for components
 import PropTypes from 'prop-types';
-// @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
-// @material-ui/icons
 
-// core components
-import cardTextStyle from '../../../../Assets/Jss/material-dashboard-pro-react/components/cardTextStyle.js';
+import cardTextStyle from './style';
 
 function CardText({ ...props }) {
   const {
