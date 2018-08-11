@@ -27,6 +27,8 @@ class HeaderLinks extends React.Component {
     this.state = {
       open: false,
     };
+    this.handleClick = this.handleClick.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   handleClick() {
