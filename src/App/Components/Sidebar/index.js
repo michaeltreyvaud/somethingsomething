@@ -135,24 +135,24 @@ class Sidebar extends React.Component {
         <div className={photo}>
           <img src={avatar} className={classes.avatarImg} alt="..." />
         </div>
-          <ListItem className={`${classes.item} ${classes.userItem}`}>
-            <NavLink
-              to="#"
-              className={`${classes.itemLink} ${classes.userCollapseButton}`}
-              onClick={() => this.openCollapse('openAvatar')}
-            >
-              <ListItemText
-                primary={'Mike'}
-                secondary={(
-                  <b
-                    className=""
-                  />
+        <ListItem className={`${classes.item} ${classes.userItem}`}>
+          <NavLink
+            to="#"
+            className={`${classes.itemLink} ${classes.userCollapseButton}`}
+            onClick={() => this.openCollapse('openAvatar')}
+          >
+            <ListItemText
+              primary="Mike"
+              secondary={(
+                <b
+                  className=""
+                />
 )}
-                disableTypography
-                className={`${itemText} ${classes.userItemText}`}
-              />
-            </NavLink>
-          </ListItem>
+              disableTypography
+              className={`${itemText} ${classes.userItemText}`}
+            />
+          </NavLink>
+        </ListItem>
       </div>
     );
     const links = (

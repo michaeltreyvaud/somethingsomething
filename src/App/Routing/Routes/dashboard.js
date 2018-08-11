@@ -3,7 +3,6 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import Image from '@material-ui/icons/Image';
 import Apps from '@material-ui/icons/Apps';
 
-// View Imports
 import CompanySettings from '../../Views/Settings/CompanySettings/index';
 import UserSettings from '../../Views/Settings/UserSettings/index';
 

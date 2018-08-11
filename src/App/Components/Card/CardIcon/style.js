@@ -5,7 +5,7 @@ import {
   infoCardHeader,
   primaryCardHeader,
   roseCardHeader,
-} from '../../../Assets/Jss/material-dashboard-pro-react.js';
+} from '../../../Assets/Jss/material-dashboard-pro-react';
 
 const cardIconStyle = {
   cardIcon: {

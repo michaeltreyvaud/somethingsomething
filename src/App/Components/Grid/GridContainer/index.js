@@ -1,6 +1,4 @@
 import React from 'react';
-
-// @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
 import Grid from '@material-ui/core/Grid';
 
@@ -8,13 +6,6 @@ const style = {
   grid: {
     margin: '0 -15px',
     width: 'calc(100% + 30px)',
-    // '&:before,&:after':{
-    //   display: 'table',
-    //   content: '" "',
-    // },
-    // '&:after':{
-    //   clear: 'both',
-    // }
   },
 };
 

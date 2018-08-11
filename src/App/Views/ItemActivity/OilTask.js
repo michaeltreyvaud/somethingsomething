@@ -1,28 +1,5 @@
 import React from 'react';
-import { translate } from 'react-i18next';
-import ContentWrapper from '../Layout/ContentWrapper';
-import { Row, Col, } from 'reactstrap';
 
-class OilTask extends React.Component {
+const Component = () => (<h1>TODO</h1>);
 
-    render() {
-        return (
-            <ContentWrapper>
-                <div className="content-heading">
-                   <div>Oil Task
-                   </div>
-                </div>
-                <Row>
-                    <Col xs={12} className="text-center">
-                        <h2 className="text-thin">Single view content</h2>
-                        <p>
-                            Stuff Goes Here
-                        </p>
-                    </Col>
-                </Row>
-            </ContentWrapper>
-        );
-    }
-}
-
-export default translate('translations')(OilTask);
+export default Component;
