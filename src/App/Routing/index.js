@@ -1,11 +1,11 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import DashBoard from '../Layouts/Dashboard';
 
-const testing = () => (<h1>Testing</h1>);
 const noMatch = () => (<h1>No MAtch</h1>);
 
 const indexRoutes = [
-  { path: '/', name: 'Main', component: testing },
+  { path: '/', name: 'Main', component: DashBoard },
 ];
 
 const AppRouter = () => (
