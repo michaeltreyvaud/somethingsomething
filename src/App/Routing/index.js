@@ -8,6 +8,8 @@ const indexRoutes = [
   { path: '/', name: 'Main', component: DashBoard },
   { path: '/CompanySettings', name: 'Company Profile', component: DashBoard },
   { path: '/UserSettings', name: 'User Settings', component: DashBoard },
+  { path: '/CheckList', name: 'Check List', component: DashBoard },
+  { path: '/SafetyTask', name: 'Safety Task', component: DashBoard },
 ];
 
 const AppRouter = () => (

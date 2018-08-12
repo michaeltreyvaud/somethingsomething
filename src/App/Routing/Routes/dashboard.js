@@ -3,8 +3,11 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import Image from '@material-ui/icons/Image';
 import Apps from '@material-ui/icons/Apps';
 
-import CompanySettings from '../../Views/Settings/CompanySettings/index';
-import UserSettings from '../../Views/Settings/UserSettings/index';
+import CompanySettings from '../../Views/Settings/CompanySettings';
+import UserSettings from '../../Views/Settings/UserSettings';
+
+import CheckList from '../../Views/CheckList';
+import SafetyTask from '../../Views/SafetyRecord/SafetyTask';
 
 const testing = () => (<h1>testing</h1>);
 
@@ -56,7 +59,8 @@ const dashRoutes = [
   {
     path: '/CheckList',
     name: 'Check List',
-    state: '',
+    state: 'openCheckList',
+    component: CheckList,
     icon: Image,
   },
   {
@@ -69,7 +73,7 @@ const dashRoutes = [
       {
         path: '/SafetyTask',
         name: 'Task',
-        component: 'SafetyTask',
+        component: SafetyTask,
       },
       {
         path: '/SafetyLog',
