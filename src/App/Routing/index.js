@@ -10,6 +10,8 @@ const indexRoutes = [
   { path: '/UserSettings', name: 'User Settings', component: DashBoard },
   { path: '/CheckList', name: 'Check List', component: DashBoard },
   { path: '/SafetyTask', name: 'Safety Task', component: DashBoard },
+  { path: '/SafetyLog', name: 'Safety Log', component: DashBoard },
+  { path: '/SafetyCategory', name: 'Safety Category', component: DashBoard },
 ];
 
 const AppRouter = () => (

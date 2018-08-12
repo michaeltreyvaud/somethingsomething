@@ -8,6 +8,8 @@ import UserSettings from '../../Views/Settings/UserSettings';
 
 import CheckList from '../../Views/CheckList';
 import SafetyTask from '../../Views/SafetyRecord/SafetyTask';
+import SafetyLog from '../../Views/SafetyRecord/SafetyLog';
+import SafetyCategory from '../../Views/SafetyRecord/SafetyCategory';
 
 const testing = () => (<h1>testing</h1>);
 
@@ -78,12 +80,12 @@ const dashRoutes = [
       {
         path: '/SafetyLog',
         name: 'Log',
-        component: 'SafetyLog',
+        component: SafetyLog,
       },
       {
         path: '/SafetyCategory',
         name: 'Category',
-        component: 'SafetyCategory',
+        component: SafetyCategory,
       },
     ],
   },

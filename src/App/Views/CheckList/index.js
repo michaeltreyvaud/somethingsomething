@@ -11,15 +11,12 @@ import Dvr from '@material-ui/icons/Dvr';
 import Close from '@material-ui/icons/Close';
 // core components
 import { cardTitle } from '../../Assets/Jss/material-dashboard-pro-react.js';
-import CardHeader from '../../Components/Card/CardHeader';
 import GridContainer from '../../Components/Grid/GridContainer';
 import GridItem from '../../Components/Grid/GridItem';
 import Button from '../../Components/CustomButtons';
 import Card from '../../Components/Card/Card';
 import CardBody from '../../Components/Card/CardBody';
-import CardIcon from '../../Components/Card/CardIcon';
 import NavPills from '../../Components/NavPills';
-import buttonStyle from './style';
 
 const styles = {
   cardIconTitle: {
