@@ -229,6 +229,9 @@ class CheckList extends React.Component {
     const { classes } = this.props;
     return (
       <div>
+        <Button color="info" className={classes.marginRight}>
+      New
+        </Button>
         <GridContainer>
           <GridItem xs={12} sm={12} md={12}>
             <Card>
