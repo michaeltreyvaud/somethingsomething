@@ -5,6 +5,9 @@ import Apps from '@material-ui/icons/Apps';
 
 import CompanySettings from '../../Views/Settings/CompanySettings';
 import UserSettings from '../../Views/Settings/UserSettings';
+import Authorisations from '../../Views/Settings/Authorisations';
+import Teams from '../../Views/Settings/Teams';
+import Users from '../../Views/Settings/Users';
 
 import CheckList from '../../Views/CheckList';
 import SafetyTask from '../../Views/SafetyRecord/SafetyTask';
@@ -44,17 +47,17 @@ const dashRoutes = [
       {
         path: '/Authorisations',
         name: 'Authorisations',
-        component: 'Authorisations',
+        component: Authorisations,
       },
       {
         path: '/Teams',
         name: 'Teams',
-        component: 'Teams',
+        component: Teams,
       },
       {
         path: '/Users',
         name: 'Users',
-        component: 'Users',
+        component: Users,
       },
     ],
   },

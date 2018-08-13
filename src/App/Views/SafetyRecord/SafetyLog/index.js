@@ -1,5 +1,5 @@
 import React from 'react';
-import Datetime from "react-datetime";
+import Datetime from 'react-datetime';
 import ReactTable from 'react-table';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';

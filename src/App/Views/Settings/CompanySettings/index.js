@@ -152,7 +152,7 @@ const CompanySettings = (props) => {
                     }}
                     inputProps={{
                       multiline: true,
-                      rows: 5,
+                      rows: 3,
                     }}
                   />
                 </GridItem>
