@@ -10,7 +10,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Dvr from '@material-ui/icons/Dvr';
 import Close from '@material-ui/icons/Close';
 // core components
-import { cardTitle } from '../../../Assets/Jss/material-dashboard-pro-react.js';
+import { cardTitle } from '../../../Assets/Jss/material-dashboard-pro-react';
 import CardHeader from '../../../Components/Card/CardHeader';
 import GridContainer from '../../../Components/Grid/GridContainer';
 import GridItem from '../../../Components/Grid/GridItem';
@@ -103,7 +103,6 @@ const dataTable = {
     ['Location 8', 'Description 8', 'Owner 8', 'Status 8'],
   ],
 };
-
 
 class SafetyTask extends React.Component {
   constructor(props) {
@@ -232,6 +231,9 @@ class SafetyTask extends React.Component {
     const { classes } = this.props;
     return (
       <div>
+        <Button color="info" className={classes.marginRight}>
+      New
+        </Button>
         <GridContainer>
           <GridItem xs={12} sm={12} md={12}>
             <Card>

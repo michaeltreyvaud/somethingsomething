@@ -14,6 +14,16 @@ import SafetyTask from '../../Views/SafetyRecord/SafetyTask';
 import SafetyLog from '../../Views/SafetyRecord/SafetyLog';
 import SafetyCategory from '../../Views/SafetyRecord/SafetyCategory';
 
+import FridgeItem from '../../Views/Fridge/FridgeItem';
+import FridgeTask from '../../Views/Fridge/FridgeTask';
+import FridgeLog from '../../Views/Fridge/FridgeLog';
+import FridgeChart from '../../Views/Fridge/FridgeChart';
+
+import FreezerItem from '../../Views/Freezer/FreezerItem';
+import FreezerTask from '../../Views/Freezer/FreezerTask';
+import FreezerLog from '../../Views/Freezer/FreezerLog';
+import FreezerChart from '../../Views/Freezer/FreezerChart';
+
 const testing = () => (<h1>testing</h1>);
 
 const dashRoutes = [
@@ -77,17 +87,17 @@ const dashRoutes = [
     views: [
       {
         path: '/SafetyTask',
-        name: 'Task',
+        name: 'Safety Task',
         component: SafetyTask,
       },
       {
         path: '/SafetyLog',
-        name: 'Log',
+        name: 'Safety Log',
         component: SafetyLog,
       },
       {
         path: '/SafetyCategory',
-        name: 'Category',
+        name: 'Safety Category',
         component: SafetyCategory,
       },
     ],
@@ -102,23 +112,23 @@ const dashRoutes = [
     views: [
       {
         path: '/FridgeItem',
-        name: 'Item',
-        component: 'FridgeItem',
+        name: 'Fridge Item',
+        component: FridgeItem,
       },
       {
         path: '/FridgeTask',
-        name: 'Task',
-        component: 'FridgeTask',
+        name: 'Fridge Task',
+        component: FridgeTask,
       },
       {
         path: '/FridgeLog',
-        name: 'Log',
-        component: 'FridgeLog',
+        name: 'Fridge Log',
+        component: FridgeLog,
       },
       {
         path: '/FridgeChart',
-        name: 'Chart',
-        component: 'FridgeChart',
+        name: 'Fridge Chart',
+        component: FridgeChart,
       },
     ],
   },
@@ -131,23 +141,23 @@ const dashRoutes = [
     views: [
       {
         path: '/FreezerItem',
-        name: 'Item',
-        component: 'FreezerItem',
+        name: 'Freezer Item',
+        component: FreezerItem,
       },
       {
         path: '/FreezerTask',
-        name: 'Task',
-        component: 'FreezerTask',
+        name: 'Freezer Task',
+        component: FreezerTask,
       },
       {
         path: '/FreezerLog',
-        name: 'Log',
-        component: 'FreezerLog',
+        name: 'Freezer Log',
+        component: FreezerLog,
       },
       {
         path: '/FreezerChart',
-        name: 'Chart',
-        component: 'FreezerChart',
+        name: 'Freezer Chart',
+        component: FreezerChart,
       },
     ],
   },

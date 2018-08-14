@@ -15,6 +15,14 @@ const indexRoutes = [
   { path: '/SafetyTask', name: 'Safety Task', component: DashBoard },
   { path: '/SafetyLog', name: 'Safety Log', component: DashBoard },
   { path: '/SafetyCategory', name: 'Safety Category', component: DashBoard },
+  { path: '/FridgeItem', name: 'Fridge Item', component: DashBoard },
+  { path: '/FridgeTask', name: 'Fridge Task', component: DashBoard },
+  { path: '/FridgeLog', name: 'Fridge Log', component: DashBoard },
+  { path: '/FridgeChart', name: 'Fridge Chart', component: DashBoard },
+  { path: '/FreezerItem', name: 'Freezer Item', component: DashBoard },
+  { path: '/FreezerTask', name: 'Freezer Task', component: DashBoard },
+  { path: '/FreezerLog', name: 'Freezer Log', component: DashBoard },
+  { path: '/FreezerChart', name: 'Freezer Chart', component: DashBoard },
 ];
 
 const AppRouter = () => (

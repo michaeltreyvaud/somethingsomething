@@ -126,7 +126,7 @@ class Users extends React.Component {
       <div>
       <Button color="info" className={classes.marginRight}>
       New
-      </Button>      
+      </Button>
       <GridContainer>
           <GridItem xs={12}>
             <Card>
