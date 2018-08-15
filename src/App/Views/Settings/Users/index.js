@@ -2,10 +2,6 @@ import React from 'react';
 import ReactTable from 'react-table';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 import Assignment from "@material-ui/icons/Assignment";
 
 import GridContainer from '../../../Components/Grid/GridContainer';
@@ -18,7 +14,7 @@ import Button from "../../../Components/CustomButtons";
 import Dvr from '@material-ui/icons/Dvr';
 import Close from '@material-ui/icons/Close';
 
-import extendedFormsStyle from '../../SafetyRecord/SafetyLog/style';
+import extendedFormsStyle from '../../../Assets/Jss/extendedFormsStyle';
 
 const dataTable = {
   headerRow: ['Full Name', 'Email', 'Digit Code', 'Phone', 'Position', 'Team', 'Authorisation', 'Last Login', 'Status'],

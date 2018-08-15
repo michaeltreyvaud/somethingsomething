@@ -16,7 +16,7 @@ import CardHeader from '../../../Components/Card/CardHeader';
 import CardBody from '../../../Components/Card/CardBody';
 import CardIcon from '../../../Components/Card/CardIcon';
 
-import extendedFormsStyle from '../../SafetyRecord/SafetyLog/style';
+import style from '../../../Assets/Jss/extendedTablesStyle';
 
 class Authorisations extends React.Component {
   constructor(props) {
@@ -100,4 +100,4 @@ class Authorisations extends React.Component {
   }
 }
 
-export default withStyles(extendedFormsStyle)(Authorisations);
+export default withStyles(style)(Authorisations);

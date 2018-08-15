@@ -22,7 +22,7 @@ import CardBody from '../../../Components/Card/CardBody';
 import CardIcon from '../../../Components/Card/CardIcon';
 import CustomInput from '../../../Components/CustomInput';
 
-import extendedFormsStyle from '../../SafetyRecord/SafetyLog/style';
+import extendedFormsStyle from '../../../Assets/Jss/extendedTablesStyle';
 
 function Transition(props) {
   return <Slide direction="down" {...props} />;
@@ -69,7 +69,7 @@ class Teams extends React.Component {
           className={classes.marginRight}
           onClick={() => this.handleClickOpen('noticeModal')}
         >
-      Add
+          Add
         </Button>
         <Dialog
           classes={{

@@ -1,6 +1,5 @@
 import React from 'react';
 import Datetime from 'react-datetime';
-import ReactTable from 'react-table';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
 import FormControl from '@material-ui/core/FormControl';
@@ -9,10 +8,6 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Assignment from '@material-ui/icons/Assignment';
 
-import Person from '@material-ui/icons/Person';
-import Edit from '@material-ui/icons/Edit';
-import Close from '@material-ui/icons/Close';
-import Dvr from '@material-ui/icons/Dvr';
 import GridContainer from '../../../Components/Grid/GridContainer';
 import GridItem from '../../../Components/Grid/GridItem';
 import Card from '../../../Components/Card/Card';

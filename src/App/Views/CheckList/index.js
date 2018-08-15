@@ -10,7 +10,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Dvr from '@material-ui/icons/Dvr';
 import Close from '@material-ui/icons/Close';
 // core components
-import { cardTitle } from '../../Assets/Jss/material-dashboard-pro-react.js';
+import { cardTitle } from '../../Assets/Jss/material-dashboard-pro-react';
 import GridContainer from '../../Components/Grid/GridContainer';
 import GridItem from '../../Components/Grid/GridItem';
 import Button from '../../Components/CustomButtons';

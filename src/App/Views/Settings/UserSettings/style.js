@@ -16,6 +16,20 @@ const regularFormsStyle = {
     marginTop: '15px',
     marginBottom: '0px',
   },
+  actionButton: {
+    margin: '0 0 0 5px',
+    padding: '5px',
+    '& svg,& .fab,& .fas,& .far,& .fal,& .material-icons': {
+      marginRight: '0px',
+    },
+  },
+  icon: {
+    verticalAlign: 'middle',
+    width: '17px',
+    height: '17px',
+    top: '-1px',
+    position: 'relative',
+  },
   staticFormGroup: {
     marginLeft: '0',
     marginRight: '0',

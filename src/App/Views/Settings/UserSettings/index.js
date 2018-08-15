@@ -28,8 +28,8 @@ import ImageUpload from '../../../Components/CustomUpload/ImageUpload';
 import CustomInput from '../../../Components/CustomInput';
 import Table from '../../../Components/Table';
 
-
 import regularFormsStyle from './style';
+import extendedTablesStyle from '../../../Assets/Jss/extendedTablesStyle';
 
 function Transition(props) {
   return <Slide direction="down" {...props} />;
@@ -393,93 +393,97 @@ class UserSettings extends React.Component {
                     tabButton: 'Medical Log',
                     tabContent: (
                       <div>
-                        <Button
-                          color="info"
-                          round
-                          className={classes.marginRight}
-                          onClick={() => this.handleClickOpen('noticeModal')}
-                        >
-                        Add
-                        </Button>
-                        <Dialog
-                          classes={{
-                            root: `${classes.center} ${classes.modalRoot}`,
-                            paper: classes.modal,
-                          }}
-                          open={this.state.noticeModal}
-                          TransitionComponent={Transition}
-                          keepMounted
-                          onClose={() => this.handleClose('noticeModal')}
-                          aria-labelledby="notice-modal-slide-title"
-                          aria-describedby="notice-modal-slide-description"
-                        >
-                          <DialogTitle
-                            id="notice-modal-slide-title"
-                            disableTypography
-                            className={classes.modalHeader}
-                          >
+                        <GridContainer>
+                          <GridItem>
                             <Button
-                              justIcon
-                              className={classes.modalCloseButton}
-                              key="close"
-                              aria-label="Close"
-                              color="transparent"
-                              onClick={() => this.handleClose('noticeModal')}
+                              color="info"
+                              round
+                              className={classes.marginRight}
+                              onClick={() => this.handleClickOpen('noticeModal')}
                             >
-                              <Close className={classes.modalClose} />
+                            Add
                             </Button>
-                            <h4 className={classes.modalTitle}>Medical Log</h4>
-                          </DialogTitle>
-                          <DialogContent
-                            id="notice-modal-slide-description"
-                            className={classes.modalBody}
-                          >
-                            <CustomInput
-                              labelText="Illness"
-                              id="illness"
-                              formControlProps={{
-                                fullWidth: true,
+                            <Dialog
+                              classes={{
+                                root: `${classes.center} ${classes.modalRoot}`,
+                                paper: classes.modal,
                               }}
-                              inputProps={{
-                                type: 'text',
-                              }}
-                            />
-                            <CustomInput
-                              labelText="Details"
-                              id="illDetails"
-                              formControlProps={{
-                                fullWidth: true,
-                              }}
-                              inputProps={{
-                                multiline: true,
-                                rows: 3,
-                              }}
-                            />
-                            <Datetime
-                              timeFormat={false}
-                              inputProps={{ placeholder: 'From' }}
-                            />
-                            <Datetime
-                              timeFormat={false}
-                              inputProps={{ placeholder: 'To' }}
-                            />
-                          </DialogContent>
-                          <DialogActions
-                            className={
+                              open={this.state.noticeModal}
+                              TransitionComponent={Transition}
+                              keepMounted
+                              onClose={() => this.handleClose('noticeModal')}
+                              aria-labelledby="notice-modal-slide-title"
+                              aria-describedby="notice-modal-slide-description"
+                            >
+                              <DialogTitle
+                                id="notice-modal-slide-title"
+                                disableTypography
+                                className={classes.modalHeader}
+                              >
+                                <Button
+                                  justIcon
+                                  className={classes.modalCloseButton}
+                                  key="close"
+                                  aria-label="Close"
+                                  color="transparent"
+                                  onClick={() => this.handleClose('noticeModal')}
+                                >
+                                  <Close className={classes.modalClose} />
+                                </Button>
+                                <h4 className={classes.modalTitle}>Medical Log</h4>
+                              </DialogTitle>
+                              <DialogContent
+                                id="notice-modal-slide-description"
+                                className={classes.modalBody}
+                              >
+                                <CustomInput
+                                  labelText="Illness"
+                                  id="illness"
+                                  formControlProps={{
+                                    fullWidth: true,
+                                  }}
+                                  inputProps={{
+                                    type: 'text',
+                                  }}
+                                />
+                                <CustomInput
+                                  labelText="Details"
+                                  id="illDetails"
+                                  formControlProps={{
+                                    fullWidth: true,
+                                  }}
+                                  inputProps={{
+                                    multiline: true,
+                                    rows: 3,
+                                  }}
+                                />
+                                <Datetime
+                                  timeFormat={false}
+                                  inputProps={{ placeholder: 'From' }}
+                                />
+                                <Datetime
+                                  timeFormat={false}
+                                  inputProps={{ placeholder: 'To' }}
+                                />
+                              </DialogContent>
+                              <DialogActions
+                                className={
                               `${classes.modalFooter
                               } ${
                                 classes.modalFooterCenter}`
                             }
-                          >
-                            <Button
-                              onClick={() => this.handleClose('noticeModal')}
-                              color="info"
-                              round
-                            >
+                              >
+                                <Button
+                                  onClick={() => this.handleClose('noticeModal')}
+                                  color="info"
+                                  round
+                                >
                               Save
-                            </Button>
-                          </DialogActions>
-                        </Dialog>
+                                </Button>
+                              </DialogActions>
+                            </Dialog>
+                          </GridItem>
+                        </GridContainer>
                         <Table
                           tableHead={[
                             'Illness Type',
@@ -655,4 +659,4 @@ class UserSettings extends React.Component {
   }
 }
 
-export default withStyles(regularFormsStyle)(UserSettings);
+export default withStyles(regularFormsStyle, extendedTablesStyle)(UserSettings);

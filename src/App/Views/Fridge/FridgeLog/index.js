@@ -1,6 +1,5 @@
 import React from 'react';
 import Datetime from 'react-datetime';
-import ReactTable from 'react-table';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
 import FormControl from '@material-ui/core/FormControl';
@@ -9,10 +8,6 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Assignment from '@material-ui/icons/Assignment';
 
-import Person from '@material-ui/icons/Person';
-import Edit from '@material-ui/icons/Edit';
-import Close from '@material-ui/icons/Close';
-import Dvr from '@material-ui/icons/Dvr';
 import GridContainer from '../../../Components/Grid/GridContainer';
 import GridItem from '../../../Components/Grid/GridItem';
 import Card from '../../../Components/Card/Card';
@@ -37,25 +32,26 @@ class FridgeLog extends React.Component {
     const { classes } = this.props;
     return (
       <div>
-        <Button color="info" className={classes.marginRight}>
+        <GridContainer>
+          <Button color="info" className={classes.marginRight}>
         New
-        </Button>
-        <CustomDropdown
-          hoverColor="black"
-          buttonText="Export"
-          buttonProps={{
-            round: true,
-            fullWidth: true,
-            style: { marginBottom: '0' },
-            color: 'info',
-          }}
-          dropdownHeader="Actions"
-          dropdownList={[
-            'Export CSV',
-            'Export PDF',
-            'Email',
-          ]}
-        />
+          </Button>
+          <CustomDropdown
+            hoverColor="black"
+            buttonText="Export"
+            buttonProps={{
+              fullWidth: true,
+              style: { marginBottom: '0' },
+              color: 'warning',
+            }}
+            dropdownHeader="Actions"
+            dropdownList={[
+              'Export CSV',
+              'Export PDF',
+              'Email',
+            ]}
+          />
+        </GridContainer>
         <GridContainer>
           <GridItem xs={12} sm={12} md={12}>
             <Card>
