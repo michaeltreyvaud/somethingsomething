@@ -24,6 +24,16 @@ import FreezerTask from '../../Views/Freezer/FreezerTask';
 import FreezerLog from '../../Views/Freezer/FreezerLog';
 import FreezerChart from '../../Views/Freezer/FreezerChart';
 
+import FoodItem from '../../Views/FoodItem';
+import HotHolding from '../../Views/HotHolding';
+import FastCooling from '../../Views/FastCooling';
+import Service from '../../Views/Service/';
+import ColdHotLocation from '../../Views/ColdHotLocation';
+import ColdHotTransportLog from '../../Views/ColdHotTransportLog';
+import SupplierList from '../../Views/Traceability/SupplierList';
+import DeliveryRecords from '../../Views/Traceability/DeliveryRecords';
+import TraceabilityLabels from '../../Views/Traceability/TraceabilityLabels';
+
 const testing = () => (<h1>testing</h1>);
 
 const dashRoutes = [
@@ -167,28 +177,28 @@ const dashRoutes = [
     name: 'Food Item',
     state: '',
     icon: Image,
-    component: 'FoodItem',
+    component: FoodItem,
   },
   {
     path: '/HotHolding',
     name: 'Hot Holding',
     state: '',
     icon: Image,
-    component: 'HotHolding',
+    component: HotHolding,
   },
   {
     path: '/FastCooling',
     name: 'Fast Cooling',
     state: '',
     icon: Image,
-    component: 'FastCooling',
+    component: FastCooling,
   },
   {
     path: '/Service',
     name: 'Service',
     state: '',
     icon: Image,
-    component: 'Service',
+    component: Service,
   },
   {
     collapse: true,
@@ -200,12 +210,12 @@ const dashRoutes = [
       {
         path: '/ColdHotLocation',
         name: 'Location',
-        component: 'ColdHotLocation',
+        component: ColdHotLocation,
       },
       {
         path: '/ColdHotTransportLog',
         name: 'Transport Log',
-        component: 'ColdHotTransportLog',
+        component: ColdHotTransportLog,
       },
     ],
   },
@@ -219,17 +229,17 @@ const dashRoutes = [
       {
         path: '/SupplierList',
         name: 'Supplier List',
-        component: 'SupplierList',
+        component: SupplierList,
       },
       {
         path: '/DeliveryRecords',
         name: 'Delivery Records',
-        component: 'DeliveryRecords',
+        component: DeliveryRecords,
       },
       {
         path: '/TraceabilityLabels',
         name: 'Labels',
-        component: 'TraceabilityLabels',
+        component: TraceabilityLabels,
       },
     ],
   },
