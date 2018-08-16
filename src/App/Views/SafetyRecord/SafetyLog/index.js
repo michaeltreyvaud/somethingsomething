@@ -68,7 +68,7 @@ class SafetyLog extends React.Component {
                   }\n}.`,
                 );
               }}
-              color="warning"
+              color="success"
               className="edit"
             >
               <Dvr />

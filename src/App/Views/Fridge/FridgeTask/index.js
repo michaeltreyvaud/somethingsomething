@@ -313,6 +313,11 @@ class FridgeTask extends React.Component {
                           Search
                         </Button>
                       </GridItem>
+                      <GridItem xs={12} sm={6} md={6} lg={2}>
+                        <Button color="rose" className={classes.marginRight}>
+                          Assign Task
+                        </Button>
+                      </GridItem>
                     </GridContainer>
                   </GridItem>
                 </GridContainer>

@@ -6,7 +6,6 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import Assignment from '@material-ui/icons/Assignment';
 
 // core components
 import Person from '@material-ui/icons/Person';
@@ -20,7 +19,6 @@ import Button from '../../../Components/CustomButtons';
 import CustomInput from '../../../Components/CustomInput';
 
 import style from '../../../Assets/Jss/style';
-import extendedTablesStyle from '../../../Assets/Jss/extendedTablesStyle';
 
 class TraceabilityLabels extends React.Component {
   constructor(props) {
@@ -347,4 +345,4 @@ class TraceabilityLabels extends React.Component {
   }
 }
 
-export default withStyles(extendedTablesStyle, style)(TraceabilityLabels);
+export default withStyles(style)(TraceabilityLabels);

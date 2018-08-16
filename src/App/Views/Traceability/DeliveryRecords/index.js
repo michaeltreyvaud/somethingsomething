@@ -1,10 +1,9 @@
 import React from 'react';
-import Datetime from 'react-datetime';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
 import Assignment from '@material-ui/icons/Assignment';
 
-import Person from '@material-ui/icons/Person';
+import Open from '@material-ui/icons/OpenInNew';
 import Edit from '@material-ui/icons/Edit';
 import Close from '@material-ui/icons/Close';
 import GridContainer from '../../../Components/Grid/GridContainer';
@@ -29,7 +28,7 @@ class DeliveryRecords extends React.Component {
   render() {
     const { classes } = this.props;
     const simpleButtons = [
-      { color: 'info', icon: Person },
+      { color: 'success', icon: Open },
       { color: 'success', icon: Edit },
       { color: 'success', icon: Edit },
       { color: 'danger', icon: Close },

@@ -1,5 +1,6 @@
 import React from 'react';
-
+import ReactDOM from 'react-dom';
+import SignatureCanvas from 'react-signature-canvas';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -9,6 +10,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import Datetime from 'react-datetime';
+
 // @material-ui/icons
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -230,11 +232,11 @@ class UserSettings extends React.Component {
                   {
                     tabButton: 'Signature',
                     tabContent: (
-                      <span>
-                        <p>
-                      Signature will go here eventually
-                        </p>
-                      </span>
+                      <SignatureCanvas
+                        penColor="green"
+                        canvasProps={{ width: 500, height: 200, className: 'sigCanvas' }}
+                      />,
+                      document.getElementById('react-container')
                     ),
                   },
                   {

@@ -2,15 +2,12 @@ import React from 'react';
 import Datetime from 'react-datetime';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 import Assignment from '@material-ui/icons/Assignment';
 
-import Person from '@material-ui/icons/Person';
-import Edit from '@material-ui/icons/Edit';
-import Close from '@material-ui/icons/Close';
+// core components
+import Print from '@material-ui/icons/Print';
+import Open from '@material-ui/icons/OpenInNew';
+import Delete from '@material-ui/icons/Delete';
 import GridContainer from '../../Components/Grid/GridContainer';
 import GridItem from '../../Components/Grid/GridItem';
 import Card from '../../Components/Card/Card';
@@ -34,9 +31,9 @@ class ColdHotTransportLog extends React.Component {
   render() {
     const { classes } = this.props;
     const simpleButtons = [
-      { color: 'info', icon: Person },
-      { color: 'success', icon: Edit },
-      { color: 'danger', icon: Close },
+      { color: 'warning', icon: Print },
+      { color: 'success', icon: Open },
+      { color: 'danger', icon: Delete },
     ].map((prop, key) => (
       <Button
         color={prop.color}

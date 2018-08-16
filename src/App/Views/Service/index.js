@@ -9,9 +9,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Assignment from '@material-ui/icons/Assignment';
 
 // core components
-import Person from '@material-ui/icons/Person';
-import Edit from '@material-ui/icons/Edit';
-import Close from '@material-ui/icons/Close';
+import Print from '@material-ui/icons/Print';
+import Open from '@material-ui/icons/OpenInNew';
+import Delete from '@material-ui/icons/Delete';
 import GridContainer from '../../Components/Grid/GridContainer';
 import GridItem from '../../Components/Grid/GridItem';
 import Card from '../../Components/Card/Card';
@@ -22,7 +22,6 @@ import Button from '../../Components/CustomButtons';
 import Table from '../../Components/Table';
 
 import style from '../../Assets/Jss/style';
-import extendedTablesStyle from '../../Assets/Jss/extendedTablesStyle';
 
 class Service extends React.Component {
   constructor(props) {
@@ -34,9 +33,9 @@ class Service extends React.Component {
   render() {
     const { classes } = this.props;
     const simpleButtons = [
-      { color: 'info', icon: Person },
-      { color: 'success', icon: Edit },
-      { color: 'danger', icon: Close },
+      { color: 'warning', icon: Print },
+      { color: 'success', icon: Open },
+      { color: 'danger', icon: Delete },
     ].map((prop, key) => (
       <Button
         color={prop.color}
@@ -300,4 +299,4 @@ class Service extends React.Component {
   }
 }
 
-export default withStyles(extendedTablesStyle, style)(Service);
+export default withStyles(style)(Service);

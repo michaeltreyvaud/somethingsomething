@@ -1,10 +1,11 @@
 import React from 'react';
-import Datetime from 'react-datetime';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
 import Assignment from '@material-ui/icons/Assignment';
 
-import Close from '@material-ui/icons/Close';
+// core components
+import Open from '@material-ui/icons/OpenInNew';
+import Delete from '@material-ui/icons/Delete';
 import GridContainer from '../../../Components/Grid/GridContainer';
 import GridItem from '../../../Components/Grid/GridItem';
 import Card from '../../../Components/Card/Card';
@@ -27,7 +28,8 @@ class SupplierList extends React.Component {
   render() {
     const { classes } = this.props;
     const simpleButtons = [
-      { color: 'danger', icon: Close },
+      { color: 'success', icon: Open },
+      { color: 'danger', icon: Delete },
     ].map((prop, key) => (
       <Button
         color={prop.color}

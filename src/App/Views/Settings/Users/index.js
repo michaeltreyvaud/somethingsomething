@@ -13,6 +13,7 @@ import CardIcon from '../../../Components/Card/CardIcon';
 import Button from "../../../Components/CustomButtons";
 import Dvr from '@material-ui/icons/Dvr';
 import Close from '@material-ui/icons/Close';
+import Open from '@material-ui/icons/OpenInNew';
 
 import extendedFormsStyle from '../../../Assets/Jss/extendedFormsStyle';
 
@@ -69,7 +70,7 @@ class Users extends React.Component {
                   }\n}.`,
                 );
               }}
-              color="warning"
+              color="success"
               className="edit"
             >
               <Dvr />

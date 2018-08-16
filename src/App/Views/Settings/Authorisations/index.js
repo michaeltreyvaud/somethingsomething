@@ -5,8 +5,8 @@ import PermIdentity from '@material-ui/icons/PermIdentity';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 // core components
-import Edit from '@material-ui/icons/Edit';
-import Close from '@material-ui/icons/Close';
+import Open from '@material-ui/icons/OpenInNew';
+import Delete from '@material-ui/icons/Delete';
 import Button from '../../../Components/CustomButtons';
 import Table from '../../../Components/Table';
 import GridContainer from '../../../Components/Grid/GridContainer';
@@ -28,8 +28,8 @@ class Authorisations extends React.Component {
   render() {
     const { classes } = this.props;
     const simpleButtons = [
-      { color: 'success', icon: Edit },
-      { color: 'danger', icon: Close },
+      { color: 'success', icon: Open },
+      { color: 'danger', icon: Delete },
     ].map((prop, key) => (
       <Button
         color={prop.color}
