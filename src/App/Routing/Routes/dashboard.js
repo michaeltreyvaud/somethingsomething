@@ -1,7 +1,24 @@
 import React from 'react';
 import DashboardIcon from '@material-ui/icons/Dashboard';
+import CheckCircle from '@material-ui/icons/CheckCircle';
+import Business from '@material-ui/icons/Business';
+import SettingsApplications from '@material-ui/icons/SettingsApplications';
+import Assignment from '@material-ui/icons/Assignment';
+import AcUnit from '@material-ui/icons/AcUnit';
+import Whatshot from '@material-ui/icons/Whatshot';
+import Fastfood from '@material-ui/icons/Fastfood';
+import FastForward from '@material-ui/icons/FastForward';
+import RoomService from '@material-ui/icons/RoomService';
+import Voicemail from '@material-ui/icons/Voicemail';
+import DirectionsCar from '@material-ui/icons/DirectionsCar';
+import Book from '@material-ui/icons/Book';
+import Colorize from '@material-ui/icons/Colorize';
+import LocalDrink from '@material-ui/icons/LocalDrink';
+import Timeline from '@material-ui/icons/Timeline';
+import Description from '@material-ui/icons/Description';
+import BugReport from '@material-ui/icons/BugReport';
+
 import Image from '@material-ui/icons/Image';
-import Apps from '@material-ui/icons/Apps';
 
 import CompanySettings from '../../Views/Settings/CompanySettings';
 import UserSettings from '../../Views/Settings/UserSettings';
@@ -49,7 +66,7 @@ const dashRoutes = [
     path: '/CompanySettings',
     name: 'Company Profile',
     state: 'openCoSetting',
-    icon: Image,
+    icon: Business,
     component: CompanySettings,
   },
   {
@@ -57,7 +74,7 @@ const dashRoutes = [
     path: '/Settings',
     name: 'User Settings',
     state: 'openSettings',
-    icon: Apps,
+    icon: SettingsApplications,
     views: [
       {
         path: '/UserSettings',
@@ -86,14 +103,14 @@ const dashRoutes = [
     name: 'Check List',
     state: 'openCheckList',
     component: CheckList,
-    icon: Image,
+    icon: CheckCircle,
   },
   {
     collapse: true,
     path: '/Safety',
     name: 'Safety Record',
     state: 'openSafetyRecord',
-    icon: Apps,
+    icon: Assignment,
     views: [
       {
         path: '/SafetyTask',
@@ -118,7 +135,7 @@ const dashRoutes = [
     path: '/Fridge',
     name: 'Fridge',
     state: 'openFridge',
-    icon: Apps,
+    icon: AcUnit,
     views: [
       {
         path: '/FridgeItem',
@@ -147,7 +164,7 @@ const dashRoutes = [
     path: '/Freezer',
     name: 'Freezer',
     state: 'openFreezer',
-    icon: Apps,
+    icon: AcUnit,
     views: [
       {
         path: '/FreezerItem',
@@ -176,28 +193,28 @@ const dashRoutes = [
     path: '/FoodItem',
     name: 'Food Item',
     state: '',
-    icon: Image,
+    icon: Fastfood,
     component: FoodItem,
   },
   {
     path: '/HotHolding',
     name: 'Hot Holding',
     state: '',
-    icon: Image,
+    icon: Whatshot,
     component: HotHolding,
   },
   {
     path: '/FastCooling',
     name: 'Fast Cooling',
     state: '',
-    icon: Image,
+    icon: FastForward,
     component: FastCooling,
   },
   {
     path: '/Service',
     name: 'Service',
     state: '',
-    icon: Image,
+    icon: RoomService,
     component: Service,
   },
   {
@@ -205,7 +222,7 @@ const dashRoutes = [
     path: '/ColdHot',
     name: 'Cold/Hot Chain',
     state: 'openColdHot',
-    icon: Apps,
+    icon: Voicemail,
     views: [
       {
         path: '/ColdHotLocation',
@@ -224,7 +241,7 @@ const dashRoutes = [
     path: '/Traceability',
     name: 'Traceability/deliveries',
     state: 'openTrace',
-    icon: Apps,
+    icon: DirectionsCar,
     views: [
       {
         path: '/SupplierList',
@@ -247,7 +264,7 @@ const dashRoutes = [
     path: '/Menus',
     name: 'Menus',
     state: 'openMenus',
-    icon: Image,
+    icon: Book,
     component: 'Menus',
   },
   {
@@ -255,7 +272,7 @@ const dashRoutes = [
     path: '/Oil',
     name: 'Oil Test',
     state: 'openOilTest',
-    icon: Apps,
+    icon: Colorize,
     views: [
       {
         path: '/OilLocation',
@@ -279,7 +296,7 @@ const dashRoutes = [
     path: '/Cleaning',
     name: 'Cleaning',
     state: 'openCleaning',
-    icon: Apps,
+    icon: LocalDrink,
     views: [
       {
         path: '/CleaningLocation',
@@ -302,21 +319,21 @@ const dashRoutes = [
     path: '/Reports',
     name: 'Reports',
     state: 'openReports',
-    icon: Image,
+    icon: Timeline,
     component: 'Reports',
   },
   {
     path: '/SafetySheet',
     name: 'Safety Datasheet',
     state: 'openSafetySheet',
-    icon: Image,
+    icon: Description,
     component: 'SafetySheet',
   },
   {
     path: '/PestManagement',
     name: 'Pest Management',
     state: 'openPestManagement',
-    icon: Image,
+    icon: BugReport,
     component: 'PestManagement',
   },
 ];
