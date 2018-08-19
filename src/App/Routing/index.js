@@ -2,6 +2,8 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import DashBoard from '../Layouts/Dashboard';
 
+import Create from '../Views/Traceability/SupplierList/Create';
+
 const noMatch = () => (<h1>No MAtch</h1>);
 
 const indexRoutes = [
@@ -29,7 +31,17 @@ const indexRoutes = [
   { path: '/Service', name: 'Service', component: DashBoard },
   { path: '/ColdHotLocation', name: 'Location', component: DashBoard },
   { path: '/ColdHotTransportLog', name: 'Transport Log', component: DashBoard },
-  { path: '/SupplierList', name: 'Supplier List', component: DashBoard },
+  {
+    path: '/SupplierList',
+    name: 'Supplier List',
+    component: DashBoard,
+    routes: [
+      {
+        path: '/SupplierList/Create',
+        component: Create,
+      },
+    ],
+  },
   { path: '/DeliveryRecords', name: 'Delivery Records', component: DashBoard },
   { path: '/TraceabilityLabels', name: 'Traceability Labels', component: DashBoard },
 ];

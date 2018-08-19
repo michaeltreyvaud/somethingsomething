@@ -124,17 +124,13 @@ class CheckList extends React.Component {
               simple
               onClick={() => {
                 const obj = this.state.data.find(o => o.id === key);
-                alert(
-                  `You've clicked EDIT button on \n{ \nName: ${
-                    obj.name
-                  }, \nposition: ${
-                    obj.position
-                  }, \noffice: ${
-                    obj.office
-                  }, \nage: ${
-                    obj.age
-                  }\n}.`,
-                );
+                alert(`You've clicked EDIT button on \n{ \nName: ${obj.name}, \nposition: ${
+                  obj.position
+                }, \noffice: ${
+                  obj.office
+                }, \nage: ${
+                  obj.age
+                }\n}.`);
               }}
               color="success"
               className="edit"

@@ -6,6 +6,7 @@ import Assignment from '@material-ui/icons/Assignment';
 // core components
 import Open from '@material-ui/icons/OpenInNew';
 import Delete from '@material-ui/icons/Delete';
+import { Link } from 'react-router-dom';
 import GridContainer from '../../../Components/Grid/GridContainer';
 import GridItem from '../../../Components/Grid/GridItem';
 import Card from '../../../Components/Card/Card';
@@ -17,6 +18,7 @@ import Table from '../../../Components/Table';
 
 import style from '../../../Assets/Jss/style';
 import extendedTablesStyle from '../../../Assets/Jss/extendedTablesStyle';
+
 
 class SupplierList extends React.Component {
   constructor(props) {
@@ -42,6 +44,7 @@ class SupplierList extends React.Component {
     ));
     return (
       <div>
+        <Link to="/SupplierList/Create">Tacos</Link>
         <Button color="info" className={classes.marginRight}>
         New
         </Button>
