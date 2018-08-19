@@ -32,6 +32,7 @@ class FoodItem extends React.Component {
 
   render() {
     const { classes } = this.props;
+    const { simpleSelect } = this.state;
     const simpleButtons = [
       { color: 'warning', icon: Print },
       { color: 'success', icon: Open },
@@ -76,7 +77,7 @@ class FoodItem extends React.Component {
                             classes={{
                               select: classes.select,
                             }}
-                            value={this.state.simpleSelect}
+                            value={simpleSelect}
                             onChange={this.handleSimple}
                             inputProps={{
                               name: 'simpleSelect',
@@ -130,7 +131,7 @@ class FoodItem extends React.Component {
                             classes={{
                               select: classes.select,
                             }}
-                            value={this.state.simpleSelect}
+                            value={simpleSelect}
                             onChange={this.handleSimple}
                             inputProps={{
                               name: 'simpleSelect',
@@ -206,7 +207,7 @@ class FoodItem extends React.Component {
                             classes={{
                               select: classes.select,
                             }}
-                            value={this.state.simpleSelect}
+                            value={simpleSelect}
                             onChange={this.handleSimple}
                             inputProps={{
                               name: 'simpleSelect',
@@ -258,7 +259,7 @@ class FoodItem extends React.Component {
                         classes={{
                           select: classes.select,
                         }}
-                        value={this.state.simpleSelect}
+                        value={simpleSelect}
                         onChange={this.handleSimple}
                         inputProps={{
                           name: 'simpleSelect',
@@ -312,7 +313,7 @@ class FoodItem extends React.Component {
                         classes={{
                           select: classes.select,
                         }}
-                        value={this.state.simpleSelect}
+                        value={simpleSelect}
                         onChange={this.handleSimple}
                         inputProps={{
                           name: 'simpleSelect',

@@ -1,9 +1,9 @@
 import React from 'react';
-// @material-ui/core components
+
 import withStyles from '@material-ui/core/styles/withStyles';
 import Assignment from '@material-ui/icons/Assignment';
+import { withRouter } from 'react-router';
 
-// core components
 import Open from '@material-ui/icons/OpenInNew';
 import Delete from '@material-ui/icons/Delete';
 import { Link } from 'react-router-dom';
@@ -45,7 +45,7 @@ class SupplierList extends React.Component {
     return (
       <div>
         <Link to="/SupplierList/Create">Tacos</Link>
-        <Button color="info" className={classes.marginRight}>
+        <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/SupplierList/Create')}>
         New
         </Button>
         <GridContainer>
@@ -98,4 +98,4 @@ class SupplierList extends React.Component {
   }
 }
 
-export default withStyles(extendedTablesStyle, style)(SupplierList);
+export default withRouter(withStyles(extendedTablesStyle, style)(SupplierList));

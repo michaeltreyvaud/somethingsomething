@@ -1,10 +1,9 @@
 import React from 'react';
 
-// @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
 import Assignment from '@material-ui/icons/Assignment';
+import { withRouter } from 'react-router';
 
-// core components
 import Print from '@material-ui/icons/Print';
 import Open from '@material-ui/icons/OpenInNew';
 import Delete from '@material-ui/icons/Delete';
@@ -43,7 +42,7 @@ class FridgeItem extends React.Component {
     ));
     return (
       <div>
-        <Button color="info" className={classes.marginRight}>
+        <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/FridgeItem/Create')}>
           New
         </Button>
         <GridContainer>
@@ -108,4 +107,4 @@ class FridgeItem extends React.Component {
   }
 }
 
-export default withStyles(extendedTablesStyle)(FridgeItem);
+export default withRouter(withStyles(extendedTablesStyle)(FridgeItem));

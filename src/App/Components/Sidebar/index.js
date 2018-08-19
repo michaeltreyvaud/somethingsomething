@@ -158,6 +158,7 @@ class Sidebar extends React.Component {
     const links = (
       <List className={classes.list}>
         {routes.map((prop, key) => {
+          if (prop.hidden) return null;
           if (prop.redirect) {
             return null;
           }
@@ -226,14 +227,13 @@ class Sidebar extends React.Component {
                 </NavLink>
                 <Collapse in={this.state[prop.state]} unmountOnExit>
                   <List className={`${classes.list} ${classes.collapseList}`}>
-                    {prop.views.map((prop, key) => {
-                      if (prop.redirect) {
-                        return null;
-                      }
+                    {prop.views.map((_prop, _key) => {
+                      if (_prop.hidden) return null;
+                      if (_prop.redirect) return null;
                       const navLinkClasses = `${classes.collapseItemLink
                       } ${
                         cx({
-                          [` ${classes[color]}`]: this.activeRoute(prop.path),
+                          [` ${classes[color]}`]: this.activeRoute(_prop.path),
                         })}`;
                       const collapseItemMini = `${classes.collapseItemMini
                       } ${
@@ -241,13 +241,13 @@ class Sidebar extends React.Component {
                           [classes.collapseItemMiniRTL]: rtlActive,
                         })}`;
                       return (
-                        <ListItem key={key} className={classes.collapseItem}>
-                          <NavLink to={prop.path} className={navLinkClasses}>
+                        <ListItem key={_key} className={classes.collapseItem}>
+                          <NavLink to={_prop.path} className={navLinkClasses}>
                             <span className={collapseItemMini}>
-                              {prop.mini}
+                              {_prop.mini}
                             </span>
                             <ListItemText
-                              primary={prop.name}
+                              primary={_prop.name}
                               disableTypography
                               className={collapseItemText}
                             />

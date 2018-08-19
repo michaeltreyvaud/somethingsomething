@@ -2,8 +2,6 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import DashBoard from '../Layouts/Dashboard';
 
-import Create from '../Views/Traceability/SupplierList/Create';
-
 const noMatch = () => (<h1>No Match</h1>);
 
 const indexRoutes = [
@@ -18,6 +16,7 @@ const indexRoutes = [
   { path: '/SafetyLog', name: 'Safety Log', component: DashBoard },
   { path: '/SafetyCategory', name: 'Safety Category', component: DashBoard },
   { path: '/FridgeItem', name: 'Fridge Item', component: DashBoard },
+  { path: '/FridgeItem/Create', name: 'Create Frige Item', component: DashBoard },
   { path: '/FridgeTask', name: 'Fridge Task', component: DashBoard },
   { path: '/FridgeLog', name: 'Fridge Log', component: DashBoard },
   { path: '/FridgeChart', name: 'Fridge Chart', component: DashBoard },
@@ -31,17 +30,8 @@ const indexRoutes = [
   { path: '/Service', name: 'Service', component: DashBoard },
   { path: '/ColdHotLocation', name: 'Location', component: DashBoard },
   { path: '/ColdHotTransportLog', name: 'Transport Log', component: DashBoard },
-  {
-    path: '/SupplierList',
-    name: 'Supplier List',
-    component: DashBoard,
-    routes: [
-      {
-        path: '/SupplierList/Create',
-        component: DashBoard,
-      },
-    ],
-  },
+  { path: '/SupplierList', name: 'Supplier List', component: DashBoard },
+  { path: '/SupplierList/Create', name: 'Create Supplier', component: DashBoard },
   { path: '/DeliveryRecords', name: 'Delivery Records', component: DashBoard },
   { path: '/TraceabilityLabels', name: 'Traceability Labels', component: DashBoard },
 ];

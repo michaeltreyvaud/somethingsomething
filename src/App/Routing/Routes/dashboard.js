@@ -44,7 +44,7 @@ import FreezerChart from '../../Views/Freezer/FreezerChart';
 import FoodItem from '../../Views/FoodItem';
 import HotHolding from '../../Views/HotHolding';
 import FastCooling from '../../Views/FastCooling';
-import Service from '../../Views/Service/';
+import Service from '../../Views/Service';
 import ColdHotLocation from '../../Views/ColdHotLocation';
 import ColdHotTransportLog from '../../Views/ColdHotTransportLog';
 import SupplierList from '../../Views/Traceability/SupplierList';
@@ -141,6 +141,12 @@ const dashRoutes = [
         path: '/FridgeItem',
         name: 'Fridge Item',
         component: FridgeItem,
+      },
+      {
+        hidden: true,
+        path: '/FridgeItem/Create',
+        name: 'Create Fridge Item',
+        component: testing,
       },
       {
         path: '/FridgeTask',
@@ -247,6 +253,12 @@ const dashRoutes = [
         path: '/SupplierList',
         name: 'Supplier List',
         component: SupplierList,
+      },
+      {
+        hidden: true,
+        path: '/SupplierList/Create',
+        name: 'Create Supplier',
+        component: testing,
       },
       {
         path: '/DeliveryRecords',
