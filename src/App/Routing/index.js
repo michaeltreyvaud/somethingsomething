@@ -38,7 +38,7 @@ const indexRoutes = [
     routes: [
       {
         path: '/SupplierList/Create',
-        component: Create,
+        component: DashBoard,
       },
     ],
   },
@@ -48,7 +48,7 @@ const indexRoutes = [
 
 const AppRouter = () => (
   <Switch>
-    {indexRoutes.map((prop, key) => <Route exact path={prop.path} component={prop.component} key={`${key}${prop.name}`} />)}
+    {indexRoutes.map((prop, key) => <Route exact path={prop.path} component={prop.component} routes={prop.routes} key={`${key}${prop.name}`} />)}
     <Route component={noMatch} />
   </Switch>
 );
