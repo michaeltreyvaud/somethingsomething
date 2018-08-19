@@ -4,7 +4,7 @@ import DashBoard from '../Layouts/Dashboard';
 
 import Create from '../Views/Traceability/SupplierList/Create';
 
-const noMatch = () => (<h1>No MAtch</h1>);
+const noMatch = () => (<h1>No Match</h1>);
 
 const indexRoutes = [
   { path: '/', name: 'Main', component: DashBoard },

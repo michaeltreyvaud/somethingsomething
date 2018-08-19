@@ -309,47 +309,47 @@ render() {
         </GridItem>
       </GridContainer>
       <GridContainer>
-              <GridItem xs={12}>
-                <Card>
-                  <CardHeader color="primary" icon>
-                    <CardIcon color="primary">
-                      <Assignment />
-                    </CardIcon>
-                    <h4 className={classes.cardIconTitle}>Records</h4>
-                  </CardHeader>
-                  <CardBody>
-                    <ReactTable
-                      data={this.state.data}
-                      filterable
-                      columns={[
-                        {
-                          Header: "Name",
-                          accessor: "name"
-                        },
-                        {
-                          Header: "Description",
-                          accessor: "description"
-                        },
-                        {
-                          Header: "Status",
-                          accessor: "status"
-                        },
-                        {
-                          Header: "Actions",
-                          accessor: "actions",
-                          sortable: false,
-                          filterable: false
-                        }
-                      ]}
-                      defaultPageSize={10}
-                      showPaginationTop
-                      showPaginationBottom={false}
-                      className="-striped -highlight"
-                    />
-                  </CardBody>
-                </Card>
-              </GridItem>
-            </GridContainer>
+        <GridItem xs={12}>
+          <Card>
+            <CardHeader color="primary" icon>
+              <CardIcon color="primary">
+                <Assignment />
+              </CardIcon>
+              <h4 className={classes.cardIconTitle}>Records</h4>
+            </CardHeader>
+            <CardBody>
+              <ReactTable
+                data={this.state.data}
+                filterable
+                columns={[
+                  {
+                    Header: "Name",
+                    accessor: "name"
+                  },
+                  {
+                    Header: "Description",
+                    accessor: "description"
+                  },
+                  {
+                    Header: "Status",
+                    accessor: "status"
+                  },
+                  {
+                    Header: "Actions",
+                    accessor: "actions",
+                    sortable: false,
+                    filterable: false
+                  }
+                ]}
+                defaultPageSize={10}
+                showPaginationTop
+                showPaginationBottom={false}
+                className="-striped -highlight"
+              />
+            </CardBody>
+          </Card>
+        </GridItem>
+      </GridContainer>
     </div>
   );
 }
