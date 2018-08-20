@@ -44,7 +44,6 @@ class SupplierList extends React.Component {
     ));
     return (
       <div>
-        <Link to="/SupplierList/Create">Tacos</Link>
         <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/SupplierList/Create')}>
         New
         </Button>

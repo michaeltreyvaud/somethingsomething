@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { withRouter } from 'react-router';
 // @material-ui/icons
 import PermIdentity from '@material-ui/icons/PermIdentity';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -42,7 +42,7 @@ class Authorisations extends React.Component {
     ));
     return (
       <div>
-        <Button color="info" className={classes.marginRight}>
+        <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/Authorisations/Create')}>
         New
         </Button>
         <GridContainer>

@@ -23,6 +23,7 @@ import Image from '@material-ui/icons/Image';
 import CompanySettings from '../../Views/Settings/CompanySettings';
 import UserSettings from '../../Views/Settings/UserSettings';
 import Authorisations from '../../Views/Settings/Authorisations';
+import AuthorisationsCreate from '../../Views/Settings/Authorisations/Create';
 import Teams from '../../Views/Settings/Teams';
 import Users from '../../Views/Settings/Users';
 
@@ -48,10 +49,9 @@ import Service from '../../Views/Service';
 import ColdHotLocation from '../../Views/ColdHotLocation';
 import ColdHotTransportLog from '../../Views/ColdHotTransportLog';
 import SupplierList from '../../Views/Traceability/SupplierList';
+import SupplierListCreate from '../../Views/Traceability/SupplierList/Create';
 import DeliveryRecords from '../../Views/Traceability/DeliveryRecords';
 import TraceabilityLabels from '../../Views/Traceability/TraceabilityLabels';
-
-const testing = () => (<h1>testing</h1>);
 
 const dashRoutes = [
   // Main Navigation
@@ -59,7 +59,7 @@ const dashRoutes = [
     path: '/dashboard',
     name: 'Dashboard',
     icon: DashboardIcon,
-    component: testing,
+    component: '',
   },
   // Settings Navigation
   {
@@ -85,6 +85,12 @@ const dashRoutes = [
         path: '/Authorisations',
         name: 'Authorisations',
         component: Authorisations,
+      },
+      {
+        hidden: true,
+        path: '/Authorisations/Create',
+        name: 'Create Authorisation',
+        component: AuthorisationsCreate,
       },
       {
         path: '/Teams',
@@ -146,7 +152,7 @@ const dashRoutes = [
         hidden: true,
         path: '/FridgeItem/Create',
         name: 'Create Fridge Item',
-        component: testing,
+        component: '',
       },
       {
         path: '/FridgeTask',
@@ -258,7 +264,7 @@ const dashRoutes = [
         hidden: true,
         path: '/SupplierList/Create',
         name: 'Create Supplier',
-        component: testing,
+        component: SupplierListCreate,
       },
       {
         path: '/DeliveryRecords',

@@ -9,6 +9,7 @@ const indexRoutes = [
   { path: '/CompanySettings', name: 'Company Profile', component: DashBoard },
   { path: '/UserSettings', name: 'User Settings', component: DashBoard },
   { path: '/Authorisations', name: 'Authorisations', component: DashBoard },
+  { path: '/Authorisations/Create', name: 'Create Authorisation', component: DashBoard },
   { path: '/Teams', name: 'Teams', component: DashBoard },
   { path: '/Users', name: 'Users', component: DashBoard },
   { path: '/CheckList', name: 'Check List', component: DashBoard },
