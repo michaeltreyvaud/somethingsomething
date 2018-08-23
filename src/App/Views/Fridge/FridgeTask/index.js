@@ -9,6 +9,15 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+
+import Dialog from '@material-ui/core/Dialog';
+import Slide from '@material-ui/core/Slide';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogActions from '@material-ui/core/DialogActions';
+import Close from '@material-ui/icons/Close';
+import CustomInput from '../../../Components/CustomInput';
+
 // core components
 import GridContainer from '../../../Components/Grid/GridContainer';
 import GridItem from '../../../Components/Grid/GridItem';
@@ -21,6 +30,10 @@ BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
 // ##############################
 // // // data for populating the calendar in Calendar view
 // #############################
+
+function Transition(props) {
+  return <Slide direction="down" {...props} />;
+}
 
 const today = new Date();
 const y = today.getFullYear();
@@ -87,6 +100,18 @@ class FridgeTask extends React.Component {
     this.hideAlert = this.hideAlert.bind(this);
   }
 
+  handleClickOpen(modal) {
+    const x = [];
+    x[modal] = true;
+    this.setState(x);
+  }
+
+  handleClose(modal) {
+    const x = [];
+    x[modal] = false;
+    this.setState(x);
+  }
+
   selectedEvent(event) {
     alert(event.title);
   }
@@ -145,9 +170,366 @@ class FridgeTask extends React.Component {
     const { classes } = this.props;
     return (
       <div>
-        <Button color="info" className={classes.marginRight}>
+        <Button color="info" className={classes.marginRight} onClick={() => this.handleClickOpen('noticeModal')}>
       New
         </Button>
+        <Dialog
+          classes={{
+            root: `${classes.center} ${classes.modalRoot}`,
+            paper: classes.modal,
+          }}
+          open={this.state.noticeModal}
+          TransitionComponent={Transition}
+          keepMounted
+          onClose={() => this.handleClose('noticeModal')}
+          aria-labelledby="notice-modal-slide-title"
+          aria-describedby="notice-modal-slide-description"
+        >
+          <DialogTitle
+            id="notice-modal-slide-title"
+            disableTypography
+            className={classes.modalHeader}
+          >
+            <Button
+              justIcon
+              className={classes.modalCloseButton}
+              key="close"
+              aria-label="Close"
+              color="transparent"
+              onClick={() => this.handleClose('noticeModal')}
+            >
+              <Close className={classes.modalClose} />
+            </Button>
+            <h4 className={classes.modalTitle}>Fridge Task</h4>
+          </DialogTitle>
+          <DialogContent
+            id="notice-modal-slide-description"
+            className={classes.modalBody}
+          >
+            <FormControl
+              fullWidth
+              className={classes.selectFormControl}
+            >
+              <InputLabel
+                htmlFor="simple-select"
+                className={classes.selectLabel}
+              >
+            Location
+              </InputLabel>
+              <Select
+                MenuProps={{
+                  className: classes.selectMenu,
+                }}
+                classes={{
+                  select: classes.select,
+                }}
+                value={this.state.simpleSelect}
+                onChange={this.handleSimple}
+                inputProps={{
+                  name: 'simpleSelect',
+                  id: 'simple-select',
+                }}
+              >
+                <MenuItem
+                  classes={{
+                    root: classes.selectMenuItem,
+                    selected: classes.selectMenuItemSelected,
+                  }}
+                >
+              Location 1
+                </MenuItem>
+                <MenuItem
+                  classes={{
+                    root: classes.selectMenuItem,
+                    selected: classes.selectMenuItemSelected,
+                  }}
+                  value="2"
+                >
+              Location 2
+                </MenuItem>
+                <MenuItem
+                  classes={{
+                    root: classes.selectMenuItem,
+                    selected: classes.selectMenuItemSelected,
+                  }}
+                  value="3"
+                >
+              Location 3
+                </MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl
+              fullWidth
+              className={classes.selectFormControl}
+            >
+              <InputLabel
+                htmlFor="simple-select"
+                className={classes.selectLabel}
+              >
+            Teams
+              </InputLabel>
+              <Select
+                MenuProps={{
+                  className: classes.selectMenu,
+                }}
+                classes={{
+                  select: classes.select,
+                }}
+                value={this.state.simpleSelect}
+                onChange={this.handleSimple}
+                inputProps={{
+                  name: 'simpleSelect',
+                  id: 'simple-select',
+                }}
+              >
+                <MenuItem
+                  classes={{
+                    root: classes.selectMenuItem,
+                    selected: classes.selectMenuItemSelected,
+                  }}
+                >
+              Teams 1
+                </MenuItem>
+                <MenuItem
+                  classes={{
+                    root: classes.selectMenuItem,
+                    selected: classes.selectMenuItemSelected,
+                  }}
+                  value="2"
+                >
+              Teams 2
+                </MenuItem>
+                <MenuItem
+                  classes={{
+                    root: classes.selectMenuItem,
+                    selected: classes.selectMenuItemSelected,
+                  }}
+                  value="3"
+                >
+              Teams 3
+                </MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl
+              fullWidth
+              className={classes.selectFormControl}
+            >
+              <InputLabel
+                htmlFor="simple-select"
+                className={classes.selectLabel}
+              >
+            Operator
+              </InputLabel>
+              <Select
+                MenuProps={{
+                  className: classes.selectMenu,
+                }}
+                classes={{
+                  select: classes.select,
+                }}
+                value={this.state.simpleSelect}
+                onChange={this.handleSimple}
+                inputProps={{
+                  name: 'simpleSelect',
+                  id: 'simple-select',
+                }}
+              >
+                <MenuItem
+                  classes={{
+                    root: classes.selectMenuItem,
+                    selected: classes.selectMenuItemSelected,
+                  }}
+                >
+              Operator 1
+                </MenuItem>
+                <MenuItem
+                  classes={{
+                    root: classes.selectMenuItem,
+                    selected: classes.selectMenuItemSelected,
+                  }}
+                  value="2"
+                >
+              Operator 2
+                </MenuItem>
+                <MenuItem
+                  classes={{
+                    root: classes.selectMenuItem,
+                    selected: classes.selectMenuItemSelected,
+                  }}
+                  value="3"
+                >
+              Operator 3
+                </MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl
+              fullWidth
+              className={classes.selectFormControl}
+            >
+              <InputLabel
+                htmlFor="simple-select"
+                className={classes.selectLabel}
+              >
+            Day
+              </InputLabel>
+              <Select
+                MenuProps={{
+                  className: classes.selectMenu,
+                }}
+                classes={{
+                  select: classes.select,
+                }}
+                value={this.state.simpleSelect}
+                onChange={this.handleSimple}
+                inputProps={{
+                  name: 'simpleSelect',
+                  id: 'simple-select',
+                }}
+              >
+                <MenuItem
+                  classes={{
+                    root: classes.selectMenuItem,
+                    selected: classes.selectMenuItemSelected,
+                  }}
+                >
+              Monday
+                </MenuItem>
+                <MenuItem
+                  classes={{
+                    root: classes.selectMenuItem,
+                    selected: classes.selectMenuItemSelected,
+                  }}
+                  value="2"
+                >
+              Tuesday
+                </MenuItem>
+                <MenuItem
+                  classes={{
+                    root: classes.selectMenuItem,
+                    selected: classes.selectMenuItemSelected,
+                  }}
+                  value="3"
+                >
+              Wednesday
+                </MenuItem>
+                <MenuItem
+                  classes={{
+                    root: classes.selectMenuItem,
+                    selected: classes.selectMenuItemSelected,
+                  }}
+                  value="3"
+                >
+                Thursday
+                </MenuItem>
+                <MenuItem
+                  classes={{
+                    root: classes.selectMenuItem,
+                    selected: classes.selectMenuItemSelected,
+                  }}
+                  value="3"
+                >
+                Friday
+                </MenuItem>
+                <MenuItem
+                  classes={{
+                    root: classes.selectMenuItem,
+                    selected: classes.selectMenuItemSelected,
+                  }}
+                  value="3"
+                >
+                Saturday
+                </MenuItem>
+                <MenuItem
+                  classes={{
+                    root: classes.selectMenuItem,
+                    selected: classes.selectMenuItemSelected,
+                  }}
+                  value="3"
+                >
+                Sunday
+                </MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl
+              fullWidth
+              className={classes.selectFormControl}
+            >
+              <InputLabel
+                htmlFor="simple-select"
+                className={classes.selectLabel}
+              >
+            Time
+              </InputLabel>
+              <Select
+                MenuProps={{
+                  className: classes.selectMenu,
+                }}
+                classes={{
+                  select: classes.select,
+                }}
+                value={this.state.simpleSelect}
+                onChange={this.handleSimple}
+                inputProps={{
+                  name: 'simpleSelect',
+                  id: 'simple-select',
+                }}
+              >
+                <MenuItem
+                  classes={{
+                    root: classes.selectMenuItem,
+                    selected: classes.selectMenuItemSelected,
+                  }}
+                >
+              Morning
+                </MenuItem>
+                <MenuItem
+                  classes={{
+                    root: classes.selectMenuItem,
+                    selected: classes.selectMenuItemSelected,
+                  }}
+                  value="2"
+                >
+              Afternoon
+                </MenuItem>
+                <MenuItem
+                  classes={{
+                    root: classes.selectMenuItem,
+                    selected: classes.selectMenuItemSelected,
+                  }}
+                  value="3"
+                >
+              Evening
+                </MenuItem>
+              </Select>
+            </FormControl>
+            <CustomInput
+              labelText="Description"
+              id="description"
+              formControlProps={{
+                fullWidth: true,
+              }}
+              inputProps={{
+                multiline: true,
+                rows: 3,
+              }}
+            />
+          </DialogContent>
+          <DialogActions
+            className={
+        `${classes.modalFooter
+        } ${
+          classes.modalFooterCenter}`
+      }
+          >
+            <Button
+              onClick={() => this.handleClose('noticeModal')}
+              color="info"
+              round
+            >
+        Save
+            </Button>
+          </DialogActions>
+        </Dialog>
         <GridContainer>
           <GridItem xs={12} sm={12} md={12}>
             <Card>
@@ -311,11 +693,6 @@ class FridgeTask extends React.Component {
                       <GridItem xs={12} sm={6} md={6} lg={2}>
                         <Button color="rose" className={classes.marginRight}>
                           Search
-                        </Button>
-                      </GridItem>
-                      <GridItem xs={12} sm={6} md={6} lg={2}>
-                        <Button color="rose" className={classes.marginRight}>
-                          Assign Task
                         </Button>
                       </GridItem>
                     </GridContainer>
