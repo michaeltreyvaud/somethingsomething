@@ -35,11 +35,13 @@ import SafetyCategory from '../../Views/SafetyRecord/SafetyCategory';
 import FridgeItem from '../../Views/Fridge/FridgeItem';
 import FridgeTask from '../../Views/Fridge/FridgeTask';
 import FridgeLog from '../../Views/Fridge/FridgeLog';
+import FridgeLogCreate from '../../Views/Fridge/FridgeLog/Create';
 import FridgeChart from '../../Views/Fridge/FridgeChart';
 
 import FreezerItem from '../../Views/Freezer/FreezerItem';
 import FreezerTask from '../../Views/Freezer/FreezerTask';
 import FreezerLog from '../../Views/Freezer/FreezerLog';
+import FreezerLogCreate from '../../Views/Freezer/FreezerLog/Create';
 import FreezerChart from '../../Views/Freezer/FreezerChart';
 
 import FoodItem from '../../Views/FoodItem';
@@ -149,12 +151,6 @@ const dashRoutes = [
         component: FridgeItem,
       },
       {
-        hidden: true,
-        path: '/FridgeItem/Create',
-        name: 'Create Fridge Item',
-        component: '',
-      },
-      {
         path: '/FridgeTask',
         name: 'Fridge Task',
         component: FridgeTask,
@@ -164,6 +160,12 @@ const dashRoutes = [
         name: 'Fridge Log',
         component: FridgeLog,
       },
+      {
+        hidden: true,
+        path: '/FridgeLog/Create',
+        name: 'Create Fridge Log',
+        component: FridgeLogCreate,
+      },      
       {
         path: '/FridgeChart',
         name: 'Fridge Chart',
@@ -193,6 +195,12 @@ const dashRoutes = [
         name: 'Freezer Log',
         component: FreezerLog,
       },
+      {
+        hidden: true,
+        path: '/FreezerLog/Create',
+        name: 'Create Freezer Log',
+        component: FreezerLogCreate,
+      },        
       {
         path: '/FreezerChart',
         name: 'Freezer Chart',

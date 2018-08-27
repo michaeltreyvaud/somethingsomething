@@ -22,7 +22,6 @@ import Button from '../../../Components/CustomButtons';
 import Table from '../../../Components/Table';
 import CustomDropdown from '../../../Components/CustomDropdown';
 
-import style from '../../../Assets/Jss/style';
 import extendedTablesStyle from '../../../Assets/Jss/extendedTablesStyle';
 
 class FreezerLog extends React.Component {
@@ -50,25 +49,26 @@ class FreezerLog extends React.Component {
     ));
     return (
       <div>
-        <Button color="info" className={classes.marginRight}>
+        <GridContainer>
+        <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/FreezerLog/Create')}>
         New
         </Button>
-        <CustomDropdown
-          hoverColor="black"
-          buttonText="Export"
-          buttonProps={{
-            round: true,
-            fullWidth: true,
-            style: { marginBottom: '0' },
-            color: 'info',
-          }}
-          dropdownHeader="Actions"
-          dropdownList={[
-            'Export CSV',
-            'Export PDF',
-            'Email',
-          ]}
-        />
+          <CustomDropdown
+            hoverColor="black"
+            buttonText="Export"
+            buttonProps={{
+              fullWidth: true,
+              style: { marginBottom: '0' },
+              color: 'warning',
+            }}
+            dropdownHeader="Actions"
+            dropdownList={[
+              'Export CSV',
+              'Export PDF',
+              'Email',
+            ]}
+          />
+        </GridContainer>
         <GridContainer>
           <GridItem xs={12} sm={12} md={12}>
             <Card>
@@ -319,4 +319,4 @@ class FreezerLog extends React.Component {
   }
 }
 
-export default withStyles(extendedTablesStyle, style)(FreezerLog);
+export default withStyles(extendedTablesStyle)(FreezerLog);

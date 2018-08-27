@@ -50,9 +50,9 @@ class FridgeLog extends React.Component {
     return (
       <div>
         <GridContainer>
-          <Button color="info" className={classes.marginRight}>
+        <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/FridgeLog/Create')}>
         New
-          </Button>
+        </Button>
           <CustomDropdown
             hoverColor="black"
             buttonText="Export"
