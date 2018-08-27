@@ -15,6 +15,9 @@ const extendedFormsStyle = {
     marginTop: '15px',
     marginBottom: '0px',
   },
+  center: {
+    textAlign: 'center',
+  },
   label: {
     cursor: 'pointer',
     paddingLeft: '0',

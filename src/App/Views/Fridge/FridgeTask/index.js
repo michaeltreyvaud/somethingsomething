@@ -24,7 +24,7 @@ import GridItem from '../../../Components/Grid/GridItem';
 import Button from '../../../Components/CustomButtons';
 import Card from '../../../Components/Card/Card';
 import CardBody from '../../../Components/Card/CardBody';
-import buttonStyle from '../../../Assets/Jss/buttonStyle';
+import extendedFormsStyle from '../../../Assets/Jss/extendedFormsStyle';
 
 BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
 // ##############################
@@ -725,4 +725,4 @@ class FridgeTask extends React.Component {
   }
 }
 
-export default withStyles(buttonStyle)(FridgeTask);
+export default withStyles(extendedFormsStyle)(FridgeTask);

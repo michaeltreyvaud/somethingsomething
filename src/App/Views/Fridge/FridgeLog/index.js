@@ -22,7 +22,6 @@ import Button from '../../../Components/CustomButtons';
 import Table from '../../../Components/Table';
 import CustomDropdown from '../../../Components/CustomDropdown';
 
-import style from '../../../Assets/Jss/style';
 import extendedTablesStyle from '../../../Assets/Jss/extendedTablesStyle';
 
 class FridgeLog extends React.Component {
@@ -320,4 +319,4 @@ class FridgeLog extends React.Component {
   }
 }
 
-export default withStyles(extendedTablesStyle, style)(FridgeLog);
+export default withStyles(extendedTablesStyle)(FridgeLog);
