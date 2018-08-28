@@ -17,6 +17,7 @@ import Header from '../../Components/Header';
 import Footer from '../../Components/Footer';
 import Sidebar from '../../Components/Sidebar';
 
+const noMatch = () => (<h1>fuck off</h1>);
 const switchRoutes = (
   <Switch>
     {dashboardRoutes.map((prop, key) => {
@@ -26,8 +27,16 @@ const switchRoutes = (
           <Route exact path={_prop.path} component={_prop.component} key={_key} />
         ));
       }
+      if (!prop.collapse && prop.views) {
+        const mapping = prop.views.map((_prop, _key) => (
+          <Route exact path={_prop.path} component={_prop.component} key={_key} />
+        ));
+        mapping.push(<Route exact path={prop.path} component={prop.component} key={key} />);
+        return mapping;
+      }
       return <Route exact path={prop.path} component={prop.component} key={key} />;
     })}
+    <Route component={noMatch} />
   </Switch>
 );
 

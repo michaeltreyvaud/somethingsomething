@@ -56,13 +56,14 @@ import SupplierListCreate from '../../Views/Traceability/SupplierList/Create';
 import DeliveryRecords from '../../Views/Traceability/DeliveryRecords';
 import TraceabilityLabels from '../../Views/Traceability/TraceabilityLabels';
 
+const TODOComponent = () => (<h1>TODO</h1>);
 const dashRoutes = [
   // Main Navigation
   {
-    path: '/dashboard',
+    path: '/Dashboard',
     name: 'Dashboard',
     icon: DashboardIcon,
-    component: '',
+    component: TODOComponent,
   },
   // Settings Navigation
   {
@@ -174,7 +175,7 @@ const dashRoutes = [
         path: '/FridgeLog/Create',
         name: 'Create Fridge Log',
         component: FridgeLogCreate,
-      },      
+      },
       {
         path: '/FridgeChart',
         name: 'Fridge Chart',
@@ -209,7 +210,7 @@ const dashRoutes = [
         path: '/FreezerLog/Create',
         name: 'Create Freezer Log',
         component: FreezerLogCreate,
-      },        
+      },
       {
         path: '/FreezerChart',
         name: 'Freezer Chart',
@@ -231,7 +232,7 @@ const dashRoutes = [
         name: 'Create Food Item',
         component: FoodItemCreate,
       },
-    ]
+    ],
   },
   {
     path: '/HotHolding',
@@ -308,7 +309,7 @@ const dashRoutes = [
     name: 'Menus',
     state: 'openMenus',
     icon: Book,
-    component: 'Menus',
+    component: TODOComponent,
   },
   {
     collapse: true,
@@ -320,17 +321,17 @@ const dashRoutes = [
       {
         path: '/OilLocation',
         name: 'Location',
-        component: 'OilLocation',
+        component: TODOComponent,
       },
       {
         path: '/OilTask',
         name: 'Task',
-        component: 'OilTask',
+        component: TODOComponent,
       },
       {
         path: '/OilLog',
         name: 'Log',
-        component: 'OilLog',
+        component: TODOComponent,
       },
     ],
   },
@@ -344,17 +345,17 @@ const dashRoutes = [
       {
         path: '/CleaningLocation',
         name: 'Location',
-        component: 'CleaningLocation',
+        component: TODOComponent,
       },
       {
         path: '/CleaningTask',
         name: 'Task',
-        component: 'CleaningTask',
+        component: TODOComponent,
       },
       {
         path: '/CleaningLog',
         name: 'Log',
-        component: 'CleaningLog',
+        component: TODOComponent,
       },
     ],
   },
@@ -363,21 +364,21 @@ const dashRoutes = [
     name: 'Reports',
     state: 'openReports',
     icon: Timeline,
-    component: 'Reports',
+    component: TODOComponent,
   },
   {
     path: '/SafetySheet',
     name: 'Safety Datasheet',
     state: 'openSafetySheet',
     icon: Description,
-    component: 'SafetySheet',
+    component: TODOComponent,
   },
   {
     path: '/PestManagement',
     name: 'Pest Management',
     state: 'openPestManagement',
     icon: BugReport,
-    component: 'PestManagement',
+    component: TODOComponent,
   },
 ];
 export default dashRoutes;
