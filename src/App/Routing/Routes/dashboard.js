@@ -44,6 +44,8 @@ import FreezerLogCreate from '../../Views/Freezer/FreezerLog/Create';
 import FreezerChart from '../../Views/Freezer/FreezerChart';
 
 import FoodItem from '../../Views/FoodItem';
+import FoodItemCreate from '../../Views/FoodItem/Create';
+
 import HotHolding from '../../Views/HotHolding';
 import FastCooling from '../../Views/FastCooling';
 import Service from '../../Views/Service';
@@ -222,6 +224,14 @@ const dashRoutes = [
     state: '',
     icon: Fastfood,
     component: FoodItem,
+    views: [
+      {
+        hidden: true,
+        path: '/FoodItem/Create',
+        name: 'Create Food Item',
+        component: FoodItemCreate,
+      },
+    ]
   },
   {
     path: '/HotHolding',

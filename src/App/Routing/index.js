@@ -28,6 +28,7 @@ const indexRoutes = [
   { path: '/FreezerLog/Create', name: 'Create Freezer Log', component: DashBoard },
   { path: '/FreezerChart', name: 'Freezer Chart', component: DashBoard },
   { path: '/FoodItem', name: 'Food Item', component: DashBoard },
+  { path: '/FoodItem/Create', name: 'Create Food Item', component: DashBoard },
   { path: '/HotHolding', name: 'Hot Holding', component: DashBoard },
   { path: '/FastCooling', name: 'Fast Cooling', component: DashBoard },
   { path: '/Service', name: 'Service', component: DashBoard },
