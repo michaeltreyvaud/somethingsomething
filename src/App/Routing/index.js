@@ -13,6 +13,7 @@ const indexRoutes = [
   { path: '/Teams', name: 'Teams', component: DashBoard },
   { path: '/Users', name: 'Users', component: DashBoard },
   { path: '/CheckList', name: 'Check List', component: DashBoard },
+  { path: '/CheckList/Create', name: 'Create Task', component: DashBoard },
   { path: '/SafetyTask', name: 'Safety Task', component: DashBoard },
   { path: '/SafetyLog', name: 'Safety Log', component: DashBoard },
   { path: '/SafetyCategory', name: 'Safety Category', component: DashBoard },

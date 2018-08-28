@@ -18,8 +18,6 @@ import Timeline from '@material-ui/icons/Timeline';
 import Description from '@material-ui/icons/Description';
 import BugReport from '@material-ui/icons/BugReport';
 
-import Image from '@material-ui/icons/Image';
-
 import CompanySettings from '../../Views/Settings/CompanySettings';
 import UserSettings from '../../Views/Settings/UserSettings';
 import Authorisations from '../../Views/Settings/Authorisations';
@@ -28,6 +26,7 @@ import Teams from '../../Views/Settings/Teams';
 import Users from '../../Views/Settings/Users';
 
 import CheckList from '../../Views/CheckList';
+import CheckListCreate from '../../Views/CheckList/Create';
 import SafetyTask from '../../Views/SafetyRecord/SafetyTask';
 import SafetyLog from '../../Views/SafetyRecord/SafetyLog';
 import SafetyCategory from '../../Views/SafetyRecord/SafetyCategory';
@@ -112,6 +111,14 @@ const dashRoutes = [
     state: 'openCheckList',
     component: CheckList,
     icon: CheckCircle,
+    views: [
+      {
+        hidden: true,
+        path: '/CheckList/Create',
+        name: 'Create Task',
+        component: CheckListCreate,
+      },
+    ],
   },
   {
     collapse: true,
