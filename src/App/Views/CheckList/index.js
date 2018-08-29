@@ -1,30 +1,24 @@
 import React from 'react';
 // react component for creating dynamic tables
-import ReactTable from 'react-table';
 import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
 import SweetAlert from 'react-bootstrap-sweetalert';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
 // @material-ui/icons
-import Dvr from '@material-ui/icons/Dvr';
-import Close from '@material-ui/icons/Close';
+import Print from '@material-ui/icons/Print';
+import Open from '@material-ui/icons/OpenInNew';
+import Delete from '@material-ui/icons/Delete';
 // core components
-import { cardTitle } from '../../Assets/Jss/material-dashboard-pro-react';
 import GridContainer from '../../Components/Grid/GridContainer';
 import GridItem from '../../Components/Grid/GridItem';
 import Button from '../../Components/CustomButtons';
 import Card from '../../Components/Card/Card';
 import CardBody from '../../Components/Card/CardBody';
 import NavPills from '../../Components/NavPills';
+import Table from '../../Components/Table';
 
-const styles = {
-  cardIconTitle: {
-    ...cardTitle,
-    marginTop: '15px',
-    marginBottom: '0px',
-  },
-};
+import style from '../../Assets/Jss/style';
 
 BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
 // ##############################
@@ -86,83 +80,12 @@ const events = [
   },
 ];
 
-const dataTable = {
-  headerRow: ['Location', 'Description', 'Owner', 'Status', 'Actions'],
-  footerRow: ['Location', 'Description', 'Owner', 'Status', 'Actions'],
-  dataRows: [
-    ['Location', 'Description', 'Owner', 'Status'],
-    ['Location 2', 'Description 2', 'Owner 2', 'Status 2'],
-    ['Location 3', 'Description 3', 'Owner 3', 'Status 3'],
-    ['Location 4', 'Description 4', 'Owner 4', 'Status 4'],
-    ['Location 5', 'Description 5', 'Owner 5', 'Status 5'],
-    ['Location 6', 'Description 6', 'Owner 6', 'Status 6'],
-    ['Location 7', 'Description 7', 'Owner 7', 'Status 7'],
-    ['Location 8', 'Description 8', 'Owner 8', 'Status 8'],
-  ],
-};
-
-
 class CheckList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       events,
       alert: null,
-      data: dataTable.dataRows.map((prop, key) => ({
-        id: key,
-        location: prop[0],
-        description: prop[1],
-        owner: prop[2],
-        status: prop[3],
-        actions: (
-        // we've added some custom button actions
-          <div className="actions-right">
-            {/* use this button to add a edit kind of action */}
-            <Button
-              justIcon
-              round
-              simple
-              onClick={() => {
-                const obj = this.state.data.find(o => o.id === key);
-                alert(`You've clicked EDIT button on \n{ \nName: ${obj.name}, \nposition: ${
-                  obj.position
-                }, \noffice: ${
-                  obj.office
-                }, \nage: ${
-                  obj.age
-                }\n}.`);
-              }}
-              color="success"
-              className="edit"
-            >
-              <Dvr />
-            </Button>{' '}
-            {/* use this button to remove the data row */}
-            <Button
-              justIcon
-              round
-              simple
-              onClick={() => {
-                const data = this.state.data;
-                data.find((o, i) => {
-                  if (o.id === key) {
-                    // here you should add some custom code so you can delete the data
-                    // from this component and from your server as well
-                    data.splice(i, 1);
-                    return true;
-                  }
-                  return false;
-                });
-                this.setState({ data });
-              }}
-              color="danger"
-              className="remove"
-            >
-              <Close />
-            </Button>{' '}
-          </div>
-        ),
-      })),
     };
     this.hideAlert = this.hideAlert.bind(this);
   }
@@ -223,6 +146,21 @@ class CheckList extends React.Component {
 
   render() {
     const { classes } = this.props;
+    const { simpleSelect } = this.state;
+    const simpleButtons = [
+      { color: 'warning', icon: Print },
+      { color: 'success', icon: Open },
+      { color: 'danger', icon: Delete },
+    ].map((prop, key) => (
+      <Button
+        color={prop.color}
+        simple
+        className={classes.actionButton}
+        key={key}
+      >
+        <prop.icon className={classes.icon} />
+      </Button>
+    ));
     return (
       <div>
         <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/CheckList/Create')}>
@@ -238,41 +176,37 @@ class CheckList extends React.Component {
                     {
                       tabButton: 'Check List',
                       tabContent: (
-                        <ReactTable
-                          data={this.state.data}
-                          filterable
-                          columns={[
-                            {
-                              Header: 'ID',
-                              accessor: 'id',
-                            },
-                            {
-                              Header: 'Location',
-                              accessor: 'location',
-                            },
-                            {
-                              Header: 'Description',
-                              accessor: 'description',
-                            },
-                            {
-                              Header: 'Owner',
-                              accessor: 'owner',
-                            },
-                            {
-                              Header: 'Status',
-                              accessor: 'status',
-                            },
-                            {
-                              Header: 'Actions',
-                              accessor: 'actions',
-                              sortable: false,
-                              filterable: false,
-                            },
+                        <Table
+                          tableHead={[
+                            'ID',
+                            'Location',
+                            'Description',
+                            'Owner',
+                            'Status',
+                            'Actions',
                           ]}
-                          defaultPageSize={10}
-                          showPaginationTop
-                          showPaginationBottom={false}
-                          className="-striped -highlight"
+                          tableData={[
+                            [
+                              '1',
+                              'Location 1',
+                              'Description 1',
+                              'Owner',
+                              'Status',
+                              simpleButtons,
+                            ],
+                          ]}
+                          customCellClasses={[
+                            classes.center,
+                            classes.right,
+                            classes.right,
+                          ]}
+                          customClassesForCells={[0, 4, 5]}
+                          customHeadCellClasses={[
+                            classes.center,
+                            classes.right,
+                            classes.right,
+                          ]}
+                          customHeadClassesForCells={[0, 4, 5]}
                         />
                       ),
                     },
@@ -302,4 +236,4 @@ class CheckList extends React.Component {
   }
 }
 
-export default withStyles(styles)(CheckList);
+export default withStyles(style)(CheckList);
