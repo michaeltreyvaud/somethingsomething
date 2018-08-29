@@ -1,19 +1,15 @@
 import React from 'react';
 // react component for creating dynamic tables
-import ReactTable from 'react-table';
 import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
 import SweetAlert from 'react-bootstrap-sweetalert';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
 // @material-ui/icons
-import Dvr from '@material-ui/icons/Dvr';
-import Close from '@material-ui/icons/Close';
 import Print from '@material-ui/icons/Print';
 import Open from '@material-ui/icons/OpenInNew';
 import Delete from '@material-ui/icons/Delete';
 // core components
-import { cardTitle } from '../../../Assets/Jss/material-dashboard-pro-react';
 import GridContainer from '../../../Components/Grid/GridContainer';
 import GridItem from '../../../Components/Grid/GridItem';
 import Button from '../../../Components/CustomButtons';
