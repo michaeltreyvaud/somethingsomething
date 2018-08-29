@@ -4,23 +4,23 @@ import Datetime from 'react-datetime';
 import withStyles from '@material-ui/core/styles/withStyles';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from "@material-ui/core/Select";
-import CustomInput from '../../../../Components/CustomInput';
-import ImageUpload from '../../../../Components/CustomUpload/ImageUpload';
+import CustomInput from '../../../Components/CustomInput';
+import ImageUpload from '../../../Components/CustomUpload/ImageUpload';
 // @material-ui/icons
 import Today from "@material-ui/icons/Today";
 // core components
-import GridItem from '../../../../Components/Grid/GridItem';
-import Button from '../../../../Components/CustomButtons';
+import GridItem from '../../../Components/Grid/GridItem';
+import Button from '../../../Components/CustomButtons';
 import FormControl from '@material-ui/core/FormControl';
-import Card from '../../../../Components/Card/Card';
-import GridContainer from '../../../../Components/Grid/GridContainer';
-import CardHeader from '../../../../Components/Card/CardHeader';
-import CardBody from '../../../../Components/Card/CardBody';
-import CardIcon from '../../../../Components/Card/CardIcon';
+import Card from '../../../Components/Card/Card';
+import GridContainer from '../../../Components/Grid/GridContainer';
+import CardHeader from '../../../Components/Card/CardHeader';
+import CardBody from '../../../Components/Card/CardBody';
+import CardIcon from '../../../Components/Card/CardIcon';
 import InputLabel from '@material-ui/core/InputLabel';
-import extendedFormsStyle from '../../../../Assets/Jss/extendedFormsStyle';
+import extendedFormsStyle from '../../../Assets/Jss/extendedFormsStyle';
 
-class FridgeLogCreate extends React.Component {
+class HotHoldingCreate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -70,7 +70,7 @@ class FridgeLogCreate extends React.Component {
                 <CardIcon color="rose">
                   <Today />
                 </CardIcon>
-                <h4 className={classes.cardIconTitle}>Fridge Temperature</h4>
+                <h4 className={classes.cardIconTitle}>Capture Reheating Temperature</h4>
               </CardHeader>
               <CardBody>
                 <FormControl
@@ -81,7 +81,7 @@ class FridgeLogCreate extends React.Component {
                     htmlFor="simple-select"
                     className={classes.selectLabel}
                   >
-                    Choose Fridge
+                    Choose Food Item
                   </InputLabel>
                   <Select
                     MenuProps={{
@@ -120,7 +120,7 @@ class FridgeLogCreate extends React.Component {
                   <CustomInput
                     success={this.state.numberState === "success"}
                     error={this.state.numberState === "error"}
-                    labelText="Temperature"
+                    labelText="Capture Temperature Value"
                     id="number"
                     formControlProps={{
                       fullWidth: true
@@ -191,4 +191,4 @@ class FridgeLogCreate extends React.Component {
   }
 }
 
-export default withStyles(extendedFormsStyle)(FridgeLogCreate);
+export default withStyles(extendedFormsStyle)(HotHoldingCreate);

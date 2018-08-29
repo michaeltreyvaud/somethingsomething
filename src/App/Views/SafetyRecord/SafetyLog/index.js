@@ -18,6 +18,7 @@ import CardIcon from '../../../Components/Card/CardIcon';
 import Button from "../../../Components/CustomButtons";
 import Dvr from '@material-ui/icons/Dvr';
 import Close from '@material-ui/icons/Close';
+import CustomDropdown from '../../../Components/CustomDropdown';
 
 import extendedFormsStyle from './style';
 
@@ -118,6 +119,21 @@ render() {
   const { classes } = this.props;
   return (
     <div>
+        <CustomDropdown
+          hoverColor="black"
+          buttonText="Export"
+          buttonProps={{
+            fullWidth: true,
+            style: { marginBottom: '0' },
+            color: 'warning',
+          }}
+          dropdownHeader="Actions"
+          dropdownList={[
+            'Export CSV',
+            'Export PDF',
+            'Email',
+          ]}
+        />      
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
           <Card>

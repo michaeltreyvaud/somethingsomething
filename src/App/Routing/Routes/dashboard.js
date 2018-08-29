@@ -28,6 +28,7 @@ import Users from '../../Views/Settings/Users';
 import CheckList from '../../Views/CheckList';
 import CheckListCreate from '../../Views/CheckList/Create';
 import SafetyTask from '../../Views/SafetyRecord/SafetyTask';
+import SafetyTaskCreate from '../../Views/SafetyRecord/SafetyTask/Create';
 import SafetyLog from '../../Views/SafetyRecord/SafetyLog';
 import SafetyCategory from '../../Views/SafetyRecord/SafetyCategory';
 
@@ -47,8 +48,14 @@ import FoodItem from '../../Views/FoodItem';
 import FoodItemCreate from '../../Views/FoodItem/Create';
 
 import HotHolding from '../../Views/HotHolding';
+import HotHoldingCreate from '../../Views/HotHolding/Create';
+
 import FastCooling from '../../Views/FastCooling';
+import FastCoolingCreate from '../../Views/FastCooling/Create';
+
 import Service from '../../Views/Service';
+import ServiceCreate from '../../Views/Service/Create';
+
 import ColdHotLocation from '../../Views/ColdHotLocation';
 import ColdHotTransportLog from '../../Views/ColdHotTransportLog';
 import SupplierList from '../../Views/Traceability/SupplierList';
@@ -135,6 +142,12 @@ const dashRoutes = [
         name: 'Safety Task',
         component: SafetyTask,
       },
+      {
+        hidden: true,
+        path: '/SafetyTask/Create',
+        name: 'Create Task',
+        component: SafetyTaskCreate,
+      },      
       {
         path: '/SafetyLog',
         name: 'Safety Log',
@@ -240,6 +253,14 @@ const dashRoutes = [
     state: '',
     icon: Whatshot,
     component: HotHolding,
+    views: [
+      {
+        hidden: true,
+        path: '/HotHolding/Create',
+        name: 'Capture Reheating Temperature',
+        component: HotHoldingCreate,
+      },
+    ],
   },
   {
     path: '/FastCooling',
@@ -247,6 +268,14 @@ const dashRoutes = [
     state: '',
     icon: FastForward,
     component: FastCooling,
+    views: [
+      {
+        hidden: true,
+        path: '/FastCooling/Create',
+        name: 'Capture Cooling Temperature',
+        component: FastCoolingCreate,
+      },
+    ],
   },
   {
     path: '/Service',
@@ -254,6 +283,14 @@ const dashRoutes = [
     state: '',
     icon: RoomService,
     component: Service,
+    views: [
+      {
+        hidden: true,
+        path: '/Service/Create',
+        name: 'Capture Service Temperature',
+        component: ServiceCreate,
+      },
+    ],    
   },
   {
     collapse: true,

@@ -49,26 +49,24 @@ class FridgeLog extends React.Component {
     ));
     return (
       <div>
-        <GridContainer>
         <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/FridgeLog/Create')}>
         New
         </Button>
-          <CustomDropdown
-            hoverColor="black"
-            buttonText="Export"
-            buttonProps={{
-              fullWidth: true,
-              style: { marginBottom: '0' },
-              color: 'warning',
-            }}
-            dropdownHeader="Actions"
-            dropdownList={[
-              'Export CSV',
-              'Export PDF',
-              'Email',
-            ]}
-          />
-        </GridContainer>
+        <CustomDropdown
+          hoverColor="black"
+          buttonText="Export"
+          buttonProps={{
+            fullWidth: true,
+            style: { marginBottom: '0' },
+            color: 'warning',
+          }}
+          dropdownHeader="Actions"
+          dropdownList={[
+            'Export CSV',
+            'Export PDF',
+            'Email',
+          ]}
+        />
         <GridContainer>
           <GridItem xs={12} sm={12} md={12}>
             <Card>

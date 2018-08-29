@@ -4,7 +4,7 @@ import Datetime from 'react-datetime';
 import withStyles from '@material-ui/core/styles/withStyles';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from "@material-ui/core/Select";
-import CustomInput from '../../../Components/CustomInput';
+import CustomInput from '../../../../Components/CustomInput';
 import Check from '@material-ui/icons/Check';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -12,18 +12,18 @@ import FormLabel from '@material-ui/core/FormLabel';
 // @material-ui/icons
 import Today from "@material-ui/icons/Today";
 // core components
-import GridItem from '../../../Components/Grid/GridItem';
-import Button from '../../../Components/CustomButtons';
+import GridItem from '../../../../Components/Grid/GridItem';
+import Button from '../../../../Components/CustomButtons';
 import FormControl from '@material-ui/core/FormControl';
-import Card from '../../../Components/Card/Card';
-import GridContainer from '../../../Components/Grid/GridContainer';
-import CardHeader from '../../../Components/Card/CardHeader';
-import CardBody from '../../../Components/Card/CardBody';
-import CardIcon from '../../../Components/Card/CardIcon';
+import Card from '../../../../Components/Card/Card';
+import GridContainer from '../../../../Components/Grid/GridContainer';
+import CardHeader from '../../../../Components/Card/CardHeader';
+import CardBody from '../../../../Components/Card/CardBody';
+import CardIcon from '../../../../Components/Card/CardIcon';
 import InputLabel from '@material-ui/core/InputLabel';
-import extendedFormsStyle from '../../../Assets/Jss/extendedFormsStyle';
+import extendedFormsStyle from '../../../../Assets/Jss/extendedFormsStyle';
 
-class CheckListCreate extends React.Component {
+class SafetyTaskCreate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -335,4 +335,4 @@ class CheckListCreate extends React.Component {
   }
 }
 
-export default withStyles(extendedFormsStyle)(CheckListCreate);
+export default withStyles(extendedFormsStyle)(SafetyTaskCreate);

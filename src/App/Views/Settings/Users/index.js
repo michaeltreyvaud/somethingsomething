@@ -174,7 +174,7 @@ class Users extends React.Component {
           >
             <Close className={classes.modalClose} />
           </Button>
-          <h4 className={classes.modalTitle}>Create New Team</h4>
+          <h4 className={classes.modalTitle}>Create New User</h4>
         </DialogTitle>
         <DialogContent
           id="notice-modal-slide-description"
