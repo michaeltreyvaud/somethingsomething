@@ -166,17 +166,7 @@ const CompanySettings = (props) => {
         </GridItem>
         <GridItem xs={12} sm={12} md={4}>
           <Card profile>
-            <CardAvatar profile>
-              <a href="#pablo" onClick={e => e.preventDefault()}>
-                <img src={avatar} alt="..." />
-              </a>
-            </CardAvatar>
             <CardBody profile>
-              <h6 className={classes.cardCategory}>CEO / CO-FOUNDER</h6>
-              <h4 className={classes.cardTitle}>Daniel Treyvaud</h4>
-              <p className={classes.description}>
-                  Treybro Studios
-              </p>
               <ImageUpload
                 avatar
                 addButtonProps={{

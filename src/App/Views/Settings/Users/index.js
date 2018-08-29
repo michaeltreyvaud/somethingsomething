@@ -15,103 +15,25 @@ import Card from '../../../Components/Card/Card';
 import CardBody from '../../../Components/Card/CardBody';
 import CardHeader from '../../../Components/Card/CardHeader';
 import CardIcon from '../../../Components/Card/CardIcon';
-import Button from "../../../Components/CustomButtons";
-import Dvr from '@material-ui/icons/Dvr';
+import Button from '../../../Components/CustomButtons';
+import Table from '../../../Components/Table';
+import Delete from '@material-ui/icons/Delete';
 import Close from '@material-ui/icons/Close';
 import Open from '@material-ui/icons/OpenInNew';
 import CustomInput from '../../../Components/CustomInput';
 import ImageUpload from '../../../Components/CustomUpload/ImageUpload';
 
-import extendedFormsStyle from '../../../Assets/Jss/extendedFormsStyle';
+import style from '../../../Assets/Jss/style';
 
 function Transition(props) {
   return <Slide direction="down" {...props} />;
 }
-
-const dataTable = {
-  headerRow: ['Full Name', 'Email', 'Digit Code', 'Phone', 'Position', 'Team', 'Authorisation', 'Last Login', 'Status'],
-  footerRow: ['Full Name', 'Email', 'Digit Code', 'Phone', 'Position', 'Team', 'Authorisation', 'Last Login', 'Status'],
-  dataRows: [
-    ['Full Name', 'Email', 'Digit Code', 'Phone', 'Position', 'Team', 'Authorisation', 'Last Login', 'Status'],
-    ['Full Name', 'Email', 'Digit Code', 'Phone', 'Position', 'Team', 'Authorisation', 'Last Login', 'Status'],
-    ['Full Name', 'Email', 'Digit Code', 'Phone', 'Position', 'Team', 'Authorisation', 'Last Login', 'Status'],
-    ['Full Name', 'Email', 'Digit Code', 'Phone', 'Position', 'Team', 'Authorisation', 'Last Login', 'Status'],
-    ['Full Name', 'Email', 'Digit Code', 'Phone', 'Position', 'Team', 'Authorisation', 'Last Login', 'Status'],
-    ['Full Name', 'Email', 'Digit Code', 'Phone', 'Position', 'Team', 'Authorisation', 'Last Login', 'Status'],
-    ['Full Name', 'Email', 'Digit Code', 'Phone', 'Position', 'Team', 'Authorisation', 'Last Login', 'Status'],
-    ['Full Name', 'Email', 'Digit Code', 'Phone', 'Position', 'Team', 'Authorisation', 'Last Login', 'Status'],
-  ],
-};
 
 class Users extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       simpleSelect: "",
-      data: dataTable.dataRows.map((prop, key) => ({
-        id: key,
-        fullname: prop[0],
-        email: prop[1],
-        digitcode: prop[2],
-        phone: prop[3],
-        position: prop[4],
-        team: prop[5],
-        authorisation: prop[6],
-        lastlogin: prop[7],
-        status: prop[8],
-        actions: (
-        // we've added some custom button actions
-          <div className="actions-right">
-            {/* use this button to add a edit kind of action */}
-            <Button
-              justIcon
-              round
-              simple
-              onClick={() => {
-                const obj = this.state.data.find(o => o.id === key);
-                alert(
-                  `You've clicked EDIT button on \n{ \nName: ${
-                    obj.name
-                  }, \nposition: ${
-                    obj.position
-                  }, \noffice: ${
-                    obj.office
-                  }, \nage: ${
-                    obj.age
-                  }\n}.`,
-                );
-              }}
-              color="success"
-              className="edit"
-            >
-              <Dvr />
-            </Button>{' '}
-            {/* use this button to remove the data row */}
-            <Button
-              justIcon
-              round
-              simple
-              onClick={() => {
-                const data = this.state.data;
-                data.find((o, i) => {
-                  if (o.id === key) {
-                    // here you should add some custom code so you can delete the data
-                    // from this component and from your server as well
-                    data.splice(i, 1);
-                    return true;
-                  }
-                  return false;
-                });
-                this.setState({ data });
-              }}
-              color="danger"
-              className="remove"
-            >
-              <Close />
-            </Button>{' '}
-          </div>
-        ),
-        })),
     };
     this.handleTags = this.handleTags.bind(this);
   }
@@ -142,6 +64,20 @@ class Users extends React.Component {
 
   render() {
     const { classes } = this.props;
+    const { simpleSelect } = this.state;
+    const simpleButtons = [
+      { color: 'success', icon: Open },
+      { color: 'danger', icon: Delete },
+    ].map((prop, key) => (
+      <Button
+        color={prop.color}
+        simple
+        className={classes.actionButton}
+        key={key}
+      >
+        <prop.icon className={classes.icon} />
+      </Button>
+    ));
     return (
       <div>
       <Button color="info" className={classes.marginRight} onClick={() => this.handleClickOpen('noticeModal')}>
@@ -304,62 +240,48 @@ class Users extends React.Component {
                 <h4 className={classes.cardIconTitle}>Records</h4>
               </CardHeader>
               <CardBody>
-                <ReactTable
-                  data={this.state.data}
-                  filterable
-                  columns={[
-                    {
-                      Header: "ID",
-                      accessor: "id"
-                    },
-                    {
-                      Header: "Full Name",
-                      accessor: "fullname"
-                    },
-                    {
-                      Header: "Email",
-                      accessor: "email"
-                    },
-                    {
-                      Header: "Digit Code",
-                      accessor: "digitcode",
-                    },
-                    {
-                      Header: "Phone",
-                      accessor: "phone",
-                    },
-                    {
-                      Header: "Position",
-                      accessor: "position",
-                    },
-                    {
-                      Header: "Team",
-                      accessor: "team",
-                    },
-                    {
-                      Header: "Authorisation",
-                      accessor: "authorisation",
-                    },
-                    {
-                      Header: "Last Login",
-                      accessor: "lastlogin",
-                    },
-                    {
-                      Header: "Status",
-                      accessor: "status",
-                    },
-                    {
-                      Header: "Actions",
-                      accessor: "actions",
-                      sortable: false,
-                      filterable: false
-                    }
+                <Table
+                  tableHead={[
+                    'ID',
+                    'Full Name',
+                    'Email',
+                    'Digit Code',
+                    'Phone',
+                    'Position',
+                    'Team',
+                    'Authorisation',
+                    'Last Login',
+                    'Status',
+                    'Actions',
                   ]}
-                  defaultPageSize={10}
-                  showPaginationTop
-                  showPaginationBottom={false}
-                  className="-striped -highlight"
-                />
+                  tableData={[
+                    [
+                      '1',
+                      'Dan Treyvaud',
+                      'test@test.test',
+                      '133700',
+                      '0857100738',
+                      'Staff',
+                      'Kitchen',
+                      'Administrator',
+                      'Active',
+                      '08/29/2018 18:07:32',
+                      simpleButtons,
+                    ],
+                  ]}
+                  customCellClasses={[
+                    classes.center,
+                    classes.right,
+                    classes.right,
+                  ]}
+                  customClassesForCells={[0, 4, 5]}
+                  customHeadCellClasses={[
+                    classes.center,
+                    classes.right,
+                    classes.right,
+                  ]}
+                  customHeadClassesForCells={[0, 4, 5]}
+                />                
               </CardBody>
             </Card>
           </GridItem>
@@ -369,4 +291,4 @@ class Users extends React.Component {
   }
 }
 
-export default withStyles(extendedFormsStyle)(Users);
+export default withStyles(style)(Users);
