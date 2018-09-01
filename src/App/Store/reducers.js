@@ -4,6 +4,7 @@ import loginReducer from '../Views/Login/Store/Reducers';
 
 const appReducers = combineReducers({
   routes: routingReducer,
+  //  TODO: Combine all auth reducers
   login: loginReducer,
 });
 

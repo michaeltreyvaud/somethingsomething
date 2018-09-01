@@ -26,6 +26,7 @@ class LoginView extends React.Component {
       cardAnimaton: 'cardHidden',
       email: '',
       password: '',
+      newPassword: '',
       displayError: false,
     };
   }
@@ -59,12 +60,18 @@ class LoginView extends React.Component {
     login(email, password);
   }
 
+  challenge() {
+    const { challenge, session } = this.props;
+    const { email, newPassword } = this.state;
+    challenge(email, newPassword, session);
+  }
+
   render() {
     const {
-      classes, loading, errorMessage,
+      classes, loading, errorMessage, challengeType,
     } = this.props;
     const {
-      cardAnimaton, email, password, displayError,
+      cardAnimaton, email, password, displayError, newPassword,
     } = this.state;
     if (loading) return (<h1>TODO: Loading</h1>);
     return (
@@ -85,7 +92,7 @@ class LoginView extends React.Component {
                   className={`${classes.cardHeader} ${classes.textCenter}`}
                   color="rose"
                 >
-                  <h4 className={classes.cardTitle}>Login</h4>
+                  <h4 className={classes.cardTitle}>{challengeType === 'NEW_PASSWORD_REQUIRED' ? 'Update Password' : 'Login'}</h4>
                 </CardHeader>
                 <CardBody>
                   <CustomInput
@@ -104,6 +111,7 @@ class LoginView extends React.Component {
                     value={email}
                     onChange={event => this.onChange(event)}
                   />
+                  {challengeType === '' && (
                   <CustomInput
                     labelText="Password"
                     id="password"
@@ -123,10 +131,38 @@ class LoginView extends React.Component {
                     value={password}
                     onChange={event => this.onChange(event)}
                   />
+                  )}
+                  {challengeType === 'NEW_PASSWORD_REQUIRED' && (
+                  <CustomInput
+                    labelText="New Password"
+                    id="newPassword"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <Icon className={classes.inputAdornmentIcon}>
+                            <Lock className={classes.inputAdornmentIcon} />
+                          </Icon>
+                        </InputAdornment>
+                      ),
+                    }}
+                    type="password"
+                    value={newPassword}
+                    onChange={event => this.onChange(event)}
+                  />
+                  )}
                 </CardBody>
                 <CardFooter className={classes.justifyContentCenter}>
-                  <Button color="rose" simple size="lg" block onClick={() => this.login()}>
-                    Login
+                  <Button
+                    color="rose"
+                    simple
+                    size="lg"
+                    block
+                    onClick={(challengeType === 'NEW_PASSWORD_REQUIRED') ? () => this.challenge() : () => this.login()}
+                  >
+                    {challengeType === 'NEW_PASSWORD_REQUIRED' ? 'Submit' : 'Login'}
                   </Button>
                 </CardFooter>
               </Card>
@@ -143,7 +179,10 @@ LoginView.propTypes = {
   loading: PropTypes.bool.isRequired,
   error: PropTypes.bool.isRequired,
   errorMessage: PropTypes.string.isRequired,
+  challengeType: PropTypes.string.isRequired,
+  session: PropTypes.string.isRequired,
   login: PropTypes.func.isRequired,
+  challenge: PropTypes.func.isRequired,
 };
 
 export default withStyles(loginPageStyle)(LoginView);
