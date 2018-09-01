@@ -13,8 +13,9 @@ const loginSuccess = () => ({
   type: LOGIN_SUCCESS,
 });
 
-const loginFail = () => ({
+const loginFail = message => ({
   type: LOGIN_FAIL,
+  payload: { message },
 });
 
 export const login = (email, password) => async (dispatch) => {
@@ -27,11 +28,9 @@ export const login = (email, password) => async (dispatch) => {
     //  TODO - fetch these
     const { REACT_APP_API_URL, REACT_APP_LOGIN_PATH } = process.env;
     const res = await fetch(`${REACT_APP_API_URL}${REACT_APP_LOGIN_PATH}`, body);
-    console.log(res);
-    return dispatch(loginSuccess());
-  } catch (error) {
-    console.log(error);
-    return dispatch(loginFail());
+    return dispatch(loginSuccess(res));
+  } catch (_err) {
+    return dispatch(loginFail(_err.message || 'An error has occurred'));
   }
 };
 

@@ -29,11 +29,12 @@ const loginReducer = (state = initialState, action) => {
       };
     }
     case LOGIN_FAIL: {
+      const { message } = action.payload;
       return {
         ...state,
         loading: false,
         error: true,
-        errorMessage: 'TODO: Something went wrong',
+        errorMessage: message,
       };
     }
     default: {

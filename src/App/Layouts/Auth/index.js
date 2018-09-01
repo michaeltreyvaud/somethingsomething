@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import pagesStyle from './style';
 import bgImage from '../../Assets/Images/register.jpeg';
 import pagesRoutes from '../../Routing/Routes/auth';
-import Footer from '../../Components/Footer';
 import PagesHeader from '../../Components/Header/PagesHeader';
 
+const noMatch = () => (<h1>Another no match</h1>);
 class Pages extends React.Component {
   componentDidMount() {
     document.body.style.overflow = 'unset';
@@ -25,25 +25,10 @@ class Pages extends React.Component {
             style={{ backgroundImage: `url(${bgImage})` }}
           >
             <Switch>
-              {pagesRoutes.map((prop, key) => {
-                if (prop.collapse) {
-                  return null;
-                }
-                if (prop.redirect) {
-                  return (
-                    <Redirect from={prop.path} to={prop.pathTo} key={key} />
-                  );
-                }
-                return (
-                  <Route
-                    path={prop.path}
-                    component={prop.component}
-                    key={key}
-                  />
-                );
-              })}
+              {pagesRoutes.map((prop, key) => (
+                <Route exact path={prop.path} component={prop.component} key={key} />))}
+              <Route component={noMatch} />
             </Switch>
-            <Footer white />
           </div>
         </div>
       </div>

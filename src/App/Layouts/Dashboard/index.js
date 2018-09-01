@@ -1,7 +1,7 @@
 import React from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import PerfectScrollbar from 'perfect-scrollbar';
 import 'perfect-scrollbar/css/perfect-scrollbar.css';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -21,7 +21,6 @@ const noMatch = () => (<h1>fuck off</h1>);
 const switchRoutes = (
   <Switch>
     {dashboardRoutes.map((prop, key) => {
-      if (prop.redirect) { return <Redirect from={prop.path} to={prop.pathTo} key={key} />; }
       if (prop.collapse) {
         return prop.views.map((_prop, _key) => (
           <Route exact path={_prop.path} component={_prop.component} key={_key} />

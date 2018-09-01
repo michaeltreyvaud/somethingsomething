@@ -15,6 +15,7 @@ import Card from '../../Components/Card/Card';
 import CardBody from '../../Components/Card/CardBody';
 import CardHeader from '../../Components/Card/CardHeader';
 import CardFooter from '../../Components/Card/CardFooter';
+import Snackbar from '../../Components/Snackbar/Snackbar';
 
 import loginPageStyle from './style';
 
@@ -25,6 +26,7 @@ class LoginView extends React.Component {
       cardAnimaton: 'cardHidden',
       email: '',
       password: '',
+      displayError: false,
     };
   }
 
@@ -32,6 +34,12 @@ class LoginView extends React.Component {
     this.timeOutFunction = setTimeout(() => {
       this.setState({ cardAnimaton: '' });
     }, 300);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      displayError: nextProps.error,
+    });
   }
 
   componentWillUnmount() {
@@ -53,13 +61,22 @@ class LoginView extends React.Component {
 
   render() {
     const {
-      classes, loading, error, errorMessage,
+      classes, loading, errorMessage,
     } = this.props;
-    if (error) return (<h1>TODO: Something went wrong ${errorMessage}</h1>);
+    const {
+      cardAnimaton, email, password, displayError,
+    } = this.state;
     if (loading) return (<h1>TODO: Loading</h1>);
-    const { cardAnimaton, email, password } = this.state;
     return (
       <div className={classes.container}>
+        <Snackbar
+          place="bc"
+          color="danger"
+          message={errorMessage}
+          open={displayError}
+          closeNotification={() => this.setState({ displayError: false })}
+          close
+        />
         <GridContainer justify="center">
           <GridItem xs={12} sm={6} md={4}>
             <form>

@@ -67,14 +67,14 @@ const TODOComponent = () => (<h1>TODO</h1>);
 const dashRoutes = [
   // Main Navigation
   {
-    path: '/Dashboard',
+    path: '/dashboard/dashboard',
     name: 'Dashboard',
     icon: DashboardIcon,
     component: TODOComponent,
   },
   // Settings Navigation
   {
-    path: '/CompanySettings',
+    path: '/dashboard/company',
     name: 'Company Profile',
     state: 'openCoSetting',
     icon: Business,
@@ -82,41 +82,41 @@ const dashRoutes = [
   },
   {
     collapse: true,
-    path: '/Settings',
+    path: '/dashboard/settings',
     name: 'User Settings',
     state: 'openSettings',
     icon: SettingsApplications,
     views: [
       {
-        path: '/UserSettings',
+        path: '/dashboard/settings/user',
         name: 'User Settings',
         component: UserSettings,
       },
       {
-        path: '/Authorisations',
+        path: '/dashboard/settings/authorisations',
         name: 'Authorisations',
         component: Authorisations,
       },
       {
         hidden: true,
-        path: '/Authorisations/Create',
+        path: '/dashboard/settings/authorisations/create',
         name: 'Create Authorisation',
         component: AuthorisationsCreate,
       },
       {
-        path: '/Teams',
+        path: '/dashboard/settings/teams',
         name: 'Teams',
         component: Teams,
       },
       {
-        path: '/Users',
+        path: '/dashboard/settings/users',
         name: 'Users',
         component: Users,
       },
     ],
   },
   {
-    path: '/CheckList',
+    path: '/dashboard/checklist',
     name: 'Check List',
     state: 'openCheckList',
     component: CheckList,
@@ -124,7 +124,7 @@ const dashRoutes = [
     views: [
       {
         hidden: true,
-        path: '/CheckList/Create',
+        path: '/dashboard/checklist/create',
         name: 'Create Task',
         component: CheckListCreate,
       },
@@ -132,29 +132,29 @@ const dashRoutes = [
   },
   {
     collapse: true,
-    path: '/Safety',
+    path: '/dashboard/safety',
     name: 'Safety Record',
     state: 'openSafetyRecord',
     icon: Assignment,
     views: [
       {
-        path: '/SafetyTask',
+        path: '/dashboard/safety/task',
         name: 'Safety Task',
         component: SafetyTask,
       },
       {
         hidden: true,
-        path: '/SafetyTask/Create',
+        path: '/dashboard/safety/create',
         name: 'Create Task',
         component: SafetyTaskCreate,
       },
       {
-        path: '/SafetyLog',
+        path: '/dashboard/safety/log',
         name: 'Safety Log',
         component: SafetyLog,
       },
       {
-        path: '/SafetyCategory',
+        path: '/dashboard/safety/category',
         name: 'Safety Category',
         component: SafetyCategory,
       },
@@ -163,34 +163,34 @@ const dashRoutes = [
   // Temperature Navigation
   {
     collapse: true,
-    path: '/Fridge',
+    path: '/dashboard/fridge',
     name: 'Fridge',
     state: 'openFridge',
     icon: AcUnit,
     views: [
       {
-        path: '/FridgeItem',
+        path: '/dashboard/fridge/item',
         name: 'Fridge Item',
         component: FridgeItem,
       },
       {
-        path: '/FridgeTask',
+        path: '/dashboard/fridge/task',
         name: 'Fridge Task',
         component: FridgeTask,
       },
       {
-        path: '/FridgeLog',
+        path: '/dashboard/fridge/log',
         name: 'Fridge Log',
         component: FridgeLog,
       },
       {
         hidden: true,
-        path: '/FridgeLog/Create',
+        path: '/dashboard/fridge/log/create',
         name: 'Create Fridge Log',
         component: FridgeLogCreate,
       },
       {
-        path: '/FridgeChart',
+        path: '/dashboard/fridge/chart',
         name: 'Fridge Chart',
         component: FridgeChart,
       },
@@ -198,34 +198,34 @@ const dashRoutes = [
   },
   {
     collapse: true,
-    path: '/Freezer',
+    path: '/dashboard/freezer',
     name: 'Freezer',
     state: 'openFreezer',
     icon: AcUnit,
     views: [
       {
-        path: '/FreezerItem',
+        path: '/dashboard/freezer/item',
         name: 'Freezer Item',
         component: FreezerItem,
       },
       {
-        path: '/FreezerTask',
+        path: '/dashboard/freezer/task',
         name: 'Freezer Task',
         component: FreezerTask,
       },
       {
-        path: '/FreezerLog',
+        path: '/dashboard/freezer/log',
         name: 'Freezer Log',
         component: FreezerLog,
       },
       {
         hidden: true,
-        path: '/FreezerLog/Create',
+        path: '/dashboard/freezer/log/create',
         name: 'Create Freezer Log',
         component: FreezerLogCreate,
       },
       {
-        path: '/FreezerChart',
+        path: '/dashboard/freezer/chart',
         name: 'Freezer Chart',
         component: FreezerChart,
       },
@@ -233,7 +233,7 @@ const dashRoutes = [
   },
   // Item Navigation
   {
-    path: '/FoodItem',
+    path: '/dashboard/fooditem',
     name: 'Food Item',
     state: '',
     icon: Fastfood,
@@ -241,14 +241,14 @@ const dashRoutes = [
     views: [
       {
         hidden: true,
-        path: '/FoodItem/Create',
+        path: '/dashboard/fooditem/create',
         name: 'Create Food Item',
         component: FoodItemCreate,
       },
     ],
   },
   {
-    path: '/HotHolding',
+    path: '/dashboard/hotholding',
     name: 'Hot Holding',
     state: '',
     icon: Whatshot,
@@ -256,14 +256,14 @@ const dashRoutes = [
     views: [
       {
         hidden: true,
-        path: '/HotHolding/Create',
+        path: '/dashboard/hotholding/create',
         name: 'Capture Reheating Temperature',
         component: HotHoldingCreate,
       },
     ],
   },
   {
-    path: '/FastCooling',
+    path: '/dashboard/fastcooling',
     name: 'Fast Cooling',
     state: '',
     icon: FastForward,
@@ -271,14 +271,14 @@ const dashRoutes = [
     views: [
       {
         hidden: true,
-        path: '/FastCooling/Create',
+        path: '/dashboard/fastcooling/create',
         name: 'Capture Cooling Temperature',
         component: FastCoolingCreate,
       },
     ],
   },
   {
-    path: '/Service',
+    path: '/dashboard/service',
     name: 'Service',
     state: '',
     icon: RoomService,
@@ -286,7 +286,7 @@ const dashRoutes = [
     views: [
       {
         hidden: true,
-        path: '/Service/Create',
+        path: '/dashboard/service/create',
         name: 'Capture Service Temperature',
         component: ServiceCreate,
       },
@@ -294,18 +294,18 @@ const dashRoutes = [
   },
   {
     collapse: true,
-    path: '/ColdHot',
+    path: '/dashboard/hotcold',
     name: 'Cold/Hot Chain',
     state: 'openColdHot',
     icon: Voicemail,
     views: [
       {
-        path: '/ColdHotLocation',
+        path: '/dashboard/hotcold/location',
         name: 'Location',
         component: ColdHotLocation,
       },
       {
-        path: '/ColdHotTransportLog',
+        path: '/dashboard/hotcold/log',
         name: 'Transport Log',
         component: ColdHotTransportLog,
       },
@@ -313,36 +313,36 @@ const dashRoutes = [
   },
   {
     collapse: true,
-    path: '/Traceability',
+    path: '/dashboard/traceability',
     name: 'Traceability/deliveries',
     state: 'openTrace',
     icon: DirectionsCar,
     views: [
       {
-        path: '/SupplierList',
+        path: '/dashboard/traceability/suppliers',
         name: 'Supplier List',
         component: SupplierList,
       },
       {
         hidden: true,
-        path: '/SupplierList/Create',
+        path: '/dashboard/traceability/suppliers/create',
         name: 'Create Supplier',
         component: SupplierListCreate,
       },
       {
-        path: '/DeliveryRecords',
+        path: '/dashboard/traceability/records',
         name: 'Delivery Records',
         component: DeliveryRecords,
       },
       {
-        path: '/TraceabilityLabels',
+        path: '/dashboard/traceability/labels',
         name: 'Labels',
         component: TraceabilityLabels,
       },
     ],
   },
   {
-    path: '/Menus',
+    path: '/dashboard/menus',
     name: 'Menus',
     state: 'openMenus',
     icon: Book,
@@ -350,23 +350,23 @@ const dashRoutes = [
   },
   {
     collapse: true,
-    path: '/Oil',
+    path: '/dashboard/oil',
     name: 'Oil Test',
     state: 'openOilTest',
     icon: Colorize,
     views: [
       {
-        path: '/OilLocation',
+        path: '/dashboard/oil/location',
         name: 'Location',
         component: TODOComponent,
       },
       {
-        path: '/OilTask',
+        path: '/dashboard/oil/task',
         name: 'Task',
         component: TODOComponent,
       },
       {
-        path: '/OilLog',
+        path: '/dashboard/oil/log',
         name: 'Log',
         component: TODOComponent,
       },
@@ -374,44 +374,44 @@ const dashRoutes = [
   },
   {
     collapse: true,
-    path: '/Cleaning',
+    path: '/dashboard/cleaning',
     name: 'Cleaning',
     state: 'openCleaning',
     icon: LocalDrink,
     views: [
       {
-        path: '/CleaningLocation',
+        path: '/dashboard/cleaning/location',
         name: 'Location',
         component: TODOComponent,
       },
       {
-        path: '/CleaningTask',
+        path: '/dashboard/cleaning/task',
         name: 'Task',
         component: TODOComponent,
       },
       {
-        path: '/CleaningLog',
+        path: '/dashboard/cleaning/log',
         name: 'Log',
         component: TODOComponent,
       },
     ],
   },
   {
-    path: '/Reports',
+    path: '/dashboard/reports',
     name: 'Reports',
     state: 'openReports',
     icon: Timeline,
     component: TODOComponent,
   },
   {
-    path: '/SafetySheet',
+    path: '/dashboard/safetysheet',
     name: 'Safety Datasheet',
     state: 'openSafetySheet',
     icon: Description,
     component: TODOComponent,
   },
   {
-    path: '/PestManagement',
+    path: '/dashboard/pest',
     name: 'Pest Management',
     state: 'openPestManagement',
     icon: BugReport,
