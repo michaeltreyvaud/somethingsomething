@@ -18,23 +18,20 @@ import CardFooter from '../../Components/Card/CardFooter';
 
 import loginPageStyle from './style';
 
-class LoginPage extends React.Component {
+class LoginView extends React.Component {
   constructor(props) {
     super(props);
-    // we use this to make the card to appear after the page has been rendered
     this.state = {
       cardAnimaton: 'cardHidden',
+      email: '',
+      password: '',
     };
   }
 
   componentDidMount() {
-    // we add a hidden class to the card and after 700 ms we delete it and the transition appears
-    this.timeOutFunction = setTimeout(
-      () => {
-        this.setState({ cardAnimaton: '' });
-      },
-      700,
-    );
+    this.timeOutFunction = setTimeout(() => {
+      this.setState({ cardAnimaton: '' });
+    }, 300);
   }
 
   componentWillUnmount() {
@@ -42,9 +39,25 @@ class LoginPage extends React.Component {
     this.timeOutFunction = null;
   }
 
+  onChange(event) {
+    this.setState({
+      [event.target.id]: event.target.value,
+    });
+  }
+
+  login() {
+    const { login } = this.props;
+    const { email, password } = this.state;
+    login(email, password);
+  }
+
   render() {
-    const { classes } = this.props;
-    const { cardAnimaton } = this.state;
+    const {
+      classes, loading, error, errorMessage,
+    } = this.props;
+    if (error) return (<h1>TODO: Something went wrong ${errorMessage}</h1>);
+    if (loading) return (<h1>TODO: Loading</h1>);
+    const { cardAnimaton, email, password } = this.state;
     return (
       <div className={classes.container}>
         <GridContainer justify="center">
@@ -71,6 +84,8 @@ class LoginPage extends React.Component {
                         </InputAdornment>
                       ),
                     }}
+                    value={email}
+                    onChange={event => this.onChange(event)}
                   />
                   <CustomInput
                     labelText="Password"
@@ -87,10 +102,13 @@ class LoginPage extends React.Component {
                         </InputAdornment>
                       ),
                     }}
+                    type="password"
+                    value={password}
+                    onChange={event => this.onChange(event)}
                   />
                 </CardBody>
                 <CardFooter className={classes.justifyContentCenter}>
-                  <Button color="rose" simple size="lg" block>
+                  <Button color="rose" simple size="lg" block onClick={() => this.login()}>
                     Login
                   </Button>
                 </CardFooter>
@@ -103,8 +121,12 @@ class LoginPage extends React.Component {
   }
 }
 
-LoginPage.propTypes = {
+LoginView.propTypes = {
   classes: PropTypes.object.isRequired,
+  loading: PropTypes.bool.isRequired,
+  error: PropTypes.bool.isRequired,
+  errorMessage: PropTypes.string.isRequired,
+  login: PropTypes.func.isRequired,
 };
 
-export default withStyles(loginPageStyle)(LoginPage);
+export default withStyles(loginPageStyle)(LoginView);

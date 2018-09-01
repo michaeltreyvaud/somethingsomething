@@ -1,5 +1,5 @@
 import Fingerprint from '@material-ui/icons/Fingerprint';
-import LoginPage from '../../Views/Login';
+import LoginPage from '../../Views/Login/login.container';
 
 const Routes = [
   {
