@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
 import DashBoard from '../Layouts/Dashboard';
 import Auth from '../Layouts/Auth';
@@ -52,12 +53,29 @@ const authRoutes = [
   { path: '/auth/challenge', name: 'Main', component: Auth },
 ];
 
-const AppRouter = () => (
-  <Switch>
-    {dashboardRoutes.map((prop, key) => <Route exact path={prop.path} component={prop.component} routes={prop.routes} key={`${key}${prop.name}`} />)}
-    {authRoutes.map((prop, key) => <Route exact path={prop.path} component={prop.component} routes={prop.routes} key={`${key}${prop.name}`} />)}
-    <Route component={noMatch} />
-  </Switch>
-);
+class AppRouter extends Component {
+  constructor(props) {
+    super(props);
+    const { getCompanyInfo } = props;
+    getCompanyInfo();
+  }
+
+  render() {
+    const { loading } = this.props;
+    if (loading) return null;
+    return (
+      <Switch>
+        {dashboardRoutes.map((prop, key) => <Route exact path={prop.path} component={prop.component} routes={prop.routes} key={`${key}${prop.name}`} />)}
+        {authRoutes.map((prop, key) => <Route exact path={prop.path} component={prop.component} routes={prop.routes} key={`${key}${prop.name}`} />)}
+        <Route component={noMatch} />
+      </Switch>
+    );
+  }
+}
+
+AppRouter.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  getCompanyInfo: PropTypes.func.isRequired,
+};
 
 export default AppRouter;
