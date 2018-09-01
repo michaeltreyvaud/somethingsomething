@@ -1,10 +1,11 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import DashBoard from '../Layouts/Dashboard';
+import Auth from '../Layouts/Auth';
 
 const noMatch = () => (<h1>No Match</h1>);
 
-const indexRoutes = [
+const dashboardRoutes = [
   { path: '/', name: 'Main', component: DashBoard },
   { path: '/CompanySettings', name: 'Company Profile', component: DashBoard },
   { path: '/UserSettings', name: 'User Settings', component: DashBoard },
@@ -44,9 +45,17 @@ const indexRoutes = [
   { path: '/TraceabilityLabels', name: 'Traceability Labels', component: DashBoard },
 ];
 
+const authRoutes = [
+  { path: '/auth/login', name: 'Main', component: Auth },
+  { path: '/auth/forgot', name: 'Main', component: Auth },
+  { path: '/auth/newpassword', name: 'Main', component: Auth },
+  { path: '/auth/challenge', name: 'Main', component: Auth },
+];
+
 const AppRouter = () => (
   <Switch>
-    {indexRoutes.map((prop, key) => <Route exact path={prop.path} component={prop.component} routes={prop.routes} key={`${key}${prop.name}`} />)}
+    {dashboardRoutes.map((prop, key) => <Route exact path={prop.path} component={prop.component} routes={prop.routes} key={`${key}${prop.name}`} />)}
+    {authRoutes.map((prop, key) => <Route exact path={prop.path} component={prop.component} routes={prop.routes} key={`${key}${prop.name}`} />)}
     <Route component={noMatch} />
   </Switch>
 );

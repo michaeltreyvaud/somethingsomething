@@ -147,7 +147,7 @@ const dashRoutes = [
         path: '/SafetyTask/Create',
         name: 'Create Task',
         component: SafetyTaskCreate,
-      },      
+      },
       {
         path: '/SafetyLog',
         name: 'Safety Log',
@@ -290,7 +290,7 @@ const dashRoutes = [
         name: 'Capture Service Temperature',
         component: ServiceCreate,
       },
-    ],    
+    ],
   },
   {
     collapse: true,

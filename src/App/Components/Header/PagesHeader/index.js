@@ -16,7 +16,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Dashboard from '@material-ui/icons/Dashboard';
 import Menu from '@material-ui/icons/Menu';
 
-import pagesRoutes from 'routes/pages.jsx';
+import pagesRoutes from '../../../Routing/Routes/pages';
 
 import pagesHeaderStyle from './style';
 import Button from '../../CustomButtons';
@@ -94,14 +94,14 @@ class PagesHeader extends React.Component {
           <Hidden smDown>
             <div className={classes.flex}>
               <Button href="#" className={classes.title} color="transparent">
-                Material Dashboard Pro React
+                Something goes here
               </Button>
             </div>
           </Hidden>
           <Hidden mdUp>
             <div className={classes.flex}>
               <Button href="#" className={classes.title} color="transparent">
-                MD Pro React
+                Something goes here
               </Button>
             </div>
           </Hidden>
