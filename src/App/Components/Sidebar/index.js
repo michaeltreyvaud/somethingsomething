@@ -16,7 +16,7 @@ import Icon from '@material-ui/core/Icon';
 
 import HeaderLinks from '../Header/HeaderLinks';
 
-import sidebarStyle from './style';
+import style from './style';
 
 import avatar from '../../Assets/Images/avatar.jpg';
 
@@ -61,24 +61,35 @@ class Sidebar extends React.Component {
     super(props);
     this.state = {
       openAvatar: false,
-      openComponents: this.activeRoute('/components'),
-      openForms: this.activeRoute('/forms'),
-      openTables: this.activeRoute('/tables'),
-      openMaps: this.activeRoute('/maps'),
-      openPages: this.activeRoute('-page'),
+      openSettings: this.activeCollapse('/dashboard/settings'),
+      openSafetyRecord: this.activeCollapse('/dashboard/safety'),
+      openFridge: this.activeCollapse('/dashboard/fridge'),
+      openFreezer: this.activeCollapse('/dashboard/freezer'),
+      openColdHot: this.activeCollapse('/dashboard/hotcold'),
+      openTrace: this.activeCollapse('/dashboard/traceability'),
+      openOilTest: this.activeCollapse('/dashboard/oil'),
+      openCleaning: this.activeCollapse('/dashboard/cleaning'),
       miniActive: true,
     };
     this.activeRoute.bind(this);
   }
 
-  // verifies if routeName is the one active (in browser input)
   activeRoute(routeName) {
-    return this.props.location.pathname.indexOf(routeName) > -1;
+    const { location } = this.props;
+    const { pathname } = location;
+    return pathname === routeName;
+  }
+
+  activeCollapse(route) {
+    const { location } = this.props;
+    const { pathname } = location;
+    return pathname.indexOf(route) > -1;
   }
 
   openCollapse(collapse) {
-    const st = {};
-    st[collapse] = !this.state[collapse];
+    const st = {
+      [collapse]: !this.state[collapse],
+    };
     this.setState(st);
   }
 
@@ -428,4 +439,4 @@ Sidebar.propTypes = {
   routes: PropTypes.arrayOf(PropTypes.object),
 };
 
-export default withStyles(sidebarStyle)(Sidebar);
+export default withStyles(style)(Sidebar);
