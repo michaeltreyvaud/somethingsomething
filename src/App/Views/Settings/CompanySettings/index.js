@@ -17,12 +17,9 @@ import CustomInput from '../../../Components/CustomInput';
 import Card from '../../../Components/Card/Card';
 import CardHeader from '../../../Components/Card/CardHeader';
 import CardIcon from '../../../Components/Card/CardIcon';
-import CardAvatar from '../../../Components/Card/CardAvatar';
 import ImageUpload from '../../../Components/CustomUpload/ImageUpload';
 
 import userProfileStyles from './style';
-
-import avatar from '../../../Assets/Images/02.jpg';
 
 const CompanySettings = (props) => {
   const { classes } = props;

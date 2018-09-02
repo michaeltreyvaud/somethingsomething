@@ -8,9 +8,6 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
 // core components
-import Person from '@material-ui/icons/Person';
-import Edit from '@material-ui/icons/Edit';
-import Close from '@material-ui/icons/Close';
 import GridContainer from '../../../Components/Grid/GridContainer';
 import GridItem from '../../../Components/Grid/GridItem';
 import Card from '../../../Components/Card/Card';
@@ -29,20 +26,7 @@ class TraceabilityLabels extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const simpleButtons = [
-      { color: 'info', icon: Person },
-      { color: 'success', icon: Edit },
-      { color: 'danger', icon: Close },
-    ].map((prop, key) => (
-      <Button
-        color={prop.color}
-        simple
-        className={classes.actionButton}
-        key={key}
-      >
-        <prop.icon className={classes.icon} />
-      </Button>
-    ));
+
     return (
       <div>
         <GridContainer>

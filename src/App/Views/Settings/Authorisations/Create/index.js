@@ -10,8 +10,6 @@ import GridContainer from '../../../../Components/Grid/GridContainer';
 import GridItem from '../../../../Components/Grid/GridItem';
 import Card from '../../../../Components/Card/Card';
 import CardBody from '../../../../Components/Card/CardBody';
-import CardHeader from '../../../../Components/Card/CardHeader';
-import CardIcon from '../../../../Components/Card/CardIcon';
 import Button from '../../../../Components/CustomButtons';
 import NavPills from '../../../../Components/NavPills';
 import CustomInput from '../../../../Components/CustomInput';

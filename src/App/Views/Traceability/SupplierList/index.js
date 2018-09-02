@@ -6,7 +6,6 @@ import { withRouter } from 'react-router';
 
 import Open from '@material-ui/icons/OpenInNew';
 import Delete from '@material-ui/icons/Delete';
-import { Link } from 'react-router-dom';
 import GridContainer from '../../../Components/Grid/GridContainer';
 import GridItem from '../../../Components/Grid/GridItem';
 import Card from '../../../Components/Card/Card';

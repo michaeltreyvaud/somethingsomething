@@ -7,7 +7,6 @@ import Select from '@material-ui/core/Select';
 import Check from '@material-ui/icons/Check';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormLabel from '@material-ui/core/FormLabel';
 import Today from '@material-ui/icons/Today';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
