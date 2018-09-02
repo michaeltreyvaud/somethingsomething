@@ -311,7 +311,7 @@ class TraceabilityLabels extends React.Component {
                         >
                           <Datetime
                             timeFormat={false}
-                            className={classes.selectLabel}
+                            className={classes.select}
                             inputProps={{ placeholder: 'From' }}
                           />
                         </FormControl>
@@ -323,7 +323,7 @@ class TraceabilityLabels extends React.Component {
                         >
                           <Datetime
                             timeFormat={false}
-                            className={classes.selectLabel}
+                            className={classes.select}
                             inputProps={{ placeholder: 'To' }}
                           />
                         </FormControl>

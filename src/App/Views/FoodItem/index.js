@@ -174,6 +174,7 @@ class FoodItem extends React.Component {
                         >
                           <Datetime
                             timeFormat={false}
+                            className={classes.select}
                             inputProps={{ placeholder: 'From' }}
                           />
                         </FormControl>
@@ -185,6 +186,7 @@ class FoodItem extends React.Component {
                         >
                           <Datetime
                             timeFormat={false}
+                            className={classes.select}
                             inputProps={{ placeholder: 'To' }}
                           />
                         </FormControl>

@@ -235,7 +235,7 @@ class FridgeLog extends React.Component {
                         >
                           <Datetime
                             timeFormat={false}
-                            className={classes.selectLabel}
+                            className={classes.select}
                             inputProps={{ placeholder: 'From' }}
                           />
                         </FormControl>
@@ -247,7 +247,7 @@ class FridgeLog extends React.Component {
                         >
                           <Datetime
                             timeFormat={false}
-                            className={classes.selectLabel}
+                            className={classes.select}
                             inputProps={{ placeholder: 'To' }}
                           />
                         </FormControl>

@@ -40,7 +40,7 @@ const extendedFormsStyle = {
     height: '17px',
     top: '-1px',
     position: 'relative',
-  },
+  },  
 };
 
 export default extendedFormsStyle;

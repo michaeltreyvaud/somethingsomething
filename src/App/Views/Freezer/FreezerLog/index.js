@@ -235,6 +235,7 @@ class FreezerLog extends React.Component {
                         >
                           <Datetime
                             timeFormat={false}
+                            className={classes.select}
                             inputProps={{ placeholder: 'From' }}
                           />
                         </FormControl>
@@ -246,6 +247,7 @@ class FreezerLog extends React.Component {
                         >
                           <Datetime
                             timeFormat={false}
+                            className={classes.select}
                             inputProps={{ placeholder: 'To' }}
                           />
                         </FormControl>

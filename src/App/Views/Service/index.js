@@ -218,6 +218,7 @@ class Service extends React.Component {
                         >
                           <Datetime
                             timeFormat={false}
+                            className={classes.select}
                             inputProps={{ placeholder: 'From' }}
                           />
                         </FormControl>
@@ -229,6 +230,7 @@ class Service extends React.Component {
                         >
                           <Datetime
                             timeFormat={false}
+                            className={classes.select}
                             inputProps={{ placeholder: 'To' }}
                           />
                         </FormControl>

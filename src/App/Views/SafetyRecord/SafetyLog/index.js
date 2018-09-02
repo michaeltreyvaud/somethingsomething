@@ -300,6 +300,7 @@ render() {
                           className={classes.selectFormControl}>
                             <Datetime
                               timeFormat={false}
+                              className={classes.select}
                               inputProps={{ placeholder: "From" }}
                             />
                           </FormControl>
@@ -309,6 +310,7 @@ render() {
                           className={classes.selectFormControl}>
                             <Datetime
                               timeFormat={false}
+                              className={classes.select}
                               inputProps={{ placeholder: "To" }}
                             />
                           </FormControl>
