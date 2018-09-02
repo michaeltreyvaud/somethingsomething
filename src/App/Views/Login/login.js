@@ -168,7 +168,7 @@ class LoginView extends React.Component {
                   <Button
                     color="info"
                     simple
-                    size="xs"
+                    size="sm"
                     block
                     onClick={() => history.push('/auth/forgot')}
                   >

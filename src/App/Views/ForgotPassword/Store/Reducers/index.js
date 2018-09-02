@@ -8,6 +8,7 @@ const initialState = {
   loading: false,
   error: false,
   errorMessage: '',
+  success: false,
 };
 
 const forgotPasswordReducer = (state = initialState, action) => {
@@ -18,6 +19,7 @@ const forgotPasswordReducer = (state = initialState, action) => {
         loading: true,
         error: false,
         errorMessage: '',
+        success: false,
       };
     }
     case FORGOT_PASSWORD_SUCCESS: {
@@ -26,6 +28,7 @@ const forgotPasswordReducer = (state = initialState, action) => {
         loading: false,
         error: false,
         errorMessage: '',
+        success: true,
       };
     }
     case FORGOT_PASSWORD_FAIL: {
@@ -35,6 +38,7 @@ const forgotPasswordReducer = (state = initialState, action) => {
         loading: false,
         error: true,
         errorMessage: message,
+        success: false,
       };
     }
     default: {

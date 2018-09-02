@@ -24,24 +24,29 @@ class ForgotPasswordView extends React.Component {
       cardAnimaton: 'cardHidden',
       email: '',
       displayError: false,
+      displaySuccess: false,
     };
   }
 
   componentDidMount() {
-    this.timeOutFunction = setTimeout(() => {
+    const fadeIn = setTimeout(() => {
+      clearTimeout(fadeIn);
       this.setState({ cardAnimaton: '' });
     }, 300);
   }
 
   componentWillReceiveProps(nextProps) {
+    const { history } = this.props;
     this.setState({
       displayError: nextProps.error,
+      displaySuccess: nextProps.success,
     });
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this.timeOutFunction);
-    this.timeOutFunction = null;
+    if (nextProps.success === true) {
+      const successTimeout = setTimeout(() => {
+        clearTimeout(successTimeout);
+        history.push('/auth/login');
+      }, 2000);
+    }
   }
 
   onChange(event) {
@@ -60,7 +65,9 @@ class ForgotPasswordView extends React.Component {
     const {
       classes, loading, errorMessage, history,
     } = this.props;
-    const { cardAnimaton, email, displayError } = this.state;
+    const {
+      cardAnimaton, email, displayError, displaySuccess,
+    } = this.state;
     if (loading) return (<h1>TODO: Loading</h1>);
     return (
       <div className={classes.container}>
@@ -72,6 +79,12 @@ class ForgotPasswordView extends React.Component {
           closeNotification={() => this.setState({ displayError: false })}
           close
         />
+        <Snackbar
+          place="bc"
+          color="success"
+          message="Password reset, successfully. Please check your email for further instructions"
+          open={displaySuccess}
+        />
         <GridContainer justify="center">
           <GridItem xs={12} sm={6} md={4}>
             <form>
@@ -80,7 +93,7 @@ class ForgotPasswordView extends React.Component {
                   className={`${classes.cardHeader} ${classes.textCenter}`}
                   color="rose"
                 >
-                  <h4 className={classes.cardTitle}>Retrieve Password</h4>
+                  <h4 className={classes.cardTitle}>Forgotten Password</h4>
                 </CardHeader>
                 <CardBody>
                   <CustomInput
@@ -108,7 +121,16 @@ class ForgotPasswordView extends React.Component {
                     block
                     onClick={() => this.forgotPassword()}
                   >
-                    Submit
+                    Retrieve Password
+                  </Button>
+                  <Button
+                    color="info"
+                    simple
+                    size="sm"
+                    block
+                    onClick={() => history.push('/auth/login')}
+                  >
+                    Back to Login
                   </Button>
                 </CardFooter>
               </Card>
@@ -127,6 +149,7 @@ ForgotPasswordView.propTypes = {
   error: PropTypes.bool.isRequired,
   errorMessage: PropTypes.string.isRequired,
   forgotPassword: PropTypes.func.isRequired,
+  success: PropTypes.bool.isRequired,
 };
 
 export default withStyles(style)(ForgotPasswordView);

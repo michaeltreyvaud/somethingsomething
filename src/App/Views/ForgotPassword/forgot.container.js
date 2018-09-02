@@ -7,6 +7,7 @@ const mapStateToProps = state => ({
   loading: state.forgotPassword.loading,
   error: state.forgotPassword.error,
   errorMessage: state.forgotPassword.errorMessage,
+  success: state.forgotPassword.success,
 });
 
 const mapDispatchToProps = dispatch => ({
