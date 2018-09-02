@@ -47,7 +47,7 @@ class LoginView extends React.Component {
     if (nextProps.success === true) {
       const successTimeout = setTimeout(() => {
         clearTimeout(successTimeout);
-        history.push('/dashboard/dashboard');
+        history.push('/dashboard/home');
       }, 3000);
     }
   }

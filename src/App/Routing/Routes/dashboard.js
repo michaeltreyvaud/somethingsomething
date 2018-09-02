@@ -67,8 +67,8 @@ const TODOComponent = () => (<h1>TODO</h1>);
 const dashRoutes = [
   // Main Navigation
   {
-    path: '/dashboard/dashboard',
-    name: 'Dashboard',
+    path: '/dashboard/home',
+    name: 'Metrics',
     icon: DashboardIcon,
     component: TODOComponent,
   },
