@@ -163,7 +163,7 @@ class CheckList extends React.Component {
     ));
     return (
       <div>
-        <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/CheckList/Create')}>
+        <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/dashboard/checklist/create')}>
         New
         </Button>
         <GridContainer>

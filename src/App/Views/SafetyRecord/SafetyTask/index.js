@@ -165,7 +165,7 @@ class SafetyTask extends React.Component {
     ));
     return (
       <div>
-        <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/SafetyTask/Create')}>
+        <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/dashboard/safety/create')}>
         New
         </Button>
         <GridContainer>

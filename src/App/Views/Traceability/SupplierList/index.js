@@ -44,7 +44,7 @@ class SupplierList extends React.Component {
     ));
     return (
       <div>
-        <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/SupplierList/Create')}>
+        <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/dashboard/traceability/suppliers/create')}>
         New
         </Button>
         <GridContainer>

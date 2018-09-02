@@ -49,7 +49,7 @@ class FreezerLog extends React.Component {
     ));
     return (
       <div>
-        <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/FreezerLog/Create')}>
+        <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/dashboard/freezer/log/create')}>
         New
         </Button>
         <CustomDropdown

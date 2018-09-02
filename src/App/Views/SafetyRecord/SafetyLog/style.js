@@ -3,8 +3,8 @@
 // #############################
 
 import { cardTitle } from '../../../Assets/Jss/material-dashboard-pro-react';
-import customSelectStyle from './customSelectStyle';
-import customCheckboxRadioSwitch from './customCheckboxRadioSwitch';
+import customSelectStyle from '../../../Assets/Jss/customSelectStyle';
+import customCheckboxRadioSwitch from '../../../Assets/Jss/customCheckboxRadioSwitch';
 
 const extendedFormsStyle = {
   ...customCheckboxRadioSwitch,

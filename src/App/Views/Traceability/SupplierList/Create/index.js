@@ -57,6 +57,11 @@ class Create extends React.Component {
   render() {
     const { classes } = this.props;
     return (
+      <div>
+      <Button color="info" onClick={() => this.props.history.push('/dashboard/traceability/suppliers')}>
+        Cancel
+      </Button>
+      <Button color="rose">Save</Button>
       <GridContainer>
         <GridItem xs={12} sm={12} md={6}>
           <Card>
@@ -117,7 +122,6 @@ class Create extends React.Component {
                     fullWidth: true,
                   }}
                 />
-                <Button color="rose">Submit</Button>
               </form>
             </CardBody>
           </Card>
@@ -353,6 +357,7 @@ class Create extends React.Component {
           </Card>
         </GridItem>
       </GridContainer>
+      </div>
     );
   }
 }

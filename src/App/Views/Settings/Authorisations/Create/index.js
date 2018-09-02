@@ -130,7 +130,9 @@ class AuthorisationsCreate extends React.Component {
     const { classes } = this.props;
     return (
       <div>
-        <Button color="info">Cancel</Button>
+        <Button color="info" onClick={() => this.props.history.push('/dashboard/settings/authorisations/')}>
+          Cancel
+        </Button>
         <Button color="rose">Save</Button>
         <GridContainer>
           <GridItem xs={12} sm={12} md={12}>

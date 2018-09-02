@@ -41,7 +41,7 @@ class Authorisations extends React.Component {
     ));
     return (
       <div>
-        <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/Authorisations/Create')}>
+        <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/dashboard/settings/authorisations/create')}>
         New
         </Button>
         <GridContainer>

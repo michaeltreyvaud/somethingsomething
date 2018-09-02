@@ -62,7 +62,9 @@ class HotHoldingCreate extends React.Component {
     return (
       <div>
         <Button color="rose">Save</Button>
-        <Button color="info">Cancel</Button>        
+        <Button color="info" onClick={() => this.props.history.push('/dashboard/hotholding')}>
+          Cancel
+        </Button>        
         <GridContainer>
           <GridItem xs={12} sm={12} md={6}>
             <Card>

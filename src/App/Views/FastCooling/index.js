@@ -48,7 +48,7 @@ class FastCooling extends React.Component {
     ));
     return (
       <div>
-        <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/FastCooling/Create')}>
+        <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/dashboard/fastcooling/create')}>
         New
         </Button>
         <GridContainer>

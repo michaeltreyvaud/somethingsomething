@@ -62,7 +62,9 @@ class FastCoolingCreate extends React.Component {
     return (
       <div>
         <Button color="rose">Save</Button>
-        <Button color="info">Cancel</Button>        
+        <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/dashboard/fastcooling')}>
+          Cancel
+        </Button>        
         <GridContainer>
           <GridItem xs={12} sm={12} md={6}>
             <Card>

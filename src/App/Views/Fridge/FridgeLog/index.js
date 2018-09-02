@@ -49,7 +49,7 @@ class FridgeLog extends React.Component {
     ));
     return (
       <div>
-        <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/FridgeLog/Create')}>
+        <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/dashboard/fridge/log/create')}>
         New
         </Button>
         <CustomDropdown
