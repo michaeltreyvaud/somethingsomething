@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import LoginView from './login';
 import { login, challenge } from './Store/Actions';
 
@@ -15,4 +16,4 @@ const mapDispatchToProps = dispatch => ({
   challenge: (email, password, session) => dispatch(challenge(email, password, session)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginView);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginView));
