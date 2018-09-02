@@ -235,7 +235,7 @@ const dashRoutes = [
   {
     path: '/dashboard/fooditem',
     name: 'Food Item',
-    state: '',
+    state: 'openFood',
     icon: Fastfood,
     component: FoodItem,
     views: [
@@ -265,7 +265,7 @@ const dashRoutes = [
   {
     path: '/dashboard/fastcooling',
     name: 'Fast Cooling',
-    state: '',
+    state: 'openFastCooling',
     icon: FastForward,
     component: FastCooling,
     views: [
@@ -280,7 +280,7 @@ const dashRoutes = [
   {
     path: '/dashboard/service',
     name: 'Service',
-    state: '',
+    state: 'openService',
     icon: RoomService,
     component: Service,
     views: [
