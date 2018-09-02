@@ -28,6 +28,7 @@ class LoginView extends React.Component {
       password: '',
       newPassword: '',
       displayError: false,
+      displaySuccess: false,
     };
   }
 
@@ -38,9 +39,17 @@ class LoginView extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    const { history } = this.props;
     this.setState({
       displayError: nextProps.error,
+      displaySuccess: nextProps.success,
     });
+    if (nextProps.success === true) {
+      const successTimeout = setTimeout(() => {
+        clearTimeout(successTimeout);
+        history.push('/dashboard/dashboard');
+      }, 3000);
+    }
   }
 
   componentWillUnmount() {
@@ -72,11 +81,13 @@ class LoginView extends React.Component {
       history,
     } = this.props;
     const {
-      cardAnimaton, email, password, displayError, newPassword,
+      cardAnimaton, email, password, displayError,
+      newPassword, displaySuccess,
     } = this.state;
     if (loading) return (<h1>TODO: Loading</h1>);
     return (
       <div className={classes.container}>
+        {/** TODO: Move these components up and link with actions / reducers * */}
         <Snackbar
           place="bc"
           color="danger"
@@ -84,6 +95,13 @@ class LoginView extends React.Component {
           open={displayError}
           closeNotification={() => this.setState({ displayError: false })}
           close
+        />
+        {/** TODO: Move these components up and link with actions / reducers * */}
+        <Snackbar
+          place="bc"
+          color="success"
+          message="Successfull logged in, please wait..."
+          open={displaySuccess}
         />
         <GridContainer justify="center">
           <GridItem xs={12} sm={6} md={4}>
@@ -194,6 +212,7 @@ LoginView.propTypes = {
   session: PropTypes.string.isRequired,
   login: PropTypes.func.isRequired,
   challenge: PropTypes.func.isRequired,
+  success: PropTypes.bool.isRequired,
 };
 
 export default withStyles(style)(LoginView);

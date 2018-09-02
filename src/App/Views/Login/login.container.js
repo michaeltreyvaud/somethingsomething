@@ -9,6 +9,7 @@ const mapStateToProps = state => ({
   errorMessage: state.login.errorMessage,
   challengeType: state.login.challengeType,
   session: state.login.session,
+  success: state.login.success,
 });
 
 const mapDispatchToProps = dispatch => ({

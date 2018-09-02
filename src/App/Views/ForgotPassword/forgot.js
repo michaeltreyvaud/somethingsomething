@@ -45,7 +45,7 @@ class ForgotPasswordView extends React.Component {
       const successTimeout = setTimeout(() => {
         clearTimeout(successTimeout);
         history.push('/auth/login');
-      }, 2000);
+      }, 3000);
     }
   }
 
@@ -71,6 +71,7 @@ class ForgotPasswordView extends React.Component {
     if (loading) return (<h1>TODO: Loading</h1>);
     return (
       <div className={classes.container}>
+        {/** TODO: Move these components up and link with actions / reducers * */}
         <Snackbar
           place="bc"
           color="danger"
@@ -79,6 +80,7 @@ class ForgotPasswordView extends React.Component {
           closeNotification={() => this.setState({ displayError: false })}
           close
         />
+        {/** TODO: Move these components up and link with actions / reducers * */}
         <Snackbar
           place="bc"
           color="success"

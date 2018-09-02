@@ -13,6 +13,7 @@ const initialState = {
   errorMessage: '',
   challengeType: '',
   session: '',
+  success: false,
 };
 
 const loginReducer = (state = initialState, action) => {
@@ -24,9 +25,21 @@ const loginReducer = (state = initialState, action) => {
         loading: true,
         error: false,
         errorMessage: '',
+        success: false,
       };
     }
-    case PASSWORD_CHALLENGE_SUCCESS:
+    case PASSWORD_CHALLENGE_SUCCESS: {
+      const { response } = action.payload;
+      return {
+        ...state,
+        loading: false,
+        error: false,
+        errorMessage: '',
+        challengeType: (response && response.ChallengeName) || '',
+        session: (response && response.Session) || '',
+        success: false,
+      };
+    }
     case LOGIN_SUCCESS: {
       const { response } = action.payload;
       return {
@@ -36,6 +49,7 @@ const loginReducer = (state = initialState, action) => {
         errorMessage: '',
         challengeType: (response && response.ChallengeName) || '',
         session: (response && response.Session) || '',
+        success: true,
       };
     }
     case PASSWORD_CHALLENGE_FAIL:
@@ -46,6 +60,7 @@ const loginReducer = (state = initialState, action) => {
         loading: false,
         error: true,
         errorMessage: message,
+        success: false,
       };
     }
     default: {
