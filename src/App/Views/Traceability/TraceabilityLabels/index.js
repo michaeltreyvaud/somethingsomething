@@ -160,12 +160,12 @@ class TraceabilityLabels extends React.Component {
                           </Select>
                         </FormControl>
                       </GridItem>
-                      <GridItem xs={12} sm={12} md={3}>
+                      <GridItem xs={12} sm={12} md={2}>
                         <CustomInput
                           labelText="Number"
                           id="number"
                           formControlProps={{
-                            fullWidth: true,
+                            fullWidth: true,                            
                           }}
                         />
                       </GridItem>
@@ -311,6 +311,7 @@ class TraceabilityLabels extends React.Component {
                         >
                           <Datetime
                             timeFormat={false}
+                            className={classes.selectLabel}
                             inputProps={{ placeholder: 'From' }}
                           />
                         </FormControl>
@@ -322,17 +323,16 @@ class TraceabilityLabels extends React.Component {
                         >
                           <Datetime
                             timeFormat={false}
+                            className={classes.selectLabel}
                             inputProps={{ placeholder: 'To' }}
                           />
                         </FormControl>
                       </GridItem>
                       <GridItem xs={12} sm={6} md={6} lg={2} />
                       <GridItem xs={12} sm={6} md={6} lg={2} />
-                      <GridItem xs={12} sm={6} md={6} lg={2}>
                         <Button color="rose" className={classes.marginRight}>
                         Download
                         </Button>
-                      </GridItem>
                     </GridContainer>
                   </GridItem>
                 </GridContainer>

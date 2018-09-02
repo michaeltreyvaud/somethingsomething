@@ -123,8 +123,9 @@ render() {
           hoverColor="black"
           buttonText="Export"
           buttonProps={{
-            fullWidth: true,
-            style: { marginBottom: '0' },
+            minHeight: 'auto',
+            minWidth: 'auto',            
+            style: { marginBottom: '0', float: 'right', },
             color: 'warning',
           }}
           dropdownHeader="Actions"

@@ -22,7 +22,7 @@ import Button from '../../../Components/CustomButtons';
 import Table from '../../../Components/Table';
 import CustomDropdown from '../../../Components/CustomDropdown';
 
-import extendedTablesStyle from '../../../Assets/Jss/extendedTablesStyle';
+import extendedTablesStyle from '../../../Assets/Jss/extendedFormsStyle';
 
 class FridgeLog extends React.Component {
   constructor(props) {
@@ -56,8 +56,9 @@ class FridgeLog extends React.Component {
           hoverColor="black"
           buttonText="Export"
           buttonProps={{
-            fullWidth: true,
-            style: { marginBottom: '0' },
+            minHeight: 'auto',
+            minWidth: 'auto',            
+            style: { marginBottom: '0', float: 'right', },
             color: 'warning',
           }}
           dropdownHeader="Actions"
@@ -234,6 +235,7 @@ class FridgeLog extends React.Component {
                         >
                           <Datetime
                             timeFormat={false}
+                            className={classes.selectLabel}
                             inputProps={{ placeholder: 'From' }}
                           />
                         </FormControl>
@@ -245,6 +247,7 @@ class FridgeLog extends React.Component {
                         >
                           <Datetime
                             timeFormat={false}
+                            className={classes.selectLabel}
                             inputProps={{ placeholder: 'To' }}
                           />
                         </FormControl>

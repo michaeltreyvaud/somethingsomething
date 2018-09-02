@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactTable from 'react-table';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
 import Assignment from "@material-ui/icons/Assignment";

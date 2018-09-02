@@ -53,10 +53,10 @@ class ColdHotTransportLog extends React.Component {
           hoverColor="black"
           buttonText="Export"
           buttonProps={{
-            round: true,
-            fullWidth: true,
-            style: { marginBottom: '0' },
-            color: 'info',
+            minHeight: 'auto',
+            minWidth: 'auto',            
+            style: { marginBottom: '0', float: 'right', },
+            color: 'warning',
           }}
           dropdownHeader="Actions"
           dropdownList={[

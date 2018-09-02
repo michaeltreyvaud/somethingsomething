@@ -2,6 +2,9 @@ import {
   primaryColor,
   primaryBoxShadow,
 } from './material-dashboard-pro-react';
+import {
+  defaultFont,
+} from '../../Assets/Jss/material-dashboard-pro-react';
 
 const customSelectStyle = {
   select: {
@@ -36,10 +39,11 @@ const customSelectStyle = {
     },
   },
   selectLabel: {
-    fontSize: '12px',
-    textTransform: 'uppercase',
-    color: '#3C4858 !important',
-    top: '8px',
+    ...defaultFont,
+    color: '#AAAAAA !important',
+    fontWeight: '400',
+    fontSize: '14px',
+    lineHeight: '1.42857',
   },
   selectMenu: {
     '& > div > ul': {
@@ -65,7 +69,7 @@ const customSelectStyle = {
     },
   },
   selectMenuItem: {
-    fontSize: '13px',
+    fontSize: '14px',
     padding: '10px 20px',
     margin: '0 5px',
     borderRadius: '2px',

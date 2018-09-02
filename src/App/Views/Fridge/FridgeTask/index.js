@@ -690,11 +690,9 @@ class FridgeTask extends React.Component {
                           </Select>
                         </FormControl>
                       </GridItem>
-                      <GridItem xs={12} sm={6} md={6} lg={2}>
                         <Button color="rose" className={classes.marginRight}>
                           Search
                         </Button>
-                      </GridItem>
                     </GridContainer>
                   </GridItem>
                 </GridContainer>
