@@ -2,10 +2,17 @@ import {
   COMPANY_INFO_FETCH,
   COMPANY_INFO_SUCCESS,
   COMPANY_INFO_FAIL,
+  VALIDATE_TOKEN_ATTEMPT,
+  VALIDATE_TOKEN_SUCCESS,
+  VALIDATE_TOKEN_FAIL,
 } from '../ActionTypes';
+import {
+  LOGIN_SUCCESS,
+} from '../../../Views/Login/Store/ActionTypes';
 
 const initialState = {
-  loading: true,
+  loading: true, //  TODO - make sure to update this!
+  isAuthenticated: false,
 };
 
 const routingReducer = (state = initialState, action) => {
@@ -14,15 +21,35 @@ const routingReducer = (state = initialState, action) => {
       return initialState;
     }
     case COMPANY_INFO_SUCCESS: {
-      return {
-        ...state,
-        loading: false,
-      };
+      return initialState;
     }
     case COMPANY_INFO_FAIL: {
+      return initialState;
+    }
+    case VALIDATE_TOKEN_ATTEMPT: {
       return {
         ...state,
-        loading: false,
+        isAuthenticated: false,
+      };
+    }
+    case VALIDATE_TOKEN_SUCCESS: {
+      return {
+        ...state,
+        isAuthenticated: true,
+        loading: false, //  TODO - make sure to update this!
+      };
+    }
+    case VALIDATE_TOKEN_FAIL: {
+      return {
+        ...state,
+        isAuthenticated: false,
+        loading: false, //  TODO - make sure to update this!
+      };
+    }
+    case LOGIN_SUCCESS: {
+      return {
+        ...state,
+        isAuthenticated: true,
       };
     }
     default: {

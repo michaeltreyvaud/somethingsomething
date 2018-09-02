@@ -6,7 +6,8 @@ import {
   PASSWORD_CHALLENGE_SUCCESS,
   PASSWORD_CHALLENGE_FAIL,
 } from '../ActionTypes';
-import fetch from '../../../../Util/fetch';
+import { Fetch } from '../../../../Util/fetch';
+import AuthStore from '../../../../Util/authstore';
 
 const loginAttempt = () => ({
   type: LOGIN_ATTEMPT,
@@ -24,6 +25,16 @@ const loginFail = message => ({
   payload: { message },
 });
 
+const handleStorage = (response) => {
+  const { AuthenticationResult } = response;
+  if (AuthenticationResult) {
+    const { AccessToken, RefreshToken, IdToken } = AuthenticationResult;
+    if (AccessToken) AuthStore.setAccessToken(AccessToken);
+    if (RefreshToken) AuthStore.setRefreshToken(RefreshToken);
+    if (IdToken) AuthStore.setIdToken(IdToken);
+  }
+};
+
 export const login = (email, password) => async (dispatch) => {
   try {
     dispatch(loginAttempt());
@@ -33,8 +44,8 @@ export const login = (email, password) => async (dispatch) => {
     };
     //  TODO - fetch these
     const { REACT_APP_API_URL, REACT_APP_LOGIN_PATH } = process.env;
-    const response = await fetch(`${REACT_APP_API_URL}${REACT_APP_LOGIN_PATH}`, body);
-    console.log(response);
+    const response = await Fetch(`${REACT_APP_API_URL}${REACT_APP_LOGIN_PATH}`, body);
+    handleStorage(response);
     return dispatch(loginSuccess(response));
   } catch (_err) {
     return dispatch(loginFail(_err.message || 'An error has occurred'));
@@ -67,8 +78,7 @@ export const challenge = (email, password, session) => async (dispatch) => {
     };
     //  TODO - fetch these
     const { REACT_APP_API_URL, REACT_APP_PASSWORD_CHALLENGE_PATH } = process.env;
-    const response = await fetch(`${REACT_APP_API_URL}${REACT_APP_PASSWORD_CHALLENGE_PATH}`, body);
-    console.log(response);
+    const response = await Fetch(`${REACT_APP_API_URL}${REACT_APP_PASSWORD_CHALLENGE_PATH}`, body);
     return dispatch(challengeSuccess(response));
   } catch (_err) {
     return dispatch(challengeFail(_err.message || 'An error has occurred'));

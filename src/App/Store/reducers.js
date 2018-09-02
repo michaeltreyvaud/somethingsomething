@@ -5,9 +5,10 @@ import forgotPasswordReducer from '../Views/ForgotPassword/Store/Reducers';
 
 const appReducers = combineReducers({
   routes: routingReducer,
-  //  TODO: Combine all auth reducers
-  login: loginReducer,
-  forgotPassword: forgotPasswordReducer,
+  auth: combineReducers({
+    login: loginReducer,
+    forgotPassword: forgotPasswordReducer,
+  }),
 });
 
 export default appReducers;

@@ -4,12 +4,12 @@ import LoginView from './login';
 import { login, challenge } from './Store/Actions';
 
 const mapStateToProps = state => ({
-  loading: state.login.loading,
-  error: state.login.error,
-  errorMessage: state.login.errorMessage,
-  challengeType: state.login.challengeType,
-  session: state.login.session,
-  success: state.login.success,
+  loading: state.auth.login.loading,
+  error: state.auth.login.error,
+  errorMessage: state.auth.login.errorMessage,
+  challengeType: state.auth.login.challengeType,
+  session: state.auth.login.session,
+  success: state.auth.login.success,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -4,16 +4,28 @@ import { Switch, Route } from 'react-router-dom';
 import coreRoutes from './Routes';
 
 const noMatch = () => (<h1>No Match</h1>);
+const Loading = () => (<h1>TODO App loading</h1>);
+
 class AppRouter extends Component {
   constructor(props) {
     super(props);
-    const { getCompanyInfo } = props;
+    const { getCompanyInfo, validateToken } = props;
     getCompanyInfo();
+    validateToken();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { loading, history } = this.props;
+    if (loading === true && nextProps.loading === false) {
+      if (nextProps.isAuthenticated === false) {
+        history.push('/auth/login');
+      }
+    }
   }
 
   render() {
     const { loading } = this.props;
-    if (loading) return null;
+    if (loading) return <Loading />;
     return (
       <Switch>
         {coreRoutes.map((prop, key) => <Route exact path={prop.path} component={prop.component} key={key} />)}
@@ -24,8 +36,11 @@ class AppRouter extends Component {
 }
 
 AppRouter.propTypes = {
+  history: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
   getCompanyInfo: PropTypes.func.isRequired,
+  validateToken: PropTypes.func.isRequired,
 };
 
 export default AppRouter;

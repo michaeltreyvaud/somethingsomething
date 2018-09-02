@@ -1,5 +1,5 @@
 import Auth from '../../Layouts/Auth';
-import Dashboard from '../../Layouts/Dashboard';
+import Dashboard from '../../Layouts/Dashboard/dashboard.container';
 
 const core = [
   { path: '/auth/:action', component: Auth },

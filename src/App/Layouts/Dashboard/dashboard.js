@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
@@ -41,7 +41,7 @@ const switchRoutes = (
 
 let ps;
 
-class Dashboard extends React.Component {
+class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -49,6 +49,8 @@ class Dashboard extends React.Component {
       miniActive: false,
     };
     this.resizeFunction = this.resizeFunction.bind(this);
+    const { isAuthenticated, history } = props;
+    if (!isAuthenticated) history.push('/auth/login');
   }
 
   componentDidMount() {
@@ -143,7 +145,9 @@ class Dashboard extends React.Component {
 }
 
 Dashboard.propTypes = {
+  history: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
 };
 
 export default withStyles(appStyle)(Dashboard);

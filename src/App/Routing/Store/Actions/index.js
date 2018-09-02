@@ -2,7 +2,11 @@ import {
   COMPANY_INFO_FETCH,
   COMPANY_INFO_SUCCESS,
   COMPANY_INFO_FAIL,
+  VALIDATE_TOKEN_ATTEMPT,
+  VALIDATE_TOKEN_SUCCESS,
+  VALIDATE_TOKEN_FAIL,
 } from '../ActionTypes';
+import { AuthenticatedFetch } from '../../../Util/fetch';
 
 const companyInfoAttempt = () => ({
   type: COMPANY_INFO_FETCH,
@@ -20,10 +24,31 @@ export const getCompanyInfo = () => async (dispatch) => {
   try {
     dispatch(companyInfoAttempt());
     return dispatch(companyInfoSuccess());
-  } catch (error) {
+  } catch (_err) {
     return dispatch(companyInfoFail());
   }
 };
 
-//  remove me
-export const a = () => {};
+const validateAttempt = () => ({
+  type: VALIDATE_TOKEN_ATTEMPT,
+});
+
+const validateSuccess = () => ({
+  type: VALIDATE_TOKEN_SUCCESS,
+});
+
+const validateFail = () => ({
+  type: VALIDATE_TOKEN_FAIL,
+});
+
+export const validateToken = () => async (dispatch) => {
+  try {
+    dispatch(validateAttempt());
+    //  TODO - fetch these
+    const { REACT_APP_API_URL, REACT_APP_VALIDATE_TOKEN_PATH } = process.env;
+    const response = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_VALIDATE_TOKEN_PATH}`, {});
+    return dispatch(validateSuccess());
+  } catch (_err) {
+    return dispatch(validateFail());
+  }
+};

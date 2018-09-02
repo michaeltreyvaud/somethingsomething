@@ -3,7 +3,7 @@ import {
   FORGOT_PASSWORD_SUCCESS,
   FORGOT_PASSWORD_FAIL,
 } from '../ActionTypes';
-import fetch from '../../../../Util/fetch';
+import { Fetch } from '../../../../Util/fetch';
 
 const forgotAttempt = () => ({
   type: FORGOT_PASSWORD_ATTEMPT,
@@ -27,7 +27,7 @@ export const forgotPassword = email => async (dispatch) => {
     const body = { email };
     //  TODO - fetch these
     const { REACT_APP_API_URL, REACT_APP_FORGOT_PASSWORD_PATH } = process.env;
-    const response = await fetch(`${REACT_APP_API_URL}${REACT_APP_FORGOT_PASSWORD_PATH}`, body);
+    const response = await Fetch(`${REACT_APP_API_URL}${REACT_APP_FORGOT_PASSWORD_PATH}`, body);
     console.log(response);
     return dispatch(forgotSuccess(response));
   } catch (_err) {

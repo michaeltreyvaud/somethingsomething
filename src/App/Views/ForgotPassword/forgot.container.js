@@ -4,10 +4,10 @@ import ForgotPasswordView from './forgot';
 import { forgotPassword } from './Store/Actions';
 
 const mapStateToProps = state => ({
-  loading: state.forgotPassword.loading,
-  error: state.forgotPassword.error,
-  errorMessage: state.forgotPassword.errorMessage,
-  success: state.forgotPassword.success,
+  loading: state.auth.forgotPassword.loading,
+  error: state.auth.forgotPassword.error,
+  errorMessage: state.auth.forgotPassword.errorMessage,
+  success: state.auth.forgotPassword.success,
 });
 
 const mapDispatchToProps = dispatch => ({
