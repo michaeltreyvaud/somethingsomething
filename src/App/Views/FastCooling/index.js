@@ -1,11 +1,6 @@
 import React from 'react';
-import Datetime from 'react-datetime';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 import Assignment from '@material-ui/icons/Assignment';
 
 // core components
@@ -38,8 +33,7 @@ class FastCooling extends React.Component {
       { color: 'danger', icon: Delete },
     ].map((prop, key) => (
       <Button
-        color={prop.color}
-        simple
+        color={prop.color}        
         className={classes.actionButton}
         key={key}
       >

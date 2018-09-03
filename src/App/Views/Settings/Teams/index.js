@@ -55,8 +55,7 @@ class Teams extends React.Component {
       { color: 'danger', icon: Delete },
     ].map((prop, key) => (
       <Button
-        color={prop.color}
-        simple
+        color={prop.color}        
         className={classes.actionButton}
         key={key}
       >
