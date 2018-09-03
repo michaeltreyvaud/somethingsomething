@@ -83,11 +83,12 @@ const dashRoutes = [
   {
     collapse: true,
     path: '/dashboard/settings',
-    name: 'User Settings',
+    name: 'Settings',
     state: 'openSettings',
     icon: SettingsApplications,
     views: [
       {
+        hidden: true,
         path: '/dashboard/settings/user',
         name: 'User Settings',
         component: UserSettings,

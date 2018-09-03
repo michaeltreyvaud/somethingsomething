@@ -12,7 +12,9 @@ import Hidden from '@material-ui/core/Hidden';
 import Popper from '@material-ui/core/Popper';
 import Notifications from '@material-ui/icons/Notifications';
 import Button from '../../CustomButtons';
+import Search from "@material-ui/icons/Search";
 
+import CustomInput from "../../../Components/CustomInput";
 import headerLinksStyle from './style';
 
 class HeaderLinks extends React.Component {
@@ -34,28 +36,44 @@ class HeaderLinks extends React.Component {
   }
 
   render() {
-    const { classes, rtlActive } = this.props;
+    const { classes } = this.props;
     const { open } = this.state;
     const searchButton = `${classes.top
     } ${
       classes.searchButton
-    } ${
-      classNames({
-        [classes.searchRTL]: rtlActive,
-      })}`;
+    } `;
     const dropdownItem = classNames(
       classes.dropdownItem,
       classes.primaryHover,
-      { [classes.dropdownItemRTL]: rtlActive },
     );
-    const wrapper = classNames({
-      [classes.wrapperRTL]: rtlActive,
-    });
     const managerClasses = classNames({
       [classes.managerClasses]: true,
     });
     return (
-      <div className={wrapper}>
+      <div>
+        <CustomInput
+          formControlProps={{
+            className: classes.top + " " + classes.search
+          }}
+          inputProps={{
+            placeholder: "Search",
+            inputProps: {
+              "aria-label": "Search",
+              className: classes.searchInput
+            }
+          }}
+        />
+        <Button
+          color="white"
+          aria-label="edit"
+          justIcon
+          round
+          className={searchButton}
+        >
+          <Search
+            className={classes.headerLinksSvg + " " + classes.searchIcon}
+          />
+        </Button>      
         <div className={managerClasses}>
           <Button
             color="transparent"
@@ -64,9 +82,9 @@ class HeaderLinks extends React.Component {
             aria-owns={open ? 'menu-list' : null}
             aria-haspopup="true"
             onClick={this.handleClick}
-            className={rtlActive ? classes.buttonLinkRTL : classes.buttonLink}
+            className={classes.buttonLink}
             muiClasses={{
-              label: rtlActive ? classes.labelRTL : '',
+              label: '',
             }}
             buttonRef={(node) => {
               this.anchorEl = node;
@@ -75,16 +93,13 @@ class HeaderLinks extends React.Component {
             <Notifications
               className={
                 `${classes.headerLinksSvg
-                } ${
-                  rtlActive
-                    ? `${classes.links} ${classes.linksRTL}`
-                    : classes.links}`
+                } ${classes.links}`
               }
             />
             <span className={classes.notifications}>5</span>
             <Hidden mdUp implementation="css">
               <span onClick={this.handleClick} className={classes.linkText}>
-                {rtlActive ? 'إعلام' : 'Notification'}
+                {'Notification'}
               </span>
             </Hidden>
           </Button>
@@ -153,7 +168,6 @@ class HeaderLinks extends React.Component {
 
 HeaderLinks.propTypes = {
   classes: PropTypes.object.isRequired,
-  rtlActive: PropTypes.bool,
 };
 
 export default withStyles(headerLinksStyle)(HeaderLinks);

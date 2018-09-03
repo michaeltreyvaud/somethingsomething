@@ -1,11 +1,7 @@
 import React from 'react';
-import Datetime from 'react-datetime';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
+import SweetAlert from 'react-bootstrap-sweetalert';
 import Assignment from '@material-ui/icons/Assignment';
 
 // core components
@@ -27,7 +23,80 @@ class Service extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      alert: null,
+      show: false
     };
+    this.hideAlert = this.hideAlert.bind(this);
+    this.successDelete = this.successDelete.bind(this);
+    this.cancelDetele = this.cancelDetele.bind(this);
+    this.warningWithConfirmMessage = this.warningWithConfirmMessage.bind(this);
+  }
+  warningWithConfirmMessage() {
+    this.setState({
+      alert: (
+        <SweetAlert
+          warning
+          style={{ display: "block", marginTop: "-100px" }}
+          title="Are you sure?"
+          onConfirm={() => this.successDelete()}
+          onCancel={() => this.hideAlert()}
+          confirmBtnCssClass={
+            this.props.classes.button + " " + this.props.classes.success
+          }
+          cancelBtnCssClass={
+            this.props.classes.button + " " + this.props.classes.danger
+          }
+          confirmBtnText="Yes, delete it!"
+          cancelBtnText="Cancel"
+          showCancel
+        >
+        </SweetAlert>
+      )
+    });
+  }
+
+  successDelete() {
+    this.setState({
+      alert: (
+        <SweetAlert
+          success
+          style={{ display: "block", marginTop: "-100px" }}
+          title="Deleted!"
+          onConfirm={() => this.hideAlert()}
+          onCancel={() => this.hideAlert()}
+          confirmBtnCssClass={
+            this.props.classes.button + " " + this.props.classes.success
+          }
+        >
+          Your imaginary file has been deleted.
+        </SweetAlert>
+      )
+    });
+  }
+
+  cancelDetele() {
+    this.setState({
+      alert: (
+        <SweetAlert
+          danger
+          style={{ display: "block", marginTop: "-100px" }}
+          title="Cancelled"
+          onConfirm={() => this.hideAlert()}
+          onCancel={() => this.hideAlert()}
+          confirmBtnCssClass={
+            this.props.classes.button + " " + this.props.classes.success
+          }
+        >
+          Your imaginary file is safe :)
+        </SweetAlert>
+      )
+    });
+  }
+
+  hideAlert() {
+    this.setState({
+      alert: null
+    });
   }
 
   render() {
@@ -42,6 +111,7 @@ class Service extends React.Component {
         simple
         className={classes.actionButton}
         key={key}
+        onClick={this.warningWithConfirmMessage}
       >
         <prop.icon className={classes.icon} />
       </Button>
@@ -51,202 +121,7 @@ class Service extends React.Component {
         <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/dashboard/service/create')}>
         New
         </Button>
-        <GridContainer>
-          <GridItem xs={12} sm={12} md={12}>
-            <Card>
-              <CardBody>
-                <GridContainer>
-                  <GridItem xs={12} sm={12} md={12}>
-                    <GridContainer>
-                      <GridItem xs={12} sm={6} md={6} lg={2}>
-                        <FormControl
-                          fullWidth
-                          className={classes.selectFormControl}
-                        >
-                          <InputLabel
-                            htmlFor="simple-select"
-                            className={classes.selectLabel}
-                          >
-                          Item
-                          </InputLabel>
-                          <Select
-                            MenuProps={{
-                              className: classes.selectMenu,
-                            }}
-                            classes={{
-                              select: classes.select,
-                            }}
-                            value={this.state.simpleSelect}
-                            onChange={this.handleSimple}
-                            inputProps={{
-                              name: 'simpleSelect',
-                              id: 'simple-select',
-                            }}
-                          >
-                            <MenuItem
-                              classes={{
-                                root: classes.selectMenuItem,
-                                selected: classes.selectMenuItemSelected,
-                              }}
-                            >
-                            Item 1
-                            </MenuItem>
-                            <MenuItem
-                              classes={{
-                                root: classes.selectMenuItem,
-                                selected: classes.selectMenuItemSelected,
-                              }}
-                              value="2"
-                            >
-                            Item 2
-                            </MenuItem>
-                            <MenuItem
-                              classes={{
-                                root: classes.selectMenuItem,
-                                selected: classes.selectMenuItemSelected,
-                              }}
-                              value="3"
-                            >
-                            Item 3
-                            </MenuItem>
-                          </Select>
-                        </FormControl>
-                      </GridItem>
-                      <GridItem xs={12} sm={6} md={6} lg={2}>
-                        <FormControl
-                          fullWidth
-                          className={classes.selectFormControl}
-                        >
-                          <InputLabel
-                            htmlFor="simple-select"
-                            className={classes.selectLabel}
-                          >
-                          Team
-                          </InputLabel>
-                          <Select
-                            MenuProps={{
-                              className: classes.selectMenu,
-                            }}
-                            classes={{
-                              select: classes.select,
-                            }}
-                            value={this.state.simpleSelect}
-                            onChange={this.handleSimple}
-                            inputProps={{
-                              name: 'simpleSelect',
-                              id: 'simple-select',
-                            }}
-                          >
-                            <MenuItem
-                              classes={{
-                                root: classes.selectMenuItem,
-                                selected: classes.selectMenuItemSelected,
-                              }}
-                            >
-                            Team 1
-                            </MenuItem>
-                            <MenuItem
-                              classes={{
-                                root: classes.selectMenuItem,
-                                selected: classes.selectMenuItemSelected,
-                              }}
-                              value="2"
-                            >
-                            Team 2
-                            </MenuItem>
-                            <MenuItem
-                              classes={{
-                                root: classes.selectMenuItem,
-                                selected: classes.selectMenuItemSelected,
-                              }}
-                              value="3"
-                            >
-                            Team 3
-                            </MenuItem>
-                          </Select>
-                        </FormControl>
-                      </GridItem>
-                      <GridItem xs={12} sm={6} md={6} lg={2}>
-                        <FormControl
-                          fullWidth
-                          className={classes.selectFormControl}
-                        >
-                          <InputLabel
-                            htmlFor="simple-select"
-                            className={classes.selectLabel}
-                          >
-                          Choose Operator
-                          </InputLabel>
-                          <Select
-                            MenuProps={{
-                              className: classes.selectMenu,
-                            }}
-                            classes={{
-                              select: classes.select,
-                            }}
-                            value={this.state.simpleSelect}
-                            onChange={this.handleSimple}
-                            inputProps={{
-                              name: 'simpleSelect',
-                              id: 'simple-select',
-                            }}
-                          >
-                            <MenuItem
-                              classes={{
-                                root: classes.selectMenuItem,
-                                selected: classes.selectMenuItemSelected,
-                              }}
-                            >
-                            Bob
-                            </MenuItem>
-                            <MenuItem
-                              classes={{
-                                root: classes.selectMenuItem,
-                                selected: classes.selectMenuItemSelected,
-                              }}
-                              value="2"
-                            >
-                            Tim
-                            </MenuItem>
-                          </Select>
-                        </FormControl>
-                      </GridItem>
-                      <GridItem xs={12} sm={6} md={6} lg={2}>
-                        <FormControl
-                          fullWidth
-                          className={classes.selectFormControl}
-                        >
-                          <Datetime
-                            timeFormat={false}
-                            className={classes.select}
-                            inputProps={{ placeholder: 'From' }}
-                          />
-                        </FormControl>
-                      </GridItem>
-                      <GridItem xs={12} sm={6} md={6} lg={2}>
-                        <FormControl
-                          fullWidth
-                          className={classes.selectFormControl}
-                        >
-                          <Datetime
-                            timeFormat={false}
-                            className={classes.select}
-                            inputProps={{ placeholder: 'To' }}
-                          />
-                        </FormControl>
-                      </GridItem>
-                      <GridItem xs={12} sm={6} md={6} lg={2}>
-                        <Button color="rose" className={classes.marginRight}>
-                        Search
-                        </Button>
-                      </GridItem>
-                    </GridContainer>
-                  </GridItem>
-                </GridContainer>
-              </CardBody>
-            </Card>
-          </GridItem>
-        </GridContainer>
+        {this.state.alert}
         <GridContainer>
           <GridItem xs={12}>
             <Card>

@@ -148,7 +148,7 @@ class Sidebar extends React.Component {
         </div>
         <ListItem className={`${classes.item} ${classes.userItem}`}>
           <NavLink
-            to="/"
+            to="/dashboard/settings/user"
             className={`${classes.itemLink} ${classes.userCollapseButton}`}
             onClick={() => this.openCollapse('openAvatar')}
           >

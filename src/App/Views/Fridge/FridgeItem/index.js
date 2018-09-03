@@ -3,6 +3,7 @@ import React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Assignment from '@material-ui/icons/Assignment';
 import { withRouter } from 'react-router';
+import SweetAlert from 'react-bootstrap-sweetalert';
 
 import Dialog from '@material-ui/core/Dialog';
 import Slide from '@material-ui/core/Slide';
@@ -34,8 +35,82 @@ class FridgeItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      alert: null,
+      show: false
     };
+    this.hideAlert = this.hideAlert.bind(this);
+    this.successDelete = this.successDelete.bind(this);
+    this.cancelDetele = this.cancelDetele.bind(this);
+    this.warningWithConfirmMessage = this.warningWithConfirmMessage.bind(this);
   }
+
+  warningWithConfirmMessage() {
+    this.setState({
+      alert: (
+        <SweetAlert
+          warning
+          style={{ display: "block", marginTop: "-100px" }}
+          title="Are you sure?"
+          onConfirm={() => this.successDelete()}
+          onCancel={() => this.hideAlert()}
+          confirmBtnCssClass={
+            this.props.classes.button + " " + this.props.classes.success
+          }
+          cancelBtnCssClass={
+            this.props.classes.button + " " + this.props.classes.danger
+          }
+          confirmBtnText="Yes, delete it!"
+          cancelBtnText="Cancel"
+          showCancel
+        >
+        </SweetAlert>
+      )
+    });
+  }
+
+  successDelete() {
+    this.setState({
+      alert: (
+        <SweetAlert
+          success
+          style={{ display: "block", marginTop: "-100px" }}
+          title="Deleted!"
+          onConfirm={() => this.hideAlert()}
+          onCancel={() => this.hideAlert()}
+          confirmBtnCssClass={
+            this.props.classes.button + " " + this.props.classes.success
+          }
+        >
+          Your imaginary file has been deleted.
+        </SweetAlert>
+      )
+    });
+  }
+
+  cancelDetele() {
+    this.setState({
+      alert: (
+        <SweetAlert
+          danger
+          style={{ display: "block", marginTop: "-100px" }}
+          title="Cancelled"
+          onConfirm={() => this.hideAlert()}
+          onCancel={() => this.hideAlert()}
+          confirmBtnCssClass={
+            this.props.classes.button + " " + this.props.classes.success
+          }
+        >
+          Your imaginary file is safe :)
+        </SweetAlert>
+      )
+    });
+  }
+
+  hideAlert() {
+    this.setState({
+      alert: null
+    });
+  }  
 
   handleClickOpen(modal) {
     const x = [];
@@ -61,12 +136,14 @@ class FridgeItem extends React.Component {
         simple
         className={classes.actionButton}
         key={key}
+        onClick={this.warningWithConfirmMessage}
       >
         <prop.icon className={classes.icon} />
       </Button>
     ));
     return (
       <div>
+        {this.state.alert}
         <Button color="info" className={classes.marginRight} onClick={() => this.handleClickOpen('noticeModal')}>
       New
         </Button>
