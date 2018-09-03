@@ -52,7 +52,7 @@ class PagesHeader extends React.Component {
     const list = (
       <List className={classes.list}>
         <ListItem className={classes.listItem}>
-          <NavLink to="/dashboard/dashboard" className={classes.navLink}>
+          <NavLink to="/dashboard/home" className={classes.navLink}>
             <ListItemIcon className={classes.listItemIcon}>
               <Dashboard />
             </ListItemIcon>
