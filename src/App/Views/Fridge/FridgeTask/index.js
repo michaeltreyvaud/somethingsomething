@@ -28,8 +28,8 @@ import extendedFormsStyle from '../../../Assets/Jss/extendedFormsStyle';
 
 moment.locale('ko', {
   week: {
-      dow: 1,
-      doy: 1,
+    dow: 1,
+    doy: 1,
   },
 });
 
@@ -47,11 +47,10 @@ const y = today.getFullYear();
 const m = today.getMonth();
 const d = today.getDate();
 
-let formats = {
+const formats = {
 
 
-
-}
+};
 
 const events = [
   {
@@ -74,7 +73,7 @@ const events = [
     end: new Date(y, m, d - 1, 12, 30),
     allDay: false,
     color: 'green',
-  },  
+  },
   {
     title: 'Lunch',
     start: new Date(y, m, d + 7, 12, 0),
@@ -114,9 +113,9 @@ class FridgeTask extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      events: events,
-      alert: null,
-      show: false
+      events,
+      showAlert: false,
+      selectedEvent: null,
     };
     this.hideAlert = this.hideAlert.bind(this);
   }
@@ -135,23 +134,14 @@ class FridgeTask extends React.Component {
 
   selectedEvent(event) {
     this.setState({
-      alert: (
-        <SweetAlert
-          style={{ display: "block", marginTop: "-100px" }}
-          title={event.title}
-          onConfirm={() => this.hideAlert()}
-          onCancel={() => this.hideAlert()}
-          confirmBtnCssClass={
-            this.props.classes.button + " " + this.props.classes.success
-          }
-        />
-      )
+      showAlert: true,
+      selectedEvent: event,
     });
   }
 
   hideAlert() {
     this.setState({
-      alert: null,
+      showAlert: null,
     });
   }
 
@@ -167,10 +157,21 @@ class FridgeTask extends React.Component {
 
   render() {
     const { classes } = this.props;
+    const { showAlert, selectedEvent } = this.state;
     return (
-     
+
       <div>
-        {this.state.alert}
+        {showAlert && (
+          <SweetAlert
+            style={{ display: 'block', marginTop: '-100px' }}
+            title={selectedEvent.title}
+            onConfirm={() => this.hideAlert()}
+            onCancel={() => this.hideAlert()}
+            confirmBtnCssClass={
+              `${this.props.classes.button} ${this.props.classes.success}`
+            }
+          />
+        )}
         <Button color="info" className={classes.marginRight} onClick={() => this.handleClickOpen('noticeModal')}>
           New
         </Button>
