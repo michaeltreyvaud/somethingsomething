@@ -115,7 +115,8 @@ class FridgeTask extends React.Component {
     super(props);
     this.state = {
       events: events,
-      alert: null,      
+      alert: null,
+      show: false
     };
     this.hideAlert = this.hideAlert.bind(this);
   }
@@ -133,14 +134,9 @@ class FridgeTask extends React.Component {
   }
 
   selectedEvent(event) {
-    alert(event.title);
-  }
-
-  selectedEventTwo(event) {
     this.setState({
       alert: (
         <SweetAlert
-          showCancel
           style={{ display: "block", marginTop: "-100px" }}
           title={event.title}
           onConfirm={() => this.hideAlert()}
@@ -148,24 +144,8 @@ class FridgeTask extends React.Component {
           confirmBtnCssClass={
             this.props.classes.button + " " + this.props.classes.success
           }
-          cancelBtnCssClass={
-            this.props.classes.button + " " + this.props.classes.danger
-          }
         />
       )
-    });
-  }
-
-  addNewEvent(e, slotInfo) {
-    const newEvents = this.state.events;
-    newEvents.push({
-      title: e,
-      start: slotInfo.start,
-      end: slotInfo.end,
-    });
-    this.setState({
-      alert: null,
-      events: newEvents,
     });
   }
 
@@ -561,7 +541,7 @@ class FridgeTask extends React.Component {
                   scrollToTime={new Date(1970, 1, 1, 6)}
                   defaultDate={new Date()}
                   onSelectEvent={event => this.selectedEvent(event)}
-                  eventPropGetter={this.eventColors}                  
+                  eventPropGetter={this.eventColors}
                 />
               </CardBody>
             </Card>
