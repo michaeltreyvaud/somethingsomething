@@ -73,7 +73,6 @@ class FridgeLog extends React.Component {
               <CardBody>
                 <Table
                   tableHead={[
-                    'ID',
                     'Image',
                     'Location',
                     'Operator',
@@ -85,7 +84,6 @@ class FridgeLog extends React.Component {
                   ]}
                   tableData={[
                     [
-                      '1',
                       'PICTURE',
                       'Cold Fridge 1',
                       'Daniel Treyvaud',

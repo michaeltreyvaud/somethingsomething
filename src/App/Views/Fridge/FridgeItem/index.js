@@ -243,7 +243,6 @@ class FridgeItem extends React.Component {
               <CardBody>
                 <Table
                   tableHead={[
-                    'ID',
                     'Image',
                     'Name',
                     'Description',
@@ -251,21 +250,18 @@ class FridgeItem extends React.Component {
                   ]}
                   tableData={[
                     [
-                      '1',
                       '',
                       'Cold Fridge 1',
                       'Its Cold',
                       simpleButtons,
                     ],
                     [
-                      '2',
                       '',
                       'Cold Fridge 2',
                       'Its Cold',
                       simpleButtons,
                     ],
                     [
-                      '3',
                       '',
                       'Cold Fridge 3',
                       'Its Cold',

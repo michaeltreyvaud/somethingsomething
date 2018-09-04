@@ -26,6 +26,13 @@ import Card from '../../../Components/Card/Card';
 import CardBody from '../../../Components/Card/CardBody';
 import extendedFormsStyle from '../../../Assets/Jss/extendedFormsStyle';
 
+moment.locale('ko', {
+  week: {
+      dow: 1,
+      doy: 1,
+  },
+});
+
 BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
 // ##############################
 // // // data for populating the calendar in Calendar view
@@ -39,6 +46,12 @@ const today = new Date();
 const y = today.getFullYear();
 const m = today.getMonth();
 const d = today.getDate();
+
+let formats = {
+
+
+
+}
 
 const events = [
   {
@@ -55,6 +68,13 @@ const events = [
     allDay: false,
     color: 'green',
   },
+  {
+    title: 'Meeting',
+    start: new Date(y, m, d - 1, 9, 30),
+    end: new Date(y, m, d - 1, 12, 30),
+    allDay: false,
+    color: 'green',
+  },  
   {
     title: 'Lunch',
     start: new Date(y, m, d + 7, 12, 0),
@@ -94,8 +114,8 @@ class FridgeTask extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      events,
-      alert: null,
+      events: events,
+      alert: null,      
     };
     this.hideAlert = this.hideAlert.bind(this);
   }
@@ -116,24 +136,23 @@ class FridgeTask extends React.Component {
     alert(event.title);
   }
 
-  addNewEventAlert(slotInfo) {
+  selectedEventTwo(event) {
     this.setState({
       alert: (
         <SweetAlert
-          input
           showCancel
-          style={{ display: 'block', marginTop: '-100px' }}
-          title="Input something"
-          onConfirm={e => this.addNewEvent(e, slotInfo)}
+          style={{ display: "block", marginTop: "-100px" }}
+          title={event.title}
+          onConfirm={() => this.hideAlert()}
           onCancel={() => this.hideAlert()}
           confirmBtnCssClass={
-            `${this.props.classes.button} ${this.props.classes.success}`
+            this.props.classes.button + " " + this.props.classes.success
           }
           cancelBtnCssClass={
-            `${this.props.classes.button} ${this.props.classes.danger}`
+            this.props.classes.button + " " + this.props.classes.danger
           }
         />
-      ),
+      )
     });
   }
 
@@ -535,14 +554,14 @@ class FridgeTask extends React.Component {
             <Card>
               <CardBody calendar>
                 <BigCalendar
+                  formats={formats}
                   selectable
                   events={this.state.events}
-                  defaultView="month"
+                  defaultView="week"
                   scrollToTime={new Date(1970, 1, 1, 6)}
                   defaultDate={new Date()}
                   onSelectEvent={event => this.selectedEvent(event)}
-                  onSelectSlot={slotInfo => this.addNewEventAlert(slotInfo)}
-                  eventPropGetter={this.eventColors}
+                  eventPropGetter={this.eventColors}                  
                 />
               </CardBody>
             </Card>
