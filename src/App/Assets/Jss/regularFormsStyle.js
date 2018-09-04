@@ -8,6 +8,7 @@ import {
   dangerColor,
 } from './material-dashboard-pro-react';
 import customCheckboxRadioSwitch from './customCheckboxRadioSwitch';
+import buttonStyle from "./buttonStyle";
 
 const regularFormsStyle = {
   ...customCheckboxRadioSwitch,
@@ -46,6 +47,7 @@ const regularFormsStyle = {
   inputAdornmentIconError: {
     color: `${dangerColor}!important`,
   },
+  ...buttonStyle
 };
 
 export default regularFormsStyle;

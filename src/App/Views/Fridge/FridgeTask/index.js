@@ -168,9 +168,11 @@ class FridgeTask extends React.Component {
   render() {
     const { classes } = this.props;
     return (
+     
       <div>
+        {this.state.alert}
         <Button color="info" className={classes.marginRight} onClick={() => this.handleClickOpen('noticeModal')}>
-      New
+          New
         </Button>
         <Dialog
           classes={{
