@@ -32,7 +32,7 @@ import SafetyTaskCreate from '../../Views/SafetyRecord/SafetyTask/Create';
 import SafetyLog from '../../Views/SafetyRecord/SafetyLog';
 import SafetyCategory from '../../Views/SafetyRecord/SafetyCategory';
 
-import FridgeItem from '../../Views/Fridge/FridgeItem';
+import FridgeItem from '../../Views/Fridge/FridgeItem/fridgeItem.container';
 import FridgeTask from '../../Views/Fridge/FridgeTask';
 import FridgeLog from '../../Views/Fridge/FridgeLog';
 import FridgeLogCreate from '../../Views/Fridge/FridgeLog/Create';

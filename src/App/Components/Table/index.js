@@ -2,7 +2,6 @@ import React from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 
-// @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -10,7 +9,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
-import tableStyle from './style';
+import style from './style';
 
 function CustomTable({ ...props }) {
   const {
@@ -183,4 +182,4 @@ CustomTable.propTypes = {
   tableShopping: PropTypes.bool,
 };
 
-export default withStyles(tableStyle)(CustomTable);
+export default withStyles(style)(CustomTable);

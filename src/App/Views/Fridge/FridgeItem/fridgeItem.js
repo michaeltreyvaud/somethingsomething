@@ -1,5 +1,5 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Assignment from '@material-ui/icons/Assignment';
 import { withRouter } from 'react-router';
@@ -36,7 +36,6 @@ class FridgeItem extends React.Component {
     super(props);
     this.state = {
       alert: null,
-      show: false
     };
     this.hideAlert = this.hideAlert.bind(this);
     this.successDelete = this.successDelete.bind(this);
@@ -44,73 +43,86 @@ class FridgeItem extends React.Component {
     this.warningWithConfirmMessage = this.warningWithConfirmMessage.bind(this);
   }
 
+  componentDidMount() {
+    const { listFridges } = this.props;
+    listFridges();
+  }
+
+  //  TODO: Fix this
   warningWithConfirmMessage() {
+    const { classes } = this.props;
+    const { success, button, danger } = classes;
     this.setState({
       alert: (
         <SweetAlert
           warning
-          style={{ display: "block", marginTop: "-100px" }}
+          style={{ display: 'block', marginTop: '-100px' }}
           title="Are you sure?"
           onConfirm={() => this.successDelete()}
           onCancel={() => this.hideAlert()}
           confirmBtnCssClass={
-            this.props.classes.button + " " + this.props.classes.success
+            `${button} ${success}`
           }
           cancelBtnCssClass={
-            this.props.classes.button + " " + this.props.classes.danger
+            `${button} ${danger}`
           }
           confirmBtnText="Yes, delete it!"
           cancelBtnText="Cancel"
           showCancel
-        >
-        </SweetAlert>
-      )
+        />
+      ),
     });
   }
 
+  //  TODO: Fix this
   successDelete() {
+    const { classes } = this.props;
+    const { success, button } = classes;
     this.setState({
       alert: (
         <SweetAlert
           success
-          style={{ display: "block", marginTop: "-100px" }}
+          style={{ display: 'block', marginTop: '-100px' }}
           title="Deleted!"
           onConfirm={() => this.hideAlert()}
           onCancel={() => this.hideAlert()}
           confirmBtnCssClass={
-            this.props.classes.button + " " + this.props.classes.success
+            `${button} ${success}`
           }
         >
           Your imaginary file has been deleted.
         </SweetAlert>
-      )
+      ),
     });
   }
 
+  //  TODO: Fix this
   cancelDetele() {
+    const { classes } = this.props;
+    const { success, button } = classes;
     this.setState({
       alert: (
         <SweetAlert
           danger
-          style={{ display: "block", marginTop: "-100px" }}
+          style={{ display: 'block', marginTop: '-100px' }}
           title="Cancelled"
           onConfirm={() => this.hideAlert()}
           onCancel={() => this.hideAlert()}
           confirmBtnCssClass={
-            this.props.classes.button + " " + this.props.classes.success
+            `${button} ${success}`
           }
         >
           Your imaginary file is safe :)
         </SweetAlert>
-      )
+      ),
     });
   }
 
   hideAlert() {
     this.setState({
-      alert: null
+      alert: null,
     });
-  }  
+  }
 
   handleClickOpen(modal) {
     const x = [];
@@ -125,14 +137,15 @@ class FridgeItem extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, items } = this.props;
+    const { alert, noticeModal } = this.state;
     const simpleButtons = [
       { color: 'warning', icon: Print },
       { color: 'success', icon: Open },
       { color: 'danger', icon: Delete },
     ].map((prop, key) => (
       <Button
-        color={prop.color}        
+        color={prop.color}
         className={classes.actionButton}
         key={key}
         onClick={this.warningWithConfirmMessage}
@@ -140,9 +153,13 @@ class FridgeItem extends React.Component {
         <prop.icon className={classes.icon} />
       </Button>
     ));
+    const tableData = items.map((i) => {
+      const item = [i.name, i.createdAt, simpleButtons];
+      return item;
+    });
     return (
       <div>
-        {this.state.alert}
+        {alert}
         <Button color="info" className={classes.marginRight} onClick={() => this.handleClickOpen('noticeModal')}>
       New
         </Button>
@@ -151,7 +168,7 @@ class FridgeItem extends React.Component {
             root: `${classes.center} ${classes.modalRoot}`,
             paper: classes.modal,
           }}
-          open={this.state.noticeModal}
+          open={noticeModal}
           TransitionComponent={Transition}
           keepMounted
           onClose={() => this.handleClose('noticeModal')}
@@ -243,31 +260,11 @@ class FridgeItem extends React.Component {
               <CardBody>
                 <Table
                   tableHead={[
-                    'Image',
                     'Name',
                     'Description',
                     'Actions',
                   ]}
-                  tableData={[
-                    [
-                      '',
-                      'Cold Fridge 1',
-                      'Its Cold',
-                      simpleButtons,
-                    ],
-                    [
-                      '',
-                      'Cold Fridge 2',
-                      'Its Cold',
-                      simpleButtons,
-                    ],
-                    [
-                      '',
-                      'Cold Fridge 3',
-                      'Its Cold',
-                      simpleButtons,
-                    ],
-                  ]}
+                  tableData={tableData}
                   customCellClasses={[
                     classes.center,
                     classes.right,
@@ -289,5 +286,11 @@ class FridgeItem extends React.Component {
     );
   }
 }
+
+FridgeItem.propTypes = {
+  classes: PropTypes.object.isRequired,
+  items: PropTypes.array.isRequired,
+  listFridges: PropTypes.func.isRequired,
+};
 
 export default withRouter(withStyles(extendedTablesStyle)(FridgeItem));
