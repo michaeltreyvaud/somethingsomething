@@ -37,7 +37,7 @@ const loginReducer = (state = initialState, action) => {
         errorMessage: '',
         challengeType: (response && response.ChallengeName) || '',
         session: (response && response.Session) || '',
-        success: false,
+        success: true,
       };
     }
     case LOGIN_SUCCESS: {

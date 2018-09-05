@@ -5,6 +5,7 @@ import {
   VALIDATE_TOKEN_ATTEMPT,
   VALIDATE_TOKEN_SUCCESS,
   VALIDATE_TOKEN_FAIL,
+  SESSION_TIMEOUT,
 } from '../ActionTypes';
 import { AuthenticatedFetch } from '../../../Util/fetch';
 
@@ -52,3 +53,8 @@ export const validateToken = () => async (dispatch) => {
     return dispatch(validateFail());
   }
 };
+
+//  TODO: Probably move this to auth router and change to logout
+export const sessionTimeout = () => ({
+  type: SESSION_TIMEOUT,
+});

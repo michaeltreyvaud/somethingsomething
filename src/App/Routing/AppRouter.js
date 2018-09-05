@@ -15,11 +15,15 @@ class AppRouter extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { loading, history } = this.props;
+    const { loading, history, sessionTimeout } = this.props;
     if (loading === true && nextProps.loading === false) {
       if (nextProps.isAuthenticated === false) {
         history.push('/auth/login');
       }
+    }
+    //  TODO - display info about session timeout to the user
+    if (sessionTimeout !== nextProps.sessionTimeout) {
+      history.push('/auth/login');
     }
   }
 
@@ -39,6 +43,7 @@ AppRouter.propTypes = {
   history: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
+  sessionTimeout: PropTypes.bool.isRequired,
   getCompanyInfo: PropTypes.func.isRequired,
   validateToken: PropTypes.func.isRequired,
 };

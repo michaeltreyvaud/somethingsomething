@@ -3,6 +3,7 @@ import {
   LIST_FRIDGE_ITEM_SUCCESS,
   LIST_FRIDGE_ITEM_FAIL,
 } from '../ActionTypes';
+import { sessionTimeout } from '../../../../../Routing/Store/Actions';
 import { AuthenticatedFetch } from '../../../../../Util/fetch';
 
 const listFridgeAttempt = () => ({
@@ -30,6 +31,7 @@ export const listFridges = () => async (dispatch) => {
     const response = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_LIST_FRIDGES_PATH}`, body);
     return dispatch(listFridgeSuccess(response));
   } catch (_err) {
+    if (_err.code === 401) return dispatch(sessionTimeout());
     return dispatch(listFridgeFail(_err.message || 'An error has occurred'));
   }
 };

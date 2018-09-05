@@ -40,16 +40,18 @@ class LoginView extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     const { history } = this.props;
-    this.setState({
-      displayError: nextProps.error,
-      displaySuccess: nextProps.success,
-    });
-    if (nextProps.success === true) {
+    if (nextProps.success === true && nextProps.session.length === 0) {
+      this.setState({
+        displaySuccess: nextProps.success,
+      });
       const successTimeout = setTimeout(() => {
         clearTimeout(successTimeout);
         history.push('/dashboard/home');
       }, 3000);
     }
+    this.setState({
+      displayError: nextProps.error,
+    });
   }
 
   componentWillUnmount() {

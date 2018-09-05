@@ -5,6 +5,7 @@ import {
   VALIDATE_TOKEN_ATTEMPT,
   VALIDATE_TOKEN_SUCCESS,
   VALIDATE_TOKEN_FAIL,
+  SESSION_TIMEOUT,
 } from '../ActionTypes';
 import {
   LOGIN_SUCCESS,
@@ -13,10 +14,19 @@ import {
 const initialState = {
   loading: true, //  TODO - make sure to update this!
   isAuthenticated: false,
+  sessionTimeout: false,
 };
 
 const routingReducer = (state = initialState, action) => {
   switch (action.type) {
+    //  TODO - this should reset all state in the app
+    case SESSION_TIMEOUT: {
+      return {
+        ...state,
+        isAuthenticated: false,
+        sessionTimeout: !state.sessionTimeout,
+      };
+    }
     case COMPANY_INFO_FETCH: {
       return initialState;
     }

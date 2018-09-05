@@ -6,6 +6,7 @@ import { getCompanyInfo, validateToken } from './Store/Actions';
 const mapStateToProps = state => ({
   loading: state.routes.loading,
   isAuthenticated: state.routes.isAuthenticated,
+  sessionTimeout: state.routes.sessionTimeout,
 });
 
 const mapDispatchToProps = dispatch => ({
