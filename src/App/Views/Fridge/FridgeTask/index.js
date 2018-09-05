@@ -141,7 +141,7 @@ class FridgeTask extends React.Component {
 
   hideAlert() {
     this.setState({
-      showAlert: null,
+      showAlert: false,
     });
   }
 
