@@ -41,9 +41,9 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        error: false,
+        error: true,
         errorMessage: '',
-        success: true,
+        success: false,
         items: [],
       };
     }
