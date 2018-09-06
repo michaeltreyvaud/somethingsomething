@@ -35,6 +35,3 @@ export const listFridges = () => async (dispatch) => {
     return dispatch(listFridgeFail(_err.message || 'An error has occurred'));
   }
 };
-
-//  TODO: Remove me
-export const a = () => {};

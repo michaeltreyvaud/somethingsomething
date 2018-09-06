@@ -2,6 +2,10 @@ import {
   LIST_FRIDGE_ITEM_ATTEMPT,
   LIST_FRIDGE_ITEM_SUCCESS,
   LIST_FRIDGE_ITEM_FAIL,
+
+  CREATE_FRIDGE_ITEM_SUCCESS,
+
+  DELETE_FRIDGE_ITEM_SUCCESS,
 } from '../ActionTypes';
 
 const initialState = {
@@ -45,6 +49,24 @@ const reducer = (state = initialState, action) => {
         errorMessage: '',
         success: false,
         items: [],
+      };
+    }
+    case CREATE_FRIDGE_ITEM_SUCCESS: {
+      const { response } = action.payload;
+      const currentItems = Object.assign(state.items);
+      currentItems.push(response);
+      return {
+        ...state,
+        items: currentItems,
+      };
+    }
+    case DELETE_FRIDGE_ITEM_SUCCESS: {
+      const { index } = action.payload;
+      const currentItems = Object.assign(state.items);
+      currentItems.splice(index, 1);
+      return {
+        ...state,
+        items: currentItems,
       };
     }
     default: {

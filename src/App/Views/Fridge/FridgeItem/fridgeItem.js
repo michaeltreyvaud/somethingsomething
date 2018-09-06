@@ -5,18 +5,10 @@ import Assignment from '@material-ui/icons/Assignment';
 import { withRouter } from 'react-router';
 import SweetAlert from 'react-bootstrap-sweetalert';
 
-import Dialog from '@material-ui/core/Dialog';
-import Slide from '@material-ui/core/Slide';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogActions from '@material-ui/core/DialogActions';
-import Close from '@material-ui/icons/Close';
-
 import Print from '@material-ui/icons/Print';
 import Open from '@material-ui/icons/OpenInNew';
 import Delete from '@material-ui/icons/Delete';
-import ImageUpload from '../../../Components/CustomUpload/ImageUpload';
-import CustomInput from '../../../Components/CustomInput';
+
 import GridContainer from '../../../Components/Grid/GridContainer';
 import GridItem from '../../../Components/Grid/GridItem';
 import Card from '../../../Components/Card/Card';
@@ -25,22 +17,29 @@ import CardHeader from '../../../Components/Card/CardHeader';
 import CardIcon from '../../../Components/Card/CardIcon';
 import Button from '../../../Components/CustomButtons';
 import Table from '../../../Components/Table';
-import extendedTablesStyle from '../../../Assets/Jss/extendedTablesStyle';
+import Snackbar from '../../../Components/Snackbar/Snackbar';
 
-function Transition(props) {
-  return <Slide direction="down" {...props} />;
-}
+import FridgeCreate from './Create/create.container';
+import FridgeDelete from './Delete/delete.container';
+
+import style from '../../../Assets/Jss/extendedTablesStyle';
 
 class FridgeItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      alert: null,
+      displayCreateModal: false,
+
+      displayDeleteModal: false,
+      selectedDeleteItem: '',
+
+      displaySuccess: false,
+      successMessage: '',
+      displayError: false,
+      errorMessage: '',
     };
-    this.hideAlert = this.hideAlert.bind(this);
     this.successDelete = this.successDelete.bind(this);
     this.cancelDetele = this.cancelDetele.bind(this);
-    this.warningWithConfirmMessage = this.warningWithConfirmMessage.bind(this);
   }
 
   componentDidMount() {
@@ -48,29 +47,72 @@ class FridgeItem extends React.Component {
     listFridges();
   }
 
-  //  TODO: Fix this
-  warningWithConfirmMessage() {
-    const { classes } = this.props;
-    const { success, button, danger } = classes;
+  //  TODO: fix this mess
+  componentWillReceiveProps(nextProps) {
+    const { createSuccess, deleteSuccess } = this.props;
+    if (createSuccess === false && nextProps.createSuccess === true) {
+      this.setState({
+        displayCreateModal: false,
+        displaySuccess: true,
+        successMessage: 'Item Created',
+      }, () => {
+        const timeout = setTimeout(() => {
+          clearTimeout(timeout);
+          this.setState({
+            displaySuccess: false,
+            successMessage: '',
+          });
+        }, 2000);
+      });
+    }
+    if (deleteSuccess === false && nextProps.deleteSuccess === true) {
+      this.setState({
+        displayDeleteModal: false,
+        displaySuccess: true,
+        successMessage: 'Item Deleted',
+      }, () => {
+        const timeout = setTimeout(() => {
+          clearTimeout(timeout);
+          this.setState({
+            displaySuccess: false,
+            successMessage: '',
+          });
+        }, 2000);
+      });
+    }
     this.setState({
-      alert: (
-        <SweetAlert
-          warning
-          style={{ display: 'block', marginTop: '-100px' }}
-          title="Are you sure?"
-          onConfirm={() => this.successDelete()}
-          onCancel={() => this.hideAlert()}
-          confirmBtnCssClass={
-            `${button} ${success}`
-          }
-          cancelBtnCssClass={
-            `${button} ${danger}`
-          }
-          confirmBtnText="Yes, delete it!"
-          cancelBtnText="Cancel"
-          showCancel
-        />
-      ),
+      displayError: nextProps.createError || nextProps.error || nextProps.deleteError,
+      errorMessage: nextProps.createErrorMessage
+        || nextProps.errorMessage || nextProps.deleteErrorMessage,
+    });
+  }
+
+  showCreateModal() {
+    this.setState({
+      displayCreateModal: true,
+    });
+  }
+
+  hideCreateModal() {
+    this.setState({
+      displayCreateModal: false,
+    });
+  }
+
+  showDeleteModal(itemId, index) {
+    this.setState({
+      displayDeleteModal: true,
+      selectedDeleteItem: {
+        itemId,
+        index,
+      },
+    });
+  }
+
+  hideDeleteModal() {
+    this.setState({
+      displayDeleteModal: false,
+      selectedDeleteItem: '',
     });
   }
 
@@ -118,28 +160,16 @@ class FridgeItem extends React.Component {
     });
   }
 
-  hideAlert() {
-    this.setState({
-      alert: null,
-    });
-  }
-
-  handleClickOpen(modal) {
-    const x = [];
-    x[modal] = true;
-    this.setState(x);
-  }
-
-  handleClose(modal) {
-    const x = [];
-    x[modal] = false;
-    this.setState(x);
-  }
-
   render() {
-    const { classes, items } = this.props;
-    const { alert, noticeModal } = this.state;
-    const simpleButtons = [
+    const {
+      classes, items,
+    } = this.props;
+    const {
+      displayCreateModal, displaySuccess, displayError,
+      displayDeleteModal, selectedDeleteItem,
+      successMessage, errorMessage,
+    } = this.state;
+    const simpleButtons = (id, index) => [
       { color: 'warning', icon: Print },
       { color: 'success', icon: Open },
       { color: 'danger', icon: Delete },
@@ -148,107 +178,51 @@ class FridgeItem extends React.Component {
         color={prop.color}
         className={classes.actionButton}
         key={key}
-        onClick={this.warningWithConfirmMessage}
+        onClick={() => this.showDeleteModal(id, index)}
       >
         <prop.icon className={classes.icon} />
       </Button>
     ));
-    const tableData = items.map((i) => {
-      const item = [i.name, i.createdAt, simpleButtons];
+    const tableData = items.map((i, index) => {
+      const item = [i.name, i.description, simpleButtons(i.id, index)];
       return item;
     });
     return (
       <div>
-        {alert}
-        <Button color="info" className={classes.marginRight} onClick={() => this.handleClickOpen('noticeModal')}>
-      New
-        </Button>
-        <Dialog
-          classes={{
-            root: `${classes.center} ${classes.modalRoot}`,
-            paper: classes.modal,
-          }}
-          open={noticeModal}
-          TransitionComponent={Transition}
-          keepMounted
-          onClose={() => this.handleClose('noticeModal')}
-          aria-labelledby="notice-modal-slide-title"
-          aria-describedby="notice-modal-slide-description"
+        <FridgeDelete
+          item={selectedDeleteItem}
+          visible={displayDeleteModal}
+          classes={classes}
+          close={() => this.hideDeleteModal()} />
+        {/** TODO: Move these components up and link with actions / reducers * */}
+        <Snackbar
+          place="bc"
+          color="success"
+          message={successMessage}
+          open={displaySuccess}
+          closeNotification={() => this.setState({ displayError: false })}
+          close
+        />
+        {/** TODO: Move these components up and link with actions / reducers * */}
+        <Snackbar
+          place="bc"
+          color="danger"
+          message={errorMessage}
+          open={displayError}
+          closeNotification={() => this.setState({ displayError: false })}
+          close
+        />
+        <Button
+          color="info"
+          className={classes.marginRight}
+          onClick={() => this.showCreateModal()}
         >
-          <DialogTitle
-            id="notice-modal-slide-title"
-            disableTypography
-            className={classes.modalHeader}
-          >
-            <Button
-              justIcon
-              className={classes.modalCloseButton}
-              key="close"
-              aria-label="Close"
-              color="transparent"
-              onClick={() => this.handleClose('noticeModal')}
-            >
-              <Close className={classes.modalClose} />
-            </Button>
-            <h4 className={classes.modalTitle}>Create New Fridge</h4>
-          </DialogTitle>
-          <DialogContent
-            id="notice-modal-slide-description"
-            className={classes.modalBody}
-          >
-            <ImageUpload
-              avatar
-              addButtonProps={{
-                color: 'rose',
-                round: true,
-              }}
-              changeButtonProps={{
-                color: 'rose',
-                round: true,
-              }}
-              removeButtonProps={{
-                color: 'danger',
-                round: true,
-              }}
-            />
-            <CustomInput
-              labelText="Name"
-              id="fridgeName"
-              formControlProps={{
-                fullWidth: true,
-              }}
-              inputProps={{
-                type: 'text',
-              }}
-            />
-            <CustomInput
-              labelText="Description"
-              id="description"
-              formControlProps={{
-                fullWidth: true,
-              }}
-              inputProps={{
-                multiline: true,
-                rows: 3,
-              }}
-            />
-          </DialogContent>
-          <DialogActions
-            className={
-          `${classes.modalFooter
-          } ${
-            classes.modalFooterCenter}`
-        }
-          >
-            <Button
-              onClick={() => this.handleClose('noticeModal')}
-              color="info"
-              round
-            >
-          Save
-            </Button>
-          </DialogActions>
-        </Dialog>
+          New
+        </Button>
+        <FridgeCreate
+          visible={displayCreateModal}
+          classes={classes}
+          close={() => this.hideCreateModal()} />
         <GridContainer>
           <GridItem xs={12}>
             <Card>
@@ -290,7 +264,22 @@ class FridgeItem extends React.Component {
 FridgeItem.propTypes = {
   classes: PropTypes.object.isRequired,
   items: PropTypes.array.isRequired,
+
+  loading: PropTypes.bool.isRequired,
+  error: PropTypes.bool.isRequired,
+  errorMessage: PropTypes.string.isRequired,
+
+  creating: PropTypes.bool.isRequired,
+  createError: PropTypes.bool.isRequired,
+  createErrorMessage: PropTypes.string.isRequired,
+  createSuccess: PropTypes.bool.isRequired,
+
+  deleting: PropTypes.bool.isRequired,
+  deleteError: PropTypes.bool.isRequired,
+  deleteErrorMessage: PropTypes.string.isRequired,
+  deleteSuccess: PropTypes.bool.isRequired,
+
   listFridges: PropTypes.func.isRequired,
 };
 
-export default withRouter(withStyles(extendedTablesStyle)(FridgeItem));
+export default withRouter(withStyles(style)(FridgeItem));
