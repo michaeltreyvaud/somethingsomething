@@ -38,8 +38,6 @@ class FridgeItem extends React.Component {
       displayError: false,
       errorMessage: '',
     };
-    this.successDelete = this.successDelete.bind(this);
-    this.cancelDetele = this.cancelDetele.bind(this);
   }
 
   componentDidMount() {
@@ -113,50 +111,6 @@ class FridgeItem extends React.Component {
     this.setState({
       displayDeleteModal: false,
       selectedDeleteItem: '',
-    });
-  }
-
-  //  TODO: Fix this
-  successDelete() {
-    const { classes } = this.props;
-    const { success, button } = classes;
-    this.setState({
-      alert: (
-        <SweetAlert
-          success
-          style={{ display: 'block', marginTop: '-100px' }}
-          title="Deleted!"
-          onConfirm={() => this.hideAlert()}
-          onCancel={() => this.hideAlert()}
-          confirmBtnCssClass={
-            `${button} ${success}`
-          }
-        >
-          Your imaginary file has been deleted.
-        </SweetAlert>
-      ),
-    });
-  }
-
-  //  TODO: Fix this
-  cancelDetele() {
-    const { classes } = this.props;
-    const { success, button } = classes;
-    this.setState({
-      alert: (
-        <SweetAlert
-          danger
-          style={{ display: 'block', marginTop: '-100px' }}
-          title="Cancelled"
-          onConfirm={() => this.hideAlert()}
-          onCancel={() => this.hideAlert()}
-          confirmBtnCssClass={
-            `${button} ${success}`
-          }
-        >
-          Your imaginary file is safe :)
-        </SweetAlert>
-      ),
     });
   }
 
