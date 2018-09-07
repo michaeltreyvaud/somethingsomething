@@ -14,17 +14,25 @@ class AppRouter extends Component {
     validateToken();
   }
 
+  //  Handle app redirects here when app loads
   componentWillReceiveProps(nextProps) {
-    const { loading, history, sessionTimeout } = this.props;
+    const {
+      loading, history, sessionTimeout, location,
+    } = this.props;
     if (loading === true && nextProps.loading === false) {
+      //  Need to route to login
       if (nextProps.isAuthenticated === false) {
-        history.push('/auth/login');
+        return history.push('/auth/login');
       }
+      //  Route to where the user typed in the url
+      const path = ((location.path === '/' || !location.path)) ? '/dashboard/dashboard' : location.path;
+      return history.push(path);
     }
     //  TODO - display info about session timeout to the user
     if (sessionTimeout !== nextProps.sessionTimeout) {
-      history.push('/auth/login');
+      return history.push('/auth/login');
     }
+    return nextProps;
   }
 
   render() {
@@ -41,6 +49,7 @@ class AppRouter extends Component {
 
 AppRouter.propTypes = {
   history: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   sessionTimeout: PropTypes.bool.isRequired,
