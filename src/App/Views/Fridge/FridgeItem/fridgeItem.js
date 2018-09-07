@@ -116,9 +116,10 @@ class FridgeItem extends React.Component {
               </CardHeader>
               <CardBody>
                 <Table
+                  hover
                   tableHead={[
                     'Name',
-                    'Description'
+                    'Description',
                   ]}
                   tableData={tableData}
                   customCellClasses={[
