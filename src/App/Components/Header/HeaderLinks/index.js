@@ -11,10 +11,10 @@ import Grow from '@material-ui/core/Grow';
 import Hidden from '@material-ui/core/Hidden';
 import Popper from '@material-ui/core/Popper';
 import Notifications from '@material-ui/icons/Notifications';
-import Button from '../../CustomButtons';
-import Search from "@material-ui/icons/Search";
+import Search from '@material-ui/icons/Search';
 
-import CustomInput from "../../../Components/CustomInput";
+import Button from '../../CustomButtons';
+import CustomInput from '../../CustomInput';
 import headerLinksStyle from './style';
 
 class HeaderLinks extends React.Component {
@@ -22,6 +22,7 @@ class HeaderLinks extends React.Component {
     super(props);
     this.state = {
       open: false,
+      searchQuery: '',
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -37,7 +38,7 @@ class HeaderLinks extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { open } = this.state;
+    const { open, searchQuery } = this.state;
     const searchButton = `${classes.top
     } ${
       classes.searchButton
@@ -53,15 +54,17 @@ class HeaderLinks extends React.Component {
       <div>
         <CustomInput
           formControlProps={{
-            className: classes.top + " " + classes.search
+            className: `${classes.top} ${classes.search}`,
           }}
           inputProps={{
-            placeholder: "Search",
+            placeholder: 'Search',
             inputProps: {
-              "aria-label": "Search",
-              className: classes.searchInput
-            }
+              'aria-label': 'Search',
+              className: classes.searchInput,
+            },
           }}
+          onChange={e => this.setState({ searchQuery: e.target.value })}
+          value={searchQuery}
         />
         <Button
           color="white"
@@ -71,9 +74,9 @@ class HeaderLinks extends React.Component {
           className={searchButton}
         >
           <Search
-            className={classes.headerLinksSvg + " " + classes.searchIcon}
+            className={`${classes.headerLinksSvg} ${classes.searchIcon}`}
           />
-        </Button>      
+        </Button>
         <div className={managerClasses}>
           <Button
             color="transparent"

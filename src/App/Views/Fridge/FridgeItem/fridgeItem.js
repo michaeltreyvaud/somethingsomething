@@ -28,7 +28,7 @@ class FridgeItem extends React.Component {
     this.state = {
       displayCreateModal: false,
       displayDeleteModal: false,
-      selectedDeleteItem: '',
+      selectedDeleteItem: {},
     };
   }
 
@@ -62,7 +62,7 @@ class FridgeItem extends React.Component {
   hideDeleteModal() {
     this.setState({
       displayDeleteModal: false,
-      selectedDeleteItem: '',
+      selectedDeleteItem: {},
     });
   }
 
