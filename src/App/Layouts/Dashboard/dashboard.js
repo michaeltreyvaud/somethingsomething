@@ -80,10 +80,11 @@ class Dashboard extends Component {
   componentDidUpdate(e) {
     if (e.history.location.pathname !== e.location.pathname) {
       this.refs.mainPanel.scrollTop = 0;
-      const { mobileOpen } = this.state;
-      if (mobileOpen) {
-        this.setState({ mobileOpen: false });
-      }
+      //  wtf is this bollox?
+      // const { mobileOpen } = this.state;
+      // if (mobileOpen) {
+      //   this.setState({ mobileOpen: false });
+      // }
     }
   }
 
@@ -100,8 +101,8 @@ class Dashboard extends Component {
   }
 
   sidebarMinimize() {
-    const { mobileOpen } = this.state;
-    this.setState({ miniActive: !mobileOpen });
+    const { miniActive } = this.state;
+    this.setState({ miniActive: !miniActive });
   }
 
   resizeFunction() {
