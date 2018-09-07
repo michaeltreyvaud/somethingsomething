@@ -4,6 +4,13 @@ import PropTypes from 'prop-types';
 import SweetAlert from 'react-bootstrap-sweetalert';
 
 class DeleteItem extends Component {
+  componentWillReceiveProps(nextProps) {
+    const { loading, close } = this.props;
+    if (loading && nextProps.loading === false && nextProps.success) {
+      close();
+    }
+  }
+
   delete() {
     const { item, deleteFridge } = this.props;
     const { itemId, index } = item;
@@ -39,6 +46,8 @@ class DeleteItem extends Component {
 DeleteItem.propTypes = {
   classes: PropTypes.object.isRequired,
   visible: PropTypes.bool.isRequired,
+  loading: PropTypes.bool.isRequired,
+  success: PropTypes.bool.isRequired,
   close: PropTypes.func.isRequired,
   deleteFridge: PropTypes.func.isRequired,
   item: PropTypes.object.isRequired,

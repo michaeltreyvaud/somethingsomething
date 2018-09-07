@@ -24,6 +24,10 @@ class Create extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    const { loading, close } = this.props;
+    if (loading && nextProps.loading === false && nextProps.success) {
+      close();
+    }
     if (nextProps.visible) {
       this.setState({
         fridgeName: '',
@@ -139,6 +143,8 @@ class Create extends Component {
 Create.propTypes = {
   classes: PropTypes.object.isRequired,
   visible: PropTypes.bool.isRequired,
+  loading: PropTypes.bool.isRequired,
+  success: PropTypes.bool.isRequired,
   createFridge: PropTypes.func.isRequired,
   close: PropTypes.func.isRequired,
 };
