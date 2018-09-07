@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Assignment from '@material-ui/icons/Assignment';
 import { withRouter } from 'react-router';
-import SweetAlert from 'react-bootstrap-sweetalert';
 
 import Print from '@material-ui/icons/Print';
 import Open from '@material-ui/icons/OpenInNew';
@@ -17,7 +16,6 @@ import CardHeader from '../../../Components/Card/CardHeader';
 import CardIcon from '../../../Components/Card/CardIcon';
 import Button from '../../../Components/CustomButtons';
 import Table from '../../../Components/Table';
-import Snackbar from '../../../Components/Snackbar/Snackbar';
 
 import FridgeCreate from './Create/create.container';
 import FridgeDelete from './Delete/delete.container';
@@ -29,60 +27,14 @@ class FridgeItem extends React.Component {
     super(props);
     this.state = {
       displayCreateModal: false,
-
       displayDeleteModal: false,
       selectedDeleteItem: '',
-
-      displaySuccess: false,
-      successMessage: '',
-      displayError: false,
-      errorMessage: '',
     };
   }
 
   componentDidMount() {
     const { listFridges } = this.props;
     listFridges();
-  }
-
-  //  TODO: fix this mess
-  componentWillReceiveProps(nextProps) {
-    const { createSuccess, deleteSuccess } = this.props;
-    if (createSuccess === false && nextProps.createSuccess === true) {
-      this.setState({
-        displayCreateModal: false,
-        displaySuccess: true,
-        successMessage: 'Item Created',
-      }, () => {
-        const timeout = setTimeout(() => {
-          clearTimeout(timeout);
-          this.setState({
-            displaySuccess: false,
-            successMessage: '',
-          });
-        }, 2000);
-      });
-    }
-    if (deleteSuccess === false && nextProps.deleteSuccess === true) {
-      this.setState({
-        displayDeleteModal: false,
-        displaySuccess: true,
-        successMessage: 'Item Deleted',
-      }, () => {
-        const timeout = setTimeout(() => {
-          clearTimeout(timeout);
-          this.setState({
-            displaySuccess: false,
-            successMessage: '',
-          });
-        }, 2000);
-      });
-    }
-    this.setState({
-      displayError: nextProps.createError || nextProps.error || nextProps.deleteError,
-      errorMessage: nextProps.createErrorMessage
-        || nextProps.errorMessage || nextProps.deleteErrorMessage,
-    });
   }
 
   showCreateModal() {
@@ -118,11 +70,7 @@ class FridgeItem extends React.Component {
     const {
       classes, items,
     } = this.props;
-    const {
-      displayCreateModal, displaySuccess, displayError,
-      displayDeleteModal, selectedDeleteItem,
-      successMessage, errorMessage,
-    } = this.state;
+    const { displayCreateModal, displayDeleteModal, selectedDeleteItem } = this.state;
     const simpleButtons = (id, index) => [
       { color: 'warning', icon: Print },
       { color: 'success', icon: Open },
@@ -148,24 +96,6 @@ class FridgeItem extends React.Component {
           visible={displayDeleteModal}
           classes={classes}
           close={() => this.hideDeleteModal()} />
-        {/** TODO: Move these components up and link with actions / reducers * */}
-        <Snackbar
-          place="bc"
-          color="success"
-          message={successMessage}
-          open={displaySuccess}
-          closeNotification={() => this.setState({ displayError: false })}
-          close
-        />
-        {/** TODO: Move these components up and link with actions / reducers * */}
-        <Snackbar
-          place="bc"
-          color="danger"
-          message={errorMessage}
-          open={displayError}
-          closeNotification={() => this.setState({ displayError: false })}
-          close
-        />
         <Button
           color="info"
           className={classes.marginRight}
@@ -222,16 +152,6 @@ FridgeItem.propTypes = {
   loading: PropTypes.bool.isRequired,
   error: PropTypes.bool.isRequired,
   errorMessage: PropTypes.string.isRequired,
-
-  creating: PropTypes.bool.isRequired,
-  createError: PropTypes.bool.isRequired,
-  createErrorMessage: PropTypes.string.isRequired,
-  createSuccess: PropTypes.bool.isRequired,
-
-  deleting: PropTypes.bool.isRequired,
-  deleteError: PropTypes.bool.isRequired,
-  deleteErrorMessage: PropTypes.string.isRequired,
-  deleteSuccess: PropTypes.bool.isRequired,
 
   listFridges: PropTypes.func.isRequired,
 };

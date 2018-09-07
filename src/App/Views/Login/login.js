@@ -104,6 +104,7 @@ class LoginView extends React.Component {
           color="success"
           message="Successfull logged in, please wait..."
           open={displaySuccess}
+          closeNotification={() => {}}
         />
         <GridContainer justify="center">
           <GridItem xs={12} sm={6} md={4}>

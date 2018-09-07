@@ -28,10 +28,9 @@ export const forgotPassword = email => async (dispatch) => {
     //  TODO - fetch these
     const { REACT_APP_API_URL, REACT_APP_FORGOT_PASSWORD_PATH } = process.env;
     const response = await Fetch(`${REACT_APP_API_URL}${REACT_APP_FORGOT_PASSWORD_PATH}`, body);
-    console.log(response);
     return dispatch(forgotSuccess(response));
   } catch (_err) {
-    return dispatch(forgotFail(_err.message || 'An error has occurred'));
+    return dispatch(forgotFail(_err.message));
   }
 };
 

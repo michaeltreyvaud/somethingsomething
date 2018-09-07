@@ -32,6 +32,9 @@ export const listFridges = () => async (dispatch) => {
     return dispatch(listFridgeSuccess(response));
   } catch (_err) {
     if (_err.code === 401) return dispatch(sessionTimeout());
-    return dispatch(listFridgeFail(_err.message || 'An error has occurred'));
+    return dispatch(listFridgeFail(_err.message));
   }
 };
+
+//  TODO: Remove me
+export const a = () => {};

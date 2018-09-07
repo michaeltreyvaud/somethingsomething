@@ -16,6 +16,7 @@ import logo from '../../Assets/Images/logo-white.svg';
 import Header from '../../Components/Header';
 import Footer from '../../Components/Footer';
 import Sidebar from '../../Components/Sidebar';
+import Snackbar from '../../Components/Snackbar/Snackbar';
 
 const noMatch = () => (<h1>fuck off</h1>);
 const switchRoutes = (
@@ -64,10 +65,23 @@ class Dashboard extends Component {
     window.addEventListener('resize', this.resizeFunction);
   }
 
+  componentWillReceiveProps(nextProps) {
+    //  Check if we need to close some popups
+    const { loading } = this.props;
+    if (loading === true && nextProps.loading === false) {
+      const timeout = setInterval(() => {
+        clearInterval(timeout);
+        this.hideSuccessMessage();
+        this.hideErrorMessage();
+      }, 2000);
+    }
+  }
+
   componentDidUpdate(e) {
     if (e.history.location.pathname !== e.location.pathname) {
       this.refs.mainPanel.scrollTop = 0;
-      if (this.state.mobileOpen) {
+      const { mobileOpen } = this.state;
+      if (mobileOpen) {
         this.setState({ mobileOpen: false });
       }
     }
@@ -80,16 +94,14 @@ class Dashboard extends Component {
     window.removeEventListener('resize', this.resizeFunction);
   }
 
-  getRoute() {
-    return this.props.location.pathname !== '/maps/full-screen-maps';
-  }
-
   handleDrawerToggle() {
-    this.setState({ mobileOpen: !this.state.mobileOpen });
+    const { mobileOpen } = this.state;
+    this.setState({ mobileOpen: !mobileOpen });
   }
 
   sidebarMinimize() {
-    this.setState({ miniActive: !this.state.miniActive });
+    const { mobileOpen } = this.state;
+    this.setState({ miniActive: !mobileOpen });
   }
 
   resizeFunction() {
@@ -98,46 +110,71 @@ class Dashboard extends Component {
     }
   }
 
+  hideSuccessMessage() {
+    const { hideDashBoardSuccess } = this.props;
+    hideDashBoardSuccess();
+  }
+
+  hideErrorMessage() {
+    const { hideDashBoardError } = this.props;
+    hideDashBoardError();
+  }
+
   render() {
     const { classes, ...rest } = this.props;
+    const {
+      error, errorMessage, success, successMessage,
+    } = rest;
+    const { mobileOpen, miniActive } = this.state;
     const mainPanel = `${classes.mainPanel
     } ${
       cx({
-        [classes.mainPanelSidebarMini]: this.state.miniActive,
+        [classes.mainPanelSidebarMini]: miniActive,
         [classes.mainPanelWithPerfectScrollbar]:
           navigator.platform.indexOf('Win') > -1,
       })}`;
     return (
       <div className={classes.wrapper}>
+        <Snackbar
+          place="bc"
+          color="danger"
+          message={errorMessage}
+          open={error}
+          closeNotification={() => this.hideErrorMessage()}
+          close
+        />
+        <Snackbar
+          place="bc"
+          color="success"
+          message={successMessage}
+          open={success}
+          closeNotification={() => this.hideSuccessMessage()}
+          close
+        />
         <Sidebar
           routes={dashboardRoutes}
           logoText="TreyBro"
           logo={logo}
           image={image}
           handleDrawerToggle={this.handleDrawerToggle}
-          open={this.state.mobileOpen}
+          open={mobileOpen}
           color="blue"
           bgColor="black"
-          miniActive={this.state.miniActive}
+          miniActive={miniActive}
           {...rest}
         />
         <div className={mainPanel} ref="mainPanel">
           <Header
             sidebarMinimize={this.sidebarMinimize.bind(this)}
-            miniActive={this.state.miniActive}
+            miniActive={miniActive}
             routes={dashboardRoutes}
             handleDrawerToggle={this.handleDrawerToggle}
             {...rest}
           />
-          {/* On the /maps/full-screen-maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
-          {this.getRoute() ? (
-            <div className={classes.content}>
-              <div className={classes.container}>{switchRoutes}</div>
-            </div>
-          ) : (
-            <div className={classes.map}>{switchRoutes}</div>
-          )}
-          {this.getRoute() ? <Footer fluid /> : null}
+          <div className={classes.content}>
+            <div className={classes.container}>{switchRoutes}</div>
+          </div>
+          <Footer fluid />
         </div>
       </div>
     );
@@ -148,6 +185,13 @@ Dashboard.propTypes = {
   history: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
+  loading: PropTypes.bool.isRequired,
+  error: PropTypes.bool.isRequired,
+  errorMessage: PropTypes.string.isRequired,
+  success: PropTypes.bool.isRequired,
+  successMessage: PropTypes.string.isRequired,
+  hideDashBoardError: PropTypes.func.isRequired,
+  hideDashBoardSuccess: PropTypes.func.isRequired,
 };
 
 export default withStyles(appStyle)(Dashboard);

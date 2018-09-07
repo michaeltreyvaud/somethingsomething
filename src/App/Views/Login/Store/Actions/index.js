@@ -48,7 +48,7 @@ export const login = (email, password) => async (dispatch) => {
     handleStorage(response);
     return dispatch(loginSuccess(response));
   } catch (_err) {
-    return dispatch(loginFail(_err.message || 'An error has occurred'));
+    return dispatch(loginFail(_err.message));
   }
 };
 
@@ -81,6 +81,6 @@ export const challenge = (email, password, session) => async (dispatch) => {
     const response = await Fetch(`${REACT_APP_API_URL}${REACT_APP_PASSWORD_CHALLENGE_PATH}`, body);
     return dispatch(challengeSuccess(response));
   } catch (_err) {
-    return dispatch(challengeFail(_err.message || 'An error has occurred'));
+    return dispatch(challengeFail(_err.message));
   }
 };

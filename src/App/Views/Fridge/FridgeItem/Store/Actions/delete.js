@@ -5,6 +5,7 @@ import {
 } from '../ActionTypes';
 import { sessionTimeout } from '../../../../../Routing/Store/Actions';
 import { AuthenticatedFetch } from '../../../../../Util/fetch';
+import { dashboardLoading, showDashBoardError, showDashBoardSuccess } from '../../../../../Layouts/Dashboard/Store/Actions';
 
 const deleteFridgeAttempt = () => ({
   type: DELETE_FRIDGE_ITEM_ATTEMPT,
@@ -24,14 +25,23 @@ const deleteFridgeFail = message => ({
 
 export const deleteFridge = (id, index) => async (dispatch) => {
   try {
+    //  Tell the layout we are doing something
+    dispatch(dashboardLoading());
     dispatch(deleteFridgeAttempt());
     const body = { id };
     //  TODO - fetch these
     const { REACT_APP_API_URL, REACT_APP_DELETE_FRIDGES_PATH } = process.env;
     await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_DELETE_FRIDGES_PATH}`, body);
+    //  Display success message
+    dispatch(showDashBoardSuccess('Item Deleted'));
     return dispatch(deleteFridgeSuccess(index));
   } catch (_err) {
     if (_err.code === 401) return dispatch(sessionTimeout());
-    return dispatch(deleteFridgeFail(_err.message || 'An error has occurred'));
+    //  Display error message
+    dispatch(showDashBoardError(_err.message));
+    return dispatch(deleteFridgeFail(_err.message));
   }
 };
+
+//  TODO: Remove me
+export const a = () => {};
