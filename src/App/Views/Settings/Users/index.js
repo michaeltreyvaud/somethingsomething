@@ -32,7 +32,6 @@ class Users extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      simpleSelect: "",
     };
     this.handleTags = this.handleTags.bind(this);
   }
@@ -63,7 +62,6 @@ class Users extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { simpleSelect } = this.state;
     const simpleButtons = [
       { color: 'success', icon: Open },
       { color: 'danger', icon: Delete },
