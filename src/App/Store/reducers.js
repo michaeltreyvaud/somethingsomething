@@ -9,6 +9,7 @@ import forgotPasswordReducer from '../Views/ForgotPassword/Store/Reducers';
 import fridgeItem from '../Views/Fridge/FridgeItem/Store/Reducers';
 import createFridgeItem from '../Views/Fridge/FridgeItem/Store/Reducers/create';
 import deleteFridgeItem from '../Views/Fridge/FridgeItem/Store/Reducers/delete';
+import updateFridgeItem from '../Views/Fridge/FridgeItem/Store/Reducers/update';
 
 const appReducers = combineReducers({
   routes: routingReducer,
@@ -20,9 +21,12 @@ const appReducers = combineReducers({
     forgotPassword: forgotPasswordReducer,
   }),
   fridge: combineReducers({
-    item: fridgeItem,
-    create: createFridgeItem,
-    delete: deleteFridgeItem,
+    item: combineReducers({
+      index: fridgeItem,
+      create: createFridgeItem,
+      delete: deleteFridgeItem,
+      update: updateFridgeItem,
+    }),
   }),
 });
 

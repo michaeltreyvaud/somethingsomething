@@ -19,6 +19,7 @@ import Table from '../../../Components/Table';
 
 import FridgeCreate from './Create/create.container';
 import FridgeDelete from './Delete/delete.container';
+import FridgeUpdate from './Update/update.container';
 
 import style from '../../../Assets/Jss/extendedTablesStyle';
 
@@ -28,7 +29,10 @@ class FridgeItem extends React.Component {
     this.state = {
       displayCreateModal: false,
       displayDeleteModal: false,
+      displayUpdateModal: false,
       selectedDeleteItem: {},
+      selectedUpdateItem: {},
+      selectedUpdateItemIndex: 0,
     };
   }
 
@@ -66,27 +70,62 @@ class FridgeItem extends React.Component {
     });
   }
 
+  showUpdateModal(item, index) {
+    this.setState({
+      displayUpdateModal: true,
+      selectedUpdateItem: item,
+      selectedUpdateItemIndex: index,
+    });
+  }
+
+  hideUpdateModal() {
+    this.setState({
+      displayUpdateModal: false,
+      selectedUpdateItem: {},
+      selectedUpdateItemIndex: 0,
+    });
+  }
+
   render() {
     const {
       classes, items,
     } = this.props;
-    const { displayCreateModal, displayDeleteModal, selectedDeleteItem } = this.state;
-    const simpleButtons = (id, index) => [
+    const {
+      displayCreateModal, displayDeleteModal, selectedDeleteItem,
+      displayUpdateModal, selectedUpdateItem, selectedUpdateItemIndex,
+    } = this.state;
+    const simpleButtons = (item, index) => [
       { color: 'warning', icon: Print },
       { color: 'success', icon: Open },
       { color: 'danger', icon: Delete },
-    ].map((prop, key) => (
-      <Button
-        color={prop.color}
-        className={classes.actionButton}
-        key={key}
-        onClick={() => this.showDeleteModal(id, index)}
-      >
-        <prop.icon className={classes.icon} />
-      </Button>
-    ));
-    const tableData = items.map((i, index) => {
-      const item = [i.name, i.description, simpleButtons(i.id, index)];
+    ].map((prop, key) => {
+      let onClick;
+      switch (key) {
+        case 1: {
+          onClick = () => this.showUpdateModal(item, index);
+          break;
+        }
+        case 2: {
+          onClick = () => this.showDeleteModal(item.id, index);
+          break;
+        }
+        default: {
+          onClick = () => {};
+        }
+      }
+      return (
+        <Button
+          color={prop.color}
+          className={classes.actionButton}
+          key={key}
+          onClick={onClick}
+        >
+          <prop.icon className={classes.icon} />
+        </Button>
+      );
+    });
+    const tableData = items.map((_item, index) => {
+      const item = [_item.name, _item.description, simpleButtons(_item, index)];
       return item;
     });
     return (
@@ -106,6 +145,12 @@ class FridgeItem extends React.Component {
           visible={displayCreateModal}
           classes={classes}
           close={() => this.hideCreateModal()} />
+        <FridgeUpdate
+          item={selectedUpdateItem}
+          index={selectedUpdateItemIndex}
+          visible={displayUpdateModal}
+          classes={classes}
+          close={() => this.hideUpdateModal()} />
         <GridContainer>
           <GridItem xs={12}>
             <Card>

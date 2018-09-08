@@ -14,7 +14,7 @@ import Button from '../../../../Components/CustomButtons';
 
 const Transition = props => <Slide direction="down" {...props} />;
 
-class Create extends Component {
+class Update extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,6 +25,11 @@ class Create extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { loading } = this.props;
+    const { item } = nextProps;
+    this.setState({
+      fridgeName: item.name,
+      fridgeDescription: item.description,
+    });
     if (loading && nextProps.loading === false && nextProps.success) {
       this.closeModal();
     }
@@ -40,10 +45,15 @@ class Create extends Component {
     });
   }
 
-  createFridge() {
-    const { createFridge } = this.props;
+  updateFridge() {
+    const { updateFridge, item, index } = this.props;
     const { fridgeName, fridgeDescription } = this.state;
-    createFridge(fridgeName, fridgeDescription);
+    const updatedItem = {
+      id: item.id,
+      name: fridgeName,
+      description: fridgeDescription,
+    };
+    updateFridge(updatedItem, index);
   }
 
   render() {
@@ -77,7 +87,7 @@ class Create extends Component {
           >
             <Close className={classes.modalClose} />
           </Button>
-          <h4 className={classes.modalTitle}>Create Fridge Item</h4>
+          <h4 className={classes.modalTitle}>Update Fridge Item</h4>
         </DialogTitle>
         <DialogContent
           id="notice-modal-slide-description"
@@ -132,11 +142,10 @@ class Create extends Component {
       }
         >
           <Button
-            onClick={() => this.createFridge()}
+            onClick={() => this.updateFridge()}
             color="info"
-            round
-          >
-        Create
+            round >
+            Save
           </Button>
         </DialogActions>
       </Dialog>
@@ -144,13 +153,15 @@ class Create extends Component {
   }
 }
 
-Create.propTypes = {
+Update.propTypes = {
   classes: PropTypes.object.isRequired,
   visible: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
   success: PropTypes.bool.isRequired,
-  createFridge: PropTypes.func.isRequired,
   close: PropTypes.func.isRequired,
+  updateFridge: PropTypes.func.isRequired,
+  item: PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired,
 };
 
-export default Create;
+export default Update;

@@ -3,8 +3,8 @@ import Create from './create';
 import { createFridge } from '../Store/Actions/create';
 
 const mapStateToProps = state => ({
-  loading: state.fridge.create.loading,
-  success: state.fridge.create.success,
+  loading: state.fridge.item.create.loading,
+  success: state.fridge.item.create.success,
 });
 
 const mapDispatchToProps = dispatch => ({

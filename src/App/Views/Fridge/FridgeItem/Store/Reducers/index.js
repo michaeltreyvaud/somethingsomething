@@ -6,6 +6,8 @@ import {
   CREATE_FRIDGE_ITEM_SUCCESS,
 
   DELETE_FRIDGE_ITEM_SUCCESS,
+
+  UPDATE_FRIDGE_ITEM_SUCCESS,
 } from '../ActionTypes';
 
 const initialState = {
@@ -70,6 +72,22 @@ const reducer = (state = initialState, action) => {
       const { index } = action.payload;
       const currentItems = Object.assign(state.items);
       currentItems.splice(index, 1);
+      return {
+        ...state,
+        items: currentItems,
+      };
+    }
+    case UPDATE_FRIDGE_ITEM_SUCCESS: {
+      const { index, item } = action.payload;
+      const currentItems = Object.assign(state.items);
+      currentItems.splice(index, 1);
+      const sortByName = (a, b) => {
+        if (a.name.toLowerCase() < b.name.toLowerCase()) { return -1; }
+        if (a.name.toLowerCase() > b.name.toLowerCase()) { return 1; }
+        return 0;
+      };
+      currentItems.push(item);
+      currentItems.sort((a, b) => sortByName(a, b));
       return {
         ...state,
         items: currentItems,
