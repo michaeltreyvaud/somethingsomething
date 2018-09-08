@@ -16,6 +16,13 @@ import createFreezerItem from '../Views/Freezer/FreezerItem/Store/Reducers/creat
 import deleteFreezerItem from '../Views/Freezer/FreezerItem/Store/Reducers/delete';
 import updateFreezerItem from '../Views/Freezer/FreezerItem/Store/Reducers/update';
 
+//  TODO: Rename directory
+import team from '../Views/Settings/Teams/Store/Reducers';
+import createTeam from '../Views/Settings/Teams/Store/Reducers/create';
+import deleteTeam from '../Views/Settings/Teams/Store/Reducers/delete';
+import updateTeam from '../Views/Settings/Teams/Store/Reducers/update';
+
+//  TODO - break these out
 const appReducers = combineReducers({
   routes: routingReducer,
   layouts: combineReducers({
@@ -39,6 +46,14 @@ const appReducers = combineReducers({
       create: createFreezerItem,
       delete: deleteFreezerItem,
       update: updateFreezerItem,
+    }),
+  }),
+  management: combineReducers({
+    team: combineReducers({
+      index: team,
+      create: createTeam,
+      delete: deleteTeam,
+      update: updateTeam,
     }),
   }),
 });
