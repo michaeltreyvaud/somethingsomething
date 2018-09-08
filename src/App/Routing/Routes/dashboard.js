@@ -18,6 +18,7 @@ import Timeline from '@material-ui/icons/Timeline';
 import Description from '@material-ui/icons/Description';
 import BugReport from '@material-ui/icons/BugReport';
 
+import Metrics from "../../Views/Home/Metrics";
 import CompanySettings from '../../Views/Settings/CompanySettings';
 import UserSettings from '../../Views/Settings/UserSettings';
 import Authorisations from '../../Views/Settings/Authorisations';
@@ -70,7 +71,7 @@ const dashRoutes = [
     path: '/dashboard/home',
     name: 'Metrics',
     icon: DashboardIcon,
-    component: TODOComponent,
+    component: Metrics,
   },
   // Settings Navigation
   {
