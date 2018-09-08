@@ -54,7 +54,13 @@ const reducer = (state = initialState, action) => {
     case CREATE_FRIDGE_ITEM_SUCCESS: {
       const { response } = action.payload;
       const currentItems = Object.assign(state.items);
+      const sortByName = (a, b) => {
+        if (a.name.toLowerCase() < b.name.toLowerCase()) { return -1; }
+        if (a.name.toLowerCase() > b.name.toLowerCase()) { return 1; }
+        return 0;
+      };
       currentItems.push(response);
+      currentItems.sort((a, b) => sortByName(a, b));
       return {
         ...state,
         items: currentItems,
