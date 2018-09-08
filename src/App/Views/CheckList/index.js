@@ -169,62 +169,15 @@ class CheckList extends React.Component {
           <GridItem xs={12} sm={12} md={12}>
             <Card>
               <CardBody>
-                <NavPills
-                  color="warning"
-                  tabs={[
-                    {
-                      tabButton: 'Check List',
-                      tabContent: (
-                        <Table
-                          tableHead={[
-                            'ID',
-                            'Location',
-                            'Description',
-                            'Owner',
-                            'Status',
-                            'Actions',
-                          ]}
-                          tableData={[
-                            [
-                              '1',
-                              'Location 1',
-                              'Description 1',
-                              'Owner',
-                              'Status',
-                              simpleButtons,
-                            ],
-                          ]}
-                          customCellClasses={[
-                            classes.center,
-                            classes.right,
-                            classes.right,
-                          ]}
-                          customClassesForCells={[0, 4, 5]}
-                          customHeadCellClasses={[
-                            classes.center,
-                            classes.right,
-                            classes.right,
-                          ]}
-                          customHeadClassesForCells={[0, 4, 5]}
-                        />
-                      ),
-                    },
-                    {
-                      tabButton: 'Task',
-                      tabContent: (
-                        <BigCalendar
-                          selectable
-                          events={this.state.events}
-                          defaultView="month"
-                          scrollToTime={new Date(1970, 1, 1, 6)}
-                          defaultDate={new Date()}
-                          onSelectEvent={event => this.selectedEvent(event)}
-                          onSelectSlot={slotInfo => this.addNewEventAlert(slotInfo)}
-                          eventPropGetter={this.eventColors}
-                        />
-                      ),
-                    },
-                  ]}
+                <BigCalendar
+                  selectable
+                  events={this.state.events}
+                  defaultView="month"
+                  scrollToTime={new Date(1970, 1, 1, 6)}
+                  defaultDate={new Date()}
+                  onSelectEvent={event => this.selectedEvent(event)}
+                  onSelectSlot={slotInfo => this.addNewEventAlert(slotInfo)}
+                  eventPropGetter={this.eventColors}
                 />
               </CardBody>
             </Card>
