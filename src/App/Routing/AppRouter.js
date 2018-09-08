@@ -25,7 +25,7 @@ class AppRouter extends Component {
         return history.push('/auth/login');
       }
       //  Route to where the user typed in the url
-      const path = ((location.path === '/' || !location.path)) ? '/dashboard/dashboard' : location.path;
+      const path = ((location.pathname === '/' || !location.pathname)) ? '/dashboard/dashboard' : location.pathname;
       return history.push(path);
     }
     //  TODO - display info about session timeout to the user

@@ -22,7 +22,7 @@ import CompanySettings from '../../Views/Settings/CompanySettings';
 import UserSettings from '../../Views/Settings/UserSettings';
 import Authorisations from '../../Views/Settings/Authorisations';
 import AuthorisationsCreate from '../../Views/Settings/Authorisations/Create';
-import Teams from '../../Views/Settings/Teams';
+import Teams from '../../Views/Settings/Teams/team.container';
 import Users from '../../Views/Settings/Users';
 
 import CheckList from '../../Views/CheckList';
