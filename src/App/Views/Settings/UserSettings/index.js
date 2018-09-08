@@ -399,7 +399,7 @@ class UserSettings extends React.Component {
                               className={classes.marginRight}
                               onClick={() => this.handleClickOpen('noticeModal')}
                             >
-                            Add
+                            New
                             </Button>
                             <Dialog
                               classes={{
@@ -529,7 +529,7 @@ class UserSettings extends React.Component {
                           className={classes.marginRight}
                           onClick={() => this.handleClickOpen('noticeModal')}
                         >
-                      Add
+                      New
                         </Button>
                         <Dialog
                           classes={{
