@@ -11,6 +11,11 @@ import createFridgeItem from '../Views/Fridge/FridgeItem/Store/Reducers/create';
 import deleteFridgeItem from '../Views/Fridge/FridgeItem/Store/Reducers/delete';
 import updateFridgeItem from '../Views/Fridge/FridgeItem/Store/Reducers/update';
 
+import freezerItem from '../Views/Freezer/FreezerItem/Store/Reducers';
+import createFreezerItem from '../Views/Freezer/FreezerItem/Store/Reducers/create';
+import deleteFreezerItem from '../Views/Freezer/FreezerItem/Store/Reducers/delete';
+import updateFreezerItem from '../Views/Freezer/FreezerItem/Store/Reducers/update';
+
 const appReducers = combineReducers({
   routes: routingReducer,
   layouts: combineReducers({
@@ -26,6 +31,14 @@ const appReducers = combineReducers({
       create: createFridgeItem,
       delete: deleteFridgeItem,
       update: updateFridgeItem,
+    }),
+  }),
+  freezer: combineReducers({
+    item: combineReducers({
+      index: freezerItem,
+      create: createFreezerItem,
+      delete: deleteFreezerItem,
+      update: updateFreezerItem,
     }),
   }),
 });

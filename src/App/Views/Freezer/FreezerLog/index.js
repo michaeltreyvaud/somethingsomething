@@ -34,7 +34,7 @@ class FreezerLog extends React.Component {
       { color: 'danger', icon: Delete },
     ].map((prop, key) => (
       <Button
-        color={prop.color}        
+        color={prop.color}
         className={classes.actionButton}
         key={key}
       >
@@ -51,8 +51,8 @@ class FreezerLog extends React.Component {
           buttonText="Export"
           buttonProps={{
             minHeight: 'auto',
-            minWidth: 'auto',            
-            style: { marginBottom: '0', float: 'right', },
+            minWidth: 'auto',
+            style: { marginBottom: '0', float: 'right' },
             color: 'warning',
           }}
           dropdownHeader="Actions"
@@ -61,7 +61,7 @@ class FreezerLog extends React.Component {
             'Export PDF',
             'Email',
           ]}
-        />        
+        />
         <GridContainer>
           <GridItem xs={12}>
             <Card>

@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import FridgeItem from './fridgeItem';
 import { listFridges } from './Store/Actions';
-import { createFridge } from './Store/Actions/create';
 
 const mapStateToProps = state => ({
   loading: state.fridge.item.index.loading,
@@ -13,7 +12,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   listFridges: () => dispatch(listFridges()),
-  createFridge: (name, description) => dispatch(createFridge(name, description)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FridgeItem);

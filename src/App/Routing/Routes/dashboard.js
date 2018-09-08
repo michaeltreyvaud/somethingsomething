@@ -38,7 +38,7 @@ import FridgeLog from '../../Views/Fridge/FridgeLog';
 import FridgeLogCreate from '../../Views/Fridge/FridgeLog/Create';
 import FridgeChart from '../../Views/Fridge/FridgeChart';
 
-import FreezerItem from '../../Views/Freezer/FreezerItem';
+import FreezerItem from '../../Views/Freezer/FreezerItem/freezerItem.container';
 import FreezerTask from '../../Views/Freezer/FreezerTask';
 import FreezerLog from '../../Views/Freezer/FreezerLog';
 import FreezerLogCreate from '../../Views/Freezer/FreezerLog/Create';
