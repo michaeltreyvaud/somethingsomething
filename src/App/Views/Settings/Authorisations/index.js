@@ -31,7 +31,7 @@ class Authorisations extends React.Component {
       { color: 'danger', icon: Delete },
     ].map((prop, key) => (
       <Button
-        color={prop.color}        
+        color={prop.color}
         className={classes.actionButton}
         key={key}
       >
@@ -40,7 +40,7 @@ class Authorisations extends React.Component {
     ));
     return (
       <div>
-        <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/dashboard/settings/authorisations/create')}>
+        <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/dashboard/management/authorisations/create')}>
         New
         </Button>
         <GridContainer>

@@ -61,7 +61,7 @@ class Sidebar extends React.Component {
     super(props);
     this.state = {
       openAvatar: false,
-      openSettings: this.activeCollapse('/dashboard/settings'),
+      openManagement: this.activeCollapse('/dashboard/management'),
       openSafetyRecord: this.activeCollapse('/dashboard/safety'),
       openFridge: this.activeCollapse('/dashboard/fridge'),
       openFreezer: this.activeCollapse('/dashboard/freezer'),
