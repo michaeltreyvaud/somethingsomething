@@ -160,16 +160,6 @@ class Users extends React.Component {
             }}
           />
           <CustomInput
-            labelText="Code"
-            id="code"
-            formControlProps={{
-              fullWidth: true,
-            }}
-            inputProps={{
-              type: 'number',
-            }}
-          />
-          <CustomInput
             labelText="Phone Number"
             id="phoneNo"
             formControlProps={{
@@ -240,29 +230,23 @@ class Users extends React.Component {
               <CardBody>
                 <Table
                   tableHead={[
-                    'ID',
                     'Full Name',
                     'Email',
-                    'Digit Code',
                     'Phone',
                     'Position',
                     'Team',
                     'Authorisation',
                     'Last Login',
-                    'Status',
                     'Actions',
                   ]}
                   tableData={[
                     [
-                      '1',
                       'Dan Treyvaud',
                       'test@test.test',
-                      '133700',
                       '0857100738',
                       'Staff',
                       'Kitchen',
                       'Administrator',
-                      'Active',
                       '08/29/2018 18:07:32',
                       simpleButtons,
                     ],
