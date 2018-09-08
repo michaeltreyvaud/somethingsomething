@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import PerfectScrollbar from 'perfect-scrollbar';
 import 'perfect-scrollbar/css/perfect-scrollbar.css';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -18,7 +18,8 @@ import Footer from '../../Components/Footer';
 import Sidebar from '../../Components/Sidebar';
 import Snackbar from '../../Components/Snackbar/Snackbar';
 
-const noMatch = () => (<h1>fuck off</h1>);
+import FourOhFour from '../../Views/Pages/404';
+
 const switchRoutes = (
   <Switch>
     {dashboardRoutes.map((prop, key) => {
@@ -36,7 +37,7 @@ const switchRoutes = (
       }
       return <Route exact path={prop.path} component={prop.component} key={key} />;
     })}
-    <Route component={noMatch} />
+    <Route component={FourOhFour} />
   </Switch>
 );
 
