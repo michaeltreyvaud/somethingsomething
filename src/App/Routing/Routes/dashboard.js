@@ -21,8 +21,6 @@ import BugReport from '@material-ui/icons/BugReport';
 import Metrics from "../../Views/Home/Metrics";
 import CompanySettings from '../../Views/Settings/CompanySettings';
 import UserSettings from '../../Views/Settings/UserSettings';
-import Authorisations from '../../Views/Settings/Authorisations';
-import AuthorisationsCreate from '../../Views/Settings/Authorisations/Create';
 import Teams from '../../Views/Settings/Teams/team.container';
 import Users from '../../Views/Settings/Users';
 
@@ -93,17 +91,6 @@ const dashRoutes = [
         path: '/dashboard/management/user',
         name: 'Users',
         component: UserSettings,
-      },
-      {
-        path: '/dashboard/management/authorisations',
-        name: 'Authorisations',
-        component: Authorisations,
-      },
-      {
-        hidden: true,
-        path: '/dashboard/management/authorisations/create',
-        name: 'Create Authorisation',
-        component: AuthorisationsCreate,
       },
       {
         path: '/dashboard/management/teams',
