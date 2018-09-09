@@ -4,7 +4,6 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Assignment from '@material-ui/icons/Assignment';
 import { withRouter } from 'react-router';
 
-import Print from '@material-ui/icons/Print';
 import Open from '@material-ui/icons/OpenInNew';
 import Delete from '@material-ui/icons/Delete';
 
@@ -21,7 +20,7 @@ import UserCreate from './Create/create.container';
 import UserDelete from './Delete/delete.container';
 import UserUpdate from './Update/update.container';
 
-import style from '../../../Assets/Jss/extendedTablesStyle';
+import style from '../../../Assets/Jss/extendedFormsStyle';
 
 class Users extends React.Component {
   constructor(props) {
