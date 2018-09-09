@@ -63,8 +63,6 @@ class Create extends Component {
     const { target } = e;
     this.setState({
       [target.id || target.name]: target.value,
-    }, () => {
-      console.log(this.state);
     });
   }
 
