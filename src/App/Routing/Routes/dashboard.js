@@ -18,16 +18,16 @@ import Timeline from '@material-ui/icons/Timeline';
 import Description from '@material-ui/icons/Description';
 import BugReport from '@material-ui/icons/BugReport';
 
-import Metrics from "../../Views/Home/Metrics";
-import CompanySettings from '../../Views/Settings/CompanySettings';
-import UserSettings from '../../Views/Settings/UserSettings';
-import Teams from '../../Views/Settings/Teams/team.container';
-import Users from '../../Views/Settings/Users';
+import Metrics from '../../Views/Home/Metrics';
+import CompanySettings from '../../Views/Management/CompanySettings';
+import Users from '../../Views/Management/Users/users.container';
+import Teams from '../../Views/Management/Teams/team.container';
 
 import CheckList from '../../Views/CheckList';
 import CheckListCreate from '../../Views/CheckList/Create';
 import SafetyTask from '../../Views/SafetyRecord/SafetyTask';
 import SafetyTaskCreate from '../../Views/SafetyRecord/SafetyTask/Create';
+//  TODO: What is this?
 import SafetyLog from '../../Views/SafetyRecord/SafetyLog';
 import SafetyCategory from '../../Views/SafetyRecord/SafetyCategory';
 
@@ -86,12 +86,6 @@ const dashRoutes = [
     state: 'openManagement',
     icon: SettingsApplications,
     views: [
-      {
-        hidden: true,
-        path: '/dashboard/management/user',
-        name: 'Users',
-        component: UserSettings,
-      },
       {
         path: '/dashboard/management/teams',
         name: 'Teams',
