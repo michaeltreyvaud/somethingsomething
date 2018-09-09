@@ -78,13 +78,33 @@ const reducer = (state = initialState, action) => {
     case CREATE_USER_SUCCESS: {
       const { response } = action.payload;
       const currentItems = Object.assign(state.items);
+      const { User } = response;
+      const attributes = User.Attributes;
+      const findValue = (field) => {
+        let value;
+        attributes.forEach((attribute) => {
+          if (attribute.Name === field) {
+            value = attribute.Value;
+          }
+        });
+        return value;
+      };
+      const displayUser = {
+        email: findValue('email'),
+        firstName: findValue('given_name'),
+        lastName: findValue('family_name'),
+        phoneNumber: findValue('phone_number'),
+        position: findValue('custom:position'),
+        team: findValue('custom:team'),
+        authorization: findValue('custom:authorization'),
+      };
       //  TODO: Sorting by username or something
       // const sortByName = (a, b) => {
       //   if (a.name.toLowerCase() < b.name.toLowerCase()) { return -1; }
       //   if (a.name.toLowerCase() > b.name.toLowerCase()) { return 1; }
       //   return 0;
       // };
-      currentItems.push(response.User);
+      currentItems.push(displayUser);
       // currentItems.sort((a, b) => sortByName(a, b));
       return {
         ...state,
