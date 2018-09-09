@@ -7,6 +7,10 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import Close from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 
 import ImageUpload from '../../../../Components/CustomUpload/ImageUpload';
 import CustomInput from '../../../../Components/CustomInput';
@@ -38,8 +42,13 @@ class Create extends Component {
   closeModal() {
     const { close } = this.props;
     this.setState({
-      userName: '',
-      userDescription: '',
+      email: '',
+      firstName: '',
+      lastName: '',
+      phoneNumber: '',
+      position: '',
+      team: '',
+      authorization: '',
     }, () => {
       close();
     });
@@ -53,8 +62,34 @@ class Create extends Component {
   updateValue(e) {
     const { target } = e;
     this.setState({
-      [target.id]: target.value,
+      [target.id || target.name]: target.value,
+    }, () => {
+      console.log(this.state);
     });
+  }
+
+  renderAuth() {
+    const { authorizations, classes } = this.props;
+    return authorizations.map(authorization => (
+      <MenuItem
+        classes={{ root: classes.selectMenuItem, selected: classes.selectMenuItemSelected }}
+        id="authorization"
+        value={authorization}
+      >
+        {authorization}
+      </MenuItem>));
+  }
+
+  renderTeams() {
+    const { teams, classes } = this.props;
+    return teams.map(team => (
+      <MenuItem
+        classes={{ root: classes.selectMenuItem, selected: classes.selectMenuItemSelected }}
+        id="team"
+        value={team.name}
+      >
+        {team.name}
+      </MenuItem>));
   }
 
   render() {
@@ -114,6 +149,7 @@ class Create extends Component {
           />
           <CustomInput
             labelText="Email"
+            name="email"
             id="email"
             formControlProps={{
               fullWidth: true,
@@ -126,6 +162,7 @@ class Create extends Component {
           />
           <CustomInput
             labelText="First Name"
+            name="firstName"
             id="firstName"
             formControlProps={{
               fullWidth: true,
@@ -138,6 +175,7 @@ class Create extends Component {
           />
           <CustomInput
             labelText="Last Name"
+            name="lastName"
             id="lastName"
             formControlProps={{
               fullWidth: true,
@@ -150,6 +188,7 @@ class Create extends Component {
           />
           <CustomInput
             labelText="Phone Number"
+            name="phoneNumber"
             id="phoneNumber"
             formControlProps={{
               fullWidth: true,
@@ -162,6 +201,7 @@ class Create extends Component {
           />
           <CustomInput
             labelText="Position"
+            name="position"
             id="position"
             formControlProps={{
               fullWidth: true,
@@ -172,32 +212,46 @@ class Create extends Component {
             value={position}
             onChange={e => this.updateValue(e)}
           />
-          <CustomInput
-            labelText="Team"
-            id="team"
-            formControlProps={{
-              fullWidth: true,
-            }}
-            inputProps={{
-              type: 'text',
-              placeholder: 'drop down menu',
-            }}
-            value={team}
-            onChange={e => this.updateValue(e)}
-          />
-          <CustomInput
-            labelText="Authorisation"
-            id="authorization"
-            formControlProps={{
-              fullWidth: true,
-            }}
-            inputProps={{
-              type: 'text',
-              placeholder: 'drop down menu',
-            }}
-            value={authorization}
-            onChange={e => this.updateValue(e)}
-          />
+          <FormControl
+            fullWidth
+            className={classes.selectFormControl}
+          >
+            <InputLabel
+              htmlFor="simple-select"
+              className={classes.selectLabel}
+            >
+              Team
+            </InputLabel>
+            <Select
+              MenuProps={{ className: classes.selectMenu }}
+              classes={{ select: classes.select }}
+              value={team}
+              onChange={e => this.updateValue(e)}
+              inputProps={{ name: 'team' }}
+            >
+              {this.renderTeams()}
+            </Select>
+          </FormControl>
+          <FormControl
+            fullWidth
+            className={classes.selectFormControl}
+          >
+            <InputLabel
+              htmlFor="simple-select"
+              className={classes.selectLabel}
+            >
+              Authorization
+            </InputLabel>
+            <Select
+              MenuProps={{ className: classes.selectMenu }}
+              classes={{ select: classes.select }}
+              value={authorization}
+              onChange={e => this.updateValue(e)}
+              inputProps={{ name: 'authorization' }}
+            >
+              {this.renderAuth()}
+            </Select>
+          </FormControl>
         </DialogContent>
         <DialogActions
           className={
@@ -226,6 +280,8 @@ Create.propTypes = {
   success: PropTypes.bool.isRequired,
   createUser: PropTypes.func.isRequired,
   close: PropTypes.func.isRequired,
+  teams: PropTypes.array.isRequired,
+  authorizations: PropTypes.array.isRequired,
 };
 
 export default Create;
