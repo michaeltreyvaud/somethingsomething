@@ -157,8 +157,7 @@ class Sidebar extends React.Component {
               secondary={(
                 <b
                   className=""
-                />
-)}
+                />)}
               disableTypography
               className={`${itemText} ${classes.userItemText}`}
             />
