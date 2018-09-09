@@ -79,6 +79,7 @@ export const challenge = (email, password, session) => async (dispatch) => {
     //  TODO - fetch these
     const { REACT_APP_API_URL, REACT_APP_PASSWORD_CHALLENGE_PATH } = process.env;
     const response = await Fetch(`${REACT_APP_API_URL}${REACT_APP_PASSWORD_CHALLENGE_PATH}`, body);
+    handleStorage(response);
     return dispatch(challengeSuccess(response));
   } catch (_err) {
     return dispatch(challengeFail(_err.message));
