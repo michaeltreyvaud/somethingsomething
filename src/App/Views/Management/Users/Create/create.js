@@ -68,8 +68,9 @@ class Create extends Component {
 
   renderAuth() {
     const { authorizations, classes } = this.props;
-    return authorizations.map(authorization => (
+    return authorizations.map((authorization, index) => (
       <MenuItem
+        key={`${authorization}${index}`}
         classes={{ root: classes.selectMenuItem, selected: classes.selectMenuItemSelected }}
         id="authorization"
         value={authorization}
@@ -80,8 +81,9 @@ class Create extends Component {
 
   renderTeams() {
     const { teams, classes } = this.props;
-    return teams.map(team => (
+    return teams.map((team, index) => (
       <MenuItem
+        key={`${team.name}${index}`}
         classes={{ root: classes.selectMenuItem, selected: classes.selectMenuItemSelected }}
         id="team"
         value={team.name}
