@@ -143,14 +143,16 @@ class Dashboard extends Component {
           message={errorMessage}
           open={error}
           closeNotification={() => this.hideErrorMessage()}
-          close />
+          close
+        />
         <Snackbar
           place="bc"
           color="success"
           message={successMessage}
           open={success}
           closeNotification={() => this.hideSuccessMessage()}
-          close />
+          close
+        />
         <Sidebar
           routes={dashboardRoutes}
           logoText="TreyBro"
@@ -161,14 +163,16 @@ class Dashboard extends Component {
           color="blue"
           bgColor="black"
           miniActive={miniActive}
-          {...rest} />
+          {...rest}
+        />
         <div className={mainPanel} ref="mainPanel">
           <Header
             sidebarMinimize={this.sidebarMinimize.bind(this)}
             miniActive={miniActive}
             routes={dashboardRoutes}
             handleDrawerToggle={this.handleDrawerToggle}
-            {...rest} />
+            {...rest}
+          />
           <div className={classes.content}>
             <div className={classes.container}>{switchRoutes}</div>
           </div>
