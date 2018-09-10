@@ -44,17 +44,18 @@ function Header({ ...props }) {
     cx({
       [classes.sidebarMinimizeRTL]: rtlActive,
     })}`;
+  const { miniActive, sidebarMinimize: sidebarMinimized, handleDrawerToggle } = props;
   return (
     <AppBar className={classes.appBar + appBarClasses}>
       <Toolbar className={classes.container}>
         <Hidden smDown implementation="css">
           <div className={sidebarMinimize}>
-            {props.miniActive ? (
+            {miniActive ? (
               <Button
                 justIcon
                 round
                 color="white"
-                onClick={props.sidebarMinimize}
+                onClick={sidebarMinimized}
               >
                 <ViewList className={classes.sidebarMiniIcon} />
               </Button>
@@ -63,7 +64,7 @@ function Header({ ...props }) {
                 justIcon
                 round
                 color="white"
-                onClick={props.sidebarMinimize}
+                onClick={sidebarMinimized}
               >
                 <MoreVert className={classes.sidebarMiniIcon} />
               </Button>
@@ -85,7 +86,7 @@ function Header({ ...props }) {
             color="transparent"
             justIcon
             aria-label="open drawer"
-            onClick={props.handleDrawerToggle}
+            onClick={handleDrawerToggle}
           >
             <Menu />
           </Button>
