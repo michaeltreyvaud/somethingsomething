@@ -5,6 +5,7 @@ import dashBoardReducer from '../Layouts/Dashboard/Store/Reducers';
 
 import loginReducer from '../Views/Login/Store/Reducers';
 import forgotPasswordReducer from '../Views/ForgotPassword/Store/Reducers';
+import companyReducer from '../Views/Company/Store/Reducers';
 
 import freezerReducer from './Reducers/Freezer';
 import fridgeReducer from './Reducers/Fridge';
@@ -20,6 +21,7 @@ const appReducers = combineReducers({
     login: loginReducer,
     forgotPassword: forgotPasswordReducer,
   }),
+  company: companyReducer,
   fridge: fridgeReducer,
   freezer: freezerReducer,
   management: managementReducer,

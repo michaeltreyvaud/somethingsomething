@@ -19,7 +19,7 @@ import Description from '@material-ui/icons/Description';
 import BugReport from '@material-ui/icons/BugReport';
 
 import Metrics from '../../Views/Home/Metrics';
-import CompanySettings from '../../Views/Management/CompanySettings';
+import Company from '../../Views/Company/company.container';
 import Users from '../../Views/Management/Users/users.container';
 import Teams from '../../Views/Management/Teams/team.container';
 
@@ -75,9 +75,8 @@ const dashRoutes = [
   {
     path: '/dashboard/company',
     name: 'Company Profile',
-    state: 'openCoSetting',
     icon: Business,
-    component: CompanySettings,
+    component: Company,
   },
   {
     collapse: true,
