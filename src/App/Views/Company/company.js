@@ -71,8 +71,9 @@ class Company extends Component {
   }
 
   updateInfo() {
-    const { updateCompanyInfo } = this.props;
-    updateCompanyInfo(this.state);
+    const { updateCompanyInfo, loading } = this.props;
+    if (loading) return false;
+    return updateCompanyInfo(this.state);
   }
 
   render() {
@@ -81,7 +82,7 @@ class Company extends Component {
       phone, mobile, country, city, address1,
       address2, address3, logo,
     } = this.state;
-    const { classes } = this.props;
+    const { classes, loading } = this.props;
     return (
       <div>
         <GridContainer>
@@ -233,7 +234,7 @@ class Company extends Component {
                     />
                   </GridItem>
                 </GridContainer>
-                <Button onClick={() => this.updateInfo()} color="rose" className={classes.updateProfileButton}>
+                <Button loading={loading} onClick={() => this.updateInfo()} color="rose" className={classes.updateProfileButton}>
                     Save
                 </Button>
                 <Clearfix />
@@ -268,6 +269,7 @@ class Company extends Component {
 }
 
 Company.propTypes = {
+  loading: PropTypes.bool.isRequired,
   classes: PropTypes.object.isRequired,
   name: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,

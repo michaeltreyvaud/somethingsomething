@@ -3,6 +3,7 @@ import Company from './company';
 import { getCompanyInfo, updateCompanyInfo } from './Store/Actions';
 
 const mapStateToProps = state => ({
+  loading: state.company.loading,
   name: state.company.name,
   email: state.company.email,
   firstName: state.company.firstName,

@@ -1,14 +1,16 @@
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import ReactLoading from 'react-loading';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import Button from '@material-ui/core/Button';
 
-import buttonStyle from './style';
+import style from './style';
 
 function RegularButton({ ...props }) {
   const {
+    loading,
     classes,
     color,
     round,
@@ -37,14 +39,16 @@ function RegularButton({ ...props }) {
     [classes.justIcon]: justIcon,
     [className]: className,
   });
+  const loadingColor = style[color].backgroundColor || style[color].color;
   return (
     <Button {...rest} classes={muiClasses} className={btnClasses}>
-      {children}
+      {(loading) ? <ReactLoading type="spin" style={{ color: loadingColor }} /> : children}
     </Button>
   );
 }
 
 RegularButton.propTypes = {
+  loading: PropTypes.bool.isRequired,
   classes: PropTypes.object.isRequired,
   color: PropTypes.oneOf([
     'primary',
@@ -79,4 +83,4 @@ RegularButton.propTypes = {
   muiClasses: PropTypes.object,
 };
 
-export default withStyles(buttonStyle)(RegularButton);
+export default withStyles(style)(RegularButton);

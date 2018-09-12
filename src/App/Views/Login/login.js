@@ -66,9 +66,10 @@ class LoginView extends React.Component {
   }
 
   login() {
-    const { login } = this.props;
+    const { login, loading } = this.props;
     const { email, password } = this.state;
-    login(email, password);
+    if (loading) return false;
+    return login(email, password);
   }
 
   challenge() {
@@ -86,7 +87,6 @@ class LoginView extends React.Component {
       cardAnimaton, email, password, displayError,
       newPassword, displaySuccess,
     } = this.state;
-    if (loading) return (<h1>TODO: Loading</h1>);
     return (
       <div className={classes.container}>
         {/** TODO: Move these components up and link with actions / reducers * */}
@@ -178,6 +178,7 @@ class LoginView extends React.Component {
                 </CardBody>
                 <CardFooter className={classes.justifyContentCenter} style={{ flexDirection: 'column' }}>
                   <Button
+                    loading={loading}
                     color="rose"
                     simple
                     size="lg"
@@ -187,6 +188,7 @@ class LoginView extends React.Component {
                     {challengeType === 'NEW_PASSWORD_REQUIRED' ? 'Submit' : 'Login'}
                   </Button>
                   <Button
+                    loading={false}
                     color="info"
                     simple
                     size="sm"
