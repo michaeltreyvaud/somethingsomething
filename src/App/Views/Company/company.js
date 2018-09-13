@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import ReactLoading from 'react-loading';
 
 import withStyles from '@material-ui/core/styles/withStyles';
-import InputLabel from '@material-ui/core/InputLabel';
 import PermIdentity from '@material-ui/icons/PermIdentity';
 
 import Button from '../../Components/CustomButtons';
@@ -71,8 +71,8 @@ class Company extends Component {
   }
 
   updateInfo() {
-    const { updateCompanyInfo, loading } = this.props;
-    if (loading) return false;
+    const { updateCompanyInfo, saving } = this.props;
+    if (saving) return false;
     return updateCompanyInfo(this.state);
   }
 
@@ -82,7 +82,7 @@ class Company extends Component {
       phone, mobile, country, city, address1,
       address2, address3, logo,
     } = this.state;
-    const { classes, loading } = this.props;
+    const { classes, saving, loading } = this.props;
     return (
       <div>
         <GridContainer>
@@ -96,6 +96,8 @@ class Company extends Component {
                     Edit Profile
                 </h4>
               </CardHeader>
+              {!loading
+              && (
               <CardBody>
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={12}>
@@ -234,11 +236,30 @@ class Company extends Component {
                     />
                   </GridItem>
                 </GridContainer>
-                <Button loading={loading} onClick={() => this.updateInfo()} color="rose" className={classes.updateProfileButton}>
+                <Button loading={saving} onClick={() => this.updateInfo()} color="rose" className={classes.updateProfileButton}>
                     Save
                 </Button>
                 <Clearfix />
               </CardBody>
+              )
+            }
+              {loading && (
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <ReactLoading
+                  type="spin"
+                  color="red"
+                  width={80}
+                  height={80}
+                />
+              </div>
+              )
+            }
             </Card>
           </GridItem>
           <GridItem xs={12} sm={12} md={4}>
@@ -270,6 +291,7 @@ class Company extends Component {
 
 Company.propTypes = {
   loading: PropTypes.bool.isRequired,
+  saving: PropTypes.bool.isRequired,
   classes: PropTypes.object.isRequired,
   name: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,

@@ -10,6 +10,7 @@ import {
 
 const initialState = {
   loading: false,
+  saving: false,
   error: false,
   errorMessage: '',
   success: false,
@@ -74,7 +75,8 @@ const reducer = (state = initialState, action) => {
       const { info } = action.payload;
       return {
         ...state,
-        loading: true,
+        loading: false,
+        saving: true,
         error: false,
         errorMessage: '',
         success: false,
@@ -86,6 +88,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+        saving: false,
         error: false,
         errorMessage: '',
         success: true,

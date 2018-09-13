@@ -4,6 +4,7 @@ import { getCompanyInfo, updateCompanyInfo } from './Store/Actions';
 
 const mapStateToProps = state => ({
   loading: state.company.loading,
+  saving: state.company.saving,
   name: state.company.name,
   email: state.company.email,
   firstName: state.company.firstName,
