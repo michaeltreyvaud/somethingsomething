@@ -41,13 +41,14 @@ class Create extends Component {
   }
 
   createFreezer() {
-    const { createFreezer } = this.props;
+    const { createFreezer, loading } = this.props;
+    if (loading) return false;
     const { freezerName, freezerDescription } = this.state;
-    createFreezer(freezerName, freezerDescription);
+    return createFreezer(freezerName, freezerDescription);
   }
 
   render() {
-    const { classes, visible } = this.props;
+    const { classes, visible, loading } = this.props;
     const { freezerName, freezerDescription } = this.state;
     return (
       <Dialog
@@ -132,6 +133,7 @@ class Create extends Component {
       }
         >
           <Button
+            loading={loading}
             onClick={() => this.createFreezer()}
             color="info"
             round

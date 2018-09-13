@@ -46,18 +46,21 @@ class Update extends Component {
   }
 
   updateFridge() {
-    const { updateFridge, item, index } = this.props;
+    const {
+      updateFridge, item, index, loading,
+    } = this.props;
+    if (loading) return false;
     const { fridgeName, fridgeDescription } = this.state;
     const updatedItem = {
       id: item.id,
       name: fridgeName,
       description: fridgeDescription,
     };
-    updateFridge(updatedItem, index);
+    return updateFridge(updatedItem, index);
   }
 
   render() {
-    const { classes, visible } = this.props;
+    const { classes, visible, loading } = this.props;
     const { fridgeName, fridgeDescription } = this.state;
     return (
       <Dialog
@@ -142,9 +145,11 @@ class Update extends Component {
       }
         >
           <Button
+            loading={loading}
             onClick={() => this.updateFridge()}
             color="info"
-            round >
+            round
+          >
             Save
           </Button>
         </DialogActions>

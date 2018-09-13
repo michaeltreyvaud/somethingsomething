@@ -55,8 +55,9 @@ class Create extends Component {
   }
 
   createUser() {
-    const { createUser } = this.props;
-    createUser(this.state);
+    const { createUser, loading } = this.props;
+    if (loading) return false;
+    return createUser(this.state);
   }
 
   updateValue(e) {
@@ -93,7 +94,7 @@ class Create extends Component {
   }
 
   render() {
-    const { classes, visible } = this.props;
+    const { classes, visible, loading } = this.props;
     const {
       email, firstName, lastName, phoneNumber,
       position, team, authorization,
@@ -261,6 +262,7 @@ class Create extends Component {
         }
         >
           <Button
+            loading={loading}
             onClick={() => this.createUser()}
             color="info"
             round

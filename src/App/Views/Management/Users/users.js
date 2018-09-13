@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Assignment from '@material-ui/icons/Assignment';
 import { withRouter } from 'react-router';
+import ReactLoading from 'react-loading';
 
 import Open from '@material-ui/icons/OpenInNew';
 import Delete from '@material-ui/icons/Delete';
@@ -87,7 +88,7 @@ class Users extends React.Component {
 
   render() {
     const {
-      classes, items,
+      classes, items, loading,
     } = this.props;
     const {
       displayCreateModal, displayDeleteModal, selectedDeleteItem,
@@ -133,24 +134,28 @@ class Users extends React.Component {
         <Button
           color="info"
           className={classes.marginRight}
-          onClick={() => this.showCreateModal()} >
+          onClick={() => this.showCreateModal()}
+        >
           New
         </Button>
         <UserDelete
           item={selectedDeleteItem}
           visible={displayDeleteModal}
           classes={classes}
-          close={() => this.hideDeleteModal()} />
+          close={() => this.hideDeleteModal()}
+        />
         <UserCreate
           visible={displayCreateModal}
           classes={classes}
-          close={() => this.hideCreateModal()} />
+          close={() => this.hideCreateModal()}
+        />
         <UserUpdate
           item={selectedUpdateItem}
           index={selectedUpdateItemIndex}
           visible={displayUpdateModal}
           classes={classes}
-          close={() => this.hideUpdateModal()} />
+          close={() => this.hideUpdateModal()}
+        />
         <GridContainer>
           <GridItem xs={12}>
             <Card>
@@ -160,6 +165,7 @@ class Users extends React.Component {
                 </CardIcon>
               </CardHeader>
               <CardBody>
+                {!loading && (
                 <Table
                   hover
                   tableHead={[
@@ -192,6 +198,24 @@ class Users extends React.Component {
                   ]}
                   customHeadClassesForCells={[0, 1, 2, 3, 4, 5]}
                 />
+                )}
+                {loading && (
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <ReactLoading
+                    type="spin"
+                    color="red"
+                    width={80}
+                    height={80}
+                  />
+                </div>
+                )
+              }
               </CardBody>
             </Card>
           </GridItem>

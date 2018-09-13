@@ -41,13 +41,14 @@ class Create extends Component {
   }
 
   createFridge() {
-    const { createFridge } = this.props;
+    const { createFridge, loading } = this.props;
+    if (loading) return false;
     const { fridgeName, fridgeDescription } = this.state;
-    createFridge(fridgeName, fridgeDescription);
+    return createFridge(fridgeName, fridgeDescription);
   }
 
   render() {
-    const { classes, visible } = this.props;
+    const { classes, visible, loading } = this.props;
     const { fridgeName, fridgeDescription } = this.state;
     return (
       <Dialog
@@ -132,6 +133,7 @@ class Create extends Component {
       }
         >
           <Button
+            loading={loading}
             onClick={() => this.createFridge()}
             color="info"
             round

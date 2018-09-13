@@ -41,13 +41,14 @@ class Create extends Component {
   }
 
   createTeam() {
-    const { createTeam } = this.props;
+    const { createTeam, loading } = this.props;
+    if (loading) return false;
     const { teamName, teamDescription } = this.state;
-    createTeam(teamName, teamDescription);
+    return createTeam(teamName, teamDescription);
   }
 
   render() {
-    const { classes, visible } = this.props;
+    const { classes, visible, loading } = this.props;
     const { teamName, teamDescription } = this.state;
     return (
       <Dialog
@@ -132,6 +133,7 @@ class Create extends Component {
       }
         >
           <Button
+            loading={loading}
             onClick={() => this.createTeam()}
             color="info"
             round

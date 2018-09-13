@@ -46,17 +46,18 @@ class Update extends Component {
   }
 
   updateTeam() {
-    const { updateTeam, index } = this.props;
+    const { updateTeam, index, loading } = this.props;
+    if (loading) return false;
     const { teamName, teamDescription } = this.state;
     const updatedItem = {
       name: teamName,
       description: teamDescription,
     };
-    updateTeam(updatedItem, index);
+    return updateTeam(updatedItem, index);
   }
 
   render() {
-    const { classes, visible } = this.props;
+    const { classes, visible, loading } = this.props;
     const { teamName, teamDescription } = this.state;
     return (
       <Dialog
@@ -141,6 +142,7 @@ class Update extends Component {
       }
         >
           <Button
+            loading={loading}
             onClick={() => this.updateTeam()}
             color="info"
             round >
