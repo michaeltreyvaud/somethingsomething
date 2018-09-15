@@ -11,6 +11,8 @@ import freezerReducer from './Reducers/Freezer';
 import fridgeReducer from './Reducers/Fridge';
 import managementReducer from './Reducers/Management';
 import foodItemReducer from './Reducers/FoodItem';
+import hotHoldingReducer from './Reducers/HotHolding';
+import fastCoolingReducer from './Reducers/FastCooling';
 
 //  TODO - break these out
 const appReducers = combineReducers({
@@ -27,6 +29,8 @@ const appReducers = combineReducers({
   freezer: freezerReducer,
   management: managementReducer,
   foodItem: foodItemReducer,
+  hotHolding: hotHoldingReducer,
+  fastCooling: fastCoolingReducer,
 });
 
 export default appReducers;

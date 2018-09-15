@@ -46,10 +46,10 @@ import FreezerChart from '../../Views/Freezer/FreezerChart';
 import FoodItem from '../../Views/FoodItem/foodItem.container';
 import FoodItemCreate from '../../Views/FoodItem/Create';
 
-import HotHolding from '../../Views/HotHolding';
+import HotHolding from '../../Views/HotHolding/hotHolding.container';
 import HotHoldingCreate from '../../Views/HotHolding/Create';
 
-import FastCooling from '../../Views/FastCooling';
+import FastCooling from '../../Views/FastCooling/fastCooling.container';
 import FastCoolingCreate from '../../Views/FastCooling/Create';
 
 import Service from '../../Views/Service';

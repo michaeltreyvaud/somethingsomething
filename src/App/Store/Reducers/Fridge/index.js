@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import itemsReducer from './items';
 
-const fridgeReducer = combineReducers({
+const reducer = combineReducers({
   item: itemsReducer,
 });
 
-export default fridgeReducer;
+export default reducer;

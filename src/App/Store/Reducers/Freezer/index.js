@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import itemsReducer from './items';
 
-const freezerReducer = combineReducers({
+const reducer = combineReducers({
   item: itemsReducer,
 });
 
-export default freezerReducer;
+export default reducer;
