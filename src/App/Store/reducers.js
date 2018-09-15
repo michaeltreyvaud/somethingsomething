@@ -10,6 +10,7 @@ import companyReducer from '../Views/Company/Store/Reducers';
 import freezerReducer from './Reducers/Freezer';
 import fridgeReducer from './Reducers/Fridge';
 import managementReducer from './Reducers/Management';
+import foodItemReducer from './Reducers/FoodItem';
 
 //  TODO - break these out
 const appReducers = combineReducers({
@@ -25,6 +26,7 @@ const appReducers = combineReducers({
   fridge: fridgeReducer,
   freezer: freezerReducer,
   management: managementReducer,
+  foodItem: foodItemReducer,
 });
 
 export default appReducers;

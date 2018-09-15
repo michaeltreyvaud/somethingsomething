@@ -43,7 +43,7 @@ import FreezerLog from '../../Views/Freezer/FreezerLog';
 import FreezerLogCreate from '../../Views/Freezer/FreezerLog/Create';
 import FreezerChart from '../../Views/Freezer/FreezerChart';
 
-import FoodItem from '../../Views/FoodItem';
+import FoodItem from '../../Views/FoodItem/foodItem.container';
 import FoodItemCreate from '../../Views/FoodItem/Create';
 
 import HotHolding from '../../Views/HotHolding';

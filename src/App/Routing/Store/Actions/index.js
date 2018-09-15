@@ -48,7 +48,6 @@ export const validateToken = () => async (dispatch) => {
     //  TODO - fetch these
     const { REACT_APP_API_URL, REACT_APP_VALIDATE_TOKEN_PATH } = process.env;
     const response = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_VALIDATE_TOKEN_PATH}`, {});
-    // console.log(JSON.stringify(response));
     return dispatch(validateSuccess());
   } catch (_err) {
     return dispatch(validateFail());
