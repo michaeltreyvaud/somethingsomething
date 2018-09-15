@@ -125,20 +125,14 @@ class Create extends Component {
             onChange={e => this.setState({ fridgeDescription: e.target.value })}
           />
         </DialogContent>
-        <DialogActions
-          className={
-        `${classes.modalFooter
-        } ${
-          classes.modalFooterCenter}`
-      }
-        >
+        <DialogActions className={`${classes.modalFooter} ${classes.modalFooterCenter}`}>
           <Button
             loading={loading}
             onClick={() => this.createFridge()}
             color="info"
             round
           >
-        Create
+          Create
           </Button>
         </DialogActions>
       </Dialog>

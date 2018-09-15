@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Assignment from '@material-ui/icons/Assignment';
 import { withRouter } from 'react-router';
-import ReactLoading from 'react-loading';
 
 import Print from '@material-ui/icons/Print';
 import Open from '@material-ui/icons/OpenInNew';
