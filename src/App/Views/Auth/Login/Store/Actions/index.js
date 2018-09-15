@@ -6,8 +6,8 @@ import {
   PASSWORD_CHALLENGE_SUCCESS,
   PASSWORD_CHALLENGE_FAIL,
 } from '../ActionTypes';
-import { Fetch } from '../../../../Util/fetch';
-import AuthStore from '../../../../Util/authstore';
+import { Fetch } from '../../../../../Util/fetch';
+import AuthStore from '../../../../../Util/authstore';
 
 const loginAttempt = () => ({
   type: LOGIN_ATTEMPT,

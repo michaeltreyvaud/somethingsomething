@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ReactLoading from 'react-loading';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import PermIdentity from '@material-ui/icons/PermIdentity';
@@ -15,6 +14,7 @@ import Card from '../../Components/Card/Card';
 import CardHeader from '../../Components/Card/CardHeader';
 import CardIcon from '../../Components/Card/CardIcon';
 import ImageUpload from '../../Components/CustomUpload/ImageUpload';
+import LoadingTable from '../../Components/Loading/LoadingTable';
 
 import style from './style';
 
@@ -86,7 +86,7 @@ class Company extends Component {
     return (
       <div>
         <GridContainer>
-          <GridItem xs={12} sm={12} md={8}>
+          <GridItem xs={12} sm={12} md={12}>
             <Card>
               <CardHeader color="rose" icon>
                 <CardIcon color="rose">
@@ -100,6 +100,33 @@ class Company extends Component {
               && (
               <CardBody>
                 <GridContainer>
+                  <GridItem
+                    xs={12}
+                    sm={12}
+                    md={12}
+                    style={{
+                      display: 'flex',
+                      flex: 1,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <ImageUpload
+                      avatar
+                      addButtonProps={{
+                        color: 'rose',
+                        round: true,
+                      }}
+                      changeButtonProps={{
+                        color: 'rose',
+                        round: true,
+                      }}
+                      removeButtonProps={{
+                        color: 'danger',
+                        round: true,
+                      }}
+                    />
+                  </GridItem>
                   <GridItem xs={12} sm={12} md={12}>
                     <CustomInput
                       onChange={event => this.onChange(event)}
@@ -243,44 +270,7 @@ class Company extends Component {
               </CardBody>
               )
             }
-              {loading && (
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <ReactLoading
-                  type="spin"
-                  color="red"
-                  width={80}
-                  height={80}
-                />
-              </div>
-              )
-            }
-            </Card>
-          </GridItem>
-          <GridItem xs={12} sm={12} md={4}>
-            <Card profile>
-              <CardBody profile>
-                <ImageUpload
-                  avatar
-                  addButtonProps={{
-                    color: 'rose',
-                    round: true,
-                  }}
-                  changeButtonProps={{
-                    color: 'rose',
-                    round: true,
-                  }}
-                  removeButtonProps={{
-                    color: 'danger',
-                    round: true,
-                  }}
-                />
-              </CardBody>
+              <LoadingTable visible={loading} color="red" />
             </Card>
           </GridItem>
         </GridContainer>

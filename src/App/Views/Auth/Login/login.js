@@ -7,15 +7,15 @@ import Icon from '@material-ui/core/Icon';
 import Email from '@material-ui/icons/Email';
 import Lock from '@material-ui/icons/Lock';
 
-import GridContainer from '../../Components/Grid/GridContainer';
-import GridItem from '../../Components/Grid/GridItem';
-import CustomInput from '../../Components/CustomInput';
-import Button from '../../Components/CustomButtons';
-import Card from '../../Components/Card/Card';
-import CardBody from '../../Components/Card/CardBody';
-import CardHeader from '../../Components/Card/CardHeader';
-import CardFooter from '../../Components/Card/CardFooter';
-import Snackbar from '../../Components/Snackbar/Snackbar';
+import GridContainer from '../../../Components/Grid/GridContainer';
+import GridItem from '../../../Components/Grid/GridItem';
+import CustomInput from '../../../Components/CustomInput';
+import Button from '../../../Components/CustomButtons';
+import Card from '../../../Components/Card/Card';
+import CardBody from '../../../Components/Card/CardBody';
+import CardHeader from '../../../Components/Card/CardHeader';
+import CardFooter from '../../../Components/Card/CardFooter';
+import Snackbar from '../../../Components/Snackbar/Snackbar';
 
 import style from './style';
 

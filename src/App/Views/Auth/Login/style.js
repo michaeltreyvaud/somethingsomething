@@ -1,7 +1,7 @@
 import {
   container,
   cardTitle,
-} from '../../Assets/Jss/material-dashboard-pro-react';
+} from '../../../Assets/Jss/material-dashboard-pro-react';
 
 const Style = theme => ({
   container: {

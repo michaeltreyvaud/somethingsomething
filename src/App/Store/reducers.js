@@ -3,7 +3,7 @@ import routingReducer from '../Routing/Store/Reducers';
 
 import dashBoardReducer from '../Layouts/Dashboard/Store/Reducers';
 
-import loginReducer from '../Views/Login/Store/Reducers';
+import loginReducer from '../Views/Auth/Login/Store/Reducers';
 import forgotPasswordReducer from '../Views/ForgotPassword/Store/Reducers';
 import companyReducer from '../Views/Company/Store/Reducers';
 

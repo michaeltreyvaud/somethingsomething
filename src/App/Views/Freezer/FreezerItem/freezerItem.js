@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Assignment from '@material-ui/icons/Assignment';
 import { withRouter } from 'react-router';
-import ReactLoading from 'react-loading';
 
 import Print from '@material-ui/icons/Print';
 import Open from '@material-ui/icons/OpenInNew';
@@ -17,6 +16,7 @@ import CardHeader from '../../../Components/Card/CardHeader';
 import CardIcon from '../../../Components/Card/CardIcon';
 import Button from '../../../Components/CustomButtons';
 import Table from '../../../Components/Table';
+import LoadingTable from '../../../Components/Loading/LoadingTable';
 
 import FreezerCreate from './Create/create.container';
 import FreezerDelete from './Delete/delete.container';
@@ -187,23 +187,7 @@ class FreezerItem extends React.Component {
                   customHeadClassesForCells={[0, 1, 2]}
                 />
                 )}
-                {loading && (
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <ReactLoading
-                    type="spin"
-                    color="red"
-                    width={80}
-                    height={80}
-                  />
-                </div>
-                )
-              }
+                <LoadingTable visible={loading} color="red" />
               </CardBody>
             </Card>
           </GridItem>

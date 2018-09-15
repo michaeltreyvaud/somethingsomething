@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Assignment from '@material-ui/icons/Assignment';
 import { withRouter } from 'react-router';
-import ReactLoading from 'react-loading';
 
 import Open from '@material-ui/icons/OpenInNew';
 import Delete from '@material-ui/icons/Delete';
@@ -16,6 +15,7 @@ import CardHeader from '../../../Components/Card/CardHeader';
 import CardIcon from '../../../Components/Card/CardIcon';
 import Button from '../../../Components/CustomButtons';
 import Table from '../../../Components/Table';
+import LoadingTable from '../../../Components/Loading/LoadingTable';
 
 import UserCreate from './Create/create.container';
 import UserDelete from './Delete/delete.container';
@@ -199,23 +199,7 @@ class Users extends React.Component {
                   customHeadClassesForCells={[0, 1, 2, 3, 4, 5]}
                 />
                 )}
-                {loading && (
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <ReactLoading
-                    type="spin"
-                    color="red"
-                    width={80}
-                    height={80}
-                  />
-                </div>
-                )
-              }
+                <LoadingTable visible={loading} color="red" />
               </CardBody>
             </Card>
           </GridItem>

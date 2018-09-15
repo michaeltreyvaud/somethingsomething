@@ -9,7 +9,7 @@ import {
 } from '../ActionTypes';
 import {
   LOGIN_SUCCESS,
-} from '../../../Views/Login/Store/ActionTypes';
+} from '../../../Views/Auth/Login/Store/ActionTypes';
 
 const initialState = {
   loading: true, //  TODO - make sure to update this!

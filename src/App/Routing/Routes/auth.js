@@ -1,4 +1,4 @@
-import LoginPage from '../../Views/Login/login.container';
+import LoginPage from '../../Views/Auth/Login/login.container';
 import ForgotPasswordPage from '../../Views/ForgotPassword/forgot.container';
 
 const Routes = [{

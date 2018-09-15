@@ -56,9 +56,10 @@ class ForgotPasswordView extends React.Component {
   }
 
   forgotPassword() {
-    const { forgotPassword } = this.props;
+    const { forgotPassword, loading } = this.props;
+    if (loading) return false;
     const { email } = this.state;
-    forgotPassword(email);
+    return forgotPassword(email);
   }
 
   render() {
@@ -68,7 +69,6 @@ class ForgotPasswordView extends React.Component {
     const {
       cardAnimaton, email, displayError, displaySuccess,
     } = this.state;
-    if (loading) return (<h1>TODO: Loading</h1>);
     return (
       <div className={classes.container}>
         {/** TODO: Move these components up and link with actions / reducers * */}
@@ -117,6 +117,7 @@ class ForgotPasswordView extends React.Component {
                 </CardBody>
                 <CardFooter className={classes.justifyContentCenter} style={{ flexDirection: 'column' }}>
                   <Button
+                    loading={loading}
                     color="rose"
                     simple
                     size="lg"
