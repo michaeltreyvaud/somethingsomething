@@ -2,6 +2,10 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import AppRouter from './AppRouter';
 import { getCompanyInfo, validateToken } from './Store/Actions';
+import { listTeams } from '../Views/Management/Teams/Store/Actions';
+import { listUsers } from '../Views/Management/Users/Store/Actions';
+import { listFreezers } from '../Views/Freezer/FreezerItem/Store/Actions';
+import { listFridges } from '../Views/Fridge/FridgeItem/Store/Actions';
 
 const mapStateToProps = state => ({
   loading: state.routes.loading,
@@ -12,6 +16,10 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getCompanyInfo: () => dispatch(getCompanyInfo()),
   validateToken: () => dispatch(validateToken()),
+  listTeams: () => dispatch(listTeams()),
+  listUsers: () => dispatch(listUsers()),
+  listFreezers: () => dispatch(listFreezers()),
+  listFridges: () => dispatch(listFridges()),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AppRouter));

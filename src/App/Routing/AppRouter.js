@@ -17,13 +17,14 @@ class AppRouter extends Component {
   //  Handle app redirects here when app loads
   componentWillReceiveProps(nextProps) {
     const {
-      loading, history, sessionTimeout, location,
+      loading, history, sessionTimeout, location, isAuthenticated,
     } = this.props;
     if (loading === true && nextProps.loading === false) {
       //  Need to route to login
-      if (nextProps.isAuthenticated === false) {
+      if (!nextProps.isAuthenticated) {
         return history.push('/auth/login');
       }
+      this.loadAppInformation();
       //  Route to where the user typed in the url
       const path = ((location.pathname === '/' || !location.pathname)) ? '/dashboard/dashboard' : location.pathname;
       return history.push(path);
@@ -32,7 +33,23 @@ class AppRouter extends Component {
     if (sessionTimeout !== nextProps.sessionTimeout) {
       return history.push('/auth/login');
     }
+
+    if (!isAuthenticated && nextProps.isAuthenticated) {
+      this.loadAppInformation();
+    }
     return nextProps;
+  }
+
+  loadAppInformation() {
+    const {
+      listTeams, listUsers,
+      listFreezers, listFridges,
+    } = this.props;
+    //  TODO: Load all app view items
+    listTeams();
+    listUsers();
+    listFreezers();
+    listFridges();
   }
 
   render() {
@@ -55,6 +72,10 @@ AppRouter.propTypes = {
   sessionTimeout: PropTypes.bool.isRequired,
   getCompanyInfo: PropTypes.func.isRequired,
   validateToken: PropTypes.func.isRequired,
+  listTeams: PropTypes.func.isRequired,
+  listUsers: PropTypes.func.isRequired,
+  listFreezers: PropTypes.func.isRequired,
+  listFridges: PropTypes.func.isRequired,
 };
 
 export default AppRouter;
