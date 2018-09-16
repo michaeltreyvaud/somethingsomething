@@ -12,9 +12,10 @@ class DeleteItem extends Component {
   }
 
   delete() {
-    const { item, deleteFreezer } = this.props;
+    const { item, deleteFreezer, loading } = this.props;
+    if (loading) return false;
     const { itemId, index } = item;
-    deleteFreezer(itemId, index);
+    return deleteFreezer(itemId, index);
   }
 
   render() {

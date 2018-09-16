@@ -12,9 +12,10 @@ class Delete extends Component {
   }
 
   delete() {
-    const { item, deleteUser } = this.props;
+    const { item, deleteUser, loading } = this.props;
+    if (loading) return false;
     const { itemId, index } = item;
-    deleteUser(itemId, index);
+    return deleteUser(itemId, index);
   }
 
   render() {

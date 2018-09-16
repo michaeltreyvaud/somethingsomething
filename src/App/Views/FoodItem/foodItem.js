@@ -18,6 +18,9 @@ import Button from '../../Components/CustomButtons';
 import Table from '../../Components/Table';
 import LoadingTable from '../../Components/Loading/LoadingTable';
 
+import FoodItemCreate from './Create/create.container';
+import FoodItemDelete from './Delete/delete.container';
+
 import style from '../../Assets/Jss/extendedTablesStyle';
 
 class FoodItem extends React.Component {
@@ -50,11 +53,11 @@ class FoodItem extends React.Component {
     });
   }
 
-  showDeleteModal(itemId, index) {
+  showDeleteModal(createdAt, index) {
     this.setState({
       displayDeleteModal: true,
       selectedDeleteItem: {
-        itemId,
+        createdAt,
         index,
       },
     });
@@ -103,7 +106,7 @@ class FoodItem extends React.Component {
           break;
         }
         case 2: {
-          onClick = () => this.showDeleteModal(item.id, index);
+          onClick = () => this.showDeleteModal(item.createdAt, index);
           break;
         }
         default: {
@@ -122,11 +125,23 @@ class FoodItem extends React.Component {
       );
     });
     const tableData = items.map((_item, index) => {
-      const item = [_item.name, _item.description, simpleButtons(_item, index)];
+      const item = [_item.name, _item.description, _item.expiryDate,
+        _item.batchNumber, simpleButtons(_item, index)];
       return item;
     });
     return (
       <div>
+        <FoodItemCreate
+          visible={displayCreateModal}
+          classes={classes}
+          close={() => this.hideCreateModal()}
+        />
+        <FoodItemDelete
+          item={selectedDeleteItem}
+          visible={displayDeleteModal}
+          classes={classes}
+          close={() => this.hideDeleteModal()}
+        />
         <GridContainer>
           <GridItem xs={12}>
             <Card>
@@ -149,20 +164,26 @@ class FoodItem extends React.Component {
                   tableHead={[
                     'Name',
                     'Description',
+                    'Expiry Date',
+                    'Batch Number',
                   ]}
                   tableData={tableData}
                   customCellClasses={[
                     classes.left,
                     classes.left,
+                    classes.left,
+                    classes.left,
                     classes.right,
                   ]}
-                  customClassesForCells={[0, 1, 2]}
+                  customClassesForCells={[0, 1, 2, 3, 4]}
                   customHeadCellClasses={[
                     classes.left,
                     classes.left,
+                    classes.left,
+                    classes.left,
                     classes.right,
                   ]}
-                  customHeadClassesForCells={[0, 1, 2]}
+                  customHeadClassesForCells={[0, 1, 2, 3, 4]}
                 />
                 )}
                 <LoadingTable visible={loading} color="red" />

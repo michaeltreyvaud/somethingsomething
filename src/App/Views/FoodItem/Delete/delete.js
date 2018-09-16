@@ -12,10 +12,10 @@ class DeleteItem extends Component {
   }
 
   delete() {
-    const { item, deleteFridge, loading } = this.props;
+    const { item, deleteFoodItem, loading } = this.props;
     if (loading) return false;
-    const { itemId, index } = item;
-    return deleteFridge(itemId, index);
+    const { createdAt, index } = item;
+    return deleteFoodItem(createdAt, index);
   }
 
   render() {
@@ -50,7 +50,7 @@ DeleteItem.propTypes = {
   loading: PropTypes.bool.isRequired,
   success: PropTypes.bool.isRequired,
   close: PropTypes.func.isRequired,
-  deleteFridge: PropTypes.func.isRequired,
+  deleteFoodItem: PropTypes.func.isRequired,
   item: PropTypes.object.isRequired,
 };
 

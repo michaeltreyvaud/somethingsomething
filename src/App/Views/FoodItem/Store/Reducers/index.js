@@ -2,6 +2,10 @@ import {
   LIST_FOOD_ITEM_ATTEMPT,
   LIST_FOOD_ITEM_SUCCESS,
   LIST_FOOD_ITEM_FAIL,
+
+  CREATE_FOOD_ITEM_ATTEMPT_SUCCESS,
+
+  DELETE_FOOD_ITEM_ATTEMPT_SUCCESS,
 } from '../ActionTypes';
 
 const initialState = {
@@ -47,8 +51,26 @@ const reducer = (state = initialState, action) => {
         items: [],
       };
     }
+    case CREATE_FOOD_ITEM_ATTEMPT_SUCCESS: {
+      const { response } = action.payload;
+      const currentItems = Object.assign(state.items);
+      currentItems.unshift(response);
+      return {
+        ...state,
+        items: currentItems,
+      };
+    }
     default: {
       return state;
+    }
+    case DELETE_FOOD_ITEM_ATTEMPT_SUCCESS: {
+      const { index } = action.payload;
+      const currentItems = Object.assign(state.items);
+      currentItems.splice(index, 1);
+      return {
+        ...state,
+        items: currentItems,
+      };
     }
   }
 };
