@@ -53,11 +53,11 @@ class Create extends Component {
     });
   }
 
-  createHotHolding() {
-    const { createHotHolding, loading } = this.props;
+  createFastCooling() {
+    const { createFastCooling, loading } = this.props;
     if (loading) return false;
     const { state } = this;
-    return createHotHolding(state);
+    return createFastCooling(state);
   }
 
   updateValue(e) {
@@ -124,7 +124,7 @@ class Create extends Component {
           >
             <Close className={classes.modalClose} />
           </Button>
-          <legend>Create Hot Holding</legend>
+          <legend>Create Fast Cooling</legend>
         </DialogTitle>
         <DialogContent id="notice-modal-slide-description" className={classes.modalBody}>
           <FormControl fullWidth className={classes.selectFormControl}>
@@ -191,7 +191,7 @@ class Create extends Component {
         <DialogActions className={`${classes.modalFooter} ${classes.modalFooterCenter}`}>
           <Button
             loading={loading}
-            onClick={() => this.createHotHolding()}
+            onClick={() => this.createFastCooling()}
             color="info"
             round
           >
@@ -208,7 +208,7 @@ Create.propTypes = {
   visible: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
   success: PropTypes.bool.isRequired,
-  createHotHolding: PropTypes.func.isRequired,
+  createFastCooling: PropTypes.func.isRequired,
   close: PropTypes.func.isRequired,
   foodItems: PropTypes.array.isRequired,
   users: PropTypes.array.isRequired,

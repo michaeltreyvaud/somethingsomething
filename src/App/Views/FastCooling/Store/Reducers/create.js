@@ -1,9 +1,7 @@
 import {
-  LIST_FAST_COOLING_ATTEMPT,
-  LIST_FAST_COOLING_SUCCESS,
-  LIST_FAST_COOLING_FAIL,
-
+  CREATE_FAST_COOLING_ATTEMPT,
   CREATE_FAST_COOLING_SUCCESS,
+  CREATE_FAST_COOLING_FAIL,
 } from '../ActionTypes';
 
 const initialState = {
@@ -11,51 +9,36 @@ const initialState = {
   error: false,
   errorMessage: '',
   success: false,
-  items: [],
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case LIST_FAST_COOLING_ATTEMPT: {
+    case CREATE_FAST_COOLING_ATTEMPT: {
       return {
         ...state,
         loading: true,
         error: false,
         errorMessage: '',
         success: false,
-        items: [],
       };
     }
-    case LIST_FAST_COOLING_SUCCESS: {
-      const { response } = action.payload;
-      //  TODO - store the next key etc for pagination
-      const { Items } = response;
+    case CREATE_FAST_COOLING_SUCCESS: {
       return {
         ...state,
         loading: false,
         error: false,
         errorMessage: '',
         success: true,
-        items: Items,
       };
     }
-    case LIST_FAST_COOLING_FAIL: {
+    case CREATE_FAST_COOLING_FAIL: {
+      const { message } = action.payload;
       return {
         ...state,
         loading: false,
         error: true,
-        errorMessage: '',
+        errorMessage: message,
         success: false,
-        items: [],
-      };
-    }
-    case CREATE_FAST_COOLING_SUCCESS: {
-      const { response } = action.payload;
-      const currentItems = Object.assign(state.items);
-      currentItems.unshift(response);
-      return {
-        ...state,
-        items: currentItems,
       };
     }
     default: {

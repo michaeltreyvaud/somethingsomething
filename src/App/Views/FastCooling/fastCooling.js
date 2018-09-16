@@ -18,6 +18,8 @@ import Button from '../../Components/CustomButtons';
 import Table from '../../Components/Table';
 import LoadingTable from '../../Components/Loading/LoadingTable';
 
+import FastCoolingCreate from './Create/create.container';
+
 import style from '../../Assets/Jss/extendedTablesStyle';
 
 class FastCooling extends React.Component {
@@ -127,6 +129,11 @@ class FastCooling extends React.Component {
     });
     return (
       <div>
+        <FastCoolingCreate
+          visible={displayCreateModal}
+          classes={classes}
+          close={() => this.hideCreateModal()}
+        />
         <GridContainer>
           <GridItem xs={12}>
             <Card>
