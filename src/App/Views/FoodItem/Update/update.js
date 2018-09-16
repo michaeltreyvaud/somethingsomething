@@ -118,6 +118,29 @@ class Update extends React.Component {
     }
   }
 
+  updateValue(e) {
+    const { target } = e;
+    this.setState({
+      [target.id]: target.value,
+    });
+  }
+
+  //  TODO: needed?
+  updateExpiryDate(date) {
+    this.setState({
+      expiryDate: date.unix(),
+    });
+  }
+
+  updateAllergens(e) {
+    const { target } = e;
+    const { allergens } = this.state;
+    allergens[target.id] = !(target.value === 'true');
+    this.setState({
+      allergens,
+    });
+  }
+
   render() {
     const { classes, loading } = this.props;
     const {
@@ -137,7 +160,6 @@ class Update extends React.Component {
                 <CardIcon color="rose">
                   <Today />
                 </CardIcon>
-                <h4 className={classes.cardIconTitle}>Capture Reheating Temperature</h4>
               </CardHeader>
               <CardBody>
                 {!loading && (
