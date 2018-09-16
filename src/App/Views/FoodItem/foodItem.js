@@ -30,10 +30,7 @@ class FoodItem extends React.Component {
     this.state = {
       displayCreateModal: false,
       displayDeleteModal: false,
-      displayUpdateModal: false,
       selectedDeleteItem: {},
-      selectedUpdateItem: {},
-      selectedUpdateItemIndex: 0,
     };
   }
 
@@ -71,29 +68,12 @@ class FoodItem extends React.Component {
     });
   }
 
-  showUpdateModal(item, index) {
-    this.setState({
-      displayUpdateModal: true,
-      selectedUpdateItem: item,
-      selectedUpdateItemIndex: index,
-    });
-  }
-
-  hideUpdateModal() {
-    this.setState({
-      displayUpdateModal: false,
-      selectedUpdateItem: {},
-      selectedUpdateItemIndex: 0,
-    });
-  }
-
   render() {
     const {
-      classes, items, loading,
+      classes, items, loading, history,
     } = this.props;
     const {
       displayCreateModal, displayDeleteModal, selectedDeleteItem,
-      displayUpdateModal, selectedUpdateItem, selectedUpdateItemIndex,
     } = this.state;
     const simpleButtons = (item, index) => [
       { color: 'warning', icon: Print },
@@ -103,7 +83,7 @@ class FoodItem extends React.Component {
       let onClick;
       switch (key) {
         case 1: {
-          onClick = () => this.showUpdateModal(item, index);
+          onClick = () => history.push(`/dashboard/fooditem/${item.createdAt}`);
           break;
         }
         case 2: {
@@ -198,6 +178,7 @@ class FoodItem extends React.Component {
 }
 
 FoodItem.propTypes = {
+  history: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
   items: PropTypes.array.isRequired,
 

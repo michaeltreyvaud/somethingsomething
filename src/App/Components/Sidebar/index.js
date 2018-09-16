@@ -77,7 +77,7 @@ class Sidebar extends React.Component {
   activeRoute(routeName) {
     const { location } = this.props;
     const { pathname } = location;
-    return pathname === routeName;
+    return (pathname === routeName || pathname.includes(routeName));
   }
 
   activeCollapse(route) {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Datetime from 'react-datetime';
 import moment from 'moment';
 
 import Dialog from '@material-ui/core/Dialog';
@@ -10,6 +11,7 @@ import Close from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 import Check from '@material-ui/icons/Check';
 import Checkbox from '@material-ui/core/Checkbox';
+import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import CustomInput from '../../../Components/CustomInput';
@@ -24,7 +26,6 @@ class Create extends Component {
       name: '',
       batchNumber: '',
       description: '',
-      expiryDateOffset: 0,
       expiryDate: 0,
       allergens: {
         gluten: false,
@@ -58,7 +59,6 @@ class Create extends Component {
       name: '',
       batchNumber: '',
       description: '',
-      expiryDateOffset: 0,
       expiryDate: 0,
       allergens: {
         gluten: false,
@@ -91,18 +91,15 @@ class Create extends Component {
 
   updateValue(e) {
     const { target } = e;
-    if (target.id === 'expiryDate') {
-      const now = moment();
-      now.add(target.value, 'd');
-      this.setState({
-        expiryDateOffset: parseInt(target.value, 10),
-        expiryDate: parseInt(now.unix(), 10),
-      });
-    } else {
-      this.setState({
-        [target.id]: target.value,
-      });
-    }
+    this.setState({
+      [target.id]: target.value,
+    });
+  }
+
+  updateExpiryDate(date) {
+    this.setState({
+      expiryDate: date.unix(),
+    });
   }
 
   updateAllergens(e) {
@@ -117,7 +114,7 @@ class Create extends Component {
   render() {
     const { classes, visible, loading } = this.props;
     const {
-      name, batchNumber, description, allergens, expiryDateOffset,
+      name, batchNumber, description, allergens, expiryDate,
     } = this.state;
     const {
       gluten, sesameSeeds, molluscs, fish, soybeans,
@@ -174,14 +171,16 @@ class Create extends Component {
             inputProps={{ multiline: true, rows: 3 }}
             onChange={e => this.updateValue(e)}
           />
-          <CustomInput
-            value={parseInt(expiryDateOffset, 10)}
-            labelText="Expiry Date After (In Days)"
-            id="expiryDate"
-            formControlProps={{ fullWidth: true }}
-            inputProps={{ type: 'number' }}
-            onChange={e => this.updateValue(e)}
-          />
+          <FormControl fullWidth>
+            <Datetime
+              value={moment.unix(expiryDate)}
+              dateFormat="DD/MM/YYYY"
+              id="expiryDate"
+              onChange={e => this.updateExpiryDate(e)}
+              timeFormat={false}
+              inputProps={{ placeholder: 'Expiry Date' }}
+            />
+          </FormControl>
           <div className={classes.inlineChecks}>
             <legend>Allergy Information</legend>
             <FormControlLabel
