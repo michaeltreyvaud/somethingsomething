@@ -18,8 +18,8 @@ class Create extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      freezerName: '',
-      freezerDescription: '',
+      name: '',
+      description: '',
     };
   }
 
@@ -33,8 +33,8 @@ class Create extends Component {
   closeModal() {
     const { close } = this.props;
     this.setState({
-      freezerName: '',
-      freezerDescription: '',
+      name: '',
+      description: '',
     }, () => {
       close();
     });
@@ -43,13 +43,19 @@ class Create extends Component {
   createFreezer() {
     const { createFreezer, loading } = this.props;
     if (loading) return false;
-    const { freezerName, freezerDescription } = this.state;
-    return createFreezer(freezerName, freezerDescription);
+    return createFreezer(this.state);
+  }
+
+  updateValue(e) {
+    const { target } = e;
+    this.setState({
+      [target.id]: target.value,
+    });
   }
 
   render() {
     const { classes, visible, loading } = this.props;
-    const { freezerName, freezerDescription } = this.state;
+    const { name, description } = this.state;
     return (
       <Dialog
         classes={{
@@ -101,28 +107,19 @@ class Create extends Component {
           />
           <CustomInput
             labelText="Name"
-            id="freezerName"
-            value={freezerName}
-            formControlProps={{
-              fullWidth: true,
-            }}
-            inputProps={{
-              type: 'text',
-            }}
-            onChange={e => this.setState({ freezerName: e.target.value })}
+            id="name"
+            value={name}
+            formControlProps={{ fullWidth: true }}
+            inputProps={{ type: 'text' }}
+            onChange={e => this.updateValue(e)}
           />
           <CustomInput
             labelText="Description"
             id="description"
-            value={freezerDescription}
-            formControlProps={{
-              fullWidth: true,
-            }}
-            inputProps={{
-              multiline: true,
-              rows: 3,
-            }}
-            onChange={e => this.setState({ freezerDescription: e.target.value })}
+            value={description}
+            formControlProps={{ fullWidth: true }}
+            inputProps={{ multiline: true, rows: 3 }}
+            onChange={e => this.updateValue(e)}
           />
         </DialogContent>
         <DialogActions

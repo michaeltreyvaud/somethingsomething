@@ -23,12 +23,12 @@ const createFridgeFail = message => ({
   payload: { message },
 });
 
-export const createFridge = (name, description) => async (dispatch) => {
+export const createFridge = fridgeItem => async (dispatch) => {
   try {
     //  Tell the layout we are doing something
     dispatch(dashboardLoading());
     dispatch(createFridgeAttempt());
-    const body = { name, description };
+    const body = fridgeItem;
     //  TODO - fetch these
     const { REACT_APP_API_URL, REACT_APP_CREATE_FRIDGES_PATH } = process.env;
     const response = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_CREATE_FRIDGES_PATH}`, body);

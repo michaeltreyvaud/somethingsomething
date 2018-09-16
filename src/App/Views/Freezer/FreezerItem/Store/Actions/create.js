@@ -23,12 +23,12 @@ const createFreezerFail = message => ({
   payload: { message },
 });
 
-export const createFreezer = (name, description) => async (dispatch) => {
+export const createFreezer = freezerItem => async (dispatch) => {
   try {
     //  Tell the layout we are doing something
     dispatch(dashboardLoading());
     dispatch(createFreezerAttempt());
-    const body = { name, description };
+    const body = freezerItem;
     //  TODO - fetch these
     const { REACT_APP_API_URL, REACT_APP_CREATE_FREEZER_PATH } = process.env;
     const response = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_CREATE_FREEZER_PATH}`, body);

@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  createFridge: (name, description) => dispatch(createFridge(name, description)),
+  createFridge: fridgeItem => dispatch(createFridge(fridgeItem)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Create);

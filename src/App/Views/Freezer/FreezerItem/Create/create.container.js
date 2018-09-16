@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  createFreezer: (name, description) => dispatch(createFreezer(name, description)),
+  createFreezer: freezerItem => dispatch(createFreezer(freezerItem)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Create);
