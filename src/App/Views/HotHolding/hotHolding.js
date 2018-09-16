@@ -127,13 +127,6 @@ class HotHolding extends React.Component {
     });
     return (
       <div>
-        <Button
-          color="info"
-          className={classes.marginRight}
-          onClick={() => this.showCreateModal()}
-        >
-          New
-        </Button>
         <GridContainer>
           <GridItem xs={12}>
             <Card>
@@ -141,6 +134,13 @@ class HotHolding extends React.Component {
                 <CardIcon color="rose">
                   <Assignment />
                 </CardIcon>
+                <Button
+                  color="info"
+                  className={classes.marginRight}
+                  onClick={() => this.showCreateModal()}
+                >
+                  New
+                </Button>
               </CardHeader>
               <CardBody>
                 {!loading && (

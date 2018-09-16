@@ -43,9 +43,6 @@ class FoodItem extends React.Component {
     ));
     return (
       <div>
-        <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/dashboard/fooditem/create')}>
-        New
-        </Button>
         <GridContainer>
           <GridItem xs={12}>
             <Card>
@@ -53,6 +50,9 @@ class FoodItem extends React.Component {
                 <CardIcon color="rose">
                   <Assignment />
                 </CardIcon>
+                <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/dashboard/fooditem/create')}>
+                what the fuck??
+                </Button>
               </CardHeader>
               <CardBody>
                 <Table

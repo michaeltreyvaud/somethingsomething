@@ -131,13 +131,6 @@ class Users extends React.Component {
     });
     return (
       <div>
-        <Button
-          color="info"
-          className={classes.marginRight}
-          onClick={() => this.showCreateModal()}
-        >
-          New
-        </Button>
         <UserDelete
           item={selectedDeleteItem}
           visible={displayDeleteModal}
@@ -163,6 +156,13 @@ class Users extends React.Component {
                 <CardIcon color="rose">
                   <Assignment />
                 </CardIcon>
+                <Button
+                  color="info"
+                  className={classes.marginRight}
+                  onClick={() => this.showCreateModal()}
+                >
+                  New
+                </Button>
               </CardHeader>
               <CardBody>
                 {!loading && (

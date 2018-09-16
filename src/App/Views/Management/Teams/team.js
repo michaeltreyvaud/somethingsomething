@@ -129,13 +129,6 @@ class Team extends React.Component {
     });
     return (
       <div>
-        <Button
-          color="info"
-          className={classes.marginRight}
-          onClick={() => this.showCreateModal()}
-        >
-          New
-        </Button>
         <TeamDelete
           item={selectedDeleteItem}
           visible={displayDeleteModal}
@@ -161,6 +154,13 @@ class Team extends React.Component {
                 <CardIcon color="rose">
                   <Assignment />
                 </CardIcon>
+                <Button
+                  color="info"
+                  className={classes.marginRight}
+                  onClick={() => this.showCreateModal()}
+                >
+                  New
+                </Button>
               </CardHeader>
               <CardBody>
                 {!loading && (

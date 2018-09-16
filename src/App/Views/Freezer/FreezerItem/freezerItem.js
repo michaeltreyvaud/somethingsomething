@@ -131,13 +131,6 @@ class FreezerItem extends React.Component {
     });
     return (
       <div>
-        <Button
-          color="info"
-          className={classes.marginRight}
-          onClick={() => this.showCreateModal()}
-        >
-          New
-        </Button>
         <FreezerDelete
           item={selectedDeleteItem}
           visible={displayDeleteModal}
@@ -163,6 +156,13 @@ class FreezerItem extends React.Component {
                 <CardIcon color="rose">
                   <Assignment />
                 </CardIcon>
+                <Button
+                  color="info"
+                  className={classes.marginRight}
+                  onClick={() => this.showCreateModal()}
+                >
+                  New
+                </Button>
               </CardHeader>
               <CardBody>
                 {!loading && (

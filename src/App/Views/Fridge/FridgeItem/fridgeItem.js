@@ -131,13 +131,6 @@ class FridgeItem extends React.Component {
     });
     return (
       <div>
-        <Button
-          color="info"
-          className={classes.marginRight}
-          onClick={() => this.showCreateModal()}
-        >
-          New
-        </Button>
         <FridgeDelete
           item={selectedDeleteItem}
           visible={displayDeleteModal}
@@ -163,6 +156,13 @@ class FridgeItem extends React.Component {
                 <CardIcon color="rose">
                   <Assignment />
                 </CardIcon>
+                <Button
+                  color="info"
+                  className={classes.marginRight}
+                  onClick={() => this.showCreateModal()}
+                >
+                  New
+                </Button>
               </CardHeader>
               <CardBody>
                 {!loading && (
