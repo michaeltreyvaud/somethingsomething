@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Datetime from 'react-datetime';
+import SignatureCanvas from 'react-signature-canvas';
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -41,6 +42,7 @@ class Create extends Component {
 
   closeModal() {
     const { close } = this.props;
+    this.sigCanvas.clear();
     this.setState({
       foodItem: 0,
       temperature: 0,
@@ -186,7 +188,12 @@ class Create extends Component {
             inputProps={{ multiline: true, rows: 3 }}
             onChange={e => this.updateValue(e)}
           />
-          <InputLabel style={{ color: '#AAAAAA' }}>Signature</InputLabel>
+          <SignatureCanvas
+            ref={(ref) => { this.sigCanvas = ref; }}
+            backgroundColor="#ECECEC"
+            penColor="black"
+            canvasProps={{ width: 500, height: 250 }}
+          />
         </DialogContent>
         <DialogActions className={`${classes.modalFooter} ${classes.modalFooterCenter}`}>
           <Button

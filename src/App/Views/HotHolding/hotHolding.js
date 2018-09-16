@@ -124,7 +124,8 @@ class HotHolding extends React.Component {
       );
     });
     const tableData = items.map((_item, index) => {
-      const item = [_item.name, _item.description, simpleButtons(_item, index)];
+      const item = [_item.createdAt, _item.user, _item.comments,
+        _item.foodItem, _item.temperature, simpleButtons(_item, index)];
       return item;
     });
     return (
@@ -154,22 +155,29 @@ class HotHolding extends React.Component {
                 <Table
                   hover
                   tableHead={[
-                    'Name',
-                    'Description',
+                    'Created',
+                    'User',
+                    'Comments',
+                    'Food Item',
+                    'Temperature',
                   ]}
                   tableData={tableData}
                   customCellClasses={[
                     classes.left,
                     classes.left,
-                    classes.right,
+                    classes.left,
+                    classes.left,
+                    classes.left,
                   ]}
-                  customClassesForCells={[0, 1, 2]}
+                  customClassesForCells={[0, 1, 2, 3, 4]}
                   customHeadCellClasses={[
                     classes.left,
                     classes.left,
-                    classes.right,
+                    classes.left,
+                    classes.left,
+                    classes.left,
                   ]}
-                  customHeadClassesForCells={[0, 1, 2]}
+                  customHeadClassesForCells={[0, 1, 2, 3, 4]}
                 />
                 )}
                 <LoadingTable visible={loading} color="red" />
