@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -23,6 +24,7 @@ class Create extends Component {
       name: '',
       batchNumber: '',
       description: '',
+      expiryDateOffset: 0,
       expiryDate: 0,
       allergens: {
         gluten: false,
@@ -56,6 +58,7 @@ class Create extends Component {
       name: '',
       batchNumber: '',
       description: '',
+      expiryDateOffset: 0,
       expiryDate: 0,
       allergens: {
         gluten: false,
@@ -81,18 +84,25 @@ class Create extends Component {
   createFoodItem() {
     const { createFoodItem, loading } = this.props;
     if (loading) return false;
-    return createFoodItem(this.state);
+    const { state } = this;
+    delete state.expiryDateOffset;
+    return createFoodItem(state);
   }
 
   updateValue(e) {
     const { target } = e;
-    let { value } = target;
     if (target.id === 'expiryDate') {
-      value = parseInt(value, 10);
+      const now = moment();
+      now.add(target.value, 'd');
+      this.setState({
+        expiryDateOffset: parseInt(target.value, 10),
+        expiryDate: parseInt(now.unix(), 10),
+      });
+    } else {
+      this.setState({
+        [target.id]: target.value,
+      });
     }
-    this.setState({
-      [target.id]: value,
-    });
   }
 
   updateAllergens(e) {
@@ -107,7 +117,7 @@ class Create extends Component {
   render() {
     const { classes, visible, loading } = this.props;
     const {
-      name, batchNumber, description, expiryDate, allergens,
+      name, batchNumber, description, allergens, expiryDateOffset,
     } = this.state;
     const {
       gluten, sesameSeeds, molluscs, fish, soybeans,
@@ -165,7 +175,7 @@ class Create extends Component {
             onChange={e => this.updateValue(e)}
           />
           <CustomInput
-            value={parseInt(expiryDate, 10)}
+            value={parseInt(expiryDateOffset, 10)}
             labelText="Expiry Date After (In Days)"
             id="expiryDate"
             formControlProps={{ fullWidth: true }}
