@@ -88,7 +88,7 @@ class Team extends React.Component {
 
   render() {
     const {
-      classes, items, loading,
+      classes, items, loading, history,
     } = this.props;
     const {
       displayCreateModal, displayDeleteModal, selectedDeleteItem,
@@ -101,7 +101,7 @@ class Team extends React.Component {
       let onClick;
       switch (key) {
         case 0: {
-          onClick = () => this.showUpdateModal(item, index);
+          onClick = () => history.push(`/dashboard/management/teams/${item.id}`);
           break;
         }
         case 1: {
@@ -196,6 +196,7 @@ class Team extends React.Component {
 }
 
 Team.propTypes = {
+  history: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
   items: PropTypes.array.isRequired,
 

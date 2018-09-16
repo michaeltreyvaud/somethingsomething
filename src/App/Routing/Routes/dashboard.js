@@ -94,6 +94,11 @@ const dashRoutes = [
         name: 'Users',
         component: Users,
       },
+      {
+        path: '/dashboard/management/suppliers',
+        name: 'Suppliers',
+        component: SupplierList,
+      },
     ],
   },
   {
@@ -290,11 +295,6 @@ const dashRoutes = [
     state: 'openTrace',
     icon: DirectionsCar,
     views: [
-      {
-        path: '/dashboard/traceability/suppliers',
-        name: 'Supplier List',
-        component: SupplierList,
-      },
       {
         hidden: true,
         path: '/dashboard/traceability/suppliers/create',
