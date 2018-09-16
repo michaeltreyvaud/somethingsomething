@@ -47,7 +47,6 @@ import FoodItem from '../../Views/FoodItem/foodItem.container';
 import FoodItemUpdate from '../../Views/FoodItem/Update/update.container';
 
 import HotHolding from '../../Views/HotHolding/hotHolding.container';
-import HotHoldingCreate from '../../Views/HotHolding/Create';
 
 import FastCooling from '../../Views/FastCooling/fastCooling.container';
 import FastCoolingCreate from '../../Views/FastCooling/Create';
@@ -234,14 +233,6 @@ const dashRoutes = [
     state: '',
     icon: Whatshot,
     component: HotHolding,
-    views: [
-      {
-        hidden: true,
-        path: '/dashboard/hotholding/create',
-        name: 'Capture Reheating Temperature',
-        component: HotHoldingCreate,
-      },
-    ],
   },
   {
     path: '/dashboard/fastcooling',

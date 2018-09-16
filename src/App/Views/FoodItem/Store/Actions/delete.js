@@ -1,25 +1,25 @@
 import {
-  DELETE_FOOD_ITEM_ATTEMPT_ATTEMPT,
-  DELETE_FOOD_ITEM_ATTEMPT_SUCCESS,
-  DELETE_FOOD_ITEM_ATTEMPT_FAIL,
+  DELETE_FOOD_ITEM_ATTEMPT,
+  DELETE_FOOD_ITEM_SUCCESS,
+  DELETE_FOOD_ITEM_FAIL,
 } from '../ActionTypes';
 import { sessionTimeout } from '../../../../Routing/Store/Actions';
 import { AuthenticatedFetch } from '../../../../Util/fetch';
 import { dashboardLoading, showDashBoardError, showDashBoardSuccess } from '../../../../Layouts/Dashboard/Store/Actions';
 
 const deleteFoodItemAttempt = () => ({
-  type: DELETE_FOOD_ITEM_ATTEMPT_ATTEMPT,
+  type: DELETE_FOOD_ITEM_ATTEMPT,
 });
 
 const deleteFoodItemSuccess = index => ({
-  type: DELETE_FOOD_ITEM_ATTEMPT_SUCCESS,
+  type: DELETE_FOOD_ITEM_SUCCESS,
   payload: {
     index,
   },
 });
 
 const deleteFoodItemFail = message => ({
-  type: DELETE_FOOD_ITEM_ATTEMPT_FAIL,
+  type: DELETE_FOOD_ITEM_FAIL,
   payload: { message },
 });
 

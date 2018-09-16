@@ -85,7 +85,6 @@ class Create extends Component {
     const { createFoodItem, loading } = this.props;
     if (loading) return false;
     const { state } = this;
-    delete state.expiryDateOffset;
     return createFoodItem(state);
   }
 

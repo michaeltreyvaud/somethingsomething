@@ -1,45 +1,45 @@
 import {
-  CREATE_FOOD_ITEM_ATTEMPT,
-  CREATE_FOOD_ITEM_SUCCESS,
-  CREATE_FOOD_ITEM_FAIL,
+  CREATE_HOT_HOLDING_ATTEMPT,
+  CREATE_HOT_HOLDING_SUCCESS,
+  CREATE_HOT_HOLDING_FAIL,
 } from '../ActionTypes';
 import { sessionTimeout } from '../../../../Routing/Store/Actions';
 import { AuthenticatedFetch } from '../../../../Util/fetch';
 import { dashboardLoading, showDashBoardError, showDashBoardSuccess } from '../../../../Layouts/Dashboard/Store/Actions';
 
-const createFoodItemAttempt = () => ({
-  type: CREATE_FOOD_ITEM_ATTEMPT,
+const createHotHoldingAttempt = () => ({
+  type: CREATE_HOT_HOLDING_ATTEMPT,
 });
 
-const createFoodItemSuccess = response => ({
-  type: CREATE_FOOD_ITEM_SUCCESS,
+const createHotHoldingSuccess = response => ({
+  type: CREATE_HOT_HOLDING_SUCCESS,
   payload: {
     response,
   },
 });
 
-const createFoodItemFail = message => ({
-  type: CREATE_FOOD_ITEM_FAIL,
+const createHotHoldingFail = message => ({
+  type: CREATE_HOT_HOLDING_FAIL,
   payload: { message },
 });
 
-export const createFoodItem = foodItem => async (dispatch) => {
+export const createHotHolding = hotHolding => async (dispatch) => {
   try {
     //  Tell the layout we are doing something
     dispatch(dashboardLoading());
-    dispatch(createFoodItemAttempt());
-    const body = foodItem;
+    dispatch(createHotHoldingAttempt());
+    const body = hotHolding;
     //  TODO - fetch these
-    const { REACT_APP_API_URL, REACT_APP_CREATE_FOOD_ITEM_PATH } = process.env;
-    const response = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_CREATE_FOOD_ITEM_PATH}`, body);
+    const { REACT_APP_API_URL, REACT_APP_CREATE_HOT_HOLDING_PATH } = process.env;
+    const response = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_CREATE_HOT_HOLDING_PATH}`, body);
     //  Display success message
     dispatch(showDashBoardSuccess('Item Created'));
-    return dispatch(createFoodItemSuccess(response));
+    return dispatch(createHotHoldingSuccess(response));
   } catch (_err) {
     if (_err.code === 401) return dispatch(sessionTimeout());
     //  Display error message
     dispatch(showDashBoardError(_err.message));
-    return dispatch(createFoodItemFail(_err.message));
+    return dispatch(createHotHoldingFail(_err.message));
   }
 };
 

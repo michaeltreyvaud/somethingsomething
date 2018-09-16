@@ -3,9 +3,9 @@ import {
   LIST_FOOD_ITEM_SUCCESS,
   LIST_FOOD_ITEM_FAIL,
 
-  CREATE_FOOD_ITEM_ATTEMPT_SUCCESS,
+  CREATE_FOOD_ITEM_SUCCESS,
 
-  DELETE_FOOD_ITEM_ATTEMPT_SUCCESS,
+  DELETE_FOOD_ITEM_SUCCESS,
 } from '../ActionTypes';
 
 const initialState = {
@@ -51,7 +51,7 @@ const reducer = (state = initialState, action) => {
         items: [],
       };
     }
-    case CREATE_FOOD_ITEM_ATTEMPT_SUCCESS: {
+    case CREATE_FOOD_ITEM_SUCCESS: {
       const { response } = action.payload;
       const currentItems = Object.assign(state.items);
       currentItems.unshift(response);
@@ -63,7 +63,7 @@ const reducer = (state = initialState, action) => {
     default: {
       return state;
     }
-    case DELETE_FOOD_ITEM_ATTEMPT_SUCCESS: {
+    case DELETE_FOOD_ITEM_SUCCESS: {
       const { index } = action.payload;
       const currentItems = Object.assign(state.items);
       currentItems.splice(index, 1);

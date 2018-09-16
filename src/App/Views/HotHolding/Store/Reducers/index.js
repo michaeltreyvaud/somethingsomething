@@ -2,6 +2,8 @@ import {
   LIST_HOT_HOLDING_ATTEMPT,
   LIST_HOT_HOLDING_SUCCESS,
   LIST_HOT_HOLDING_FAIL,
+
+  CREATE_HOT_HOLDING_SUCCESS,
 } from '../ActionTypes';
 
 const initialState = {
@@ -45,6 +47,15 @@ const reducer = (state = initialState, action) => {
         errorMessage: '',
         success: false,
         items: [],
+      };
+    }
+    case CREATE_HOT_HOLDING_SUCCESS: {
+      const { response } = action.payload;
+      const currentItems = Object.assign(state.items);
+      currentItems.unshift(response);
+      return {
+        ...state,
+        items: currentItems,
       };
     }
     default: {
