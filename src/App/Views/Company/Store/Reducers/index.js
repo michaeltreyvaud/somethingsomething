@@ -98,7 +98,8 @@ const reducer = (state = initialState, action) => {
     case UPDATE_COMPANY_INFO_FAIL: {
       return {
         ...state,
-        loading: true,
+        saving: false,
+        loading: false,
         error: true,
         errorMessage: '',
         success: false,

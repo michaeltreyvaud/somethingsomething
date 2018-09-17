@@ -8,7 +8,6 @@ import DialogActions from '@material-ui/core/DialogActions';
 import Close from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 
-import ImageUpload from '../../../../Components/CustomUpload/ImageUpload';
 import CustomInput from '../../../../Components/CustomInput';
 import Button from '../../../../Components/CustomButtons';
 
@@ -84,21 +83,6 @@ class Create extends Component {
           id="notice-modal-slide-description"
           className={classes.modalBody}
         >
-          <ImageUpload
-            avatar
-            addButtonProps={{
-              color: 'rose',
-              round: true,
-            }}
-            changeButtonProps={{
-              color: 'rose',
-              round: true,
-            }}
-            removeButtonProps={{
-              color: 'danger',
-              round: true,
-            }}
-          />
           <CustomInput
             labelText="Name"
             id="teamName"

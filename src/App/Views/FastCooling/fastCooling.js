@@ -7,6 +7,7 @@ import { withRouter } from 'react-router';
 import Print from '@material-ui/icons/Print';
 import Open from '@material-ui/icons/OpenInNew';
 import Delete from '@material-ui/icons/Delete';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import GridContainer from '../../Components/Grid/GridContainer';
 import GridItem from '../../Components/Grid/GridItem';
@@ -94,9 +95,9 @@ class FastCooling extends React.Component {
       displayUpdateModal, selectedUpdateItem, selectedUpdateItemIndex,
     } = this.state;
     const simpleButtons = (item, index) => [
-      { color: 'warning', icon: Print },
-      { color: 'success', icon: Open },
-      { color: 'danger', icon: Delete },
+      { color: 'warning', icon: Print, tooltip: 'Print' },
+      { color: 'success', icon: Open, tooltip: 'Edit' },
+      { color: 'danger', icon: Delete, tooltip: 'Delete' },
     ].map((prop, key) => {
       let onClick;
       switch (key) {
@@ -113,14 +114,21 @@ class FastCooling extends React.Component {
         }
       }
       return (
-        <Button
-          color={prop.color}
-          className={classes.actionButton}
-          key={key}
-          onClick={onClick}
+        <Tooltip
+          id="tooltip-top"
+          title={prop.tooltip}
+          placement="top"
+          classes={{ tooltip: classes.tooltip }}
         >
-          <prop.icon className={classes.icon} />
-        </Button>
+          <Button
+            color={prop.color}
+            className={classes.actionButton}
+            key={key}
+            onClick={onClick}
+          >
+            <prop.icon className={classes.icon} />
+          </Button>
+        </Tooltip>
       );
     });
     const tableData = items.map((_item, index) => {
