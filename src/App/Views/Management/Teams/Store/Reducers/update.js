@@ -1,3 +1,5 @@
+import { combineReducers } from 'redux';
+import usersReducer from './users';
 import {
   UPDATE_TEAM_ITEM_ATTEMPT,
   UPDATE_TEAM_ITEM_SUCCESS,
@@ -47,4 +49,9 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-export default reducer;
+const combinedReducer = combineReducers({
+  index: reducer,
+  teamUsers: usersReducer,
+});
+
+export default combinedReducer;

@@ -22,6 +22,7 @@ import Metrics from '../../Views/Home/Metrics';
 import Company from '../../Views/Company/company.container';
 import Users from '../../Views/Management/Users/users.container';
 import Teams from '../../Views/Management/Teams/team.container';
+import TeamsUpdate from '../../Views/Management/Teams/Update/update.container';
 
 import CheckList from '../../Views/CheckList';
 import CheckListCreate from '../../Views/CheckList/Create';
@@ -88,6 +89,12 @@ const dashRoutes = [
         path: '/dashboard/management/teams',
         name: 'Teams',
         component: Teams,
+      },
+      {
+        hidden: true,
+        path: '/dashboard/management/teams/:id',
+        name: 'Team',
+        component: TeamsUpdate,
       },
       {
         path: '/dashboard/management/users',

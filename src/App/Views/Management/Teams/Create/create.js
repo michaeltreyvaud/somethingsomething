@@ -17,8 +17,8 @@ class Create extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      teamName: '',
-      teamDescription: '',
+      name: '',
+      description: '',
     };
   }
 
@@ -32,8 +32,8 @@ class Create extends Component {
   closeModal() {
     const { close } = this.props;
     this.setState({
-      teamName: '',
-      teamDescription: '',
+      name: '',
+      description: '',
     }, () => {
       close();
     });
@@ -42,8 +42,14 @@ class Create extends Component {
   createTeam() {
     const { createTeam, loading } = this.props;
     if (loading) return false;
-    const { teamName, teamDescription } = this.state;
-    return createTeam(teamName, teamDescription);
+    return createTeam(this.state);
+  }
+
+  updateValue(e) {
+    const { target } = e;
+    this.setState({
+      [target.id]: target.value,
+    });
   }
 
   render() {
@@ -51,10 +57,7 @@ class Create extends Component {
     const { teamName, teamDescription } = this.state;
     return (
       <Dialog
-        classes={{
-          root: `${classes.center} ${classes.modalRoot}`,
-          paper: classes.modal,
-        }}
+        classes={{ root: `${classes.center} ${classes.modalRoot}`, paper: classes.modal }}
         open={visible}
         TransitionComponent={Transition}
         keepMounted
@@ -85,36 +88,23 @@ class Create extends Component {
         >
           <CustomInput
             labelText="Name"
-            id="teamName"
+            id="name"
             value={teamName}
-            formControlProps={{
-              fullWidth: true,
-            }}
-            inputProps={{
-              type: 'text',
-            }}
-            onChange={e => this.setState({ teamName: e.target.value })}
+            formControlProps={{ fullWidth: true }}
+            inputProps={{ type: 'text' }}
+            onChange={e => this.updateValue(e)}
           />
           <CustomInput
             labelText="Description"
             id="description"
             value={teamDescription}
-            formControlProps={{
-              fullWidth: true,
-            }}
-            inputProps={{
-              multiline: true,
-              rows: 3,
-            }}
-            onChange={e => this.setState({ teamDescription: e.target.value })}
+            formControlProps={{ fullWidth: true }}
+            inputProps={{ multiline: true, rows: 3 }}
+            onChange={e => this.updateValue(e)}
           />
         </DialogContent>
         <DialogActions
-          className={
-        `${classes.modalFooter
-        } ${
-          classes.modalFooterCenter}`
-      }
+          className={`${classes.modalFooter} ${classes.modalFooterCenter}`}
         >
           <Button
             loading={loading}
@@ -122,7 +112,7 @@ class Create extends Component {
             color="info"
             round
           >
-        Create
+          Create
           </Button>
         </DialogActions>
       </Dialog>
