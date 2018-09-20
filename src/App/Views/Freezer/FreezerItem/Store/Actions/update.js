@@ -11,10 +11,9 @@ const updateFreezerAttempt = () => ({
   type: UPDATE_FREEZER_ITEM_ATTEMPT,
 });
 
-const updateFreezerSuccess = (index, item) => ({
+const updateFreezerSuccess = item => ({
   type: UPDATE_FREEZER_ITEM_SUCCESS,
   payload: {
-    index,
     item,
   },
 });
@@ -24,7 +23,7 @@ const updateFreezerFail = message => ({
   payload: { message },
 });
 
-export const updateFreezer = (item, index) => async (dispatch) => {
+export const updateFreezer = item => async (dispatch) => {
   try {
     //  Tell the layout we are doing something
     dispatch(dashboardLoading());
@@ -35,7 +34,7 @@ export const updateFreezer = (item, index) => async (dispatch) => {
     const updatedItem = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_UPDATE_FREEZER_PATH}`, body);
     //  Display success message
     dispatch(showDashBoardSuccess('Item Updated'));
-    return dispatch(updateFreezerSuccess(index, updatedItem));
+    return dispatch(updateFreezerSuccess(updatedItem));
   } catch (_err) {
     if (_err.code === 401) return dispatch(sessionTimeout());
     //  Display error message

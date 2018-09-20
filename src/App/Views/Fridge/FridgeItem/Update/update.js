@@ -1,172 +1,122 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import withStyles from '@material-ui/core/styles/withStyles';
+import Today from '@material-ui/icons/Today';
 
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogActions from '@material-ui/core/DialogActions';
-import Close from '@material-ui/icons/Close';
-import Slide from '@material-ui/core/Slide';
-
-import ImageUpload from '../../../../Components/CustomUpload/ImageUpload';
-import CustomInput from '../../../../Components/CustomInput';
 import Button from '../../../../Components/CustomButtons';
+import CustomInput from '../../../../Components/CustomInput';
+import GridItem from '../../../../Components/Grid/GridItem';
+import Card from '../../../../Components/Card/Card';
+import GridContainer from '../../../../Components/Grid/GridContainer';
+import CardHeader from '../../../../Components/Card/CardHeader';
+import CardBody from '../../../../Components/Card/CardBody';
+import CardIcon from '../../../../Components/Card/CardIcon';
+import extendedFormsStyle from '../../../../Assets/Jss/extendedFormsStyle';
 
-const Transition = props => <Slide direction="down" {...props} />;
+import LoadingTable from '../../../../Components/Loading/LoadingTable';
 
-class Update extends Component {
+class Update extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      fridgeName: '',
-      fridgeDescription: '',
-    };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { loading } = this.props;
-    const { item } = nextProps;
-    this.setState({
-      fridgeName: item.name,
-      fridgeDescription: item.description,
-    });
-    if (loading && nextProps.loading === false && nextProps.success) {
-      this.closeModal();
+    const { item } = props;
+    if (item) {
+      const {
+        name, description, id,
+      } = item;
+      this.state = {
+        name,
+        description,
+        id,
+      };
+    } else {
+      this.state = {
+        name: '',
+        description: '',
+        id: '',
+      };
     }
   }
 
-  closeModal() {
-    const { close } = this.props;
+  componentWillReceiveProps(nextProps) {
+    const { item, updating } = nextProps;
+    if (item && !updating) {
+      const {
+        name, description, id,
+      } = item;
+      this.setState({
+        name,
+        description,
+        id,
+      });
+    }
+  }
+
+  updateValue(e) {
+    const { target } = e;
     this.setState({
-      fridgeName: '',
-      fridgeDescription: '',
-    }, () => {
-      close();
+      [target.id]: target.value,
     });
   }
 
   updateFridge() {
-    const {
-      updateFridge, item, index, loading,
-    } = this.props;
-    if (loading) return false;
-    const { fridgeName, fridgeDescription } = this.state;
-    const updatedItem = {
-      id: item.id,
-      name: fridgeName,
-      description: fridgeDescription,
-    };
-    return updateFridge(updatedItem, index);
+    const { loading, updating, updateFridge } = this.props;
+    if (loading || updating) return false;
+    return updateFridge(this.state);
   }
 
   render() {
-    const { classes, visible, loading } = this.props;
-    const { fridgeName, fridgeDescription } = this.state;
+    const { classes, loading, updating } = this.props;
+    const { name, description } = this.state;
     return (
-      <Dialog
-        classes={{
-          root: `${classes.center} ${classes.modalRoot}`,
-          paper: classes.modal,
-        }}
-        open={visible}
-        TransitionComponent={Transition}
-        keepMounted
-        onClose={() => this.closeModal()}
-        aria-labelledby="notice-modal-slide-title"
-        aria-describedby="notice-modal-slide-description"
-      >
-        <DialogTitle
-          id="notice-modal-slide-title"
-          disableTypography
-          className={classes.modalHeader}
-        >
-          <Button
-            justIcon
-            className={classes.modalCloseButton}
-            key="close"
-            aria-label="Close"
-            color="transparent"
-            onClick={() => this.closeModal()}
-          >
-            <Close className={classes.modalClose} />
-          </Button>
-          <h4 className={classes.modalTitle}>Update Fridge Item</h4>
-        </DialogTitle>
-        <DialogContent
-          id="notice-modal-slide-description"
-          className={classes.modalBody}
-        >
-          <ImageUpload
-            avatar
-            addButtonProps={{
-              color: 'rose',
-              round: true,
-            }}
-            changeButtonProps={{
-              color: 'rose',
-              round: true,
-            }}
-            removeButtonProps={{
-              color: 'danger',
-              round: true,
-            }}
-          />
-          <CustomInput
-            labelText="Name"
-            id="fridgeName"
-            value={fridgeName}
-            formControlProps={{
-              fullWidth: true,
-            }}
-            inputProps={{
-              type: 'text',
-            }}
-            onChange={e => this.setState({ fridgeName: e.target.value })}
-          />
-          <CustomInput
-            labelText="Description"
-            id="description"
-            value={fridgeDescription}
-            formControlProps={{
-              fullWidth: true,
-            }}
-            inputProps={{
-              multiline: true,
-              rows: 3,
-            }}
-            onChange={e => this.setState({ fridgeDescription: e.target.value })}
-          />
-        </DialogContent>
-        <DialogActions
-          className={
-        `${classes.modalFooter
-        } ${
-          classes.modalFooterCenter}`
-      }
-        >
-          <Button
-            loading={loading}
-            onClick={() => this.updateFridge()}
-            color="info"
-            round
-          >
-            Save
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <div>
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={12}>
+            <Card>
+              <CardHeader color="rose" icon>
+                <CardIcon color="rose">
+                  <Today />
+                </CardIcon>
+              </CardHeader>
+              <CardBody>
+                {!loading && (
+                  <div>
+                    <CustomInput
+                      labelText="Name"
+                      id="name"
+                      value={name}
+                      formControlProps={{ fullWidth: true }}
+                      inputProps={{ type: 'text' }}
+                      onChange={e => this.updateValue(e)}
+                    />
+                    <CustomInput
+                      labelText="Description"
+                      id="description"
+                      value={description}
+                      formControlProps={{ fullWidth: true }}
+                      inputProps={{ multiline: true, rows: 3 }}
+                      onChange={e => this.updateValue(e)}
+                    />
+                    <Button loading={updating} onClick={() => this.updateFridge()} color="rose" className={classes.updateProfileButton}>
+                        Save
+                    </Button>
+                  </div>
+                )}
+                <LoadingTable visible={loading} color="red" />
+              </CardBody>
+            </Card>
+          </GridItem>
+        </GridContainer>
+      </div>
     );
   }
 }
 
 Update.propTypes = {
   classes: PropTypes.object.isRequired,
-  visible: PropTypes.bool.isRequired,
-  loading: PropTypes.bool.isRequired,
-  success: PropTypes.bool.isRequired,
-  close: PropTypes.func.isRequired,
-  updateFridge: PropTypes.func.isRequired,
   item: PropTypes.object.isRequired,
-  index: PropTypes.number.isRequired,
+  loading: PropTypes.bool.isRequired,
+  updating: PropTypes.bool.isRequired,
+  updateFridge: PropTypes.func.isRequired,
 };
 
-export default Update;
+export default withStyles(extendedFormsStyle)(Update);
