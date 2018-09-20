@@ -1,11 +1,7 @@
-import { combineReducers } from 'redux';
-import usersReducer from './users';
-import usersDeleteReducer from './usersDelete';
-
 import {
-  UPDATE_TEAM_ITEM_ATTEMPT,
-  UPDATE_TEAM_ITEM_SUCCESS,
-  UPDATE_TEAM_ITEM_FAIL,
+  LIST_TEAM_USERS_DELETE_ATTEMPT,
+  LIST_TEAM_USERS_DELETE_SUCCESS,
+  LIST_TEAM_USERS_DELETE_FAIL,
 } from '../ActionTypes';
 
 const initialState = {
@@ -17,7 +13,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case UPDATE_TEAM_ITEM_ATTEMPT: {
+    case LIST_TEAM_USERS_DELETE_ATTEMPT: {
       return {
         ...state,
         loading: true,
@@ -26,7 +22,7 @@ const reducer = (state = initialState, action) => {
         success: false,
       };
     }
-    case UPDATE_TEAM_ITEM_SUCCESS: {
+    case LIST_TEAM_USERS_DELETE_SUCCESS: {
       return {
         ...state,
         loading: false,
@@ -35,13 +31,12 @@ const reducer = (state = initialState, action) => {
         success: true,
       };
     }
-    case UPDATE_TEAM_ITEM_FAIL: {
-      const { message } = action.payload;
+    case LIST_TEAM_USERS_DELETE_FAIL: {
       return {
         ...state,
         loading: false,
         error: true,
-        errorMessage: message,
+        errorMessage: '',
         success: false,
       };
     }
@@ -51,12 +46,4 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-const combinedReducer = combineReducers({
-  index: reducer,
-  teamUsers: combineReducers({
-    index: usersReducer,
-    delete: usersDeleteReducer,
-  }),
-});
-
-export default combinedReducer;
+export default reducer;

@@ -3,11 +3,8 @@ import Users from './users';
 import { listTeamUsers } from '../../Store/Actions/users';
 
 const mapStateToProps = state => ({
-  loading: state.management.team.update.teamUsers.loading,
-  error: state.management.team.update.teamUsers.error,
-  errorMessage: state.management.team.update.teamUsers.errorMessage,
-  success: state.management.team.update.teamUsers.success,
-  items: state.management.team.update.teamUsers.items,
+  loading: state.management.team.update.teamUsers.index.loading,
+  items: state.management.team.update.teamUsers.index.items,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -2,6 +2,8 @@ import {
   LIST_TEAM_USERS_ATTEMPT,
   LIST_TEAM_USERS_SUCCESS,
   LIST_TEAM_USERS_FAIL,
+
+  LIST_TEAM_USERS_DELETE_SUCCESS,
 } from '../ActionTypes';
 
 const initialState = {
@@ -40,6 +42,7 @@ const reducer = (state = initialState, action) => {
           return value;
         };
         const User = {
+          userName: user.Username,
           email: findValue('email'),
           firstName: findValue('given_name'),
           lastName: findValue('family_name'),
@@ -67,6 +70,15 @@ const reducer = (state = initialState, action) => {
         errorMessage: '',
         success: false,
         items: [],
+      };
+    }
+    case LIST_TEAM_USERS_DELETE_SUCCESS: {
+      const { index } = action.payload;
+      const currentItems = Object.assign(state.items);
+      currentItems.splice(index, 1);
+      return {
+        ...state,
+        items: currentItems,
       };
     }
     default: {

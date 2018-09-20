@@ -15,24 +15,50 @@ import CardIcon from '../../../../../Components/Card/CardIcon';
 import LoadingTable from '../../../../../Components/Loading/LoadingTable';
 import Table from '../../../../../Components/Table';
 
+import UserRemove from './Remove/remove.container';
+
 class Users extends Component {
   constructor(props) {
     super(props);
     const { listTeamUsers, groupName } = props;
     listTeamUsers(groupName);
+    this.state = {
+      displayDeleteModal: false,
+      selectedDeleteItem: {},
+    };
+  }
+
+  showDeleteModal(userName, index) {
+    const { groupName } = this.props;
+    this.setState({
+      displayDeleteModal: true,
+      selectedDeleteItem: {
+        groupName,
+        userName,
+        index,
+      },
+    });
+  }
+
+  hideDeleteModal() {
+    this.setState({
+      displayDeleteModal: false,
+      selectedDeleteItem: {},
+    });
   }
 
   render() {
     const {
       classes, items, loading,
     } = this.props;
+    const { selectedDeleteItem, displayDeleteModal } = this.state;
     const simpleButtons = (item, index) => [
       { color: 'danger', icon: Delete, tooltip: 'Remove User' },
     ].map((prop, key) => {
       let onClick;
       switch (key) {
         case 0: {
-          onClick = () => console.log('Remove User from Group');
+          onClick = () => this.showDeleteModal(item.userName, index);
           break;
         }
         default: {
@@ -66,6 +92,12 @@ class Users extends Component {
     return (
       <GridItem xs={12} sm={12} md={12}>
         <Card>
+          <UserRemove
+            item={selectedDeleteItem}
+            visible={displayDeleteModal}
+            classes={classes}
+            close={() => this.hideDeleteModal()}
+          />
           <CardHeader color="rose" icon>
             <CardIcon color="rose">
               <Assignment />
@@ -117,9 +149,11 @@ class Users extends Component {
 Users.propTypes = {
   classes: PropTypes.object.isRequired,
   groupName: PropTypes.string.isRequired,
-  listTeamUsers: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   items: PropTypes.array.isRequired,
+  deleting: PropTypes.bool.isRequired,
+  listTeamUsers: PropTypes.func.isRequired,
+  deleteTeamUser: PropTypes.func.isRequired,
 };
 
 export default Users;
