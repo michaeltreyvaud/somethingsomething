@@ -20,7 +20,6 @@ import LoadingTable from '../../../Components/Loading/LoadingTable';
 
 import TeamCreate from './Create/create.container';
 import TeamDelete from './Delete/delete.container';
-import TeamUpdate from './Update/update.container';
 
 import style from '../../../Assets/Jss/extendedTablesStyle';
 
@@ -30,10 +29,7 @@ class Team extends React.Component {
     this.state = {
       displayCreateModal: false,
       displayDeleteModal: false,
-      displayUpdateModal: false,
       selectedDeleteItem: {},
-      selectedUpdateItem: {},
-      selectedUpdateItemIndex: 0,
     };
   }
 
@@ -71,29 +67,12 @@ class Team extends React.Component {
     });
   }
 
-  showUpdateModal(item, index) {
-    this.setState({
-      displayUpdateModal: true,
-      selectedUpdateItem: item,
-      selectedUpdateItemIndex: index,
-    });
-  }
-
-  hideUpdateModal() {
-    this.setState({
-      displayUpdateModal: false,
-      selectedUpdateItem: {},
-      selectedUpdateItemIndex: 0,
-    });
-  }
-
   render() {
     const {
       classes, items, loading, history,
     } = this.props;
     const {
       displayCreateModal, displayDeleteModal, selectedDeleteItem,
-      displayUpdateModal, selectedUpdateItem, selectedUpdateItemIndex,
     } = this.state;
     const simpleButtons = (item, index) => [
       { color: 'success', icon: Open, tooltip: 'Edit' },
@@ -102,7 +81,7 @@ class Team extends React.Component {
       let onClick;
       switch (key) {
         case 0: {
-          onClick = () => history.push(`/dashboard/management/teams/${item.id}`);
+          onClick = () => history.push(`/dashboard/management/teams/${item.name}`);
           break;
         }
         case 1: {
@@ -147,13 +126,6 @@ class Team extends React.Component {
           visible={displayCreateModal}
           classes={classes}
           close={() => this.hideCreateModal()}
-        />
-        <TeamUpdate
-          item={selectedUpdateItem}
-          index={selectedUpdateItemIndex}
-          visible={displayUpdateModal}
-          classes={classes}
-          close={() => this.hideUpdateModal()}
         />
         <GridContainer>
           <GridItem xs={12}>

@@ -11,10 +11,9 @@ const updateFridgeAttempt = () => ({
   type: UPDATE_FRIDGE_ITEM_ATTEMPT,
 });
 
-const updateFridgeSuccess = (index, item) => ({
+const updateFridgeSuccess = item => ({
   type: UPDATE_FRIDGE_ITEM_SUCCESS,
   payload: {
-    index,
     item,
   },
 });
@@ -24,7 +23,7 @@ const updateFridgeFail = message => ({
   payload: { message },
 });
 
-export const updateFridge = (item, index) => async (dispatch) => {
+export const updateFridge = item => async (dispatch) => {
   try {
     //  Tell the layout we are doing something
     dispatch(dashboardLoading());
@@ -35,7 +34,7 @@ export const updateFridge = (item, index) => async (dispatch) => {
     const updatedItem = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_UPDATE_FRIDGES_PATH}`, body);
     //  Display success message
     dispatch(showDashBoardSuccess('Item Updated'));
-    return dispatch(updateFridgeSuccess(index, updatedItem));
+    return dispatch(updateFridgeSuccess(updatedItem));
   } catch (_err) {
     if (_err.code === 401) return dispatch(sessionTimeout());
     //  Display error message

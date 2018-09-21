@@ -2,13 +2,17 @@ import { connect } from 'react-redux';
 import Update from './update';
 import { updateTeam } from '../Store/Actions/update';
 
-const mapStateToProps = state => ({
-  loading: state.management.team.update.loading,
-  success: state.management.team.update.success,
+const findItem = (state, name) => (state.management.team.index.items
+  .find(item => (item.name === name)));
+
+const mapStateToProps = (state, ownProps) => ({
+  item: findItem(state, ownProps.match.params.id),
+  loading: state.management.team.index.loading,
+  updating: state.management.team.update.index.loading,
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateTeam: (item, index) => dispatch(updateTeam(item, index)),
+  updateTeam: team => dispatch(updateTeam(team)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Update);

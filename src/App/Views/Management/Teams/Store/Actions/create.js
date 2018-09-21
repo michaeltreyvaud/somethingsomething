@@ -23,12 +23,12 @@ const createTeamFail = message => ({
   payload: { message },
 });
 
-export const createTeam = (name, description) => async (dispatch) => {
+export const createTeam = team => async (dispatch) => {
   try {
     //  Tell the layout we are doing something
     dispatch(dashboardLoading());
     dispatch(createTeamAttempt());
-    const body = { name, description };
+    const body = team;
     //  TODO - fetch these
     const { REACT_APP_API_URL, REACT_APP_CREATE_TEAM_PATH } = process.env;
     const response = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_CREATE_TEAM_PATH}`, body);

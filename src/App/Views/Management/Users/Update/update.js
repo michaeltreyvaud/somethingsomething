@@ -46,7 +46,9 @@ class Update extends Component {
   }
 
   updateUser() {
-    const { updateUser, item, index, loading } = this.props;
+    const {
+      updateUser, item, index, loading,
+    } = this.props;
     if (loading) return false;
     const { userName, userDescription } = this.state;
     const updatedItem = {
@@ -146,7 +148,8 @@ class Update extends Component {
             loading={loading}
             onClick={() => this.updateUser()}
             color="info"
-            round >
+            round
+          >
             Save
           </Button>
         </DialogActions>

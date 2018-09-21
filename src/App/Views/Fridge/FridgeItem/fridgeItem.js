@@ -21,7 +21,6 @@ import LoadingTable from '../../../Components/Loading/LoadingTable';
 
 import FridgeCreate from './Create/create.container';
 import FridgeDelete from './Delete/delete.container';
-import FridgeUpdate from './Update/update.container';
 
 import style from '../../../Assets/Jss/extendedTablesStyle';
 
@@ -31,10 +30,7 @@ class FridgeItem extends React.Component {
     this.state = {
       displayCreateModal: false,
       displayDeleteModal: false,
-      displayUpdateModal: false,
       selectedDeleteItem: {},
-      selectedUpdateItem: {},
-      selectedUpdateItemIndex: 0,
     };
   }
 
@@ -72,29 +68,12 @@ class FridgeItem extends React.Component {
     });
   }
 
-  showUpdateModal(item, index) {
-    this.setState({
-      displayUpdateModal: true,
-      selectedUpdateItem: item,
-      selectedUpdateItemIndex: index,
-    });
-  }
-
-  hideUpdateModal() {
-    this.setState({
-      displayUpdateModal: false,
-      selectedUpdateItem: {},
-      selectedUpdateItemIndex: 0,
-    });
-  }
-
   render() {
     const {
-      classes, items, loading,
+      classes, items, loading, history,
     } = this.props;
     const {
       displayCreateModal, displayDeleteModal, selectedDeleteItem,
-      displayUpdateModal, selectedUpdateItem, selectedUpdateItemIndex,
     } = this.state;
     const simpleButtons = (item, index) => [
       { color: 'warning', icon: Print, tooltip: 'Print' },
@@ -104,7 +83,7 @@ class FridgeItem extends React.Component {
       let onClick;
       switch (key) {
         case 1: {
-          onClick = () => this.showUpdateModal(item, index);
+          onClick = () => history.push(`/dashboard/fridge/item/${item.id}`);
           break;
         }
         case 2: {
@@ -149,13 +128,6 @@ class FridgeItem extends React.Component {
           visible={displayCreateModal}
           classes={classes}
           close={() => this.hideCreateModal()}
-        />
-        <FridgeUpdate
-          item={selectedUpdateItem}
-          index={selectedUpdateItemIndex}
-          visible={displayUpdateModal}
-          classes={classes}
-          close={() => this.hideUpdateModal()}
         />
         <GridContainer>
           <GridItem xs={12}>
@@ -206,13 +178,10 @@ class FridgeItem extends React.Component {
 }
 
 FridgeItem.propTypes = {
+  history: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
   items: PropTypes.array.isRequired,
-
   loading: PropTypes.bool.isRequired,
-  error: PropTypes.bool.isRequired,
-  errorMessage: PropTypes.string.isRequired,
-
   listFridges: PropTypes.func.isRequired,
 };
 

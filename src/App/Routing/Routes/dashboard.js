@@ -23,6 +23,7 @@ import Company from '../../Views/Company/company.container';
 import Users from '../../Views/Management/Users/users.container';
 import Teams from '../../Views/Management/Teams/team.container';
 import UserProfile from '../../Views/Profile/';
+import TeamsUpdate from '../../Views/Management/Teams/Update/update.container';
 
 import CheckList from '../../Views/CheckList';
 import CheckListCreate from '../../Views/CheckList/Create';
@@ -33,12 +34,14 @@ import SafetyLog from '../../Views/SafetyRecord/SafetyLog';
 import SafetyCategory from '../../Views/SafetyRecord/SafetyCategory';
 
 import FridgeItem from '../../Views/Fridge/FridgeItem/fridgeItem.container';
+import FridgeItemUpdate from '../../Views/Fridge/FridgeItem/Update/update.container';
 import FridgeTask from '../../Views/Fridge/FridgeTask';
 import FridgeLog from '../../Views/Fridge/FridgeLog';
 import FridgeLogCreate from '../../Views/Fridge/FridgeLog/Create';
 import FridgeChart from '../../Views/Fridge/FridgeChart';
 
 import FreezerItem from '../../Views/Freezer/FreezerItem/freezerItem.container';
+import FreezerItemUpdate from '../../Views/Freezer/FreezerItem/Update/update.container';
 import FreezerTask from '../../Views/Freezer/FreezerTask';
 import FreezerLog from '../../Views/Freezer/FreezerLog';
 import FreezerLogCreate from '../../Views/Freezer/FreezerLog/Create';
@@ -89,6 +92,12 @@ const dashRoutes = [
         path: '/dashboard/management/teams',
         name: 'Teams',
         component: Teams,
+      },
+      {
+        hidden: true,
+        path: '/dashboard/management/teams/:id',
+        name: 'Team',
+        component: TeamsUpdate,
       },
       {
         path: '/dashboard/management/users',
@@ -167,6 +176,12 @@ const dashRoutes = [
         component: FridgeItem,
       },
       {
+        hidden: true,
+        path: '/dashboard/fridge/item/:id',
+        name: 'Fridge Item',
+        component: FridgeItemUpdate,
+      },
+      {
         path: '/dashboard/fridge/task',
         name: 'Fridge Task',
         component: FridgeTask,
@@ -200,6 +215,12 @@ const dashRoutes = [
         path: '/dashboard/freezer/item',
         name: 'Freezer Item',
         component: FreezerItem,
+      },
+      {
+        hidden: true,
+        path: '/dashboard/freezer/item/:id',
+        name: 'Freezer Item',
+        component: FreezerItemUpdate,
       },
       {
         path: '/dashboard/freezer/task',

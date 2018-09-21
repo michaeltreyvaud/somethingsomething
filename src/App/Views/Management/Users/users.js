@@ -133,7 +133,7 @@ class Users extends React.Component {
     });
     const tableData = items.map((_item, index) => {
       const item = [_item.firstName, _item.lastName, _item.email,
-        _item.phoneNumber, _item.team, _item.position,
+        _item.phoneNumber, _item.team, _item.position, _item.authorization,
         simpleButtons(_item, index)];
       return item;
     });
@@ -183,6 +183,7 @@ class Users extends React.Component {
                     'Phone',
                     'Team',
                     'Position',
+                    'Authorization',
                   ]}
                   tableData={tableData}
                   customCellClasses={[
@@ -192,9 +193,10 @@ class Users extends React.Component {
                     classes.left,
                     classes.left,
                     classes.left,
+                    classes.left,
                     classes.right,
                   ]}
-                  customClassesForCells={[0, 1, 2, 3, 4, 5]}
+                  customClassesForCells={[0, 1, 2, 3, 4, 5, 6]}
                   customHeadCellClasses={[
                     classes.left,
                     classes.left,
@@ -202,9 +204,10 @@ class Users extends React.Component {
                     classes.left,
                     classes.left,
                     classes.left,
+                    classes.left,
                     classes.right,
                   ]}
-                  customHeadClassesForCells={[0, 1, 2, 3, 4, 5]}
+                  customHeadClassesForCells={[0, 1, 2, 3, 4, 5, 6]}
                 />
                 )}
                 <LoadingTable visible={loading} color="red" />
@@ -220,11 +223,7 @@ class Users extends React.Component {
 Users.propTypes = {
   classes: PropTypes.object.isRequired,
   items: PropTypes.array.isRequired,
-
   loading: PropTypes.bool.isRequired,
-  error: PropTypes.bool.isRequired,
-  errorMessage: PropTypes.string.isRequired,
-
   listUsers: PropTypes.func.isRequired,
 };
 

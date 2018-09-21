@@ -83,8 +83,12 @@ const reducer = (state = initialState, action) => {
       };
     }
     case UPDATE_TEAM_ITEM_SUCCESS: {
-      const { index, item } = action.payload;
+      const { item } = action.payload;
       const currentItems = Object.assign(state.items);
+      let index;
+      currentItems.forEach((_item, _index) => {
+        if (_item.name === item.name) index = _index;
+      });
       currentItems.splice(index, 1);
       const sortByName = (a, b) => {
         if (a.name.toLowerCase() < b.name.toLowerCase()) { return -1; }

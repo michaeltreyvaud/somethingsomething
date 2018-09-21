@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  createTeam: (name, description) => dispatch(createTeam(name, description)),
+  createTeam: team => dispatch(createTeam(team)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Create);
