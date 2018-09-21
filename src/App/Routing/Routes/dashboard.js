@@ -22,6 +22,7 @@ import Metrics from '../../Views/Home/Metrics';
 import Company from '../../Views/Company/company.container';
 import Users from '../../Views/Management/Users/users.container';
 import Teams from '../../Views/Management/Teams/team.container';
+import UserProfile from '../../Views/Profile/';
 
 import CheckList from '../../Views/CheckList';
 import CheckListCreate from '../../Views/CheckList/Create';
@@ -99,6 +100,12 @@ const dashRoutes = [
         name: 'Suppliers',
         component: SupplierList,
       },
+      {
+        hidden: true,
+        path: '/dashboard/profile/user',
+        name: 'User Profile',
+        component: UserProfile,
+      },      
     ],
   },
   {
