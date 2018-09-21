@@ -173,7 +173,7 @@ class Users extends React.Component {
                 </Button>
               </CardHeader>
               <CardBody>
-                {!loading && (
+                {!loading && items && items.length > 0 && (
                 <Table
                   hover
                   tableHead={[
@@ -209,6 +209,14 @@ class Users extends React.Component {
                   ]}
                   customHeadClassesForCells={[0, 1, 2, 3, 4, 5, 6]}
                 />
+                )}
+                {!loading && items && items.length === 0 && (
+                  <div style={{
+                    display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'center',
+                  }}
+                  >
+                    <h2><small>No Users to display</small></h2>
+                  </div>
                 )}
                 <LoadingTable visible={loading} color="red" />
               </CardBody>

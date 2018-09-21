@@ -17,6 +17,7 @@ import GridContainer from '../../../Components/Grid/GridContainer';
 import CardHeader from '../../../Components/Card/CardHeader';
 import CardBody from '../../../Components/Card/CardBody';
 import CardIcon from '../../../Components/Card/CardIcon';
+import NotFound from '../../../Components/NotFound';
 import extendedFormsStyle from '../../../Assets/Jss/extendedFormsStyle';
 
 import LoadingTable from '../../../Components/Loading/LoadingTable';
@@ -142,7 +143,8 @@ class Update extends React.Component {
   }
 
   render() {
-    const { classes, loading } = this.props;
+    const { classes, loading, item } = this.props;
+    if (!item && !loading) return (<NotFound text="Food Item Not Found" />);
     const {
       name, batchNumber, description, allergens, expiryDate,
     } = this.state;

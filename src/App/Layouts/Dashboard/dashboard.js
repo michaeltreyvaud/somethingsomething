@@ -18,7 +18,7 @@ import Footer from '../../Components/Footer';
 import Sidebar from '../../Components/Sidebar';
 import Snackbar from '../../Components/Snackbar/Snackbar';
 
-import FourOhFour from '../../Views/Pages/404';
+const TODO = () => (<h1>TODO</h1>);
 
 const switchRoutes = (
   <Switch>
@@ -37,7 +37,7 @@ const switchRoutes = (
       }
       return <Route exact path={prop.path} component={prop.component} key={key} />;
     })}
-    <Route component={FourOhFour} />
+    <Route component={TODO} />
   </Switch>
 );
 
