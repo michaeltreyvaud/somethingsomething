@@ -87,6 +87,40 @@ const dashRoutes = [
   },
   {
     collapse: true,
+    path: '/dashboard/user',
+    name: 'User Settings',
+    state: 'openUser',
+    icon: SettingsApplications,
+    hidden: true,
+    views: [
+      {
+        hidden: true,
+        path: '/dashboard/user/profile',
+        name: 'User Profile',
+        component: UserProfile,
+      },
+      {
+        hidden: true,
+        path: '/dashboard/user/password',
+        name: 'User Profile',
+        component: UserPassword,
+      },
+      {
+        hidden: true,
+        path: '/dashboard/user/medical',
+        name: 'User Profile',
+        component: UserMedicalLog,
+      },
+      {
+        hidden: true,
+        path: '/dashboard/user/training',
+        name: 'User Profile',
+        component: UserTrainingLog,
+      },
+    ]
+  },
+  {
+    collapse: true,
     path: '/dashboard/management',
     name: 'Management',
     state: 'openManagement',
@@ -112,30 +146,6 @@ const dashRoutes = [
         path: '/dashboard/management/suppliers',
         name: 'Suppliers',
         component: SupplierList,
-      },
-      {
-        hidden: true,
-        path: '/dashboard/user/profile',
-        name: 'User Profile',
-        component: UserProfile,
-      },
-      {
-        hidden: true,
-        path: '/dashboard/user/password',
-        name: 'User Profile',
-        component: UserPassword,
-      },
-      {
-        hidden: true,
-        path: '/dashboard/user/medical',
-        name: 'User Profile',
-        component: UserMedicalLog,
-      },
-      {
-        hidden: true,
-        path: '/dashboard/user/training',
-        name: 'User Profile',
-        component: UserTrainingLog,
       },
     ],
   },
