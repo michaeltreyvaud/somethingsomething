@@ -26,7 +26,7 @@ import TeamsUpdate from '../../Views/Management/Teams/Update/update.container';
 import SupplierList from '../../Views/Management/SupplierList';
 import SupplierListCreate from '../../Views/Management/SupplierList/Create';
 
-import UserProfile from '../../Views/User/Profile';
+import UserProfile from '../../Views/User/Profile/profile.container';
 import UserPassword from '../../Views/User/Password';
 import UserMedicalLog from '../../Views/User/MedicalLog';
 import UserTrainingLog from '../../Views/User/TrainingLog';
@@ -116,7 +116,7 @@ const dashRoutes = [
         name: 'Training Log',
         component: UserTrainingLog,
       },
-    ]
+    ],
   },
   {
     collapse: true,
@@ -151,7 +151,7 @@ const dashRoutes = [
         path: '/dashboard/management/suppliers/create',
         name: 'Create Supplier',
         component: SupplierListCreate,
-      },      
+      },
     ],
   },
   {
