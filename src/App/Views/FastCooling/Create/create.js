@@ -21,11 +21,15 @@ const Transition = props => <Slide direction="down" {...props} />;
 class Create extends Component {
   constructor(props) {
     super(props);
+    const { user } = props;
     this.state = {
       selectedFoodItem: -1,
-      selectedUser: -1,
       temperature: 0,
-      user: {},
+      user: {
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+      },
       image: 'https://todo.com',
       comments: '',
       signature: 'https://todo.com',
@@ -42,8 +46,7 @@ class Create extends Component {
   closeModal() {
     const { close } = this.props;
     this.setState({
-      selectedFoodItem: 0,
-      selectedUser: 0,
+      selectedFoodItem: -1,
       temperature: 0,
       user: {},
       image: 'https://todo.com',
@@ -59,7 +62,6 @@ class Create extends Component {
     if (loading) return false;
     const { state } = this;
     delete state.selectedFoodItem;
-    delete state.selectedUser;
     return createFastCooling(state);
   }
 
@@ -73,17 +75,6 @@ class Create extends Component {
         foodItem: {
           id: foodItems[value].createdAt,
           displayName: foodItems[value].name,
-        },
-      });
-    }
-    if (target.name === 'user') {
-      const { users } = this.props;
-      return this.setState({
-        selectedFoodItem: value,
-        user: {
-          email: users[value].email,
-          firstName: users[value].firstName,
-          lastName: users[value].lastName,
         },
       });
     }
@@ -102,19 +93,6 @@ class Create extends Component {
         value={index}
       >
         {foodItem.name}
-      </MenuItem>));
-  }
-
-  renderUsers() {
-    const { users, classes } = this.props;
-    return users.map((user, index) => (
-      <MenuItem
-        key={`${user.name}${index}`}
-        classes={{ root: classes.selectMenuItem, selected: classes.selectMenuItemSelected }}
-        id="user"
-        value={index}
-      >
-        {`${user.firstName} ${user.lastName}`}
       </MenuItem>));
   }
 
@@ -174,20 +152,6 @@ class Create extends Component {
             formControlProps={{ fullWidth: true }}
             inputProps={{ type: 'number' }}
           />
-          <FormControl fullWidth className={classes.selectFormControl}>
-            <InputLabel htmlFor="simple-select" className={classes.selectLabel}>
-              Choose User
-            </InputLabel>
-            <Select
-              MenuProps={{ className: classes.selectMenu }}
-              classes={{ select: classes.select }}
-              value={selectedUser}
-              onChange={e => this.updateValue(e)}
-              inputProps={{ name: 'user' }}
-            >
-              {this.renderUsers()}
-            </Select>
-          </FormControl>
           <ImageUpload
             avatar
             addButtonProps={{ color: 'rose', round: true }}
@@ -227,7 +191,7 @@ Create.propTypes = {
   createFastCooling: PropTypes.func.isRequired,
   close: PropTypes.func.isRequired,
   foodItems: PropTypes.array.isRequired,
-  users: PropTypes.array.isRequired,
+  user: PropTypes.object.isRequired,
 };
 
 export default Create;
