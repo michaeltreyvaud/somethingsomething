@@ -145,6 +145,7 @@ class Users extends React.Component {
       }
       return (
         <Tooltip
+          key={key}
           id="tooltip-top"
           title={prop.tooltip}
           placement="top"
@@ -227,7 +228,7 @@ class Users extends React.Component {
                     classes.left,
                     classes.right,
                   ]}
-                  customClassesForCells={[0, 1, 2, 3, 4, 5, 6]}
+                  customClassesForCells={[0, 1, 2, 3, 4, 5, 6, 7]}
                   customHeadCellClasses={[
                     classes.left,
                     classes.left,
@@ -238,7 +239,7 @@ class Users extends React.Component {
                     classes.left,
                     classes.right,
                   ]}
-                  customHeadClassesForCells={[0, 1, 2, 3, 4, 5, 6]}
+                  customHeadClassesForCells={[0, 1, 2, 3, 4, 5, 6, 7]}
                 />
                 )}
                 {!loading && items && items.length === 0 && (
