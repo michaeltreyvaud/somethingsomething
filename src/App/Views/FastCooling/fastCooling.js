@@ -22,6 +22,7 @@ import Table from '../../Components/Table';
 import LoadingTable from '../../Components/Loading/LoadingTable';
 
 import FastCoolingCreate from './Create/create.container';
+import FastCoolingDelete from './Delete/delete.container';
 
 import style from '../../Assets/Jss/extendedTablesStyle';
 
@@ -62,11 +63,11 @@ class FastCooling extends React.Component {
     });
   }
 
-  showDeleteModal(itemId, index) {
+  showDeleteModal(createdAt, index) {
     this.setState({
       displayDeleteModal: true,
       selectedDeleteItem: {
-        itemId,
+        createdAt,
         index,
       },
     });
@@ -137,7 +138,7 @@ class FastCooling extends React.Component {
           break;
         }
         case 2: {
-          onClick = () => this.showDeleteModal(item.id, index);
+          onClick = () => this.showDeleteModal(item.createdAt, index);
           break;
         }
         default: {
@@ -174,6 +175,12 @@ class FastCooling extends React.Component {
           visible={displayCreateModal}
           classes={classes}
           close={() => this.hideCreateModal()}
+        />
+        <FastCoolingDelete
+          item={selectedDeleteItem}
+          visible={displayDeleteModal}
+          classes={classes}
+          close={() => this.hideDeleteModal()}
         />
         <GridContainer>
           <GridItem xs={12}>
