@@ -4,9 +4,6 @@ import { listSuppliers } from './Store/Actions';
 
 const mapStateToProps = state => ({
   loading: state.management.suppliers.index.loading,
-  error: state.management.suppliers.index.error,
-  errorMessage: state.management.suppliers.index.errorMessage,
-  success: state.management.suppliers.index.success,
   items: state.management.suppliers.index.items,
 });
 
