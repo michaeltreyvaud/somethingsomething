@@ -22,7 +22,6 @@ const loginReducer = (state = initialState, action) => {
       const user = {};
       if (AuthenticationResult) {
         const { IdToken } = AuthenticationResult;
-        console.log(jwtDecode(IdToken));
         const decodedToken = jwtDecode(IdToken);
         user.userName = decodedToken['cognito:username'];
         user.authorization = decodedToken['custom:authorization'];
