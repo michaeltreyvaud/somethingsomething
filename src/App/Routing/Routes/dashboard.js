@@ -102,19 +102,19 @@ const dashRoutes = [
       {
         hidden: true,
         path: '/dashboard/user/password',
-        name: 'User Profile',
+        name: 'Password',
         component: UserPassword,
       },
       {
         hidden: true,
         path: '/dashboard/user/medical',
-        name: 'User Profile',
+        name: 'Medical Log',
         component: UserMedicalLog,
       },
       {
         hidden: true,
         path: '/dashboard/user/training',
-        name: 'User Profile',
+        name: 'Training Log',
         component: UserTrainingLog,
       },
     ]
