@@ -10,7 +10,7 @@ import dashboardRoutes from '../../Routing/Routes/dashboard';
 
 import appStyle from './style';
 
-import image from '../../Assets/Images/sidebar-2.jpg';
+import image from '../../Assets/Images/sidebar-4.jpg';
 import logo from '../../Assets/Images/logo-white.svg';
 
 import Header from '../../Components/Header';
