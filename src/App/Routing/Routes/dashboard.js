@@ -57,8 +57,10 @@ import FoodItem from '../../Views/FoodItem/foodItem.container';
 import FoodItemUpdate from '../../Views/FoodItem/Update/update.container';
 
 import HotHolding from '../../Views/HotHolding/hotHolding.container';
+import HotHoldingUpdate from '../../Views/HotHolding/Update/update.container';
 
 import FastCooling from '../../Views/FastCooling/fastCooling.container';
+import FastCoolingUpdate from '../../Views/FastCooling/Update/update.container';
 
 import Service from '../../Views/Service';
 import ServiceCreate from '../../Views/Service/Create';
@@ -151,7 +153,7 @@ const dashRoutes = [
         path: '/dashboard/management/suppliers/create',
         name: 'Create Supplier',
         component: SuppliersCreate,
-      },      
+      },
     ],
   },
   {
@@ -303,6 +305,13 @@ const dashRoutes = [
     state: '',
     icon: Whatshot,
     component: HotHolding,
+    views: [
+      {
+        path: '/dashboard/hotholding/:id',
+        name: 'Hot Holding Item',
+        component: HotHoldingUpdate,
+      },
+    ],
   },
   {
     path: '/dashboard/fastcooling',
@@ -310,6 +319,13 @@ const dashRoutes = [
     state: 'openFastCooling',
     icon: FastForward,
     component: FastCooling,
+    views: [
+      {
+        path: '/dashboard/fastcooling/:id',
+        name: 'Fast Cooling Item',
+        component: FastCoolingUpdate,
+      },
+    ],
   },
   {
     path: '/dashboard/service',

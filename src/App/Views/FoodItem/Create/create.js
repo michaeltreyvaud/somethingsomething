@@ -26,7 +26,7 @@ class Create extends Component {
       name: '',
       batchNumber: '',
       description: '',
-      expiryDate: moment(Date.now()),
+      expiryDate: '',
       allergens: {
         gluten: false,
         sesameSeeds: false,
@@ -59,7 +59,7 @@ class Create extends Component {
       name: '',
       batchNumber: '',
       description: '',
-      expiryDate: moment(Date.now()),
+      expiryDate: '',
       allergens: {
         gluten: false,
         sesameSeeds: false,
