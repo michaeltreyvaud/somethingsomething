@@ -23,6 +23,8 @@ import Company from '../../Views/Company/company.container';
 import Users from '../../Views/Management/Users/users.container';
 import Teams from '../../Views/Management/Teams/team.container';
 import TeamsUpdate from '../../Views/Management/Teams/Update/update.container';
+import SupplierList from '../../Views/Management/SupplierList';
+import SupplierListCreate from '../../Views/Management/SupplierList/Create';
 
 import UserProfile from '../../Views/User/Profile';
 import UserPassword from '../../Views/User/Password';
@@ -63,8 +65,6 @@ import ServiceCreate from '../../Views/Service/Create';
 
 import ColdHotLocation from '../../Views/ColdHotLocation';
 import ColdHotTransportLog from '../../Views/ColdHotTransportLog';
-import SupplierList from '../../Views/Traceability/SupplierList';
-import SupplierListCreate from '../../Views/Traceability/SupplierList/Create';
 import DeliveryRecords from '../../Views/Traceability/DeliveryRecords';
 import TraceabilityLabels from '../../Views/Traceability/TraceabilityLabels';
 
@@ -146,6 +146,12 @@ const dashRoutes = [
         name: 'Suppliers',
         component: SupplierList,
       },
+      {
+        hidden: true,
+        path: '/dashboard/management/suppliers/create',
+        name: 'Create Supplier',
+        component: SupplierListCreate,
+      },      
     ],
   },
   {
@@ -346,12 +352,6 @@ const dashRoutes = [
     state: 'openTrace',
     icon: DirectionsCar,
     views: [
-      {
-        hidden: true,
-        path: '/dashboard/traceability/suppliers/create',
-        name: 'Create Supplier',
-        component: SupplierListCreate,
-      },
       {
         path: '/dashboard/traceability/records',
         name: 'Delivery Records',

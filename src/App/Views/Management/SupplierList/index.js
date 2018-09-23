@@ -42,9 +42,7 @@ class SupplierList extends React.Component {
     ));
     return (
       <div>
-        <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/dashboard/traceability/suppliers/create')}>
-        New
-        </Button>
+
         <GridContainer>
           <GridItem xs={12}>
             <Card>
@@ -52,6 +50,9 @@ class SupplierList extends React.Component {
                 <CardIcon color="rose">
                   <Assignment />
                 </CardIcon>
+                <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/dashboard/management/suppliers/create')}>
+                New
+                </Button>
               </CardHeader>
               <CardBody>
                 <Table
