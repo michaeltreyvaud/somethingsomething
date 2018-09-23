@@ -26,7 +26,7 @@ class Create extends Component {
       name: '',
       batchNumber: '',
       description: '',
-      expiryDate: 0,
+      expiryDate: moment(Date.now()),
       allergens: {
         gluten: false,
         sesameSeeds: false,
@@ -59,7 +59,7 @@ class Create extends Component {
       name: '',
       batchNumber: '',
       description: '',
-      expiryDate: 0,
+      expiryDate: moment(Date.now()),
       allergens: {
         gluten: false,
         sesameSeeds: false,
@@ -97,7 +97,7 @@ class Create extends Component {
 
   updateExpiryDate(date) {
     this.setState({
-      expiryDate: date.unix(),
+      expiryDate: date.valueOf(),
     });
   }
 
@@ -172,7 +172,7 @@ class Create extends Component {
           />
           <FormControl fullWidth>
             <Datetime
-              value={moment.unix(expiryDate)}
+              value={moment(expiryDate)}
               dateFormat="DD/MM/YYYY"
               id="expiryDate"
               onChange={e => this.updateExpiryDate(e)}

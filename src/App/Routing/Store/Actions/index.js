@@ -8,6 +8,7 @@ import {
   SESSION_TIMEOUT,
 } from '../ActionTypes';
 import { AuthenticatedFetch } from '../../../Util/fetch';
+import AuthStore from '../../../Util/authstore';
 
 const companyInfoAttempt = () => ({
   type: COMPANY_INFO_FETCH,
@@ -42,12 +43,24 @@ const validateFail = () => ({
   type: VALIDATE_TOKEN_FAIL,
 });
 
+const handleStorage = (response) => {
+  const { AuthenticationResult } = response;
+  if (AuthenticationResult) {
+    const { AccessToken, RefreshToken, IdToken } = AuthenticationResult;
+    if (AccessToken) AuthStore.setAccessToken(AccessToken);
+    if (RefreshToken) AuthStore.setRefreshToken(RefreshToken);
+    if (IdToken) AuthStore.setIdToken(IdToken);
+  }
+};
+
 export const validateToken = () => async (dispatch) => {
   try {
     dispatch(validateAttempt());
     //  TODO - fetch these
     const { REACT_APP_API_URL, REACT_APP_VALIDATE_TOKEN_PATH } = process.env;
-    const response = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_VALIDATE_TOKEN_PATH}`, {});
+    const body = { refreshToken: AuthStore.getRefreshToken() };
+    const response = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_VALIDATE_TOKEN_PATH}`, body);
+    handleStorage(response);
     return dispatch(validateSuccess());
   } catch (_err) {
     return dispatch(validateFail());

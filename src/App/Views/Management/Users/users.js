@@ -8,6 +8,7 @@ import Open from '@material-ui/icons/OpenInNew';
 import Delete from '@material-ui/icons/Delete';
 import Tooltip from '@material-ui/core/Tooltip';
 
+import SweetAlert from 'react-bootstrap-sweetalert';
 import GridContainer from '../../../Components/Grid/GridContainer';
 import GridItem from '../../../Components/Grid/GridItem';
 import Card from '../../../Components/Card/Card';
@@ -34,6 +35,7 @@ class Users extends React.Component {
       selectedDeleteItem: {},
       selectedUpdateItem: {},
       selectedUpdateItemIndex: 0,
+      displayErrorMessage: false,
     };
   }
 
@@ -43,7 +45,13 @@ class Users extends React.Component {
   }
 
   showCreateModal() {
-    this.setState({
+    const { teams } = this.props;
+    if (teams.length === 0) {
+      return this.setState({
+        displayErrorMessage: true,
+      });
+    }
+    return this.setState({
       displayCreateModal: true,
     });
   }
@@ -85,6 +93,28 @@ class Users extends React.Component {
       selectedUpdateItem: {},
       selectedUpdateItemIndex: 0,
     });
+  }
+
+  closeErrorMessage() {
+    this.setState({
+      displayErrorMessage: false,
+    });
+  }
+
+  renderErrorMessage() {
+    const { displayErrorMessage } = this.state;
+    const { classes } = this.props;
+    const { success, button } = classes;
+    return (
+      <SweetAlert
+        show={displayErrorMessage}
+        warning
+        title="Please create a team before adding a user"
+        onConfirm={() => this.closeErrorMessage()}
+        confirmBtnCssClass={`${button} ${success}`}
+        confirmBtnText="Ok"
+      />
+    );
   }
 
   render() {
@@ -139,6 +169,7 @@ class Users extends React.Component {
     });
     return (
       <div>
+        {this.renderErrorMessage()}
         <UserDelete
           item={selectedDeleteItem}
           visible={displayDeleteModal}
@@ -173,7 +204,7 @@ class Users extends React.Component {
                 </Button>
               </CardHeader>
               <CardBody>
-                {!loading && (
+                {!loading && items && items.length > 0 && (
                 <Table
                   hover
                   tableHead={[
@@ -210,6 +241,14 @@ class Users extends React.Component {
                   customHeadClassesForCells={[0, 1, 2, 3, 4, 5, 6]}
                 />
                 )}
+                {!loading && items && items.length === 0 && (
+                  <div style={{
+                    display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'center',
+                  }}
+                  >
+                    <h2><small>No Users to display</small></h2>
+                  </div>
+                )}
                 <LoadingTable visible={loading} color="red" />
               </CardBody>
             </Card>
@@ -223,6 +262,7 @@ class Users extends React.Component {
 Users.propTypes = {
   classes: PropTypes.object.isRequired,
   items: PropTypes.array.isRequired,
+  teams: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
   listUsers: PropTypes.func.isRequired,
 };
