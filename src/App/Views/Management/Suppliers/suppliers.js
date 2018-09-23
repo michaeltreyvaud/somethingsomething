@@ -1,8 +1,11 @@
 import React from 'react';
+import { withRouter } from 'react-router';
+import PropTypes from 'prop-types';
+import moment from 'moment';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import Assignment from '@material-ui/icons/Assignment';
-import { withRouter } from 'react-router';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import Open from '@material-ui/icons/OpenInNew';
 import Delete from '@material-ui/icons/Delete';
@@ -14,35 +17,84 @@ import CardHeader from '../../../Components/Card/CardHeader';
 import CardIcon from '../../../Components/Card/CardIcon';
 import Button from '../../../Components/CustomButtons';
 import Table from '../../../Components/Table';
+import LoadingTable from '../../../Components/Loading/LoadingTable';
 
 import style from '../../../Assets/Jss/style';
 import extendedTablesStyle from '../../../Assets/Jss/extendedTablesStyle';
-
 
 class SupplierList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      displayDeleteModal: false,
+      selectedDeleteItem: {},
     };
   }
 
+  showDeleteModal(createdAt, index) {
+    this.setState({
+      displayDeleteModal: true,
+      selectedDeleteItem: {
+        createdAt,
+        index,
+      },
+    });
+  }
+
+  hideDeleteModal() {
+    this.setState({
+      displayDeleteModal: false,
+      selectedDeleteItem: {},
+    });
+  }  
+
   render() {
-    const { classes } = this.props;
-    const simpleButtons = [
-      { color: 'success', icon: Open },
-      { color: 'danger', icon: Delete },
-    ].map((prop, key) => (
-      <Button
-        color={prop.color}        
-        className={classes.actionButton}
-        key={key}
-      >
-        <prop.icon className={classes.icon} />
-      </Button>
-    ));
+    const { classes, items, loading, history} = this.props;
+    const {
+      displayDeleteModal, selectedDeleteItem,
+    } = this.state;
+    const simpleButtons = (item, index) => [
+      { color: 'success', icon: Open, tooltip: 'Edit' },
+      { color: 'danger', icon: Delete, tooltip: 'Delete' },
+    ].map((prop, key) => {
+      let onClick;
+      switch (key) {
+        case 1: {
+          //onClick = () => history.push(`/dashboard/fooditem/${item.createdAt}`);
+          break;
+        }
+        case 2: {
+          onClick = () => this.showDeleteModal(item.createdAt, index);
+          break;
+        }
+        default: {
+          onClick = () => {};
+        }
+      }
+      return (
+        <Tooltip
+          id="tooltip-top"
+          title={prop.tooltip}
+          placement="top"
+          classes={{ tooltip: classes.tooltip }}
+        >
+          <Button
+            color={prop.color}
+            className={classes.actionButton}
+            key={key}
+            onClick={onClick}
+          >
+            <prop.icon className={classes.icon} />
+          </Button>
+        </Tooltip>
+      );
+    });
+    const tableData = items.map((_item, index) => {
+      const item = [_item.name, _item.address, _item.email, _item.phoneNo, simpleButtons(_item, index)];
+      return item;
+    });
     return (
       <div>
-
         <GridContainer>
           <GridItem xs={12}>
             <Card>
@@ -57,23 +109,13 @@ class SupplierList extends React.Component {
               <CardBody>
                 <Table
                   tableHead={[
-                    'ID',
                     'Name',
                     'Address',
                     'Email',
                     'Phone',
                     'Actions',
                   ]}
-                  tableData={[
-                    [
-                      '1',
-                      'Supplier',
-                      'kadwd',
-                      'test@test.test',
-                      'dwad',
-                      simpleButtons,
-                    ],
-                  ]}
+                  tableData={tableData}
                   customCellClasses={[
                     classes.center,
                     classes.right,
@@ -87,6 +129,7 @@ class SupplierList extends React.Component {
                   ]}
                   customHeadClassesForCells={[0, 4, 5]}
                 />
+                <LoadingTable visible={loading} color="red" />
               </CardBody>
             </Card>
           </GridItem>
@@ -95,5 +138,17 @@ class SupplierList extends React.Component {
     );
   }
 }
+
+SupplierList.propTypes = {
+  history: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
+  items: PropTypes.array.isRequired,
+
+  loading: PropTypes.bool.isRequired,
+  error: PropTypes.bool.isRequired,
+  errorMessage: PropTypes.string.isRequired,
+
+  listSupplierItems: PropTypes.func.isRequired,
+};
 
 export default withRouter(withStyles(extendedTablesStyle, style)(SupplierList));
