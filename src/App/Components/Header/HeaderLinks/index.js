@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import { withRouter} from 'react-router-dom';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -10,7 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import Grow from '@material-ui/core/Grow';
 import Hidden from '@material-ui/core/Hidden';
 import Popper from '@material-ui/core/Popper';
-import Notifications from '@material-ui/icons/Notifications';
+import Notifications from '@material-ui/icons/AccountCircle';
 import Search from '@material-ui/icons/Search';
 
 import Button from '../../CustomButtons';
@@ -25,15 +26,10 @@ class HeaderLinks extends React.Component {
       searchQuery: '',
     };
     this.handleClick = this.handleClick.bind(this);
-    this.handleClose = this.handleClose.bind(this);
   }
 
   handleClick() {
     this.setState({ open: !this.state.open });
-  }
-
-  handleClose() {
-    this.setState({ open: false });
   }
 
   render() {
@@ -99,7 +95,6 @@ class HeaderLinks extends React.Component {
                 } ${classes.links}`
               }
             />
-            <span className={classes.notifications}>5</span>
             <Hidden mdUp implementation="css">
               <span onClick={this.handleClick} className={classes.linkText}>
                 {'Notification'}
@@ -128,34 +123,34 @@ class HeaderLinks extends React.Component {
                   <ClickAwayListener onClickAway={this.handleClose}>
                     <MenuList role="menu">
                       <MenuItem
-                        onClick={this.handleClose}
+                        onClick={() => this.props.history.push('/dashboard/user/profile')}
                         className={dropdownItem}
                       >
-                        {'Mike John responded to your email'}
+                        {'Profile/Signature Settings'}
                       </MenuItem>
                       <MenuItem
-                        onClick={this.handleClose}
+                        onClick={() => this.props.history.push('/dashboard/user/password')}
                         className={dropdownItem}
                       >
-                        {'You have 5 new tasks'}
+                        {'Change Password'}
                       </MenuItem>
                       <MenuItem
-                        onClick={this.handleClose}
+                        onClick={() => this.props.history.push('/dashboard/user/medical')}
                         className={dropdownItem}
                       >
-                        {"You're now friend with Andrew"}
+                        {"Medical Log"}
                       </MenuItem>
                       <MenuItem
-                        onClick={this.handleClose}
+                        onClick={() => this.props.history.push('/dashboard/user/training')}
                         className={dropdownItem}
                       >
-                        {'Another Notification'}
+                        {'Training Log'}
                       </MenuItem>
                       <MenuItem
-                        onClick={this.handleClose}
+                        onClick={() => this.props.history.push('/dashboard/user/profile')}
                         className={dropdownItem}
                       >
-                        {'Another One'}
+                        {'Log Out'}
                       </MenuItem>
                     </MenuList>
                   </ClickAwayListener>
@@ -173,4 +168,4 @@ HeaderLinks.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(headerLinksStyle)(HeaderLinks);
+export default withRouter(withStyles(headerLinksStyle)(HeaderLinks));

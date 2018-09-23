@@ -22,8 +22,12 @@ import Metrics from '../../Views/Home/Metrics';
 import Company from '../../Views/Company/company.container';
 import Users from '../../Views/Management/Users/users.container';
 import Teams from '../../Views/Management/Teams/team.container';
-import UserProfile from '../../Views/Profile/';
 import TeamsUpdate from '../../Views/Management/Teams/Update/update.container';
+
+import UserProfile from '../../Views/User/Profile';
+import UserPassword from '../../Views/User/Password';
+import UserMedicalLog from '../../Views/User/MedicalLog';
+import UserTrainingLog from '../../Views/User/TrainingLog';
 
 import CheckList from '../../Views/CheckList';
 import CheckListCreate from '../../Views/CheckList/Create';
@@ -111,10 +115,28 @@ const dashRoutes = [
       },
       {
         hidden: true,
-        path: '/dashboard/profile/user',
+        path: '/dashboard/user/profile',
         name: 'User Profile',
         component: UserProfile,
-      },      
+      },
+      {
+        hidden: true,
+        path: '/dashboard/user/password',
+        name: 'User Profile',
+        component: UserPassword,
+      },
+      {
+        hidden: true,
+        path: '/dashboard/user/medical',
+        name: 'User Profile',
+        component: UserMedicalLog,
+      },
+      {
+        hidden: true,
+        path: '/dashboard/user/training',
+        name: 'User Profile',
+        component: UserTrainingLog,
+      },
     ],
   },
   {

@@ -18,8 +18,6 @@ import HeaderLinks from '../Header/HeaderLinks';
 
 import style from './style';
 
-import avatar from '../../Assets/Images/avatar.jpg';
-
 let ps;
 
 // We've created this component so we can have a ref to the wrapper of the links that appears in our sidebar.
@@ -44,11 +42,10 @@ class SidebarWrapper extends React.Component {
 
   render() {
     const {
-      className, user, headerLinks, links,
+      className, headerLinks, links,
     } = this.props;
     return (
       <div className={className} ref="sidebarWrapper">
-        {user}
         {headerLinks}
         {links}
       </div>
@@ -141,30 +138,7 @@ class Sidebar extends React.Component {
       cx({
         [classes.photoRTL]: rtlActive,
       })}`;
-    const user = (
-      <div className={userWrapperClass}>
-        <div className={photo}>
-          <img src={avatar} className={classes.avatarImg} alt="..." />
-        </div>
-        <ListItem className={`${classes.item} ${classes.userItem}`}>
-          <NavLink
-            to="/dashboard/profile/user"
-            className={`${classes.itemLink} ${classes.userCollapseButton}`}
-            onClick={() => this.openCollapse('openAvatar')}
-          >
-            <ListItemText
-              primary="Mike"
-              secondary={(
-                <b
-                  className=""
-                />)}
-              disableTypography
-              className={`${itemText} ${classes.userItemText}`}
-            />
-          </NavLink>
-        </ListItem>
-      </div>
-    );
+    
     const links = (
       <List className={classes.list}>
         {routes.map((prop, key) => {
@@ -373,7 +347,7 @@ class Sidebar extends React.Component {
             {brand}
             <SidebarWrapper
               className={sidebarWrapper}
-              user={user}
+
               headerLinks={<HeaderLinks rtlActive={rtlActive} />}
               links={links}
             />
@@ -399,7 +373,7 @@ class Sidebar extends React.Component {
             {brand}
             <SidebarWrapper
               className={sidebarWrapper}
-              user={user}
+
               links={links}
             />
             {image !== undefined ? (

@@ -15,8 +15,6 @@ import GridItem from '../../Components/Grid/GridItem';
 import Button from '../../Components/CustomButtons';
 import Card from '../../Components/Card/Card';
 import CardBody from '../../Components/Card/CardBody';
-import NavPills from '../../Components/NavPills';
-import Table from '../../Components/Table';
 
 import style from '../../Assets/Jss/style';
 
