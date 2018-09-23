@@ -26,11 +26,15 @@ class HeaderLinks extends React.Component {
       searchQuery: '',
     };
     this.handleClick = this.handleClick.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   handleClick() {
     this.setState({ open: !this.state.open });
   }
+  handleClose = () => {
+    this.setState({ open: false });
+  };  
 
   render() {
     const { classes } = this.props;
