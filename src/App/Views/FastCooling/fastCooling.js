@@ -208,16 +208,18 @@ class FastCooling extends React.Component {
                     classes.left,
                     classes.left,
                     classes.left,
+                    classes.right,
                   ]}
-                  customClassesForCells={[0, 1, 2, 3, 4]}
+                  customClassesForCells={[0, 1, 2, 3, 4, 5]}
                   customHeadCellClasses={[
                     classes.left,
                     classes.left,
                     classes.left,
                     classes.left,
                     classes.left,
+                    classes.right,
                   ]}
-                  customHeadClassesForCells={[0, 1, 2, 3, 4]}
+                  customHeadClassesForCells={[0, 1, 2, 3, 4, 5]}
                 />
                 )}
                 {!loading && items && items.length === 0 && (
