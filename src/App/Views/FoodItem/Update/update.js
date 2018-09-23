@@ -10,6 +10,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Today from '@material-ui/icons/Today';
 
+import Button from '../../../Components/CustomButtons';
 import CustomInput from '../../../Components/CustomInput';
 import GridItem from '../../../Components/Grid/GridItem';
 import Card from '../../../Components/Card/Card';
@@ -28,7 +29,8 @@ class Update extends React.Component {
     const { item } = props;
     if (item) {
       const {
-        name, batchNumber, description, allergens, expiryDate,
+        name, batchNumber, description, allergens,
+        expiryDate, id, createdAt,
       } = item;
       const {
         gluten, sesameSeeds, molluscs, fish, soybeans,
@@ -36,6 +38,8 @@ class Update extends React.Component {
         eggs, lupin, nuts, mustard, celery,
       } = allergens;
       this.state = {
+        id,
+        createdAt,
         name,
         batchNumber,
         description,
@@ -59,6 +63,8 @@ class Update extends React.Component {
       };
     } else {
       this.state = {
+        id: '',
+        createdAt: 0,
         name: '',
         batchNumber: '',
         description: '',
@@ -84,10 +90,11 @@ class Update extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { item } = nextProps;
-    if (item) {
+    const { item, updating } = nextProps;
+    if (item && !updating) {
       const {
-        name, batchNumber, description, allergens, expiryDate,
+        name, batchNumber, description, allergens,
+        expiryDate, id, createdAt,
       } = item;
       const {
         gluten, sesameSeeds, molluscs, fish, soybeans,
@@ -95,7 +102,9 @@ class Update extends React.Component {
         eggs, lupin, nuts, mustard, celery,
       } = allergens;
       this.setState({
+        id,
         name,
+        createdAt,
         batchNumber,
         description,
         expiryDate,
@@ -126,13 +135,6 @@ class Update extends React.Component {
     });
   }
 
-  //  TODO: needed?
-  updateExpiryDate(date) {
-    this.setState({
-      expiryDate: date.unix(),
-    });
-  }
-
   updateAllergens(e) {
     const { target } = e;
     const { allergens } = this.state;
@@ -142,8 +144,16 @@ class Update extends React.Component {
     });
   }
 
+  updateFoodItem() {
+    const { loading, updating, updateFoodItem } = this.props;
+    if (loading || updating) return false;
+    return updateFoodItem(this.state);
+  }
+
   render() {
-    const { classes, loading, item } = this.props;
+    const {
+      classes, loading, item, updating,
+    } = this.props;
     if (!item && !loading) return (<NotFound text="Food Item Not Found" />);
     const {
       name, batchNumber, description, allergens, expiryDate,
@@ -189,10 +199,9 @@ class Update extends React.Component {
                   />
                   <FormControl fullWidth>
                     <Datetime
-                      value={moment.unix(expiryDate)}
+                      value={moment(expiryDate)}
                       dateFormat="DD/MM/YYYY"
                       id="expiryDate"
-                      onChange={e => this.updateExpiryDate(e)}
                       timeFormat={false}
                       inputProps={{ placeholder: 'Expiry Date', disabled: true }}
                     />
@@ -409,6 +418,9 @@ class Update extends React.Component {
                       classes={{ label: classes.label }}
                       label="Celery"
                     />
+                    <Button loading={updating} onClick={() => this.updateFoodItem()} color="rose" className={classes.updateProfileButton}>
+                        Save
+                    </Button>
                   </div>
                 </div>
                 )}
@@ -426,6 +438,8 @@ Update.propTypes = {
   classes: PropTypes.object.isRequired,
   item: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
+  updating: PropTypes.bool.isRequired,
+  updateFoodItem: PropTypes.func.isRequired,
 };
 
 export default withStyles(extendedFormsStyle)(Update);

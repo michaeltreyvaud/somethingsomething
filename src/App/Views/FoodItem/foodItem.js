@@ -114,8 +114,8 @@ class FoodItem extends React.Component {
       );
     });
     const tableData = items.map((_item, index) => {
-      const item = [_item.name, _item.description, moment.unix(_item.expiryDate).format('DD/MM/YYYY'),
-        _item.batchNumber, simpleButtons(_item, index)];
+      const item = [_item.name, _item.description, moment(_item.expiryDate).format('DD/MM/YYYY'),
+        moment(_item.createdAt).format('DD/MM/YYYY'), _item.batchNumber, simpleButtons(_item, index)];
       return item;
     });
     return (
@@ -147,13 +147,14 @@ class FoodItem extends React.Component {
                 </Button>
               </CardHeader>
               <CardBody>
-                {!loading && (
+                {!loading && items && items.length > 0 && (
                 <Table
                   hover
                   tableHead={[
                     'Name',
                     'Description',
                     'Expiry Date',
+                    'Created',
                     'Batch Number',
                   ]}
                   tableData={tableData}
@@ -162,18 +163,28 @@ class FoodItem extends React.Component {
                     classes.left,
                     classes.left,
                     classes.left,
+                    classes.left,
                     classes.right,
                   ]}
-                  customClassesForCells={[0, 1, 2, 3, 4]}
+                  customClassesForCells={[0, 1, 2, 3, 4, 5]}
                   customHeadCellClasses={[
                     classes.left,
                     classes.left,
                     classes.left,
                     classes.left,
+                    classes.left,
                     classes.right,
                   ]}
-                  customHeadClassesForCells={[0, 1, 2, 3, 4]}
+                  customHeadClassesForCells={[0, 1, 2, 3, 4, 5]}
                 />
+                )}
+                {!loading && items && items.length === 0 && (
+                  <div style={{
+                    display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'center',
+                  }}
+                  >
+                    <h2><small>No Items to display</small></h2>
+                  </div>
                 )}
                 <LoadingTable visible={loading} color="red" />
               </CardBody>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Datetime from 'react-datetime';
 import SignatureCanvas from 'react-signature-canvas';
 
 import Dialog from '@material-ui/core/Dialog';
@@ -24,9 +23,10 @@ class Create extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      foodItem: 0,
+      selectedFoodItem: -1,
+      selectedUser: -1,
       temperature: 0,
-      user: 'Some User',
+      user: {},
       image: 'https://todo.com',
       comments: '',
       signature: 'https://todo.com',
@@ -42,11 +42,11 @@ class Create extends Component {
 
   closeModal() {
     const { close } = this.props;
-    this.sigCanvas.clear();
     this.setState({
-      foodItem: 0,
+      selectedFoodItem: 0,
+      selectedUser: 0,
       temperature: 0,
-      user: '',
+      user: {},
       image: 'https://todo.com',
       comments: '',
       signature: 'https://todo.com',
@@ -59,13 +59,37 @@ class Create extends Component {
     const { createHotHolding, loading } = this.props;
     if (loading) return false;
     const { state } = this;
+    delete state.selectedFoodItem;
+    delete state.selectedUser;
     return createHotHolding(state);
   }
 
   updateValue(e) {
     const { target } = e;
-    this.setState({
-      [target.id || target.name]: target.value,
+    const { value } = target;
+    if (target.name === 'foodItem') {
+      const { foodItems } = this.props;
+      return this.setState({
+        selectedFoodItem: value,
+        foodItem: {
+          id: foodItems[value].createdAt,
+          displayName: foodItems[value].name,
+        },
+      });
+    }
+    if (target.name === 'user') {
+      const { users } = this.props;
+      return this.setState({
+        selectedFoodItem: value,
+        user: {
+          email: users[value].email,
+          firstName: users[value].firstName,
+          lastName: users[value].lastName,
+        },
+      });
+    }
+    return this.setState({
+      [target.id || target.name]: value,
     });
   }
 
@@ -76,7 +100,7 @@ class Create extends Component {
         key={`${foodItem.name}${index}`}
         classes={{ root: classes.selectMenuItem, selected: classes.selectMenuItemSelected }}
         id="foodItem"
-        value={foodItem.createdAt}
+        value={index}
       >
         {foodItem.name}
       </MenuItem>));
@@ -89,7 +113,7 @@ class Create extends Component {
         key={`${user.name}${index}`}
         classes={{ root: classes.selectMenuItem, selected: classes.selectMenuItemSelected }}
         id="user"
-        value={`${user.email}`}
+        value={index}
       >
         {`${user.firstName} ${user.lastName}`}
       </MenuItem>));
@@ -98,7 +122,7 @@ class Create extends Component {
   render() {
     const { classes, visible, loading } = this.props;
     const {
-      foodItem, temperature, user,
+      selectedFoodItem, temperature, selectedUser,
       comments,
     } = this.state;
     return (
@@ -136,8 +160,8 @@ class Create extends Component {
             <Select
               MenuProps={{ className: classes.selectMenu }}
               classes={{ select: classes.select }}
-              value={foodItem}
               onChange={e => this.updateValue(e)}
+              value={selectedFoodItem}
               inputProps={{ name: 'foodItem' }}
             >
               {this.renderFoodItems()}
@@ -158,21 +182,12 @@ class Create extends Component {
             <Select
               MenuProps={{ className: classes.selectMenu }}
               classes={{ select: classes.select }}
-              value={user}
+              value={selectedUser}
               onChange={e => this.updateValue(e)}
               inputProps={{ name: 'user' }}
             >
               {this.renderUsers()}
             </Select>
-          </FormControl>
-          <InputLabel className={classes.label}>
-            Capture Datetime
-          </InputLabel>
-          <br />
-          <FormControl fullWidth>
-            <Datetime
-              inputProps={{ placeholder: '08/01/2018 12:00 AM', disabled: true }}
-            />
           </FormControl>
           <ImageUpload
             avatar

@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Assignment from '@material-ui/icons/Assignment';
 import { withRouter } from 'react-router';
+import moment from 'moment';
 
 import Print from '@material-ui/icons/Print';
 import Open from '@material-ui/icons/OpenInNew';
 import Delete from '@material-ui/icons/Delete';
 import Tooltip from '@material-ui/core/Tooltip';
+import SweetAlert from 'react-bootstrap-sweetalert';
 
 import GridContainer from '../../Components/Grid/GridContainer';
 import GridItem from '../../Components/Grid/GridItem';
@@ -33,6 +35,7 @@ class FastCooling extends React.Component {
       selectedDeleteItem: {},
       selectedUpdateItem: {},
       selectedUpdateItemIndex: 0,
+      displayErrorMessage: false,
     };
   }
 
@@ -42,7 +45,13 @@ class FastCooling extends React.Component {
   }
 
   showCreateModal() {
-    this.setState({
+    const { foodItems } = this.props;
+    if (foodItems.length === 0) {
+      return this.setState({
+        displayErrorMessage: true,
+      });
+    }
+    return this.setState({
       displayCreateModal: true,
     });
   }
@@ -84,6 +93,28 @@ class FastCooling extends React.Component {
       selectedUpdateItem: {},
       selectedUpdateItemIndex: 0,
     });
+  }
+
+  closeErrorMessage() {
+    this.setState({
+      displayErrorMessage: false,
+    });
+  }
+
+  renderErrorMessage() {
+    const { displayErrorMessage } = this.state;
+    const { classes } = this.props;
+    const { success, button } = classes;
+    return (
+      <SweetAlert
+        show={displayErrorMessage}
+        warning
+        title="Please create a Food Item before adding a Fast Cooling Item"
+        onConfirm={() => this.closeErrorMessage()}
+        confirmBtnCssClass={`${button} ${success}`}
+        confirmBtnText="Ok"
+      />
+    );
   }
 
   render() {
@@ -132,12 +163,13 @@ class FastCooling extends React.Component {
       );
     });
     const tableData = items.map((_item, index) => {
-      const item = [_item.createdAt, _item.user, _item.comments,
-        _item.foodItem, _item.temperature, simpleButtons(_item, index)];
+      const item = [moment(_item.createdAt).format('DD/MM/YYYY'), `${_item.user.firstName} ${_item.user.lastName}`, _item.comments,
+        _item.foodItem.displayName, _item.temperature, simpleButtons(_item, index)];
       return item;
     });
     return (
       <div>
+        {this.renderErrorMessage()}
         <FastCoolingCreate
           visible={displayCreateModal}
           classes={classes}
@@ -209,11 +241,8 @@ class FastCooling extends React.Component {
 FastCooling.propTypes = {
   classes: PropTypes.object.isRequired,
   items: PropTypes.array.isRequired,
-
+  foodItems: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
-  error: PropTypes.bool.isRequired,
-  errorMessage: PropTypes.string.isRequired,
-
   listFastCoolings: PropTypes.func.isRequired,
 };
 

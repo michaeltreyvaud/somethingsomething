@@ -22,7 +22,7 @@ import Metrics from '../../Views/Home/Metrics';
 import Company from '../../Views/Company/company.container';
 import Users from '../../Views/Management/Users/users.container';
 import Teams from '../../Views/Management/Teams/team.container';
-import UserProfile from '../../Views/Profile/';
+import UserProfile from '../../Views/Profile';
 import TeamsUpdate from '../../Views/Management/Teams/Update/update.container';
 
 import CheckList from '../../Views/CheckList';
@@ -53,7 +53,6 @@ import FoodItemUpdate from '../../Views/FoodItem/Update/update.container';
 import HotHolding from '../../Views/HotHolding/hotHolding.container';
 
 import FastCooling from '../../Views/FastCooling/fastCooling.container';
-import FastCoolingCreate from '../../Views/FastCooling/Create';
 
 import Service from '../../Views/Service';
 import ServiceCreate from '../../Views/Service/Create';
@@ -114,7 +113,7 @@ const dashRoutes = [
         path: '/dashboard/profile/user',
         name: 'User Profile',
         component: UserProfile,
-      },      
+      },
     ],
   },
   {
@@ -273,14 +272,6 @@ const dashRoutes = [
     state: 'openFastCooling',
     icon: FastForward,
     component: FastCooling,
-    views: [
-      {
-        hidden: true,
-        path: '/dashboard/fastcooling/create',
-        name: 'Capture Cooling Temperature',
-        component: FastCoolingCreate,
-      },
-    ],
   },
   {
     path: '/dashboard/service',

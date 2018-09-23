@@ -4,10 +4,8 @@ import { listHotHoldings } from './Store/Actions';
 
 const mapStateToProps = state => ({
   loading: state.hotHolding.index.loading,
-  error: state.hotHolding.index.error,
-  errorMessage: state.hotHolding.index.errorMessage,
-  success: state.hotHolding.index.success,
   items: state.hotHolding.index.items,
+  foodItems: state.foodItem.index.items,
 });
 
 const mapDispatchToProps = dispatch => ({
