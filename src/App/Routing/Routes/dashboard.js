@@ -23,8 +23,8 @@ import Company from '../../Views/Company/company.container';
 import Users from '../../Views/Management/Users/users.container';
 import Teams from '../../Views/Management/Teams/team.container';
 import TeamsUpdate from '../../Views/Management/Teams/Update/update.container';
-import SupplierList from '../../Views/Management/SupplierList';
-import SupplierListCreate from '../../Views/Management/SupplierList/Create';
+import Suppliers from '../../Views/Management/Suppliers/suppliers.container';
+import SuppliersCreate from '../../Views/Management/Suppliers/Create';
 
 import UserProfile from '../../Views/User/Profile';
 import UserPassword from '../../Views/User/Password';
@@ -144,13 +144,13 @@ const dashRoutes = [
       {
         path: '/dashboard/management/suppliers',
         name: 'Suppliers',
-        component: SupplierList,
+        component: Suppliers,
       },
       {
         hidden: true,
         path: '/dashboard/management/suppliers/create',
         name: 'Create Supplier',
-        component: SupplierListCreate,
+        component: SuppliersCreate,
       },      
     ],
   },
