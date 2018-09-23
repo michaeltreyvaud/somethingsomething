@@ -163,8 +163,8 @@ class FastCooling extends React.Component {
       );
     });
     const tableData = items.map((_item, index) => {
-      const item = [moment(_item.createdAt).format('DD/MM/YYYY'), `${_item.user.firstName} ${_item.user.lastName}`, _item.comments,
-        _item.foodItem.displayName, _item.temperature, simpleButtons(_item, index)];
+      const item = [_item.foodItem.displayName, _item.temperature, `${_item.user.firstName} ${_item.user.lastName}`,
+        _item.comments, moment(_item.createdAt).format('DD/MM/YYYY'), simpleButtons(_item, index)];
       return item;
     });
     return (
@@ -195,11 +195,11 @@ class FastCooling extends React.Component {
                 <Table
                   hover
                   tableHead={[
-                    'Created',
-                    'User',
-                    'Comments',
                     'Food Item',
                     'Temperature',
+                    'User',
+                    'Comments',
+                    'Created',
                   ]}
                   tableData={tableData}
                   customCellClasses={[
@@ -217,7 +217,7 @@ class FastCooling extends React.Component {
                     classes.left,
                     classes.left,
                   ]}
-                  customHeadClassesForCells={[0, 1, 2, 3 ,4]}
+                  customHeadClassesForCells={[0, 1, 2, 3, 4]}
                 />
                 )}
                 {!loading && items && items.length === 0 && (
