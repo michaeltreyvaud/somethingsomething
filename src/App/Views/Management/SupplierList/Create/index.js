@@ -58,7 +58,7 @@ class Create extends React.Component {
     const { classes } = this.props;
     return (
       <div>
-      <Button color="info" onClick={() => this.props.history.push('/dashboard/traceability/suppliers')}>
+      <Button color="info" onClick={() => this.props.history.push('/dashboard/management/suppliers')}>
         Cancel
       </Button>
       <Button color="rose">Save</Button>
