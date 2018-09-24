@@ -28,7 +28,7 @@ class Update extends React.Component {
     const { item } = props;
     if (item) {
       const {
-        signature, image, comments, user, createdAt, freezerItem, id, temperature
+        signature, image, comments, user, createdAt, fridgeItem, id, temperature
       } = item;
       this.state = {
         signature,
@@ -36,7 +36,7 @@ class Update extends React.Component {
         comments,
         user,
         createdAt,
-        freezerItem,
+        fridgeItem,
         id,
         temperature,
       };
@@ -47,7 +47,7 @@ class Update extends React.Component {
         comments: '',
         user: '',
         createdAt: 0,
-        freezerItem: '',
+        fridgeItem: '',
         id: '',
         temperature: 0,
       };
@@ -58,7 +58,7 @@ class Update extends React.Component {
     const { item, updating } = nextProps;
     if (item && !updating) {
       const {
-        signature, image, comments, user, createdAt, freezerItem, id, temperature
+        signature, image, comments, user, createdAt, fridgeItem, id, temperature
       } = item;
       this.setState({
         signature,
@@ -66,7 +66,7 @@ class Update extends React.Component {
         comments,
         user,
         createdAt,
-        freezerItem,
+        fridgeItem,
         id,
         temperature,
       });
@@ -106,7 +106,7 @@ class Update extends React.Component {
     } = this.props;
     if (!item && !loading) return (<NotFound text="Fridge Log Not Found" />);
     const {
-      signature, image, comments, user, createdAt, freezerItem, id, temperature
+      signature, image, comments, user, createdAt, fridgeItem, id, temperature
     } = this.state;
     return (
       <div>
@@ -126,7 +126,7 @@ class Update extends React.Component {
               <CardBody>
                   <CustomInput
                     id="fridge"
-                    value={freezerItem}
+                    value={fridgeItem}
                     formControlProps={{
                       fullWidth: true
                     }}

@@ -100,7 +100,7 @@ class FridgeLog extends React.Component {
       );
     });
     const tableData = items.map((_item, index) => {
-      const item = [ _item.freezerItem, _item.user, _item.temperature, moment(_item.createdAt).format('MMMM Do YYYY, h:mm:ss a'), _item.image, _item.comments, simpleButtons(_item, index)];
+      const item = [ _item.fridgeItem, _item.user, _item.temperature, moment(_item.createdAt).format('MMMM Do YYYY, h:mm:ss a'), _item.image, _item.comments, simpleButtons(_item, index)];
       return item;
     });
     return (
