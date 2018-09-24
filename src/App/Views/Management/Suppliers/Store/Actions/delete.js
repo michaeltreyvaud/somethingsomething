@@ -1,45 +1,45 @@
 import {
-  DELETE_FOOD_ITEM_ATTEMPT,
-  DELETE_FOOD_ITEM_SUCCESS,
-  DELETE_FOOD_ITEM_FAIL,
+  DELETE_SUPPLIER_ATTEMPT,
+  DELETE_SUPPLIER_SUCCESS,
+  DELETE_SUPPLIER_FAIL,
 } from '../ActionTypes';
-import { sessionTimeout } from '../../../../Routing/Store/Actions';
-import { AuthenticatedFetch } from '../../../../Util/fetch';
-import { dashboardLoading, showDashBoardError, showDashBoardSuccess } from '../../../../Layouts/Dashboard/Store/Actions';
+import { sessionTimeout } from '../../../../../Routing/Store/Actions';
+import { AuthenticatedFetch } from '../../../../../Util/fetch';
+import { dashboardLoading, showDashBoardError, showDashBoardSuccess } from '../../../../../Layouts/Dashboard/Store/Actions';
 
-const deleteFoodItemAttempt = () => ({
-  type: DELETE_FOOD_ITEM_ATTEMPT,
+const deleteSupplierAttempt = () => ({
+  type: DELETE_SUPPLIER_ATTEMPT,
 });
 
-const deleteFoodItemSuccess = index => ({
-  type: DELETE_FOOD_ITEM_SUCCESS,
+const deleteSupplierSuccess = index => ({
+  type: DELETE_SUPPLIER_SUCCESS,
   payload: {
     index,
   },
 });
 
-const deleteFoodItemFail = message => ({
-  type: DELETE_FOOD_ITEM_FAIL,
+const deleteSupplierFail = message => ({
+  type: DELETE_SUPPLIER_FAIL,
   payload: { message },
 });
 
-export const deleteFoodItem = (createdAt, index) => async (dispatch) => {
+export const deleteSupplier = (name, index) => async (dispatch) => {
   try {
     //  Tell the layout we are doing something
     dispatch(dashboardLoading());
-    dispatch(deleteFoodItemAttempt());
-    const body = { createdAt };
+    dispatch(deleteSupplierAttempt());
+    const body = { name };
     //  TODO - fetch these
-    const { REACT_APP_API_URL, REACT_APP_DELETE_FOOD_ITEM_PATH } = process.env;
-    await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_DELETE_FOOD_ITEM_PATH}`, body);
+    const { REACT_APP_API_URL, REACT_APP_DELETE_SUPPLIER_PATH } = process.env;
+    await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_DELETE_SUPPLIER_PATH}`, body);
     //  Display success message
     dispatch(showDashBoardSuccess('Item Deleted'));
-    return dispatch(deleteFoodItemSuccess(index));
+    return dispatch(deleteSupplierSuccess(index));
   } catch (_err) {
     if (_err.code === 401) return dispatch(sessionTimeout());
     //  Display error message
     dispatch(showDashBoardError(_err.message));
-    return dispatch(deleteFoodItemFail(_err.message));
+    return dispatch(deleteSupplierFail(_err.message));
   }
 };
 

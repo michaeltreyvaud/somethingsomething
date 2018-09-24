@@ -1,7 +1,7 @@
 import {
-  UPDATE_FOOD_ITEM_ATTEMPT,
-  UPDATE_FOOD_ITEM_SUCCESS,
-  UPDATE_FOOD_ITEM_FAIL,
+  UPDATE_SUPPLIER_ATTEMPT,
+  UPDATE_SUPPLIER_SUCCESS,
+  UPDATE_SUPPLIER_FAIL,
 } from '../ActionTypes';
 
 const initialState = {
@@ -13,7 +13,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case UPDATE_FOOD_ITEM_ATTEMPT: {
+    case UPDATE_SUPPLIER_ATTEMPT: {
       return {
         ...state,
         loading: true,
@@ -22,7 +22,7 @@ const reducer = (state = initialState, action) => {
         success: false,
       };
     }
-    case UPDATE_FOOD_ITEM_SUCCESS: {
+    case UPDATE_SUPPLIER_SUCCESS: {
       return {
         ...state,
         loading: false,
@@ -31,7 +31,7 @@ const reducer = (state = initialState, action) => {
         success: true,
       };
     }
-    case UPDATE_FOOD_ITEM_FAIL: {
+    case UPDATE_SUPPLIER_FAIL: {
       const { message } = action.payload;
       return {
         ...state,
