@@ -6,7 +6,7 @@ const mapStateToProps = state => ({
   loading: state.hotHolding.create.loading,
   success: state.hotHolding.create.success,
   foodItems: state.foodItem.index.items,
-  user: state.auth.userDetails,
+  user: state.user.profile.index.user,
 });
 
 const mapDispatchToProps = dispatch => ({

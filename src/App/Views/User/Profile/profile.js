@@ -13,7 +13,6 @@ import ImageUpload from '../../../Components/CustomUpload/ImageUpload';
 import CustomInput from '../../../Components/CustomInput';
 import Button from '../../../Components/CustomButtons';
 import Clearfix from '../../../Components/Clearfix';
-import LoadingTable from '../../../Components/Loading/LoadingTable';
 import CardHeader from '../../../Components/Card/CardHeader';
 import CardIcon from '../../../Components/Card/CardIcon';
 
@@ -28,12 +27,25 @@ class Profile extends React.Component {
     };
   }
 
+  updateValue(e) {
+    const { target } = e;
+    this.setState({
+      [target.id]: target.value,
+    });
+  }
+
+  updateInfo() {
+    const { updateUser, loading } = this.props;
+    if (loading) return false;
+    return updateUser(this.state);
+  }
+
   render() {
     const {
       email, lastName, firstName, phoneNumber,
       position, team,
     } = this.state;
-    const { classes, saving, loading } = this.props;
+    const { classes, loading } = this.props;
     return (
       <div>
         <GridContainer>
@@ -58,90 +70,63 @@ class Profile extends React.Component {
                 >
                   <ImageUpload
                     avatar
-                    addButtonProps={{
-                      color: 'rose',
-                      round: true,
-                    }}
-                    changeButtonProps={{
-                      color: 'rose',
-                      round: true,
-                    }}
-                    removeButtonProps={{
-                      color: 'danger',
-                      round: true,
-                    }}
+                    addButtonProps={{ color: 'rose', round: true }}
+                    changeButtonProps={{ color: 'rose', round: true }}
+                    removeButtonProps={{ color: 'danger', round: true }}
                   />
                 </GridItem>
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={6}>
                     <CustomInput
-                      onChange={event => this.onChange(event)}
+                      onChange={e => this.updateValue(e)}
                       value={firstName}
                       labelText="First Name"
                       id="firstName"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
+                      formControlProps={{ fullWidth: true }}
                     />
                   </GridItem>
                   <GridItem xs={12} sm={12} md={6}>
                     <CustomInput
-                      onChange={event => this.onChange(event)}
+                      onChange={e => this.updateValue(e)}
                       value={lastName}
                       labelText="Last Name"
                       id="lastName"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
+                      formControlProps={{ fullWidth: true }}
                     />
                   </GridItem>
                 </GridContainer>
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={6}>
                     <CustomInput
-                      onChange={event => this.onChange(event)}
+                      onChange={e => this.updateValue(e)}
                       value={phoneNumber}
                       labelText="Contact Phone No."
-                      id="phone"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
+                      id="phoneNumber"
+                      formControlProps={{ fullWidth: true }}
                     />
                   </GridItem>
                   <GridItem xs={12} sm={12} md={6}>
                     <CustomInput
-                      onChange={event => this.onChange(event)}
                       value={email}
                       labelText="Email"
                       id="email"
-                      formControlProps={{
-                        fullWidth: true,
-                        disabled: true,
-                      }}
+                      formControlProps={{ fullWidth: true, disabled: true }}
                     />
                   </GridItem>
                   <GridItem xs={12} sm={12} md={6}>
                     <CustomInput
-                      onChange={event => this.onChange(event)}
                       value={position}
                       labelText="Position"
                       id="position"
-                      formControlProps={{
-                        fullWidth: true,
-                        disabled: true,
-                      }}
+                      formControlProps={{ fullWidth: true, disabled: true }}
                     />
                   </GridItem>
                   <GridItem xs={12} sm={12} md={6}>
                     <CustomInput
-                      onChange={event => this.onChange(event)}
                       value={team}
                       labelText="Team"
                       id="team"
-                      formControlProps={{
-                        fullWidth: true,
-                        disabled: true,
-                      }}
+                      formControlProps={{ fullWidth: true, disabled: true }}
                     />
                   </GridItem>
                 </GridContainer>
@@ -165,9 +150,8 @@ class Profile extends React.Component {
             </Card>
           </GridItem>
         </GridContainer>
-        <LoadingTable visible={loading} color="red" />
-        <Button loading={saving} onClick={() => this.updateInfo()} color="rose" className={classes.updateProfileButton}>
-                    Save
+        <Button loading={loading} onClick={() => this.updateInfo()} color="rose" className={classes.updateProfileButton}>
+          Save
         </Button>
       </div>
     );
@@ -175,7 +159,10 @@ class Profile extends React.Component {
 }
 
 Profile.propTypes = {
+  classes: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired,
+  loading: PropTypes.bool.isRequired,
+  updateUser: PropTypes.func.isRequired,
 };
 
 export default withStyles(style)(Profile);
