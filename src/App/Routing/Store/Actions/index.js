@@ -7,6 +7,7 @@ import {
   VALIDATE_TOKEN_FAIL,
   SESSION_TIMEOUT,
 } from '../ActionTypes';
+import { USER_AUTH_UPDATED } from '../../../Views/Auth/Login/Store/ActionTypes';
 import { AuthenticatedFetch } from '../../../Util/fetch';
 import AuthStore from '../../../Util/authstore';
 
@@ -53,6 +54,13 @@ const handleStorage = (response) => {
   }
 };
 
+const userAuthUpdated = response => ({
+  type: USER_AUTH_UPDATED,
+  payload: {
+    response,
+  },
+});
+
 export const validateToken = () => async (dispatch) => {
   try {
     dispatch(validateAttempt());
@@ -61,6 +69,7 @@ export const validateToken = () => async (dispatch) => {
     const body = { refreshToken: AuthStore.getRefreshToken() };
     const response = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_VALIDATE_TOKEN_PATH}`, body);
     handleStorage(response);
+    dispatch(userAuthUpdated(response));
     return dispatch(validateSuccess());
   } catch (_err) {
     return dispatch(validateFail());

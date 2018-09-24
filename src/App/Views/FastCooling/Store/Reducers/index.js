@@ -4,6 +4,8 @@ import {
   LIST_FAST_COOLING_FAIL,
 
   CREATE_FAST_COOLING_SUCCESS,
+
+  DELETE_FAST_COOLING_SUCCESS,
 } from '../ActionTypes';
 
 const initialState = {
@@ -53,6 +55,15 @@ const reducer = (state = initialState, action) => {
       const { response } = action.payload;
       const currentItems = Object.assign(state.items);
       currentItems.unshift(response);
+      return {
+        ...state,
+        items: currentItems,
+      };
+    }
+    case DELETE_FAST_COOLING_SUCCESS: {
+      const { index } = action.payload;
+      const currentItems = Object.assign(state.items);
+      currentItems.splice(index, 1);
       return {
         ...state,
         items: currentItems,

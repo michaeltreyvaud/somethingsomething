@@ -48,10 +48,12 @@ class SupplierList extends React.Component {
       displayDeleteModal: false,
       selectedDeleteItem: {},
     });
-  }  
+  }
 
   render() {
-    const { classes, items, loading, history} = this.props;
+    const {
+      classes, items, loading, history,
+    } = this.props;
     const {
       displayDeleteModal, selectedDeleteItem,
     } = this.state;
@@ -115,6 +117,7 @@ class SupplierList extends React.Component {
                 </Button>
               </CardHeader>
               <CardBody>
+                {!loading && items && items.length > 0 && (
                 <Table
                   tableHead={[
                     'Name',
@@ -125,18 +128,33 @@ class SupplierList extends React.Component {
                   ]}
                   tableData={tableData}
                   customCellClasses={[
-                    classes.center,
-                    classes.right,
+                    classes.left,
+                    classes.left,
+                    classes.left,
+                    classes.left,
+                    classes.left,
                     classes.right,
                   ]}
-                  customClassesForCells={[0, 4, 5]}
+                  customClassesForCells={[0, 1, 2, 3, 4]}
                   customHeadCellClasses={[
-                    classes.center,
-                    classes.right,
+                    classes.left,
+                    classes.left,
+                    classes.left,
+                    classes.left,
+                    classes.left,
                     classes.right,
                   ]}
-                  customHeadClassesForCells={[0, 4, 5]}
+                  customHeadClassesForCells={[0, 1, 2, 3, 4]}
                 />
+                )}
+                {!loading && items && items.length === 0 && (
+                  <div style={{
+                    display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'center',
+                  }}
+                  >
+                    <h2><small>No Items to display</small></h2>
+                  </div>
+                )}
                 <LoadingTable visible={loading} color="red" />
               </CardBody>
             </Card>
@@ -151,11 +169,7 @@ SupplierList.propTypes = {
   history: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
   items: PropTypes.array.isRequired,
-
   loading: PropTypes.bool.isRequired,
-  error: PropTypes.bool.isRequired,
-  errorMessage: PropTypes.string.isRequired,
-
   listSupplierItems: PropTypes.func.isRequired,
 };
 

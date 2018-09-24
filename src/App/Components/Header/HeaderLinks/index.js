@@ -34,7 +34,7 @@ class HeaderLinks extends React.Component {
   }
   handleClose = () => {
     this.setState({ open: false });
-  };  
+  };
 
   render() {
     const { classes } = this.props;
@@ -130,13 +130,13 @@ class HeaderLinks extends React.Component {
                         onClick={() => this.props.history.push('/dashboard/user/profile')}
                         className={dropdownItem}
                       >
-                        {'Profile/Signature Settings'}
+                        {'Profile Settings'}
                       </MenuItem>
                       <MenuItem
                         onClick={() => this.props.history.push('/dashboard/user/password')}
                         className={dropdownItem}
                       >
-                        {'Change Password'}
+                        {'Security'}
                       </MenuItem>
                       <MenuItem
                         onClick={() => this.props.history.push('/dashboard/user/medical')}

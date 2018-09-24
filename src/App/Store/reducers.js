@@ -3,6 +3,7 @@ import routingReducer from '../Routing/Store/Reducers';
 
 import dashBoardReducer from '../Layouts/Dashboard/Store/Reducers';
 
+import userDetailsReducer from '../Views/Auth/Login/Store/Reducers/userDetails';
 import loginReducer from '../Views/Auth/Login/Store/Reducers';
 import forgotPasswordReducer from '../Views/ForgotPassword/Store/Reducers';
 import companyReducer from '../Views/Company/Store/Reducers';
@@ -21,6 +22,7 @@ const appReducers = combineReducers({
     dashboard: dashBoardReducer,
   }),
   auth: combineReducers({
+    userDetails: userDetailsReducer,
     login: loginReducer,
     forgotPassword: forgotPasswordReducer,
   }),

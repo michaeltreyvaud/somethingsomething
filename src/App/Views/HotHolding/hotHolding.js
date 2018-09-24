@@ -22,6 +22,7 @@ import Table from '../../Components/Table';
 import LoadingTable from '../../Components/Loading/LoadingTable';
 
 import HotHoldingCreate from './Create/create.container';
+import HotHoldingDelete from './Delete/delete.container';
 
 import style from '../../Assets/Jss/extendedTablesStyle';
 
@@ -31,10 +32,7 @@ class HotHolding extends React.Component {
     this.state = {
       displayCreateModal: false,
       displayDeleteModal: false,
-      displayUpdateModal: false,
       selectedDeleteItem: {},
-      selectedUpdateItem: {},
-      selectedUpdateItemIndex: 0,
       displayErrorMessage: false,
     };
   }
@@ -62,11 +60,11 @@ class HotHolding extends React.Component {
     });
   }
 
-  showDeleteModal(itemId, index) {
+  showDeleteModal(createdAt, index) {
     this.setState({
       displayDeleteModal: true,
       selectedDeleteItem: {
-        itemId,
+        createdAt,
         index,
       },
     });
@@ -76,22 +74,6 @@ class HotHolding extends React.Component {
     this.setState({
       displayDeleteModal: false,
       selectedDeleteItem: {},
-    });
-  }
-
-  showUpdateModal(item, index) {
-    this.setState({
-      displayUpdateModal: true,
-      selectedUpdateItem: item,
-      selectedUpdateItemIndex: index,
-    });
-  }
-
-  hideUpdateModal() {
-    this.setState({
-      displayUpdateModal: false,
-      selectedUpdateItem: {},
-      selectedUpdateItemIndex: 0,
     });
   }
 
@@ -119,11 +101,10 @@ class HotHolding extends React.Component {
 
   render() {
     const {
-      classes, items, loading,
+      classes, items, loading, history,
     } = this.props;
     const {
       displayCreateModal, displayDeleteModal, selectedDeleteItem,
-      displayUpdateModal, selectedUpdateItem, selectedUpdateItemIndex,
     } = this.state;
     const simpleButtons = (item, index) => [
       { color: 'warning', icon: Print, tooltip: 'Print' },
@@ -133,11 +114,11 @@ class HotHolding extends React.Component {
       let onClick;
       switch (key) {
         case 1: {
-          onClick = () => this.showUpdateModal(item, index);
+          onClick = () => history.push(`/dashboard/hotholding/${item.createdAt}`);
           break;
         }
         case 2: {
-          onClick = () => this.showDeleteModal(item.id, index);
+          onClick = () => this.showDeleteModal(item.createdAt, index);
           break;
         }
         default: {
@@ -175,6 +156,12 @@ class HotHolding extends React.Component {
           classes={classes}
           close={() => this.hideCreateModal()}
         />
+        <HotHoldingDelete
+          item={selectedDeleteItem}
+          visible={displayDeleteModal}
+          classes={classes}
+          close={() => this.hideDeleteModal()}
+        />
         <GridContainer>
           <GridItem xs={12}>
             <Card>
@@ -208,16 +195,18 @@ class HotHolding extends React.Component {
                     classes.left,
                     classes.left,
                     classes.left,
+                    classes.right,
                   ]}
-                  customClassesForCells={[0, 1, 2, 3, 4]}
+                  customClassesForCells={[0, 1, 2, 3, 4, 5]}
                   customHeadCellClasses={[
                     classes.left,
                     classes.left,
                     classes.left,
                     classes.left,
                     classes.left,
+                    classes.right,
                   ]}
-                  customHeadClassesForCells={[0, 1, 2, 3, 4]}
+                  customHeadClassesForCells={[0, 1, 2, 3, 4, 5]}
                 />
                 )}
                 {!loading && items && items.length === 0 && (
@@ -239,6 +228,7 @@ class HotHolding extends React.Component {
 }
 
 HotHolding.propTypes = {
+  history: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
   items: PropTypes.array.isRequired,
   foodItems: PropTypes.array.isRequired,

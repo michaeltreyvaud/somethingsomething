@@ -4,6 +4,8 @@ import {
   LIST_HOT_HOLDING_FAIL,
 
   CREATE_HOT_HOLDING_SUCCESS,
+
+  DELETE_HOT_HOLDING_SUCCESS,
 } from '../ActionTypes';
 
 const initialState = {
@@ -53,6 +55,15 @@ const reducer = (state = initialState, action) => {
       const { response } = action.payload;
       const currentItems = Object.assign(state.items);
       currentItems.unshift(response);
+      return {
+        ...state,
+        items: currentItems,
+      };
+    }
+    case DELETE_HOT_HOLDING_SUCCESS: {
+      const { index } = action.payload;
+      const currentItems = Object.assign(state.items);
+      currentItems.splice(index, 1);
       return {
         ...state,
         items: currentItems,
