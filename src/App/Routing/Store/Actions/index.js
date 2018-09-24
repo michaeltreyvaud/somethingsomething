@@ -7,7 +7,7 @@ import {
   VALIDATE_TOKEN_FAIL,
   SESSION_TIMEOUT,
 } from '../ActionTypes';
-import { USER_AUTH_UPDATED } from '../../../Views/Auth/Login/Store/ActionTypes';
+import { USER_AUTH_UPDATED } from '../../../Views/User/Profile/Store/ActionTypes';
 import { AuthenticatedFetch } from '../../../Util/fetch';
 import AuthStore from '../../../Util/authstore';
 

@@ -5,9 +5,8 @@ import {
   PASSWORD_CHALLENGE_ATTEMPT,
   PASSWORD_CHALLENGE_SUCCESS,
   PASSWORD_CHALLENGE_FAIL,
-
-  USER_AUTH_UPDATED,
 } from '../ActionTypes';
+import { USER_AUTH_UPDATED } from '../../../../User/Profile/Store/ActionTypes';
 import { Fetch } from '../../../../../Util/fetch';
 import AuthStore from '../../../../../Util/authstore';
 

@@ -2,8 +2,6 @@ import { combineReducers } from 'redux';
 import routingReducer from '../Routing/Store/Reducers';
 
 import dashBoardReducer from '../Layouts/Dashboard/Store/Reducers';
-
-import userDetailsReducer from '../Views/Auth/Login/Store/Reducers/userDetails';
 import loginReducer from '../Views/Auth/Login/Store/Reducers';
 import forgotPasswordReducer from '../Views/ForgotPassword/Store/Reducers';
 import companyReducer from '../Views/Company/Store/Reducers';
@@ -14,6 +12,7 @@ import managementReducer from './Reducers/Management';
 import foodItemReducer from './Reducers/FoodItem';
 import hotHoldingReducer from './Reducers/HotHolding';
 import fastCoolingReducer from './Reducers/FastCooling';
+import userReducer from './Reducers/User';
 
 //  TODO - break these out
 const appReducers = combineReducers({
@@ -22,7 +21,6 @@ const appReducers = combineReducers({
     dashboard: dashBoardReducer,
   }),
   auth: combineReducers({
-    userDetails: userDetailsReducer,
     login: loginReducer,
     forgotPassword: forgotPasswordReducer,
   }),
@@ -33,6 +31,7 @@ const appReducers = combineReducers({
   foodItem: foodItemReducer,
   hotHolding: hotHoldingReducer,
   fastCooling: fastCoolingReducer,
+  user: userReducer,
 });
 
 export default appReducers;
