@@ -1,14 +1,13 @@
 import {
-  LIST_SUPPLIER_ATTEMPT,
-  LIST_SUPPLIER_SUCCESS,
-  LIST_SUPPLIER_FAIL,
+  LIST_FRIDGE_LOG_ATTEMPT,
+  LIST_FRIDGE_LOG_SUCCESS,
+  LIST_FRIDGE_LOG_FAIL,
 
-  CREATE_SUPPLIER_SUCCESS,
+  CREATE_FRIDGE_LOG_SUCCESS,
 
-  DELETE_SUPPLIER_SUCCESS,
+  DELETE_FRIDGE_LOG_SUCCESS,
 
-  UPDATE_SUPPLIER_SUCCESS,
-  
+  UPDATE_FRIDGE_LOG_SUCCESS,
 } from '../ActionTypes';
 
 const initialState = {
@@ -21,7 +20,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case LIST_SUPPLIER_ATTEMPT: {
+    case LIST_FRIDGE_LOG_ATTEMPT: {
       return {
         ...state,
         loading: true,
@@ -31,7 +30,7 @@ const reducer = (state = initialState, action) => {
         items: [],
       };
     }
-    case LIST_SUPPLIER_SUCCESS: {
+    case LIST_FRIDGE_LOG_SUCCESS: {
       const { response } = action.payload;
       //  TODO - store the next key etc for pagination
       const { Items } = response;
@@ -44,7 +43,7 @@ const reducer = (state = initialState, action) => {
         items: Items,
       };
     }
-    case LIST_SUPPLIER_FAIL: {
+    case LIST_FRIDGE_LOG_FAIL: {
       return {
         ...state,
         loading: false,
@@ -54,7 +53,7 @@ const reducer = (state = initialState, action) => {
         items: [],
       };
     }
-    case CREATE_SUPPLIER_SUCCESS: {
+    case CREATE_FRIDGE_LOG_SUCCESS: {
       const { response } = action.payload;
       const currentItems = Object.assign(state.items);
       currentItems.unshift(response);
@@ -63,7 +62,10 @@ const reducer = (state = initialState, action) => {
         items: currentItems,
       };
     }
-    case DELETE_SUPPLIER_SUCCESS: {
+    default: {
+      return state;
+    }
+    case DELETE_FRIDGE_LOG_SUCCESS: {
       const { index } = action.payload;
       const currentItems = Object.assign(state.items);
       currentItems.splice(index, 1);
@@ -72,17 +74,17 @@ const reducer = (state = initialState, action) => {
         items: currentItems,
       };
     }
-    case UPDATE_SUPPLIER_SUCCESS: {
+    case UPDATE_FRIDGE_LOG_SUCCESS: {
       const { item } = action.payload;
       const currentItems = Object.assign(state.items);
       let index;
       currentItems.forEach((_item, _index) => {
-        if (_item.name === item.name) index = _index;
+        if (_item.createdAt === item.createdAt) index = _index;
       });
       currentItems.splice(index, 1);
       const sortByName = (a, b) => {
-        if (a.name < b.name) { return -1; }
-        if (a.name > b.name) { return 1; }
+        if (a.createdAt < b.createdAt) { return -1; }
+        if (a.createdAt > b.createdAt) { return 1; }
         return 0;
       };
       currentItems.push(item);
@@ -92,9 +94,6 @@ const reducer = (state = initialState, action) => {
         items: currentItems,
       };
     }
-    default: {
-      return state;
-    }  
   }
 };
 

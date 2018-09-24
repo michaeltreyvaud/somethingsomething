@@ -24,6 +24,7 @@ import Users from '../../Views/Management/Users/users.container';
 import Teams from '../../Views/Management/Teams/team.container';
 import TeamsUpdate from '../../Views/Management/Teams/Update/update.container';
 import Suppliers from '../../Views/Management/Suppliers/suppliers.container';
+import SupplierUpdate from '../../Views/Management/Suppliers/Update/update.container';
 import SuppliersCreate from '../../Views/Management/Suppliers/Create';
 
 import UserProfile from '../../Views/User/Profile/profile.container';
@@ -42,8 +43,9 @@ import SafetyCategory from '../../Views/SafetyRecord/SafetyCategory';
 import FridgeItem from '../../Views/Fridge/FridgeItem/fridgeItem.container';
 import FridgeItemUpdate from '../../Views/Fridge/FridgeItem/Update/update.container';
 import FridgeTask from '../../Views/Fridge/FridgeTask';
-import FridgeLog from '../../Views/Fridge/FridgeLog';
+import FridgeLog from '../../Views/Fridge/FridgeLog/fridgeLog.container';
 import FridgeLogCreate from '../../Views/Fridge/FridgeLog/Create';
+import FridgeLogUpdate from '../../Views/Fridge/FridgeLog/Update/update.container';
 import FridgeChart from '../../Views/Fridge/FridgeChart';
 
 import FreezerItem from '../../Views/Freezer/FreezerItem/freezerItem.container';
@@ -150,6 +152,12 @@ const dashRoutes = [
       },
       {
         hidden: true,
+        path: '/dashboard/management/suppliers/:id',
+        name: 'Supplier',
+        component: SupplierUpdate,
+      },      
+      {
+        hidden: true,
         path: '/dashboard/management/suppliers/create',
         name: 'Create Supplier',
         component: SuppliersCreate,
@@ -230,6 +238,12 @@ const dashRoutes = [
         name: 'Fridge Log',
         component: FridgeLog,
       },
+      {
+        hidden: true,
+        path: '/dashboard/fridge/log/:id',
+        name: 'Create Fridge Log',
+        component: FridgeLogUpdate,
+      },      
       {
         hidden: true,
         path: '/dashboard/fridge/log/create',

@@ -1,7 +1,7 @@
 import {
-  DELETE_SUPPLIER_ATTEMPT,
-  DELETE_SUPPLIER_SUCCESS,
-  DELETE_SUPPLIER_FAIL,
+  UPDATE_FRIDGE_LOG_ATTEMPT,
+  UPDATE_FRIDGE_LOG_SUCCESS,
+  UPDATE_FRIDGE_LOG_FAIL,
 } from '../ActionTypes';
 
 const initialState = {
@@ -13,7 +13,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case DELETE_SUPPLIER_ATTEMPT: {
+    case UPDATE_FRIDGE_LOG_ATTEMPT: {
       return {
         ...state,
         loading: true,
@@ -22,7 +22,7 @@ const reducer = (state = initialState, action) => {
         success: false,
       };
     }
-    case DELETE_SUPPLIER_SUCCESS: {
+    case UPDATE_FRIDGE_LOG_SUCCESS: {
       return {
         ...state,
         loading: false,
@@ -31,7 +31,7 @@ const reducer = (state = initialState, action) => {
         success: true,
       };
     }
-    case DELETE_SUPPLIER_FAIL: {
+    case UPDATE_FRIDGE_LOG_FAIL: {
       const { message } = action.payload;
       return {
         ...state,
