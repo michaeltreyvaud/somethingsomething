@@ -1,7 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import Assignment from '@material-ui/icons/Assignment';
@@ -19,6 +18,9 @@ import Button from '../../../Components/CustomButtons';
 import Table from '../../../Components/Table';
 import LoadingTable from '../../../Components/Loading/LoadingTable';
 
+//import SupplierCreate from './Create/create.container';
+import SupplierDelete from './Delete/delete.container';
+
 import style from '../../../Assets/Jss/style';
 import extendedTablesStyle from '../../../Assets/Jss/extendedTablesStyle';
 
@@ -31,11 +33,11 @@ class SupplierList extends React.Component {
     };
   }
 
-  showDeleteModal(createdAt, index) {
+  showDeleteModal(name, index) {
     this.setState({
       displayDeleteModal: true,
       selectedDeleteItem: {
-        createdAt,
+        name,
         index,
       },
     });
@@ -59,12 +61,12 @@ class SupplierList extends React.Component {
     ].map((prop, key) => {
       let onClick;
       switch (key) {
-        case 1: {
-          //onClick = () => history.push(`/dashboard/fooditem/${item.createdAt}`);
+        case 0: {
+          onClick = () => history.push(`/dashboard/management/suppliers/${item.name}`);
           break;
         }
-        case 2: {
-          onClick = () => this.showDeleteModal(item.createdAt, index);
+        case 1: {
+          onClick = () => this.showDeleteModal(item.name, index);
           break;
         }
         default: {
@@ -95,6 +97,12 @@ class SupplierList extends React.Component {
     });
     return (
       <div>
+        <SupplierDelete
+          item={selectedDeleteItem}
+          visible={displayDeleteModal}
+          classes={classes}
+          close={() => this.hideDeleteModal()}
+        />        
         <GridContainer>
           <GridItem xs={12}>
             <Card>

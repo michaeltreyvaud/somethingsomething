@@ -1,7 +1,7 @@
 import {
-  DELETE_FOOD_ITEM_ATTEMPT,
-  DELETE_FOOD_ITEM_SUCCESS,
-  DELETE_FOOD_ITEM_FAIL,
+  DELETE_SUPPLIER_ATTEMPT,
+  DELETE_SUPPLIER_SUCCESS,
+  DELETE_SUPPLIER_FAIL,
 } from '../ActionTypes';
 
 const initialState = {
@@ -13,7 +13,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case DELETE_FOOD_ITEM_ATTEMPT: {
+    case DELETE_SUPPLIER_ATTEMPT: {
       return {
         ...state,
         loading: true,
@@ -22,7 +22,7 @@ const reducer = (state = initialState, action) => {
         success: false,
       };
     }
-    case DELETE_FOOD_ITEM_SUCCESS: {
+    case DELETE_SUPPLIER_SUCCESS: {
       return {
         ...state,
         loading: false,
@@ -31,7 +31,7 @@ const reducer = (state = initialState, action) => {
         success: true,
       };
     }
-    case DELETE_FOOD_ITEM_FAIL: {
+    case DELETE_SUPPLIER_FAIL: {
       const { message } = action.payload;
       return {
         ...state,

@@ -24,6 +24,7 @@ import Users from '../../Views/Management/Users/users.container';
 import Teams from '../../Views/Management/Teams/team.container';
 import TeamsUpdate from '../../Views/Management/Teams/Update/update.container';
 import Suppliers from '../../Views/Management/Suppliers/suppliers.container';
+import SupplierUpdate from '../../Views/Management/Suppliers/Update/update.container';
 import SuppliersCreate from '../../Views/Management/Suppliers/Create';
 
 import UserProfile from '../../Views/User/Profile';
@@ -146,6 +147,12 @@ const dashRoutes = [
         name: 'Suppliers',
         component: Suppliers,
       },
+      {
+        hidden: true,
+        path: '/dashboard/management/suppliers/:id',
+        name: 'Supplier',
+        component: SupplierUpdate,
+      },      
       {
         hidden: true,
         path: '/dashboard/management/suppliers/create',

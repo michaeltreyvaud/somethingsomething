@@ -62,9 +62,6 @@ const reducer = (state = initialState, action) => {
         items: currentItems,
       };
     }
-    default: {
-      return state;
-    }
     case DELETE_FOOD_ITEM_SUCCESS: {
       const { index } = action.payload;
       const currentItems = Object.assign(state.items);
@@ -94,6 +91,9 @@ const reducer = (state = initialState, action) => {
         items: currentItems,
       };
     }
+    default: {
+      return state;
+    }    
   }
 };
 
