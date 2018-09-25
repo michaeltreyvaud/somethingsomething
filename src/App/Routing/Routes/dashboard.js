@@ -51,8 +51,9 @@ import FridgeChart from '../../Views/Fridge/FridgeChart';
 import FreezerItem from '../../Views/Freezer/FreezerItem/freezerItem.container';
 import FreezerItemUpdate from '../../Views/Freezer/FreezerItem/Update/update.container';
 import FreezerTask from '../../Views/Freezer/FreezerTask';
-import FreezerLog from '../../Views/Freezer/FreezerLog';
+import FreezerLog from '../../Views/Freezer/FreezerLog/freezerLog.container';
 import FreezerLogCreate from '../../Views/Freezer/FreezerLog/Create';
+import FreezerLogUpdate from '../../Views/Freezer/FreezerLog/Update/update.container';
 import FreezerChart from '../../Views/Freezer/FreezerChart';
 
 import FoodItem from '../../Views/FoodItem/foodItem.container';
@@ -243,7 +244,7 @@ const dashRoutes = [
         path: '/dashboard/fridge/log/:id',
         name: 'Create Fridge Log',
         component: FridgeLogUpdate,
-      },      
+      },
       {
         hidden: true,
         path: '/dashboard/fridge/log/create',
@@ -284,6 +285,12 @@ const dashRoutes = [
         path: '/dashboard/freezer/log',
         name: 'Freezer Log',
         component: FreezerLog,
+      },
+      {
+        hidden: true,
+        path: '/dashboard/freezer/log/:id',
+        name: 'Create Freezer Log',
+        component: FreezerLogUpdate,
       },
       {
         hidden: true,
