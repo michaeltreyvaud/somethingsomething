@@ -2,8 +2,7 @@ import React from 'react';
 import Datetime from 'react-datetime';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from "@material-ui/core/Select";
+import SignatureCanvas from 'react-signature-canvas';
 import CustomInput from '../../../../Components/CustomInput';
 import ImageUpload from '../../../../Components/CustomUpload/ImageUpload';
 // @material-ui/icons
@@ -19,15 +18,59 @@ import CardBody from '../../../../Components/Card/CardBody';
 import CardIcon from '../../../../Components/Card/CardIcon';
 import InputLabel from '@material-ui/core/InputLabel';
 import extendedFormsStyle from '../../../../Assets/Jss/extendedFormsStyle';
+import NotFound from '../../../../Components/NotFound';
 
-class FreezerLogCreate extends React.Component {
+import LoadingTable from '../../../../Components/Loading/LoadingTable';
+
+class Update extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      number: "",
-      numberState: "",
-    };
-    this.typeClick = this.typeClick.bind(this);
+    const { item } = props;
+    if (item) {
+      const {
+        signature, image, comments, user, createdAt, freezerItem, id, temperature
+      } = item;
+      this.state = {
+        signature,
+        image,
+        comments,
+        user,
+        createdAt,
+        freezerItem,
+        id,
+        temperature,
+      };
+    } else {
+      this.state = {
+        signature: '',
+        image: '',
+        comments: '',
+        user: '',
+        createdAt: 0,
+        freezerItem: '',
+        id: '',
+        temperature: 0,
+      };
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { item, updating } = nextProps;
+    if (item && !updating) {
+      const {
+        signature, image, comments, user, createdAt, freezerItem, id, temperature
+      } = item;
+      this.setState({
+        signature,
+        image,
+        comments,
+        user,
+        createdAt,
+        freezerItem,
+        id,
+        temperature,
+      });
+    }
   }
 
   // function that verifies if value contains only numbers
@@ -58,10 +101,16 @@ class FreezerLogCreate extends React.Component {
     }
 
   render() {
-    const { classes } = this.props;
+    const {
+      classes, loading, item, updating,
+    } = this.props;
+    if (!item && !loading) return (<NotFound text="Freezer Log Not Found" />);
+    const {
+      signature, image, comments, user, createdAt, freezerItem, id, temperature
+    } = this.state;
     return (
       <div>
-        <Button color="rose">Save</Button>
+        <Button color="rose">Clone</Button>
         <Button color="info" onClick={() => this.props.history.push('/dashboard/freezer/log')}>
           Cancel
         </Button>        
@@ -75,71 +124,33 @@ class FreezerLogCreate extends React.Component {
                 <h4 className={classes.cardIconTitle}>Freezer Temperature</h4>
               </CardHeader>
               <CardBody>
-                <FormControl
-                  fullWidth
-                  className={classes.selectFormControl}
-                >
-                  <InputLabel
-                    htmlFor="simple-select"
-                    className={classes.selectLabel}
-                  >
-                    Choose Freezer
-                  </InputLabel>
-                  <Select
-                    MenuProps={{
-                      className: classes.selectMenu
-                    }}
-                    classes={{
-                      select: classes.select
-                    }}
-                    value={this.state.simpleSelect}
-                    onChange={this.handleSimple}
-                    inputProps={{
-                      name: "simpleSelect",
-                      id: "simple-select"
-                    }}
-                  >
-                  <MenuItem
-                    classes={{
-                      root: classes.selectMenuItem,
-                      selected: classes.selectMenuItemSelected
-                    }}
-                    value="2"
-                  >
-                    Freezer 1
-                  </MenuItem>
-                  <MenuItem
-                    classes={{
-                      root: classes.selectMenuItem,
-                      selected: classes.selectMenuItemSelected
-                    }}
-                    value="3"
-                  >
-                    Freezer 2
-                  </MenuItem>
-                  </Select>
-                </FormControl>
                   <CustomInput
-                    success={this.state.numberState === "success"}
-                    error={this.state.numberState === "error"}
-                    labelText="Temperature"
-                    id="number"
+                    id="freezer"
+                    value={freezerItem}
                     formControlProps={{
                       fullWidth: true
                     }}
                     inputProps={{
-                      onChange: event =>
-                        this.change(event, "number", "number"),
-                      type: "number"
+                      disabled: true
+                    }}
+                  />
+                  <CustomInput
+                    id="temperature"
+                    value={temperature}
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    inputProps={{
+                      disabled: true
                     }}
                   />
                     <CustomInput
-                    id="disabled"
+                    id="user"
+                    value={user}
                     formControlProps={{
                       fullWidth: true
                     }}
                     inputProps={{
-                      placeholder: "Bob Bobson",
                       disabled: true
                     }}
                   />
@@ -149,7 +160,8 @@ class FreezerLogCreate extends React.Component {
                   <br />
                   <FormControl fullWidth>
                     <Datetime
-                      inputProps={{ placeholder: "08/01/2018 12:00 AM", disabled: true } }
+                      value={createdAt}
+                      inputProps={{ disabled: true } }
                     />
                   </FormControl>
                   <ImageUpload
@@ -174,16 +186,36 @@ class FreezerLogCreate extends React.Component {
               <CardBody>
                 <InputLabel style={{ color: '#AAAAAA' }}>Comments</InputLabel>
                 <CustomInput
-                  id="about-me"
+                  id="comments"
+                  value={comments}
                   formControlProps={{
                     fullWidth: true,
                   }}
                   inputProps={{
                     multiline: true,
                     rows: 3,
+                    disabled: true,
                   }}
                 />
                 <InputLabel style={{ color: '#AAAAAA' }}>Signature</InputLabel>
+                <SignatureCanvas
+                  ref={(ref) => { this.sigCanvas = ref; }}
+                  backgroundColor="#ECECEC"
+                  penColor="black"
+                  canvasProps={{ width: 740, height: 320 }}
+                />
+                <CustomInput
+                  id="signature"
+                  value={signature}
+                  formControlProps={{
+                    fullWidth: true,
+                  }}
+                  inputProps={{
+                    multiline: true,
+                    rows: 3,
+                    disabled: true,
+                  }}
+                />
               </CardBody>
             </Card>
           </GridItem>
@@ -193,4 +225,4 @@ class FreezerLogCreate extends React.Component {
   }
 }
 
-export default withStyles(extendedFormsStyle)(FreezerLogCreate);
+export default withStyles(extendedFormsStyle)(Update);

@@ -6,7 +6,7 @@ import Assignment from '@material-ui/icons/Assignment';
 import Tooltip from '@material-ui/core/Tooltip';
 import moment from 'moment';
 // core components
-import Print from '@material-ui/icons/Print';
+import FileCopy from '@material-ui/icons/FileCopy';
 import Open from '@material-ui/icons/OpenInNew';
 import Delete from '@material-ui/icons/Delete';
 import GridContainer from '../../../Components/Grid/GridContainer';
@@ -53,7 +53,7 @@ class FridgeLog extends React.Component {
       displayDeleteModal: false,
       selectedDeleteItem: {},
     });
-  }  
+  }
 
   render() {
     const {
@@ -62,14 +62,14 @@ class FridgeLog extends React.Component {
     const {
       displayDeleteModal, selectedDeleteItem,
     } = this.state;
-    const simpleButtons = (item, index) => [
-      { color: 'warning', icon: Print, tooltip: 'Print' },
+    const simpleButtons = (item, index) => [      
       { color: 'success', icon: Open, tooltip: 'Edit' },
+      { color: 'warning', icon: FileCopy, tooltip: 'Copy' },
       { color: 'danger', icon: Delete, tooltip: 'Delete' },
     ].map((prop, key) => {
       let onClick;
       switch (key) {
-        case 1: {
+        case 0: {
           onClick = () => history.push(`/dashboard/fridge/log/${item.createdAt}`);
           break;
         }
@@ -110,7 +110,7 @@ class FridgeLog extends React.Component {
           visible={displayDeleteModal}
           classes={classes}
           close={() => this.hideDeleteModal()}
-        />        
+        />
         <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/dashboard/fridge/log/create')}>
         New
         </Button>
@@ -173,7 +173,7 @@ class FridgeLog extends React.Component {
                     <h2><small>No Items to display</small></h2>
                   </div>
                 )}
-                <LoadingTable visible={loading} color="red" />                
+                <LoadingTable visible={loading} color="red" />
               </CardBody>
             </Card>
           </GridItem>

@@ -1,10 +1,12 @@
 import React from 'react';
 // @material-ui/core components
+import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Assignment from '@material-ui/icons/Assignment';
-
+import Tooltip from '@material-ui/core/Tooltip';
+import moment from 'moment';
 // core components
-import Print from '@material-ui/icons/Print';
+import FileCopy from '@material-ui/icons/FileCopy';
 import Open from '@material-ui/icons/OpenInNew';
 import Delete from '@material-ui/icons/Delete';
 import GridContainer from '../../../Components/Grid/GridContainer';
@@ -16,6 +18,9 @@ import CardIcon from '../../../Components/Card/CardIcon';
 import Button from '../../../Components/CustomButtons';
 import Table from '../../../Components/Table';
 import CustomDropdown from '../../../Components/CustomDropdown';
+import LoadingTable from '../../../Components/Loading/LoadingTable';
+
+import FreezerLogDelete from './Delete/delete.container';
 
 import extendedTablesStyle from '../../../Assets/Jss/extendedFormsStyle';
 
@@ -23,26 +28,89 @@ class FreezerLog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      displayDeleteModal: false,
+      selectedDeleteItem: {},      
     };
   }
 
+  componentDidMount() {
+    const { listFreezerLogs } = this.props;
+    listFreezerLogs();
+  }
+
+  showDeleteModal(createdAt, index) {
+    this.setState({
+      displayDeleteModal: true,
+      selectedDeleteItem: {
+        createdAt,
+        index,
+      },
+    });
+  }
+
+  hideDeleteModal() {
+    this.setState({
+      displayDeleteModal: false,
+      selectedDeleteItem: {},
+    });
+  }  
+
   render() {
-    const { classes } = this.props;
-    const simpleButtons = [
-      { color: 'warning', icon: Print },
-      { color: 'success', icon: Open },
-      { color: 'danger', icon: Delete },
-    ].map((prop, key) => (
-      <Button
-        color={prop.color}
-        className={classes.actionButton}
-        key={key}
-      >
-        <prop.icon className={classes.icon} />
-      </Button>
-    ));
+    const {
+      classes, items, loading, history,
+    } = this.props;
+    const {
+      displayDeleteModal, selectedDeleteItem,
+    } = this.state;
+    const simpleButtons = (item, index) => [      
+      { color: 'success', icon: Open, tooltip: 'Edit' },
+      { color: 'warning', icon: FileCopy, tooltip: 'Copy' },
+      { color: 'danger', icon: Delete, tooltip: 'Delete' },
+    ].map((prop, key) => {
+      let onClick;
+      switch (key) {
+        case 0: {
+          onClick = () => history.push(`/dashboard/freezer/log/${item.createdAt}`);
+          break;
+        }
+        case 2: {
+          onClick = () => this.showDeleteModal(item.createdAt, index);
+          break;
+        }
+        default: {
+          onClick = () => {};
+        }
+      }
+      return (
+        <Tooltip
+          id="tooltip-top"
+          title={prop.tooltip}
+          placement="top"
+          classes={{ tooltip: classes.tooltip }}
+        >
+          <Button
+            color={prop.color}
+            className={classes.actionButton}
+            key={key}
+            onClick={onClick}
+          >
+            <prop.icon className={classes.icon} />
+          </Button>
+        </Tooltip>
+      );
+    });
+    const tableData = items.map((_item, index) => {
+      const item = [ _item.freezerItem, _item.user, _item.temperature, moment(_item.createdAt).format('MMMM Do YYYY, h:mm:ss a'), _item.image, _item.comments, simpleButtons(_item, index)];
+      return item;
+    });    
     return (
       <div>
+        <FreezerLogDelete
+          item={selectedDeleteItem}
+          visible={displayDeleteModal}
+          classes={classes}
+          close={() => this.hideDeleteModal()}
+        />
         <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/dashboard/freezer/log/create')}>
         New
         </Button>
@@ -71,11 +139,10 @@ class FreezerLog extends React.Component {
                 </CardIcon>
               </CardHeader>
               <CardBody>
+              {!loading && items && items.length > 0 && (
                 <Table
                   tableHead={[
-                    'ID',
-                    'Image',
-                    'Location',
+                    'Freezer',
                     'Operator',
                     'Temperature',
                     'Date/Time',
@@ -83,19 +150,7 @@ class FreezerLog extends React.Component {
                     'Comments',
                     'Actions',
                   ]}
-                  tableData={[
-                    [
-                      '1',
-                      'PICTURE',
-                      'Cold Fridge 1',
-                      'Daniel Treyvaud',
-                      '17 Degrees',
-                      '07/22/2018 18:38:34',
-                      'IMAGE',
-                      'Test Comments',
-                      simpleButtons,
-                    ],
-                  ]}
+                  tableData={tableData}
                   customCellClasses={[
                     classes.center,
                     classes.right,
@@ -109,6 +164,8 @@ class FreezerLog extends React.Component {
                   ]}
                   customHeadClassesForCells={[0, 4, 5]}
                 />
+                )}
+                <LoadingTable visible={loading} color="red" />
               </CardBody>
             </Card>
           </GridItem>
