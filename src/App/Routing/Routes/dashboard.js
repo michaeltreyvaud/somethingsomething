@@ -29,8 +29,8 @@ import SuppliersCreate from '../../Views/Management/Suppliers/Create';
 
 import UserProfile from '../../Views/User/Profile/profile.container';
 import UserPassword from '../../Views/User/Password';
-import UserMedicalLog from '../../Views/User/MedicalLog';
-import UserTrainingLog from '../../Views/User/TrainingLog';
+import UserMedicalLog from '../../Views/User/MedicalLog/medicalLog.container';
+import UserTrainingLog from '../../Views/User/TrainingLog/trainingLog.container';
 
 import CheckList from '../../Views/CheckList';
 import CheckListCreate from '../../Views/CheckList/Create';
