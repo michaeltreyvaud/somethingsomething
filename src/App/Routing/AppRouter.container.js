@@ -10,6 +10,8 @@ import { listFoodItems } from '../Views/FoodItem/Store/Actions';
 import { listSuppliers } from '../Views/Management/Suppliers/Store/Actions';
 import { listFridgeLogs } from '../Views/Fridge/FridgeLog/Store/Actions';
 import { listFreezerLogs } from '../Views/Freezer/FreezerLog/Store/Actions';
+import { listMedicalLogs } from '../Views/User/MedicalLog/Store/Actions';
+import { listTrainingLogs } from '../Views/User/TrainingLog/Store/Actions';
 
 const mapStateToProps = state => ({
   loading: state.routes.loading,
@@ -28,6 +30,8 @@ const mapDispatchToProps = dispatch => ({
   listSuppliers: () => dispatch(listSuppliers()),
   listFridgeLogs: () => dispatch(listFridgeLogs()),
   listFreezerLogs: () => dispatch(listFreezerLogs()),
+  listMedicalLogs: () => dispatch(listMedicalLogs()),
+  listTrainingLogs: () => dispatch(listTrainingLogs()),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AppRouter));
