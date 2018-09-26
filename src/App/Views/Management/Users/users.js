@@ -21,7 +21,6 @@ import LoadingTable from '../../../Components/Loading/LoadingTable';
 
 import UserCreate from './Create/create.container';
 import UserDelete from './Delete/delete.container';
-import UserUpdate from './Update/update.container';
 
 import style from '../../../Assets/Jss/extendedFormsStyle';
 
@@ -31,10 +30,7 @@ class Users extends React.Component {
     this.state = {
       displayCreateModal: false,
       displayDeleteModal: false,
-      displayUpdateModal: false,
       selectedDeleteItem: {},
-      selectedUpdateItem: {},
-      selectedUpdateItemIndex: 0,
       displayErrorMessage: false,
     };
   }
@@ -79,22 +75,6 @@ class Users extends React.Component {
     });
   }
 
-  showUpdateModal(item, index) {
-    this.setState({
-      displayUpdateModal: true,
-      selectedUpdateItem: item,
-      selectedUpdateItemIndex: index,
-    });
-  }
-
-  hideUpdateModal() {
-    this.setState({
-      displayUpdateModal: false,
-      selectedUpdateItem: {},
-      selectedUpdateItemIndex: 0,
-    });
-  }
-
   closeErrorMessage() {
     this.setState({
       displayErrorMessage: false,
@@ -119,11 +99,10 @@ class Users extends React.Component {
 
   render() {
     const {
-      classes, items, loading,
+      classes, items, loading, history,
     } = this.props;
     const {
       displayCreateModal, displayDeleteModal, selectedDeleteItem,
-      displayUpdateModal, selectedUpdateItem, selectedUpdateItemIndex,
     } = this.state;
     const simpleButtons = (item, index) => [
       { color: 'success', icon: Open, tooltip: 'Edit' },
@@ -132,7 +111,7 @@ class Users extends React.Component {
       let onClick;
       switch (key) {
         case 0: {
-          onClick = () => this.showUpdateModal(item, index);
+          onClick = () => history.push(`/dashboard/management/users/${item.userName}`);
           break;
         }
         case 1: {
@@ -181,13 +160,6 @@ class Users extends React.Component {
           visible={displayCreateModal}
           classes={classes}
           close={() => this.hideCreateModal()}
-        />
-        <UserUpdate
-          item={selectedUpdateItem}
-          index={selectedUpdateItemIndex}
-          visible={displayUpdateModal}
-          classes={classes}
-          close={() => this.hideUpdateModal()}
         />
         <GridContainer>
           <GridItem xs={12}>
@@ -261,6 +233,7 @@ class Users extends React.Component {
 }
 
 Users.propTypes = {
+  history: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
   items: PropTypes.array.isRequired,
   teams: PropTypes.array.isRequired,

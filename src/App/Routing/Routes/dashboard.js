@@ -20,12 +20,14 @@ import BugReport from '@material-ui/icons/BugReport';
 
 import Metrics from '../../Views/Home/Metrics';
 import Company from '../../Views/Company/company.container';
-import Users from '../../Views/Management/Users/users.container';
-import Teams from '../../Views/Management/Teams/team.container';
-import TeamsUpdate from '../../Views/Management/Teams/Update/update.container';
-import Suppliers from '../../Views/Management/Suppliers/suppliers.container';
-import SupplierUpdate from '../../Views/Management/Suppliers/Update/update.container';
-import SuppliersCreate from '../../Views/Management/Suppliers/Create';
+
+import ManagementUsers from '../../Views/Management/Users/users.container';
+import ManagementUsersUpdate from '../../Views/Management/Users/Update/update.container';
+import ManagementTeams from '../../Views/Management/Teams/team.container';
+import ManagementTeamsUpdate from '../../Views/Management/Teams/Update/update.container';
+import ManagementSuppliers from '../../Views/Management/Suppliers/suppliers.container';
+import ManagementSupplierUpdate from '../../Views/Management/Suppliers/Update/update.container';
+import ManagementSuppliersCreate from '../../Views/Management/Suppliers/Create';
 
 import UserProfile from '../../Views/User/Profile/profile.container';
 import UserPassword from '../../Views/User/Password';
@@ -133,35 +135,41 @@ const dashRoutes = [
       {
         path: '/dashboard/management/teams',
         name: 'Teams',
-        component: Teams,
+        component: ManagementTeams,
       },
       {
         hidden: true,
         path: '/dashboard/management/teams/:id',
         name: 'Team',
-        component: TeamsUpdate,
+        component: ManagementTeamsUpdate,
       },
       {
         path: '/dashboard/management/users',
         name: 'Users',
-        component: Users,
+        component: ManagementUsers,
+      },
+      {
+        hidden: true,
+        path: '/dashboard/management/users/:id',
+        name: 'Users',
+        component: ManagementUsersUpdate,
       },
       {
         path: '/dashboard/management/suppliers',
         name: 'Suppliers',
-        component: Suppliers,
+        component: ManagementSuppliers,
       },
       {
         hidden: true,
         path: '/dashboard/management/suppliers/:id',
         name: 'Supplier',
-        component: SupplierUpdate,
-      },      
+        component: ManagementSupplierUpdate,
+      },
       {
         hidden: true,
         path: '/dashboard/management/suppliers/create',
         name: 'Create Supplier',
-        component: SuppliersCreate,
+        component: ManagementSuppliersCreate,
       },
     ],
   },

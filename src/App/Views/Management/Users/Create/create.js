@@ -135,29 +135,16 @@ class Create extends Component {
         >
           <ImageUpload
             avatar
-            addButtonProps={{
-              color: 'rose',
-              round: true,
-            }}
-            changeButtonProps={{
-              color: 'rose',
-              round: true,
-            }}
-            removeButtonProps={{
-              color: 'danger',
-              round: true,
-            }}
+            addButtonProps={{ color: 'rose', round: true }}
+            changeButtonProps={{ color: 'rose', round: true }}
+            removeButtonProps={{ color: 'danger', round: true }}
           />
           <CustomInput
             labelText="Email"
             name="email"
             id="email"
-            formControlProps={{
-              fullWidth: true,
-            }}
-            inputProps={{
-              type: 'email',
-            }}
+            formControlProps={{ fullWidth: true }}
+            inputProps={{ type: 'email' }}
             value={email}
             onChange={e => this.updateValue(e)}
           />
@@ -165,12 +152,8 @@ class Create extends Component {
             labelText="First Name"
             name="firstName"
             id="firstName"
-            formControlProps={{
-              fullWidth: true,
-            }}
-            inputProps={{
-              type: 'text',
-            }}
+            formControlProps={{ fullWidth: true }}
+            inputProps={{ type: 'text' }}
             value={firstName}
             onChange={e => this.updateValue(e)}
           />
@@ -178,12 +161,8 @@ class Create extends Component {
             labelText="Last Name"
             name="lastName"
             id="lastName"
-            formControlProps={{
-              fullWidth: true,
-            }}
-            inputProps={{
-              type: 'text',
-            }}
+            formControlProps={{ fullWidth: true }}
+            inputProps={{ type: 'text' }}
             value={lastName}
             onChange={e => this.updateValue(e)}
           />
@@ -191,12 +170,8 @@ class Create extends Component {
             labelText="Phone Number"
             name="phoneNumber"
             id="phoneNumber"
-            formControlProps={{
-              fullWidth: true,
-            }}
-            inputProps={{
-              type: 'phone',
-            }}
+            formControlProps={{ fullWidth: true }}
+            inputProps={{ type: 'phone' }}
             value={phoneNumber}
             onChange={e => this.updateValue(e)}
           />
@@ -204,12 +179,8 @@ class Create extends Component {
             labelText="Position"
             name="position"
             id="position"
-            formControlProps={{
-              fullWidth: true,
-            }}
-            inputProps={{
-              type: 'text',
-            }}
+            formControlProps={{ fullWidth: true }}
+            inputProps={{ type: 'text' }}
             value={position}
             onChange={e => this.updateValue(e)}
           />
@@ -254,13 +225,7 @@ class Create extends Component {
             </Select>
           </FormControl>
         </DialogContent>
-        <DialogActions
-          className={
-          `${classes.modalFooter
-          } ${
-            classes.modalFooterCenter}`
-        }
-        >
+        <DialogActions className={`${classes.modalFooter} ${classes.modalFooterCenter}`}>
           <Button
             loading={loading}
             onClick={() => this.createUser()}

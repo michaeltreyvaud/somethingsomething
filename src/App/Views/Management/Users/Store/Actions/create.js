@@ -30,8 +30,8 @@ export const createUser = user => async (dispatch) => {
     dispatch(createUserAttempt());
     const body = user;
     //  TODO - fetch these
-    const { REACT_APP_API_URL, REACT_APP_CREATE_USER_PATH } = process.env;
-    const response = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_CREATE_USER_PATH}`, body);
+    const { REACT_APP_API_URL, REACT_APP_MANAGEMENT_USER_CREATE_PATH } = process.env;
+    const response = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_MANAGEMENT_USER_CREATE_PATH}`, body);
     //  Display success message
     dispatch(showDashBoardSuccess('User Created'));
     return dispatch(createUserSuccess(response));

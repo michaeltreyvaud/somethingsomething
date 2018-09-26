@@ -30,8 +30,8 @@ export const deleteTeam = (name, index) => async (dispatch) => {
     dispatch(deleteTeamAttempt());
     const body = { name };
     //  TODO - fetch these
-    const { REACT_APP_API_URL, REACT_APP_DELETE_TEAM_PATH } = process.env;
-    await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_DELETE_TEAM_PATH}`, body);
+    const { REACT_APP_API_URL, REACT_APP_MANAGEMENT_TEAM_DELETE_PATH } = process.env;
+    await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_MANAGEMENT_TEAM_DELETE_PATH}`, body);
     //  Display success message
     dispatch(showDashBoardSuccess('Item Deleted'));
     return dispatch(deleteTeamSuccess(index));

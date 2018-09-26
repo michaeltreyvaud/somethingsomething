@@ -32,8 +32,8 @@ export const listTeamUsers = name => async (dispatch) => {
     dispatch(listTeamUsersAttempt());
     const body = { name };
     //  TODO - fetch these
-    const { REACT_APP_API_URL, REACT_APP_USERS_TEAM_PATH } = process.env;
-    const response = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_USERS_TEAM_PATH}`, body);
+    const { REACT_APP_API_URL, REACT_APP_MANAGEMENT_TEAM_USERS_PATH } = process.env;
+    const response = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_MANAGEMENT_TEAM_USERS_PATH}`, body);
     return dispatch(listTeamUsersSuccess(response));
   } catch (_err) {
     if (_err.code === 401) return dispatch(sessionTimeout());
@@ -64,8 +64,8 @@ export const deleteTeamUser = (name, userName, index) => async (dispatch) => {
     dispatch(deleteTeamUserAttempt());
     const body = { name, userName };
     //  TODO - fetch these
-    const { REACT_APP_API_URL, REACT_APP_DELETE_USER_TEAM_PATH } = process.env;
-    await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_DELETE_USER_TEAM_PATH}`, body);
+    const { REACT_APP_API_URL, REACT_APP_MANAGEMENT_TEAM_DELETE_USER_PATH } = process.env;
+    await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_MANAGEMENT_TEAM_DELETE_USER_PATH}`, body);
     //  Display success message
     dispatch(showDashBoardSuccess('User Removed'));
     return dispatch(deleteTeamUserSuccess(index));

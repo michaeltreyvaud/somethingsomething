@@ -11,10 +11,9 @@ const updateUserAttempt = () => ({
   type: UPDATE_USER_ATTEMPT,
 });
 
-const updateUserSuccess = (index, item) => ({
+const updateUserSuccess = item => ({
   type: UPDATE_USER_SUCCESS,
   payload: {
-    index,
     item,
   },
 });
@@ -24,18 +23,18 @@ const updateUserFail = message => ({
   payload: { message },
 });
 
-export const updateUser = (item, index) => async (dispatch) => {
+export const updateUser = user => async (dispatch) => {
   try {
     //  Tell the layout we are doing something
     dispatch(dashboardLoading());
     dispatch(updateUserAttempt());
-    const body = item;
+    const body = user;
     //  TODO - fetch these
-    const { REACT_APP_API_URL, REACT_APP_UPDATE_USER_PATH } = process.env;
-    const updatedItem = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_UPDATE_USER_PATH}`, body);
+    const { REACT_APP_API_URL, REACT_APP_MANAGEMENT_USER_UPDATE_PATH } = process.env;
+    const updatedItem = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_MANAGEMENT_USER_UPDATE_PATH}`, body);
     //  Display success message
-    dispatch(showDashBoardSuccess('Item Updated'));
-    return dispatch(updateUserSuccess(index, updatedItem));
+    dispatch(showDashBoardSuccess('User Updated'));
+    return dispatch(updateUserSuccess(updatedItem));
   } catch (_err) {
     if (_err.code === 401) return dispatch(sessionTimeout());
     //  Display error message

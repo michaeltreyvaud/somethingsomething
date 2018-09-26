@@ -27,8 +27,8 @@ export const listSuppliers = () => async (dispatch) => {
     dispatch(listSupplierAttempt());
     const body = {};
     //  TODO - fetch these
-    const { REACT_APP_API_URL, REACT_APP_LIST_SUPPLIER_PATH } = process.env;
-    const response = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_LIST_SUPPLIER_PATH}`, body);
+    const { REACT_APP_API_URL, REACT_APP_MANAGEMENT_SUPPLIER_LIST_PATH } = process.env;
+    const response = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_MANAGEMENT_SUPPLIER_LIST_PATH}`, body);
     return dispatch(listSupplierSuccess(response));
   } catch (_err) {
     if (_err.code === 401) return dispatch(sessionTimeout());

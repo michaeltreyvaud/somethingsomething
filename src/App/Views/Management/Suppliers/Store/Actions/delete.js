@@ -30,8 +30,8 @@ export const deleteSupplier = (name, index) => async (dispatch) => {
     dispatch(deleteSupplierAttempt());
     const body = { name };
     //  TODO - fetch these
-    const { REACT_APP_API_URL, REACT_APP_DELETE_SUPPLIER_PATH } = process.env;
-    await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_DELETE_SUPPLIER_PATH}`, body);
+    const { REACT_APP_API_URL, REACT_APP_MANAGEMENT_SUPPLIER_DELETE_PATH } = process.env;
+    await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_MANAGEMENT_SUPPLIER_DELETE_PATH}`, body);
     //  Display success message
     dispatch(showDashBoardSuccess('Item Deleted'));
     return dispatch(deleteSupplierSuccess(index));
