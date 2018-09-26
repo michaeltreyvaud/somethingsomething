@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import SignatureCanvas from 'react-signature-canvas';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import Contacts from '@material-ui/icons/Contacts';
@@ -223,6 +224,19 @@ class Update extends React.Component {
                         >
                           {this.renderTeams()}
                         </Select>
+                      </FormControl>
+                    </GridItem>
+                    <GridItem xs={12} sm={12} md={12}>
+                      <FormControl
+                        fullWidth
+                        className={classes.selectFormControl}
+                      >
+                        <h4 className={classes.cardIconTitle}>Signature</h4>
+                        <SignatureCanvas
+                          ref={(ref) => { this.sigCanvas = ref; }}
+                          backgroundColor="#ECECEC"
+                          penColor="black"
+                        />
                       </FormControl>
                     </GridItem>
                   </GridContainer>

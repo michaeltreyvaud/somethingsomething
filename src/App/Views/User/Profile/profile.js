@@ -4,6 +4,7 @@ import SignatureCanvas from 'react-signature-canvas';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import Contacts from '@material-ui/icons/Contacts';
+import FormControl from '@material-ui/core/FormControl';
 
 import GridContainer from '../../../Components/Grid/GridContainer';
 import Card from '../../../Components/Card/Card';
@@ -129,23 +130,21 @@ class Profile extends React.Component {
                       formControlProps={{ fullWidth: true, disabled: true }}
                     />
                   </GridItem>
+                  <GridItem xs={12} sm={12} md={12}>
+                    <FormControl
+                      fullWidth
+                      className={classes.selectFormControl}
+                    >
+                      <h4 className={classes.cardIconTitle}>Signature</h4>
+                      <SignatureCanvas
+                        ref={(ref) => { this.sigCanvas = ref; }}
+                        backgroundColor="#ECECEC"
+                        penColor="black"
+                      />
+                    </FormControl>
+                  </GridItem>
                 </GridContainer>
                 <Clearfix />
-              </CardBody>
-            </Card>
-          </GridItem>
-          <GridItem xs={12} sm={12} md={12}>
-            <Card>
-              <CardHeader color="rose" icon>
-                <h4 className={classes.cardIconTitle}>Signature</h4>
-              </CardHeader>
-              <CardBody>
-                <SignatureCanvas
-                  ref={(ref) => { this.sigCanvas = ref; }}
-                  backgroundColor="#ECECEC"
-                  penColor="black"
-                  canvasProps={{ width: 740, height: 320 }}
-                />
               </CardBody>
             </Card>
           </GridItem>
