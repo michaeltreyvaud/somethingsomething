@@ -17,8 +17,15 @@ class AppRouter extends Component {
   //  Handle app redirects here when app loads
   componentWillReceiveProps(nextProps) {
     const {
-      loading, history, sessionTimeout, location, isAuthenticated,
+      loading, history, sessionTimeout, location,
+      isAuthenticated, getCompanyInfo, validateToken,
     } = this.props;
+    //  user logged out
+    if ((loading === false && nextProps.loading === true)
+      && (isAuthenticated && !nextProps.isAuthenticated)) {
+      getCompanyInfo();
+      validateToken();
+    }
     if (loading === true && nextProps.loading === false) {
       //  Need to route to login
       if (!nextProps.isAuthenticated) {

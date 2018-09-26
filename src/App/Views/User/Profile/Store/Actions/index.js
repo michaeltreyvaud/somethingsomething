@@ -2,6 +2,8 @@ import {
   USER_PROFILE_UPDATE_ATTEMPT,
   USER_PROFILE_UPDATE_SUCCESS,
   USER_PROFILE_UPDATE_FAIL,
+
+  USER_AUTH_LOGOUT,
 } from '../ActionTypes';
 import { sessionTimeout } from '../../../../../Routing/Store/Actions';
 import { AuthenticatedFetch } from '../../../../../Util/fetch';
@@ -43,5 +45,5 @@ export const updateUser = user => async (dispatch) => {
   }
 };
 
-//  TODO: Remove me
-export const a = () => {};
+const logout = () => ({ type: USER_AUTH_LOGOUT });
+export const userLogout = () => async dispatch => dispatch(logout());

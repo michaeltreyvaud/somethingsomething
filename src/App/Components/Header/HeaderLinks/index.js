@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
@@ -18,6 +19,8 @@ import Button from '../../CustomButtons';
 import CustomInput from '../../CustomInput';
 import headerLinksStyle from './style';
 
+import { userLogout } from '../../../Views/User/Profile/Store/Actions';
+
 class HeaderLinks extends React.Component {
   constructor(props) {
     super(props);
@@ -28,6 +31,7 @@ class HeaderLinks extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleOpen = this.handleOpen.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   handleClick(path) {
@@ -46,6 +50,11 @@ class HeaderLinks extends React.Component {
 
   handleClose() {
     this.setState({ open: false });
+  }
+
+  logout() {
+    const { logout } = this.props;
+    logout();
   }
 
   render() {
@@ -149,7 +158,7 @@ class HeaderLinks extends React.Component {
                         {'Training Log'}
                       </MenuItem>
                       <MenuItem
-                        onClick={() => this.handleClick('profile')}
+                        onClick={() => this.logout()}
                         className={dropdownItem}
                       >
                         {'Log Out'}
@@ -169,6 +178,12 @@ class HeaderLinks extends React.Component {
 HeaderLinks.propTypes = {
   history: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
+  logout: PropTypes.func.isRequired,
 };
 
-export default withRouter(withStyles(headerLinksStyle)(HeaderLinks));
+const mapStateToProps = () => ({});
+const mapDispatchToProps = dispatch => ({ logout: () => dispatch(userLogout()) });
+
+const connected = connect(mapStateToProps, mapDispatchToProps)(HeaderLinks);
+
+export default withRouter(withStyles(headerLinksStyle)(connected));
