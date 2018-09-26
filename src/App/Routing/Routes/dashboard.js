@@ -161,15 +161,15 @@ const dashRoutes = [
       },
       {
         hidden: true,
-        path: '/dashboard/management/suppliers/:id',
-        name: 'Supplier',
-        component: ManagementSupplierUpdate,
-      },
-      {
-        hidden: true,
         path: '/dashboard/management/suppliers/create',
         name: 'Create Supplier',
         component: ManagementSuppliersCreate,
+      },
+      {
+        hidden: true,
+        path: '/dashboard/management/suppliers/:id',
+        name: 'Supplier',
+        component: ManagementSupplierUpdate,
       },
     ],
   },
