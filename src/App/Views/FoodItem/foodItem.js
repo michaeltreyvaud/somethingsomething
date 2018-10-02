@@ -20,7 +20,6 @@ import Button from '../../Components/CustomButtons';
 import Table from '../../Components/Table';
 import LoadingTable from '../../Components/Loading/LoadingTable';
 
-import FoodItemCreate from './Create/create.container';
 import FoodItemDelete from './Delete/delete.container';
 
 import style from '../../Assets/Jss/extendedTablesStyle';
@@ -29,7 +28,6 @@ class FoodItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayCreateModal: false,
       displayDeleteModal: false,
       selectedDeleteItem: {},
     };
@@ -38,18 +36,6 @@ class FoodItem extends React.Component {
   componentDidMount() {
     const { listFoodItems } = this.props;
     listFoodItems();
-  }
-
-  showCreateModal() {
-    this.setState({
-      displayCreateModal: true,
-    });
-  }
-
-  hideCreateModal() {
-    this.setState({
-      displayCreateModal: false,
-    });
   }
 
   showDeleteModal(createdAt, index) {
@@ -74,7 +60,7 @@ class FoodItem extends React.Component {
       classes, items, loading, history,
     } = this.props;
     const {
-      displayCreateModal, displayDeleteModal, selectedDeleteItem,
+      displayDeleteModal, selectedDeleteItem,
     } = this.state;
     const simpleButtons = (item, index) => [
       { color: 'warning', icon: Print, tooltip: 'Print' },
@@ -120,11 +106,6 @@ class FoodItem extends React.Component {
     });
     return (
       <div>
-        <FoodItemCreate
-          visible={displayCreateModal}
-          classes={classes}
-          close={() => this.hideCreateModal()}
-        />
         <FoodItemDelete
           item={selectedDeleteItem}
           visible={displayDeleteModal}
@@ -141,9 +122,9 @@ class FoodItem extends React.Component {
                 <Button
                   color="info"
                   className={classes.marginRight}
-                  onClick={() => this.showCreateModal()}
+                  onClick={() => history.push('/dashboard/fooditem/create')}
                 >
-                  New
+                  Create
                 </Button>
               </CardHeader>
               <CardBody>
@@ -200,11 +181,7 @@ FoodItem.propTypes = {
   history: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
   items: PropTypes.array.isRequired,
-
   loading: PropTypes.bool.isRequired,
-  error: PropTypes.bool.isRequired,
-  errorMessage: PropTypes.string.isRequired,
-
   listFoodItems: PropTypes.func.isRequired,
 };
 

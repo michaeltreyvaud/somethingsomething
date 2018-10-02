@@ -67,6 +67,7 @@ import FreezerLogUpdate from '../../Views/Freezer/FreezerLog/Update/update.conta
 import FreezerChart from '../../Views/Freezer/FreezerChart';
 
 import FoodItem from '../../Views/FoodItem/foodItem.container';
+import FoodItemCreate from '../../Views/FoodItem/Create/create.container';
 import FoodItemUpdate from '../../Views/FoodItem/Update/update.container';
 
 import HotHolding from '../../Views/HotHolding/hotHolding.container';
@@ -353,6 +354,11 @@ const dashRoutes = [
     icon: Fastfood,
     component: FoodItem,
     views: [
+      {
+        path: '/dashboard/fooditem/create',
+        name: 'Food Item',
+        component: FoodItemCreate,
+      },
       {
         path: '/dashboard/fooditem/:id',
         name: 'Food Item',
