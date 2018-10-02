@@ -22,9 +22,13 @@ import Metrics from '../../Views/Home/Metrics';
 import Company from '../../Views/Company/company.container';
 
 import ManagementUsers from '../../Views/Management/Users/users.container';
+import ManagementUsersCreate from '../../Views/Management/Users/Create/create.container';
 import ManagementUsersUpdate from '../../Views/Management/Users/Update/update.container';
+
 import ManagementTeams from '../../Views/Management/Teams/team.container';
+import ManagementTeamsCreate from '../../Views/Management/Teams/Create/create.container';
 import ManagementTeamsUpdate from '../../Views/Management/Teams/Update/update.container';
+
 import ManagementSuppliers from '../../Views/Management/Suppliers/suppliers.container';
 import ManagementSupplierUpdate from '../../Views/Management/Suppliers/Update/update.container';
 import ManagementSuppliersCreate from '../../Views/Management/Suppliers/Create';
@@ -43,7 +47,9 @@ import SafetyLog from '../../Views/SafetyRecord/SafetyLog';
 import SafetyCategory from '../../Views/SafetyRecord/SafetyCategory';
 
 import FridgeItem from '../../Views/Fridge/FridgeItem/fridgeItem.container';
+import FridgeItemCreate from '../../Views/Fridge/FridgeItem/Create/create.container';
 import FridgeItemUpdate from '../../Views/Fridge/FridgeItem/Update/update.container';
+
 import FridgeTask from '../../Views/Fridge/FridgeTask';
 import FridgeLog from '../../Views/Fridge/FridgeLog/fridgeLog.container';
 import FridgeLogCreate from '../../Views/Fridge/FridgeLog/Create';
@@ -51,7 +57,9 @@ import FridgeLogUpdate from '../../Views/Fridge/FridgeLog/Update/update.containe
 import FridgeChart from '../../Views/Fridge/FridgeChart';
 
 import FreezerItem from '../../Views/Freezer/FreezerItem/freezerItem.container';
+import FreezerItemCreate from '../../Views/Freezer/FreezerItem/Create/create.container';
 import FreezerItemUpdate from '../../Views/Freezer/FreezerItem/Update/update.container';
+
 import FreezerTask from '../../Views/Freezer/FreezerTask';
 import FreezerLog from '../../Views/Freezer/FreezerLog/freezerLog.container';
 import FreezerLogCreate from '../../Views/Freezer/FreezerLog/Create';
@@ -139,6 +147,12 @@ const dashRoutes = [
       },
       {
         hidden: true,
+        path: '/dashboard/management/teams/create',
+        name: 'Team',
+        component: ManagementTeamsCreate,
+      },
+      {
+        hidden: true,
         path: '/dashboard/management/teams/:id',
         name: 'Team',
         component: ManagementTeamsUpdate,
@@ -147,6 +161,12 @@ const dashRoutes = [
         path: '/dashboard/management/users',
         name: 'Users',
         component: ManagementUsers,
+      },
+      {
+        hidden: true,
+        path: '/dashboard/management/users/create',
+        name: 'Users',
+        component: ManagementUsersCreate,
       },
       {
         hidden: true,
@@ -233,6 +253,12 @@ const dashRoutes = [
       },
       {
         hidden: true,
+        path: '/dashboard/fridge/item/create',
+        name: 'Fridge Item',
+        component: FridgeItemCreate,
+      },
+      {
+        hidden: true,
         path: '/dashboard/fridge/item/:id',
         name: 'Fridge Item',
         component: FridgeItemUpdate,
@@ -277,6 +303,12 @@ const dashRoutes = [
         path: '/dashboard/freezer/item',
         name: 'Freezer Item',
         component: FreezerItem,
+      },
+      {
+        hidden: true,
+        path: '/dashboard/freezer/item/create',
+        name: 'Freezer Item',
+        component: FreezerItemCreate,
       },
       {
         hidden: true,

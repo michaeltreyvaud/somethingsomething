@@ -1,45 +1,34 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Today from '@material-ui/icons/Today';
+import withStyles from '@material-ui/core/styles/withStyles';
 
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogActions from '@material-ui/core/DialogActions';
-import Close from '@material-ui/icons/Close';
-import Slide from '@material-ui/core/Slide';
+import GridItem from '../../../../Components/Grid/GridItem';
+import Card from '../../../../Components/Card/Card';
+import GridContainer from '../../../../Components/Grid/GridContainer';
+import CardHeader from '../../../../Components/Card/CardHeader';
+import CardBody from '../../../../Components/Card/CardBody';
+import CardIcon from '../../../../Components/Card/CardIcon';
 
 import CustomInput from '../../../../Components/CustomInput';
 import Button from '../../../../Components/CustomButtons';
 
-const Transition = props => <Slide direction="down" {...props} />;
+import extendedFormsStyle from '../../../../Assets/Jss/extendedFormsStyle';
 
 class Create extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      name: '',
-      description: '',
-    };
+    this.state = {};
   }
 
   componentWillReceiveProps(nextProps) {
     const { loading } = this.props;
     if (loading && nextProps.loading === false && nextProps.success) {
-      this.closeModal();
+      this.back();
     }
   }
 
-  closeModal() {
-    const { close } = this.props;
-    this.setState({
-      name: '',
-      description: '',
-    }, () => {
-      close();
-    });
-  }
-
-  createTeam() {
+  create() {
     const { createTeam, loading } = this.props;
     if (loading) return false;
     return createTeam(this.state);
@@ -52,81 +41,64 @@ class Create extends Component {
     });
   }
 
+  back() {
+    const { history } = this.props;
+    history.push('/dashboard/management/teams');
+  }
+
   render() {
-    const { classes, visible, loading } = this.props;
-    const { teamName, teamDescription } = this.state;
+    const { classes, loading } = this.props;
+    const { name, description } = this.state;
     return (
-      <Dialog
-        classes={{ root: `${classes.center} ${classes.modalRoot}`, paper: classes.modal }}
-        open={visible}
-        TransitionComponent={Transition}
-        keepMounted
-        onClose={() => this.closeModal()}
-        aria-labelledby="notice-modal-slide-title"
-        aria-describedby="notice-modal-slide-description"
-      >
-        <DialogTitle
-          id="notice-modal-slide-title"
-          disableTypography
-          className={classes.modalHeader}
-        >
-          <Button
-            justIcon
-            className={classes.modalCloseButton}
-            key="close"
-            aria-label="Close"
-            color="transparent"
-            onClick={() => this.closeModal()}
-          >
-            <Close className={classes.modalClose} />
-          </Button>
-          <h4 className={classes.modalTitle}>Create Team</h4>
-        </DialogTitle>
-        <DialogContent
-          id="notice-modal-slide-description"
-          className={classes.modalBody}
-        >
-          <CustomInput
-            labelText="Name"
-            id="name"
-            value={teamName}
-            formControlProps={{ fullWidth: true }}
-            inputProps={{ type: 'text' }}
-            onChange={e => this.updateValue(e)}
-          />
-          <CustomInput
-            labelText="Description"
-            id="description"
-            value={teamDescription}
-            formControlProps={{ fullWidth: true }}
-            inputProps={{ multiline: true, rows: 3 }}
-            onChange={e => this.updateValue(e)}
-          />
-        </DialogContent>
-        <DialogActions
-          className={`${classes.modalFooter} ${classes.modalFooterCenter}`}
-        >
-          <Button
-            loading={loading}
-            onClick={() => this.createTeam()}
-            color="info"
-            round
-          >
-          Create
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <div>
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={12}>
+            <Card>
+              <CardHeader color="rose" icon>
+                <CardIcon color="rose">
+                  <Today />
+                </CardIcon>
+              </CardHeader>
+              <CardBody>
+                <div>
+                  <CustomInput
+                    labelText="Name"
+                    id="name"
+                    value={name}
+                    formControlProps={{ fullWidth: true }}
+                    inputProps={{ type: 'text' }}
+                    onChange={e => this.updateValue(e)}
+                  />
+                  <CustomInput
+                    labelText="Description"
+                    id="description"
+                    value={description}
+                    formControlProps={{ fullWidth: true }}
+                    inputProps={{ multiline: true, rows: 3 }}
+                    onChange={e => this.updateValue(e)}
+                  />
+                  <Button loading={loading} onClick={() => this.create()} color="rose" className={classes.updateProfileButton}>
+                    Save
+                  </Button>
+                  <Button onClick={() => this.back()} color="info" className={classes.updateProfileButton}>
+                    Cancel
+                  </Button>
+                </div>
+              </CardBody>
+            </Card>
+          </GridItem>
+        </GridContainer>
+      </div>
     );
   }
 }
 
 Create.propTypes = {
+  history: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
-  visible: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
   success: PropTypes.bool.isRequired,
   createTeam: PropTypes.func.isRequired,
-  close: PropTypes.func.isRequired,
 };
 
-export default Create;
+export default withStyles(extendedFormsStyle)(Create);

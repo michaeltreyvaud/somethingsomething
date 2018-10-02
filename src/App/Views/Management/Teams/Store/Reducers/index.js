@@ -3,8 +3,6 @@ import {
   LIST_TEAM_ITEM_SUCCESS,
   LIST_TEAM_ITEM_FAIL,
 
-  CREATE_TEAM_ITEM_SUCCESS,
-
   DELETE_TEAM_ITEM_SUCCESS,
 
   UPDATE_TEAM_ITEM_SUCCESS,
@@ -33,12 +31,17 @@ const reducer = (state = initialState, action) => {
     case LIST_TEAM_ITEM_SUCCESS: {
       const { response } = action.payload;
       //  TODO - store the next key etc for pagination
-      // TODO - fix the result on the back end?
       const { Groups } = response;
       const items = Groups.map(group => ({
         name: group.GroupName,
         description: group.Description,
       }));
+      const sortByName = (a, b) => {
+        if (a.name.toLowerCase() < b.name.toLowerCase()) { return -1; }
+        if (a.name.toLowerCase() > b.name.toLowerCase()) { return 1; }
+        return 0;
+      };
+      items.sort((a, b) => sortByName(a, b));
       return {
         ...state,
         loading: false,
@@ -56,21 +59,6 @@ const reducer = (state = initialState, action) => {
         errorMessage: '',
         success: false,
         items: [],
-      };
-    }
-    case CREATE_TEAM_ITEM_SUCCESS: {
-      const { response } = action.payload;
-      const currentItems = Object.assign(state.items);
-      const sortByName = (a, b) => {
-        if (a.name.toLowerCase() < b.name.toLowerCase()) { return -1; }
-        if (a.name.toLowerCase() > b.name.toLowerCase()) { return 1; }
-        return 0;
-      };
-      currentItems.push(response);
-      currentItems.sort((a, b) => sortByName(a, b));
-      return {
-        ...state,
-        items: currentItems,
       };
     }
     case DELETE_TEAM_ITEM_SUCCESS: {
