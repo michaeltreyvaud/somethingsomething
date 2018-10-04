@@ -16,6 +16,7 @@ import CardHeader from '../../Components/Card/CardHeader';
 import CardIcon from '../../Components/Card/CardIcon';
 import Button from '../../Components/CustomButtons';
 import Table from '../../Components/Table';
+import CustomDropdown from '../../Components/CustomDropdown';
 
 import style from '../../Assets/Jss/style';
 
@@ -120,6 +121,22 @@ class Service extends React.Component {
         <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/dashboard/service/create')}>
         New
         </Button>
+        <CustomDropdown
+          hoverColor="black"
+          buttonText="Export"
+          buttonProps={{
+            minHeight: 'auto',
+            minWidth: 'auto',            
+            style: { marginBottom: '0', float: 'right', },
+            color: 'warning',
+          }}
+          dropdownHeader="Actions"
+          dropdownList={[
+            'Export CSV',
+            'Export PDF',
+            'Email',
+          ]}
+        />        
         {this.state.alert}
         <GridContainer>
           <GridItem xs={12}>

@@ -63,7 +63,7 @@ class FastCoolingCreate extends React.Component {
     return (
       <div>
         <Button color="rose">Save</Button>
-        <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/dashboard/service')}>Cancel</Button>
+        <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/dashboard/safetysheet')}>Cancel</Button>
         <GridContainer>
           <GridItem xs={12} sm={12} md={6}>
             <Card>
@@ -71,100 +71,86 @@ class FastCoolingCreate extends React.Component {
                 <CardIcon color="rose">
                   <Today />
                 </CardIcon>
-                <h4 className={classes.cardIconTitle}>Capture Service Temperature</h4>
+                <h4 className={classes.cardIconTitle}>Create Safety Datasheet</h4>
               </CardHeader>
               <CardBody>
+                <CustomInput
+                      id="disabled"
+                      labelText="Title"
+                      formControlProps={{
+                        fullWidth: true
+                      }}
+                      inputProps={{
+                        
+                      }}
+                    />
                 <FormControl
                   fullWidth
                   className={classes.selectFormControl}
                 >
-                  <InputLabel
-                    htmlFor="simple-select"
-                    className={classes.selectLabel}
-                  >
-                    Choose Food Item
-                  </InputLabel>
-                  <Select
-                    MenuProps={{
-                      className: classes.selectMenu
-                    }}
-                    classes={{
-                      select: classes.select
-                    }}
-                    value={this.state.simpleSelect}
-                    onChange={this.handleSimple}
-                    inputProps={{
-                      name: "simpleSelect",
-                      id: "simple-select"
-                    }}
-                  >
-                  <MenuItem
-                    classes={{
-                      root: classes.selectMenuItem,
-                      selected: classes.selectMenuItemSelected
-                    }}
-                    value="2"
-                  >
-                    Fridge 1
-                  </MenuItem>
-                  <MenuItem
-                    classes={{
-                      root: classes.selectMenuItem,
-                      selected: classes.selectMenuItemSelected
-                    }}
-                    value="3"
-                  >
-                    Fridge 2
-                  </MenuItem>
-                  </Select>
+                <InputLabel
+                  htmlFor="simple-select"
+                  className={classes.selectLabel}
+                >
+                  Operator
+                </InputLabel>
+                <Select
+                  MenuProps={{
+                    className: classes.selectMenu
+                  }}
+                  classes={{
+                    select: classes.select
+                  }}
+                  value={this.state.simpleSelect}
+                  onChange={this.handleSimple}
+                  inputProps={{
+                    name: "simpleSelect",
+                    id: "simple-select"
+                  }}
+                >
+                <MenuItem
+                  classes={{
+                    root: classes.selectMenuItem,
+                    selected: classes.selectMenuItemSelected
+                  }}
+                  value="2"
+                >
+                  Bob
+                </MenuItem>
+                <MenuItem
+                  classes={{
+                    root: classes.selectMenuItem,
+                    selected: classes.selectMenuItemSelected
+                  }}
+                  value="3"
+                >
+                  Bob  2
+                </MenuItem>
+                </Select>
                 </FormControl>
-                  <CustomInput
-                    success={this.state.numberState === "success"}
-                    error={this.state.numberState === "error"}
-                    labelText="Capture Temperature Value"
-                    id="number"
-                    formControlProps={{
-                      fullWidth: true
+                <InputLabel className={classes.label}>
+                Date
+                </InputLabel>
+                <br />
+                <FormControl fullWidth>
+                  <Datetime
+                    inputProps={{ placeholder: "08/01/2018 12:00 AM"} }
+                  />
+                </FormControl>
+                <ImageUpload
+                    addButtonProps={{
+                      color: "rose",
+                      round: true
                     }}
-                    inputProps={{
-                      onChange: event =>
-                        this.change(event, "number", "number"),
-                      type: "number"
+                    changeButtonProps={{
+                      color: "rose",
+                      round: true
+                    }}
+                    removeButtonProps={{
+                      color: "danger",
+                      round: true
                     }}
                   />
-                    <CustomInput
-                    id="disabled"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      placeholder: "Bob Bobson",
-                      disabled: true
-                    }}
-                  />
-                  <InputLabel className={classes.label}>
-                  Capture Datetime
-                  </InputLabel>
-                  <br />
-                  <FormControl fullWidth>
-                    <Datetime
-                      inputProps={{ placeholder: "08/01/2018 12:00 AM", disabled: true } }
-                    />
-                  </FormControl>
-                  <ImageUpload
-                      addButtonProps={{
-                        color: "rose",
-                        round: true
-                      }}
-                      changeButtonProps={{
-                        color: "rose",
-                        round: true
-                      }}
-                      removeButtonProps={{
-                        color: "danger",
-                        round: true
-                      }}
-                    />
               </CardBody>
             </Card>
           </GridItem>

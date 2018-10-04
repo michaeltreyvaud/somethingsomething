@@ -1,6 +1,7 @@
 import React from 'react';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
+import SweetAlert from 'react-bootstrap-sweetalert';
 import Assignment from '@material-ui/icons/Assignment';
 
 // core components
@@ -18,33 +19,107 @@ import Table from '../../Components/Table';
 import CustomDropdown from '../../Components/CustomDropdown';
 
 import style from '../../Assets/Jss/style';
-import extendedTablesStyle from '../../Assets/Jss/extendedTablesStyle';
 
-class ColdHotTransportLog extends React.Component {
+class Service extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      alert: null,
+      show: false
     };
+    this.hideAlert = this.hideAlert.bind(this);
+    this.successDelete = this.successDelete.bind(this);
+    this.cancelDetele = this.cancelDetele.bind(this);
+    this.warningWithConfirmMessage = this.warningWithConfirmMessage.bind(this);
+  }
+  warningWithConfirmMessage() {
+    this.setState({
+      alert: (
+        <SweetAlert
+          warning
+          style={{ display: "block", marginTop: "-100px" }}
+          title="Are you sure?"
+          onConfirm={() => this.successDelete()}
+          onCancel={() => this.hideAlert()}
+          confirmBtnCssClass={
+            this.props.classes.button + " " + this.props.classes.success
+          }
+          cancelBtnCssClass={
+            this.props.classes.button + " " + this.props.classes.danger
+          }
+          confirmBtnText="Yes, delete it!"
+          cancelBtnText="Cancel"
+          showCancel
+        >
+        </SweetAlert>
+      )
+    });
+  }
+
+  successDelete() {
+    this.setState({
+      alert: (
+        <SweetAlert
+          success
+          style={{ display: "block", marginTop: "-100px" }}
+          title="Deleted!"
+          onConfirm={() => this.hideAlert()}
+          onCancel={() => this.hideAlert()}
+          confirmBtnCssClass={
+            this.props.classes.button + " " + this.props.classes.success
+          }
+        >
+          Your imaginary file has been deleted.
+        </SweetAlert>
+      )
+    });
+  }
+
+  cancelDetele() {
+    this.setState({
+      alert: (
+        <SweetAlert
+          danger
+          style={{ display: "block", marginTop: "-100px" }}
+          title="Cancelled"
+          onConfirm={() => this.hideAlert()}
+          onCancel={() => this.hideAlert()}
+          confirmBtnCssClass={
+            this.props.classes.button + " " + this.props.classes.success
+          }
+        >
+          Your imaginary file is safe :)
+        </SweetAlert>
+      )
+    });
+  }
+
+  hideAlert() {
+    this.setState({
+      alert: null
+    });
   }
 
   render() {
     const { classes } = this.props;
     const simpleButtons = [
-      { color: 'warning', icon: Print },
       { color: 'success', icon: Open },
       { color: 'danger', icon: Delete },
     ].map((prop, key) => (
       <Button
-        color={prop.color}        
+        color={prop.color}
         className={classes.actionButton}
         key={key}
+        onClick={this.warningWithConfirmMessage}
       >
         <prop.icon className={classes.icon} />
       </Button>
     ));
     return (
       <div>
-        <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/dashboard/transport/create')}>Create</Button>
+        <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/dashboard/safetysheet/create')}>
+        New
+        </Button>
         <CustomDropdown
           hoverColor="black"
           buttonText="Export"
@@ -60,7 +135,8 @@ class ColdHotTransportLog extends React.Component {
             'Export PDF',
             'Email',
           ]}
-        />
+        />        
+        {this.state.alert}
         <GridContainer>
           <GridItem xs={12}>
             <Card>
@@ -72,34 +148,19 @@ class ColdHotTransportLog extends React.Component {
               <CardBody>
                 <Table
                   tableHead={[
-                    'ID',
-                    'Item',
-                    'Number',
-                    'Departure Area',
-                    'Departure Operator',
-                    'Departure Time',
-                    'Departure Temperature',
-                    'Status',
-                    'Arrival Area',
-                    'Arrival Operator',
-                    'Arrival Time',
-                    'Arrival Temperature',
-                    'Actions',
+                    'Operator',
+                    'Date/Time',
+                    'Title',
+                    'File',
+                    'Update Time',
                   ]}
                   tableData={[
                     [
-                      '1',
-                      'Chicken',
-                      '123',
-                      'Trans Test',
                       'Bob Boson',
-                      '07/22/2018 19:14:00',
-                      '3',
-                      'Accept',
-                      'Trans Test',
-                      'Bob Boson',
-                      '07/22/2018 19:16:00',
-                      '3',
+                      '07/22/2018 19:09:06',
+                      'Title Goes Here',
+                      'LINK TO FILE',
+                      '07/22/2018 19:09:06',
                       simpleButtons,
                     ],
                   ]}
@@ -125,4 +186,4 @@ class ColdHotTransportLog extends React.Component {
   }
 }
 
-export default withStyles(extendedTablesStyle, style)(ColdHotTransportLog);
+export default withStyles(style)(Service);

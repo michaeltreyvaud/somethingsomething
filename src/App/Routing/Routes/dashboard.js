@@ -72,8 +72,19 @@ import ServiceCreate from '../../Views/Service/Create';
 
 import ColdHotLocation from '../../Views/ColdHotLocation';
 import ColdHotTransportLog from '../../Views/ColdHotTransportLog';
+import ColdHotTransportCreate from '../../Views/ColdHotTransportLog/Create'
 import DeliveryRecords from '../../Views/Traceability/DeliveryRecords';
+import DeliveryRecordsCreate from '../../Views/Traceability/DeliveryRecords/Create';
 import TraceabilityLabels from '../../Views/Traceability/TraceabilityLabels';
+
+import Reports from '../../Views/Reports/';
+import ReportsCreate from '../../Views/Reports/Create';
+
+import SafetySheet from '../../Views/SafetySheet/';
+import SafetySheetCreate from '../../Views/SafetySheet/Create';
+
+import PestControl from '../../Views/PestControl';
+import PestControlCreate from '../../Views/PestControl/Create';
 
 const TODOComponent = () => (<h1>TODO</h1>);
 const dashRoutes = [
@@ -379,14 +390,20 @@ const dashRoutes = [
     icon: Voicemail,
     views: [
       {
-        path: '/dashboard/hotcold/location',
+        path: '/dashboard/transport/location',
         name: 'Location',
         component: ColdHotLocation,
       },
       {
-        path: '/dashboard/hotcold/log',
+        path: '/dashboard/transport/log',
         name: 'Transport Log',
         component: ColdHotTransportLog,
+      },
+      {
+        hidden: true,
+        path: '/dashboard/transport/create',
+        name: 'Create Transport Log',
+        component: ColdHotTransportCreate,
       },
     ],
   },
@@ -398,9 +415,15 @@ const dashRoutes = [
     icon: DirectionsCar,
     views: [
       {
-        path: '/dashboard/traceability/records',
+        path: '/dashboard/delivery',
         name: 'Delivery Records',
         component: DeliveryRecords,
+      },
+      {
+        hidden: true,
+        path: '/dashboard/delivery/create',
+        name: 'Create Delivery Record',
+        component: DeliveryRecordsCreate,
       },
       {
         path: '/dashboard/traceability/labels',
@@ -469,21 +492,45 @@ const dashRoutes = [
     name: 'Reports',
     state: 'openReports',
     icon: Timeline,
-    component: TODOComponent,
+    component: Reports,
+    views: [
+      {
+        hidden: true,
+        path: '/dashboard/reports/create',
+        name: 'Create Report Log',
+        component: ReportsCreate,
+      },
+    ]    
   },
   {
     path: '/dashboard/safetysheet',
     name: 'Safety Datasheet',
     state: 'openSafetySheet',
     icon: Description,
-    component: TODOComponent,
-  },
+    component: SafetySheet,
+    views: [
+      {
+        hidden: true,
+        path: '/dashboard/safetysheet/create',
+        name: 'Create Safety Datasheet',
+        component: SafetySheetCreate,
+      },
+    ]
+  },  
   {
     path: '/dashboard/pest',
     name: 'Pest Management',
     state: 'openPestManagement',
     icon: BugReport,
-    component: TODOComponent,
+    component: PestControl,
+    views: [
+      {
+        hidden: true,
+        path: '/dashboard/pest/create',
+        name: 'Create Pest Record',
+        component: PestControlCreate,
+      },
+    ]
   },
 ];
 export default dashRoutes;

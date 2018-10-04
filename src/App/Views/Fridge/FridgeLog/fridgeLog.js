@@ -129,7 +129,7 @@ class FridgeLog extends React.Component {
             'Export PDF',
             'Email',
           ]}
-        />        
+        />
         <GridContainer>
           <GridItem xs={12}>
             <Card>
