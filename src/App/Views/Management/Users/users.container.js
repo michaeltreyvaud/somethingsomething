@@ -4,7 +4,6 @@ import { listUsers } from './Store/Actions';
 
 const mapStateToProps = state => ({
   loading: state.management.users.index.loading,
-  success: state.management.users.index.success,
   items: state.management.users.index.items,
   teams: state.management.team.index.items,
 });

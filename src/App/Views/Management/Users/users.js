@@ -19,7 +19,6 @@ import Button from '../../../Components/CustomButtons';
 import Table from '../../../Components/Table';
 import LoadingTable from '../../../Components/Loading/LoadingTable';
 
-import UserCreate from './Create/create.container';
 import UserDelete from './Delete/delete.container';
 
 import style from '../../../Assets/Jss/extendedFormsStyle';
@@ -28,7 +27,6 @@ class Users extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayCreateModal: false,
       displayDeleteModal: false,
       selectedDeleteItem: {},
       displayErrorMessage: false,
@@ -38,24 +36,6 @@ class Users extends React.Component {
   componentDidMount() {
     const { listUsers } = this.props;
     listUsers();
-  }
-
-  showCreateModal() {
-    const { teams } = this.props;
-    if (teams.length === 0) {
-      return this.setState({
-        displayErrorMessage: true,
-      });
-    }
-    return this.setState({
-      displayCreateModal: true,
-    });
-  }
-
-  hideCreateModal() {
-    this.setState({
-      displayCreateModal: false,
-    });
   }
 
   showDeleteModal(itemId, index) {
@@ -102,7 +82,7 @@ class Users extends React.Component {
       classes, items, loading, history,
     } = this.props;
     const {
-      displayCreateModal, displayDeleteModal, selectedDeleteItem,
+      displayDeleteModal, selectedDeleteItem,
     } = this.state;
     const simpleButtons = (item, index) => [
       { color: 'success', icon: Open, tooltip: 'Edit' },
@@ -156,11 +136,6 @@ class Users extends React.Component {
           classes={classes}
           close={() => this.hideDeleteModal()}
         />
-        <UserCreate
-          visible={displayCreateModal}
-          classes={classes}
-          close={() => this.hideCreateModal()}
-        />
         <GridContainer>
           <GridItem xs={12}>
             <Card>
@@ -171,9 +146,9 @@ class Users extends React.Component {
                 <Button
                   color="info"
                   className={classes.marginRight}
-                  onClick={() => this.showCreateModal()}
+                  onClick={() => history.push('/dashboard/management/users/create')}
                 >
-                  New
+                  Create
                 </Button>
               </CardHeader>
               <CardBody>

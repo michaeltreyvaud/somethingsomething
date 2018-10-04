@@ -1,7 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -18,6 +19,8 @@ import Button from '../../CustomButtons';
 import CustomInput from '../../CustomInput';
 import headerLinksStyle from './style';
 
+import { userLogout } from '../../../Views/User/Profile/Store/Actions';
+
 class HeaderLinks extends React.Component {
   constructor(props) {
     super(props);
@@ -27,22 +30,37 @@ class HeaderLinks extends React.Component {
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handleOpen = this.handleOpen.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
-  handleClick() {
-    this.setState({ open: !this.state.open });
+  handleClick(path) {
+    const { history } = this.props;
+    const { open } = this.state;
+    this.setState({
+      open: !open,
+    }, () => {
+      history.push(`/dashboard/user/${path}`);
+    });
   }
-  handleClose = () => {
+
+  handleOpen() {
+    this.setState({ open: true });
+  }
+
+  handleClose() {
     this.setState({ open: false });
-  };
+  }
+
+  logout() {
+    const { logout } = this.props;
+    logout();
+  }
 
   render() {
     const { classes } = this.props;
     const { open, searchQuery } = this.state;
-    const searchButton = `${classes.top
-    } ${
-      classes.searchButton
-    } `;
+    const searchButton = `${classes.top} ${classes.searchButton}`;
     const dropdownItem = classNames(
       classes.dropdownItem,
       classes.primaryHover,
@@ -53,9 +71,7 @@ class HeaderLinks extends React.Component {
     return (
       <div>
         <CustomInput
-          formControlProps={{
-            className: `${classes.top} ${classes.search}`,
-          }}
+          formControlProps={{ className: `${classes.top} ${classes.search}` }}
           inputProps={{
             placeholder: 'Search',
             inputProps: {
@@ -73,9 +89,7 @@ class HeaderLinks extends React.Component {
           round
           className={searchButton}
         >
-          <Search
-            className={`${classes.headerLinksSvg} ${classes.searchIcon}`}
-          />
+          <Search className={`${classes.headerLinksSvg} ${classes.searchIcon}`} />
         </Button>
         <div className={managerClasses}>
           <Button
@@ -84,20 +98,13 @@ class HeaderLinks extends React.Component {
             aria-label="Notifications"
             aria-owns={open ? 'menu-list' : null}
             aria-haspopup="true"
-            onClick={this.handleClick}
+            onClick={this.handleOpen}
             className={classes.buttonLink}
-            muiClasses={{
-              label: '',
-            }}
-            buttonRef={(node) => {
-              this.anchorEl = node;
-            }}
+            muiClasses={{ label: '' }}
+            buttonRef={(node) => { this.anchorEl = node; }}
           >
             <Notifications
-              className={
-                `${classes.headerLinksSvg
-                } ${classes.links}`
-              }
+              className={`${classes.headerLinksSvg} ${classes.links}`}
             />
             <Hidden mdUp implementation="css">
               <span onClick={this.handleClick} className={classes.linkText}>
@@ -117,7 +124,7 @@ class HeaderLinks extends React.Component {
               [classes.pooperNav]: true,
             })}
           >
-            {({ TransitionProps, placement }) => (
+            {({ TransitionProps }) => (
               <Grow
                 {...TransitionProps}
                 id="menu-list"
@@ -127,31 +134,31 @@ class HeaderLinks extends React.Component {
                   <ClickAwayListener onClickAway={this.handleClose}>
                     <MenuList role="menu">
                       <MenuItem
-                        onClick={() => this.props.history.push('/dashboard/user/profile')}
+                        onClick={() => this.handleClick('profile')}
                         className={dropdownItem}
                       >
                         {'Profile Settings'}
                       </MenuItem>
                       <MenuItem
-                        onClick={() => this.props.history.push('/dashboard/user/password')}
+                        onClick={() => this.handleClick('password')}
                         className={dropdownItem}
                       >
                         {'Security'}
                       </MenuItem>
                       <MenuItem
-                        onClick={() => this.props.history.push('/dashboard/user/medical')}
+                        onClick={() => this.handleClick('medical')}
                         className={dropdownItem}
                       >
-                        {"Medical Log"}
+                        {'Medical Log'}
                       </MenuItem>
                       <MenuItem
-                        onClick={() => this.props.history.push('/dashboard/user/training')}
+                        onClick={() => this.handleClick('training')}
                         className={dropdownItem}
                       >
                         {'Training Log'}
                       </MenuItem>
                       <MenuItem
-                        onClick={() => this.props.history.push('/dashboard/user/profile')}
+                        onClick={() => this.logout()}
                         className={dropdownItem}
                       >
                         {'Log Out'}
@@ -169,7 +176,14 @@ class HeaderLinks extends React.Component {
 }
 
 HeaderLinks.propTypes = {
+  history: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
+  logout: PropTypes.func.isRequired,
 };
 
-export default withRouter(withStyles(headerLinksStyle)(HeaderLinks));
+const mapStateToProps = () => ({});
+const mapDispatchToProps = dispatch => ({ logout: () => dispatch(userLogout()) });
+
+const connected = connect(mapStateToProps, mapDispatchToProps)(HeaderLinks);
+
+export default withRouter(withStyles(headerLinksStyle)(connected));

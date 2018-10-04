@@ -19,7 +19,6 @@ import Button from '../../../Components/CustomButtons';
 import Table from '../../../Components/Table';
 import LoadingTable from '../../../Components/Loading/LoadingTable';
 
-import FreezerCreate from './Create/create.container';
 import FreezerDelete from './Delete/delete.container';
 
 import style from '../../../Assets/Jss/extendedTablesStyle';
@@ -28,7 +27,6 @@ class FreezerItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayCreateModal: false,
       displayDeleteModal: false,
       selectedDeleteItem: {},
     };
@@ -37,18 +35,6 @@ class FreezerItem extends React.Component {
   componentDidMount() {
     const { listFreezers } = this.props;
     listFreezers();
-  }
-
-  showCreateModal() {
-    this.setState({
-      displayCreateModal: true,
-    });
-  }
-
-  hideCreateModal() {
-    this.setState({
-      displayCreateModal: false,
-    });
   }
 
   showDeleteModal(itemId, index) {
@@ -73,7 +59,7 @@ class FreezerItem extends React.Component {
       classes, items, loading, history,
     } = this.props;
     const {
-      displayCreateModal, displayDeleteModal, selectedDeleteItem,
+      displayDeleteModal, selectedDeleteItem,
     } = this.state;
     const simpleButtons = (item, index) => [
       { color: 'warning', icon: Print, tooltip: 'Print' },
@@ -124,11 +110,6 @@ class FreezerItem extends React.Component {
           classes={classes}
           close={() => this.hideDeleteModal()}
         />
-        <FreezerCreate
-          visible={displayCreateModal}
-          classes={classes}
-          close={() => this.hideCreateModal()}
-        />
         <GridContainer>
           <GridItem xs={12}>
             <Card>
@@ -139,19 +120,16 @@ class FreezerItem extends React.Component {
                 <Button
                   color="info"
                   className={classes.marginRight}
-                  onClick={() => this.showCreateModal()}
+                  onClick={() => history.push('/dashboard/freezer/item/create')}
                 >
-                  New
+                Create
                 </Button>
               </CardHeader>
               <CardBody>
                 {!loading && items && items.length > 0 && (
                 <Table
                   hover
-                  tableHead={[
-                    'Name',
-                    'Description',
-                  ]}
+                  tableHead={['Name', 'Description']}
                   tableData={tableData}
                   customCellClasses={[
                     classes.left,

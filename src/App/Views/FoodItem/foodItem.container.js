@@ -4,9 +4,6 @@ import { listFoodItems } from './Store/Actions';
 
 const mapStateToProps = state => ({
   loading: state.foodItem.index.loading,
-  error: state.foodItem.index.error,
-  errorMessage: state.foodItem.index.errorMessage,
-  success: state.foodItem.index.success,
   items: state.foodItem.index.items,
 });
 

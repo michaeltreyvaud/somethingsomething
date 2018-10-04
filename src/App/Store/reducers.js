@@ -1,4 +1,6 @@
 import { combineReducers } from 'redux';
+import AuthStore from '../Util/authstore';
+import { USER_AUTH_LOGOUT } from '../Views/User/Profile/Store/ActionTypes';
 import routingReducer from '../Routing/Store/Reducers';
 
 import dashBoardReducer from '../Layouts/Dashboard/Store/Reducers';
@@ -14,7 +16,6 @@ import hotHoldingReducer from './Reducers/HotHolding';
 import fastCoolingReducer from './Reducers/FastCooling';
 import userReducer from './Reducers/User';
 
-//  TODO - break these out
 const appReducers = combineReducers({
   routes: routingReducer,
   layouts: combineReducers({
@@ -34,4 +35,14 @@ const appReducers = combineReducers({
   user: userReducer,
 });
 
-export default appReducers;
+const rootReducer = (state, action) => {
+  if (action.type === USER_AUTH_LOGOUT) {
+    AuthStore.removeIdToken();
+    AuthStore.removeRefreshToken();
+    AuthStore.removeAccessToken();
+    return appReducers(undefined, action);
+  }
+  return appReducers(state, action);
+};
+
+export default rootReducer;

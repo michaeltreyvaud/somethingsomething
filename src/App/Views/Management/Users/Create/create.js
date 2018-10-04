@@ -1,60 +1,40 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Today from '@material-ui/icons/Today';
+import withStyles from '@material-ui/core/styles/withStyles';
 
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogActions from '@material-ui/core/DialogActions';
-import Close from '@material-ui/icons/Close';
-import Slide from '@material-ui/core/Slide';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 
+import GridItem from '../../../../Components/Grid/GridItem';
+import Card from '../../../../Components/Card/Card';
+import GridContainer from '../../../../Components/Grid/GridContainer';
+import CardHeader from '../../../../Components/Card/CardHeader';
+import CardBody from '../../../../Components/Card/CardBody';
+import CardIcon from '../../../../Components/Card/CardIcon';
+
 import ImageUpload from '../../../../Components/CustomUpload/ImageUpload';
 import CustomInput from '../../../../Components/CustomInput';
 import Button from '../../../../Components/CustomButtons';
 
-const Transition = props => <Slide direction="down" {...props} />;
+import extendedFormsStyle from '../../../../Assets/Jss/extendedFormsStyle';
 
 class Create extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      email: '',
-      firstName: '',
-      lastName: '',
-      phoneNumber: '',
-      position: '',
-      team: '',
-      authorization: '',
-    };
+    this.state = {};
   }
 
   componentWillReceiveProps(nextProps) {
     const { loading } = this.props;
     if (loading && nextProps.loading === false && nextProps.success) {
-      this.closeModal();
+      this.back();
     }
   }
 
-  closeModal() {
-    const { close } = this.props;
-    this.setState({
-      email: '',
-      firstName: '',
-      lastName: '',
-      phoneNumber: '',
-      position: '',
-      team: '',
-      authorization: '',
-    }, () => {
-      close();
-    });
-  }
-
-  createUser() {
+  create() {
     const { createUser, loading } = this.props;
     if (loading) return false;
     return createUser(this.state);
@@ -65,6 +45,11 @@ class Create extends Component {
     this.setState({
       [target.id || target.name]: target.value,
     });
+  }
+
+  back() {
+    const { history } = this.props;
+    history.push('/dashboard/management/users');
   }
 
   renderAuth() {
@@ -94,155 +79,133 @@ class Create extends Component {
   }
 
   render() {
-    const { classes, visible, loading } = this.props;
+    const { classes, loading } = this.props;
     const {
       email, firstName, lastName, phoneNumber,
       position, team, authorization,
     } = this.state;
     return (
-      <Dialog
-        classes={{
-          root: `${classes.center} ${classes.modalRoot}`,
-          paper: classes.modal,
-        }}
-        open={visible}
-        TransitionComponent={Transition}
-        keepMounted
-        onClose={() => this.closeModal()}
-        aria-labelledby="notice-modal-slide-title"
-        aria-describedby="notice-modal-slide-description"
-      >
-        <DialogTitle
-          id="notice-modal-slide-title"
-          disableTypography
-          className={classes.modalHeader}
-        >
-          <Button
-            justIcon
-            className={classes.modalCloseButton}
-            key="close"
-            aria-label="Close"
-            color="transparent"
-            onClick={() => this.closeModal()}
-          >
-            <Close className={classes.modalClose} />
-          </Button>
-          <h4 className={classes.modalTitle}>Create User</h4>
-        </DialogTitle>
-        <DialogContent
-          id="notice-modal-slide-description"
-          className={classes.modalBody}
-        >
-          <ImageUpload
-            avatar
-            addButtonProps={{ color: 'rose', round: true }}
-            changeButtonProps={{ color: 'rose', round: true }}
-            removeButtonProps={{ color: 'danger', round: true }}
-          />
-          <CustomInput
-            labelText="Email"
-            name="email"
-            id="email"
-            formControlProps={{ fullWidth: true }}
-            inputProps={{ type: 'email' }}
-            value={email}
-            onChange={e => this.updateValue(e)}
-          />
-          <CustomInput
-            labelText="First Name"
-            name="firstName"
-            id="firstName"
-            formControlProps={{ fullWidth: true }}
-            inputProps={{ type: 'text' }}
-            value={firstName}
-            onChange={e => this.updateValue(e)}
-          />
-          <CustomInput
-            labelText="Last Name"
-            name="lastName"
-            id="lastName"
-            formControlProps={{ fullWidth: true }}
-            inputProps={{ type: 'text' }}
-            value={lastName}
-            onChange={e => this.updateValue(e)}
-          />
-          <CustomInput
-            labelText="Phone Number"
-            name="phoneNumber"
-            id="phoneNumber"
-            formControlProps={{ fullWidth: true }}
-            inputProps={{ type: 'phone' }}
-            value={phoneNumber}
-            onChange={e => this.updateValue(e)}
-          />
-          <CustomInput
-            labelText="Position"
-            name="position"
-            id="position"
-            formControlProps={{ fullWidth: true }}
-            inputProps={{ type: 'text' }}
-            value={position}
-            onChange={e => this.updateValue(e)}
-          />
-          <FormControl
-            fullWidth
-            className={classes.selectFormControl}
-          >
-            <InputLabel
-              htmlFor="simple-select"
-              className={classes.selectLabel}
-            >
-              Team
-            </InputLabel>
-            <Select
-              MenuProps={{ className: classes.selectMenu }}
-              classes={{ select: classes.select }}
-              value={team}
-              onChange={e => this.updateValue(e)}
-              inputProps={{ name: 'team' }}
-            >
-              {this.renderTeams()}
-            </Select>
-          </FormControl>
-          <FormControl
-            fullWidth
-            className={classes.selectFormControl}
-          >
-            <InputLabel
-              htmlFor="simple-select"
-              className={classes.selectLabel}
-            >
-              Authorization
-            </InputLabel>
-            <Select
-              MenuProps={{ className: classes.selectMenu }}
-              classes={{ select: classes.select }}
-              value={authorization}
-              onChange={e => this.updateValue(e)}
-              inputProps={{ name: 'authorization' }}
-            >
-              {this.renderAuth()}
-            </Select>
-          </FormControl>
-        </DialogContent>
-        <DialogActions className={`${classes.modalFooter} ${classes.modalFooterCenter}`}>
-          <Button
-            loading={loading}
-            onClick={() => this.createUser()}
-            color="info"
-            round
-          >
-          Save
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <div>
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={12}>
+            <Card>
+              <CardHeader color="rose" icon>
+                <CardIcon color="rose">
+                  <Today />
+                </CardIcon>
+              </CardHeader>
+              <CardBody>
+                <div>
+                  <ImageUpload
+                    avatar
+                    addButtonProps={{ color: 'rose', round: true }}
+                    changeButtonProps={{ color: 'rose', round: true }}
+                    removeButtonProps={{ color: 'danger', round: true }}
+                  />
+                  <CustomInput
+                    labelText="Email"
+                    name="email"
+                    id="email"
+                    formControlProps={{ fullWidth: true }}
+                    inputProps={{ type: 'email' }}
+                    value={email}
+                    onChange={e => this.updateValue(e)}
+                  />
+                  <CustomInput
+                    labelText="First Name"
+                    name="firstName"
+                    id="firstName"
+                    formControlProps={{ fullWidth: true }}
+                    inputProps={{ type: 'text' }}
+                    value={firstName}
+                    onChange={e => this.updateValue(e)}
+                  />
+                  <CustomInput
+                    labelText="Last Name"
+                    name="lastName"
+                    id="lastName"
+                    formControlProps={{ fullWidth: true }}
+                    inputProps={{ type: 'text' }}
+                    value={lastName}
+                    onChange={e => this.updateValue(e)}
+                  />
+                  <CustomInput
+                    labelText="Phone Number"
+                    name="phoneNumber"
+                    id="phoneNumber"
+                    formControlProps={{ fullWidth: true }}
+                    inputProps={{ type: 'phone' }}
+                    value={phoneNumber}
+                    onChange={e => this.updateValue(e)}
+                  />
+                  <CustomInput
+                    labelText="Position"
+                    name="position"
+                    id="position"
+                    formControlProps={{ fullWidth: true }}
+                    inputProps={{ type: 'text' }}
+                    value={position}
+                    onChange={e => this.updateValue(e)}
+                  />
+                  <FormControl
+                    fullWidth
+                    className={classes.selectFormControl}
+                  >
+                    <InputLabel
+                      htmlFor="simple-select"
+                      className={classes.selectLabel}
+                    >
+            Team
+                    </InputLabel>
+                    <Select
+                      MenuProps={{ className: classes.selectMenu }}
+                      classes={{ select: classes.select }}
+                      value={team}
+                      onChange={e => this.updateValue(e)}
+                      inputProps={{ name: 'team' }}
+                    >
+                      {this.renderTeams()}
+                    </Select>
+                  </FormControl>
+                  <FormControl
+                    fullWidth
+                    className={classes.selectFormControl}
+                  >
+                    <InputLabel
+                      htmlFor="simple-select"
+                      className={classes.selectLabel}
+                    >
+            Authorization
+                    </InputLabel>
+                    <Select
+                      MenuProps={{ className: classes.selectMenu }}
+                      classes={{ select: classes.select }}
+                      value={authorization}
+                      onChange={e => this.updateValue(e)}
+                      inputProps={{ name: 'authorization' }}
+                    >
+                      {this.renderAuth()}
+                    </Select>
+                  </FormControl>
+                  <Button loading={loading} onClick={() => this.create()} color="rose" className={classes.updateProfileButton}>
+                    Save
+                  </Button>
+                  <Button onClick={() => this.back()} color="info" className={classes.updateProfileButton}>
+                    Cancel
+                  </Button>
+                </div>
+              </CardBody>
+            </Card>
+          </GridItem>
+        </GridContainer>
+      </div>
     );
   }
 }
 
 Create.propTypes = {
+  history: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
-  visible: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
   success: PropTypes.bool.isRequired,
   createUser: PropTypes.func.isRequired,
@@ -251,4 +214,4 @@ Create.propTypes = {
   authorizations: PropTypes.array.isRequired,
 };
 
-export default Create;
+export default withStyles(extendedFormsStyle)(Create);
