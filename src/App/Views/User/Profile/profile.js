@@ -28,6 +28,11 @@ class Profile extends React.Component {
     };
   }
 
+  componentDidMount() {
+    const { signature } = this.state;
+    this.sigCanvas.fromDataURL(signature);
+  }
+
   updateValue(e) {
     const { target } = e;
     this.setState({
@@ -38,7 +43,9 @@ class Profile extends React.Component {
   updateInfo() {
     const { updateUser, loading } = this.props;
     if (loading) return false;
-    return updateUser(this.state);
+    return this.setState({
+      signature: this.sigCanvas.toDataURL('image/jpeg'),
+    }, () => updateUser(this.state));
   }
 
   render() {
@@ -140,8 +147,17 @@ class Profile extends React.Component {
                         ref={(ref) => { this.sigCanvas = ref; }}
                         backgroundColor="#ECECEC"
                         penColor="black"
+                        clearOnResize={false}
                       />
                     </FormControl>
+                    <Button
+                      loading={false}
+                      onClick={() => this.sigCanvas.clear()}
+                      color="info"
+                      className={classes.updateProfileButton}
+                    >
+                      Clear
+                    </Button>
                   </GridItem>
                 </GridContainer>
                 <Clearfix />

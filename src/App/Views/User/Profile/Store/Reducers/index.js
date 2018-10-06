@@ -52,7 +52,7 @@ const reducer = (state = initialState, action) => {
     }
     case USER_AUTH_UPDATED: {
       const { response } = action.payload;
-      const { AuthenticationResult } = response;
+      const { AuthenticationResult, signature } = response;
       const user = {};
       if (AuthenticationResult) {
         const { IdToken } = AuthenticationResult;
@@ -65,6 +65,7 @@ const reducer = (state = initialState, action) => {
         user.lastName = decodedToken.family_name;
         user.firstName = decodedToken.given_name;
         user.phoneNumber = decodedToken.phone_number;
+        user.signature = signature;
       }
       return {
         ...state,
