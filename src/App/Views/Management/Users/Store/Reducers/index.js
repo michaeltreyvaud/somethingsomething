@@ -33,43 +33,20 @@ const reducer = (state = initialState, action) => {
     case LIST_USER_SUCCESS: {
       const { response } = action.payload;
       //  TODO - store the next key etc for pagination
-      const { Users } = response;
-      const displayUsers = Users.map((user) => {
-        const attributes = user.Attributes;
-        const findValue = (field) => {
-          let value;
-          attributes.forEach((attribute) => {
-            if (attribute.Name === field) {
-              value = attribute.Value;
-            }
-          });
-          return value;
-        };
-        const User = {
-          userName: user.Username,
-          email: findValue('email'),
-          firstName: findValue('given_name'),
-          lastName: findValue('family_name'),
-          phoneNumber: findValue('phone_number'),
-          position: findValue('custom:position'),
-          team: findValue('custom:team'),
-          authorization: findValue('custom:authorization'),
-        };
-        return User;
-      });
+      const { users } = response;
       const sortByName = (a, b) => {
         if (a.firstName.toLowerCase() < b.firstName.toLowerCase()) { return -1; }
         if (a.firstName.toLowerCase() > b.firstName.toLowerCase()) { return 1; }
         return 0;
       };
-      displayUsers.sort((a, b) => sortByName(a, b));
+      users.sort((a, b) => sortByName(a, b));
       return {
         ...state,
         loading: false,
         error: false,
         errorMessage: '',
         success: true,
-        items: displayUsers,
+        items: users,
       };
     }
     case LIST_USER_FAIL: {

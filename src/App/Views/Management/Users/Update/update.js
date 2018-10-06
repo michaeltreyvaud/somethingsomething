@@ -45,11 +45,23 @@ class Update extends React.Component {
     }
   }
 
+  componentDidMount() {
+    const { signature } = this.state;
+    if (signature) {
+      this.sigCanvas.fromDataURL(signature);
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     const { item, updating } = nextProps;
     if (item && !updating) {
       this.setState({
         ...item,
+      }, () => {
+        const { signature } = this.state;
+        if (signature) {
+          this.sigCanvas.fromDataURL(signature);
+        }
       });
     }
   }
@@ -100,7 +112,7 @@ class Update extends React.Component {
     if (!item && !loading) return (<NotFound text="User Not Found" />);
     const {
       email, lastName, firstName, phoneNumber,
-      position, team, authorization,
+      position, team, authorization, signature,
     } = this.state;
     return (
       <div>
@@ -232,11 +244,18 @@ class Update extends React.Component {
                         className={classes.selectFormControl}
                       >
                         <h4 className={classes.cardIconTitle}>Signature</h4>
+                        {signature && (
                         <SignatureCanvas
                           ref={(ref) => { this.sigCanvas = ref; }}
                           backgroundColor="#ECECEC"
                           penColor="black"
                         />
+                        )}
+                        {!signature && (
+                        <h5 className={classes.cardIconTitle}>
+                          No Signature Found
+                        </h5>
+                        )}
                       </FormControl>
                     </GridItem>
                   </GridContainer>
