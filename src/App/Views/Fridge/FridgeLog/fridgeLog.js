@@ -1,11 +1,10 @@
 import React from 'react';
-// @material-ui/core components
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Assignment from '@material-ui/icons/Assignment';
 import Tooltip from '@material-ui/core/Tooltip';
 import moment from 'moment';
-// core components
+
 import FileCopy from '@material-ui/icons/FileCopy';
 import Open from '@material-ui/icons/OpenInNew';
 import Delete from '@material-ui/icons/Delete';
@@ -29,7 +28,7 @@ class FridgeLog extends React.Component {
     super(props);
     this.state = {
       displayDeleteModal: false,
-      selectedDeleteItem: {},      
+      selectedDeleteItem: {},
     };
   }
 
@@ -62,7 +61,7 @@ class FridgeLog extends React.Component {
     const {
       displayDeleteModal, selectedDeleteItem,
     } = this.state;
-    const simpleButtons = (item, index) => [      
+    const simpleButtons = (item, index) => [
       { color: 'success', icon: Open, tooltip: 'Edit' },
       { color: 'warning', icon: FileCopy, tooltip: 'Copy' },
       { color: 'danger', icon: Delete, tooltip: 'Delete' },
@@ -100,7 +99,8 @@ class FridgeLog extends React.Component {
       );
     });
     const tableData = items.map((_item, index) => {
-      const item = [ _item.fridgeItem, _item.user, _item.temperature, moment(_item.createdAt).format('MMMM Do YYYY, h:mm:ss a'), _item.image, _item.comments, simpleButtons(_item, index)];
+      const item = [_item.fridgeItem.displayName, `${_item.user.firstName} ${_item.user.lastName}`, _item.temperature,
+        moment(_item.createdAt).format('DD/MM/YYYY'), _item.comments, simpleButtons(_item, index)];
       return item;
     });
     return (
@@ -111,25 +111,6 @@ class FridgeLog extends React.Component {
           classes={classes}
           close={() => this.hideDeleteModal()}
         />
-        <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/dashboard/fridge/log/create')}>
-        New
-        </Button>
-        <CustomDropdown
-          hoverColor="black"
-          buttonText="Export"
-          buttonProps={{
-            minHeight: 'auto',
-            minWidth: 'auto',            
-            style: { marginBottom: '0', float: 'right', },
-            color: 'warning',
-          }}
-          dropdownHeader="Actions"
-          dropdownList={[
-            'Export CSV',
-            'Export PDF',
-            'Email',
-          ]}
-        />
         <GridContainer>
           <GridItem xs={12}>
             <Card>
@@ -137,32 +118,54 @@ class FridgeLog extends React.Component {
                 <CardIcon color="rose">
                   <Assignment />
                 </CardIcon>
+                <Button color="info" className={classes.marginRight} onClick={() => history.push('/dashboard/fridge/log/create')}>
+                  Create
+                </Button>
+                <CustomDropdown
+                  hoverColor="black"
+                  buttonText="Export"
+                  buttonProps={{
+                    minHeight: 'auto',
+                    minWidth: 'auto',
+                    style: { marginBottom: '0', float: 'right' },
+                    color: 'warning',
+                  }}
+                  dropdownHeader="Actions"
+                  dropdownList={[
+                    'Export CSV',
+                    'Export PDF',
+                    'Email',
+                  ]}
+                />
               </CardHeader>
               <CardBody>
-              {!loading && items && items.length > 0 && (
+                {!loading && items && items.length > 0 && (
                 <Table
                   tableHead={[
                     'Fridge',
                     'Operator',
                     'Temperature',
-                    'Date/Time',
-                    'Captured Image',
+                    'Created',
                     'Comments',
                     'Actions',
                   ]}
                   tableData={tableData}
                   customCellClasses={[
-                    classes.center,
-                    classes.right,
+                    classes.left,
+                    classes.left,
+                    classes.left,
+                    classes.left,
                     classes.right,
                   ]}
-                  customClassesForCells={[0, 4, 5]}
+                  customClassesForCells={[0, 1, 2, 3, 4]}
                   customHeadCellClasses={[
-                    classes.center,
-                    classes.right,
+                    classes.left,
+                    classes.left,
+                    classes.left,
+                    classes.left,
                     classes.right,
                   ]}
-                  customHeadClassesForCells={[0, 4, 5]}
+                  customHeadClassesForCells={[0, 1, 2, 3, 4]}
                 />
                 )}
                 {!loading && items && items.length === 0 && (
@@ -187,11 +190,7 @@ FridgeLog.propTypes = {
   history: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
   items: PropTypes.array.isRequired,
-
   loading: PropTypes.bool.isRequired,
-  error: PropTypes.bool.isRequired,
-  errorMessage: PropTypes.string.isRequired,
-
   listFridgeLogs: PropTypes.func.isRequired,
 };
 

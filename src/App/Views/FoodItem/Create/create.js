@@ -350,10 +350,10 @@ class Create extends Component {
                     />
                   </div>
                   <Button loading={loading} onClick={() => this.create()} color="rose" className={classes.updateProfileButton}>
-                Save
+                    Save
                   </Button>
                   <Button onClick={() => this.back()} color="info" className={classes.updateProfileButton}>
-                Cancel
+                    Cancel
                   </Button>
                 </div>
               </CardBody>

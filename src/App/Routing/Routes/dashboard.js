@@ -51,9 +51,11 @@ import FridgeItemCreate from '../../Views/Fridge/FridgeItem/Create/create.contai
 import FridgeItemUpdate from '../../Views/Fridge/FridgeItem/Update/update.container';
 
 import FridgeTask from '../../Views/Fridge/FridgeTask';
+
 import FridgeLog from '../../Views/Fridge/FridgeLog/fridgeLog.container';
-import FridgeLogCreate from '../../Views/Fridge/FridgeLog/Create';
+import FridgeLogCreate from '../../Views/Fridge/FridgeLog/Create/create.container';
 import FridgeLogUpdate from '../../Views/Fridge/FridgeLog/Update/update.container';
+
 import FridgeChart from '../../Views/Fridge/FridgeChart';
 
 import FreezerItem from '../../Views/Freezer/FreezerItem/freezerItem.container';
@@ -61,9 +63,11 @@ import FreezerItemCreate from '../../Views/Freezer/FreezerItem/Create/create.con
 import FreezerItemUpdate from '../../Views/Freezer/FreezerItem/Update/update.container';
 
 import FreezerTask from '../../Views/Freezer/FreezerTask';
+
 import FreezerLog from '../../Views/Freezer/FreezerLog/freezerLog.container';
-import FreezerLogCreate from '../../Views/Freezer/FreezerLog/Create';
+import FreezerLogCreate from '../../Views/Freezer/FreezerLog/Create/create.container';
 import FreezerLogUpdate from '../../Views/Freezer/FreezerLog/Update/update.container';
+
 import FreezerChart from '../../Views/Freezer/FreezerChart';
 
 import FoodItem from '../../Views/FoodItem/foodItem.container';
