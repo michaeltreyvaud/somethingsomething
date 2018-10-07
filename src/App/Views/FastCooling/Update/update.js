@@ -1,14 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Datetime from 'react-datetime';
-import moment from 'moment';
-
-import Check from '@material-ui/icons/Check';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import withStyles from '@material-ui/core/styles/withStyles';
+import SignatureCanvas from 'react-signature-canvas';
 import Today from '@material-ui/icons/Today';
+import withStyles from '@material-ui/core/styles/withStyles';
+
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
 import Button from '../../../Components/CustomButtons';
 import CustomInput from '../../../Components/CustomInput';
@@ -21,111 +20,65 @@ import CardIcon from '../../../Components/Card/CardIcon';
 import NotFound from '../../../Components/NotFound';
 import extendedFormsStyle from '../../../Assets/Jss/extendedFormsStyle';
 
+import ImageUpload from '../../../Components/CustomUpload/ImageUpload';
+
 import LoadingTable from '../../../Components/Loading/LoadingTable';
 
-class Update extends React.Component {
+class Update extends Component {
   constructor(props) {
     super(props);
     const { item } = props;
     if (item) {
       const {
-        name, batchNumber, description, allergens,
-        expiryDate, id, createdAt,
+        comments, createdAt, foodItem,
+        signature, temperature, user,
       } = item;
-      const {
-        gluten, sesameSeeds, molluscs, fish, soybeans,
-        peanuts, milk, sulphurDioxideAndSulphites, crustaceans,
-        eggs, lupin, nuts, mustard, celery,
-      } = allergens;
       this.state = {
-        id,
+        comments,
         createdAt,
-        name,
-        batchNumber,
-        description,
-        expiryDate,
-        allergens: {
-          gluten,
-          sesameSeeds,
-          molluscs,
-          fish,
-          soybeans,
-          peanuts,
-          milk,
-          sulphurDioxideAndSulphites,
-          crustaceans,
-          eggs,
-          lupin,
-          nuts,
-          mustard,
-          celery,
-        },
+        foodItem,
+        temperature,
+        user,
+        signature,
       };
     } else {
       this.state = {
-        id: '',
+        comments: '',
         createdAt: 0,
-        name: '',
-        batchNumber: '',
-        description: '',
-        expiryDate: 0,
-        allergens: {
-          gluten: false,
-          sesameSeeds: false,
-          molluscs: false,
-          fish: false,
-          soybeans: false,
-          peanuts: false,
-          milk: false,
-          sulphurDioxideAndSulphites: false,
-          crustaceans: false,
-          eggs: false,
-          lupin: false,
-          nuts: false,
-          mustard: false,
-          celery: false,
-        },
+        foodItem: {},
+        temperature: 0,
+        user: {},
+        signature: '',
       };
     }
   }
 
+  componentDidMount() {
+    const { signature } = this.state;
+    if (signature) this.sigCanvas.fromDataURL(signature);
+  }
+
   componentWillReceiveProps(nextProps) {
-    const { item, updating } = nextProps;
-    if (item && !updating) {
+    const { item, updating, loading } = nextProps;
+    if (item && !updating && !loading) {
       const {
-        name, batchNumber, description, allergens,
-        expiryDate, id, createdAt,
+        comments, createdAt, foodItem,
+        signature, temperature, user,
       } = item;
-      const {
-        gluten, sesameSeeds, molluscs, fish, soybeans,
-        peanuts, milk, sulphurDioxideAndSulphites, crustaceans,
-        eggs, lupin, nuts, mustard, celery,
-      } = allergens;
       this.setState({
-        id,
-        name,
+        comments,
         createdAt,
-        batchNumber,
-        description,
-        expiryDate,
-        allergens: {
-          gluten,
-          sesameSeeds,
-          molluscs,
-          fish,
-          soybeans,
-          peanuts,
-          milk,
-          sulphurDioxideAndSulphites,
-          crustaceans,
-          eggs,
-          lupin,
-          nuts,
-          mustard,
-          celery,
-        },
+        foodItem,
+        temperature,
+        user,
+        signature,
       });
     }
+  }
+
+  componentDidUpdate() {
+    const { signature } = this.state;
+    if (signature) this.sigCanvas.fromDataURL(signature);
   }
 
   updateValue(e) {
@@ -144,10 +97,10 @@ class Update extends React.Component {
     });
   }
 
-  updateFoodItem() {
-    const { loading, updating, updateFoodItem } = this.props;
+  update() {
+    const { loading, updating, updateFastCooling } = this.props;
     if (loading || updating) return false;
-    return updateFoodItem(this.state);
+    return updateFastCooling(this.state);
   }
 
   render() {
@@ -155,14 +108,8 @@ class Update extends React.Component {
       classes, loading, item, updating,
     } = this.props;
     if (!item && !loading) return (<NotFound text="Item Not Found" />);
-    const {
-      name, batchNumber, description, allergens, expiryDate,
-    } = this.state;
-    const {
-      gluten, sesameSeeds, molluscs, fish, soybeans,
-      peanuts, milk, sulphurDioxideAndSulphites, crustaceans,
-      eggs, lupin, nuts, mustard, celery,
-    } = allergens;
+    const { foodItem, temperature, comments } = this.state;
+    const { displayName: foodItemDisplayName } = foodItem;
     return (
       <div>
         <GridContainer>
@@ -175,253 +122,48 @@ class Update extends React.Component {
               </CardHeader>
               <CardBody>
                 {!loading && (
-                <div><CustomInput
-                  value={name}
-                  labelText="Name"
-                  id="name"
-                  formControlProps={{ fullWidth: true }}
-                  onChange={e => this.updateValue(e)}
-                />
+                <div>
                   <CustomInput
-                    value={batchNumber}
-                    labelText="Batch Number"
-                    id="batchNumber"
+                    value={foodItemDisplayName}
+                    labelText="Food Item"
                     formControlProps={{ fullWidth: true }}
-                    onChange={e => this.updateValue(e)}
+                    inputProps={{ disabled: true }}
                   />
                   <CustomInput
-                    value={description}
-                    labelText="Description"
-                    id="description"
+                    value={temperature}
+                    labelText="Temperature"
+                    formControlProps={{ fullWidth: true }}
+                    inputProps={{ disabled: true }}
+                  />
+                  <ImageUpload
+                    avatar
+                    addButtonProps={{ color: 'rose', round: true }}
+                    changeButtonProps={{ color: 'rose', round: true }}
+                    removeButtonProps={{ color: 'danger', round: true }}
+                  />
+                  <CustomInput
+                    value={comments}
+                    labelText="Comments"
+                    id="comments"
                     formControlProps={{ fullWidth: true }}
                     inputProps={{ multiline: true, rows: 3 }}
                     onChange={e => this.updateValue(e)}
                   />
-                  <FormControl fullWidth>
-                    <Datetime
-                      value={moment(expiryDate)}
-                      dateFormat="DD/MM/YYYY"
-                      id="expiryDate"
-                      timeFormat={false}
-                      inputProps={{ placeholder: 'Expiry Date', disabled: true }}
+                  <FormControl fullWidth className={classes.selectFormControl}>
+                    <h4 className={classes.cardIconTitle}>Signature</h4>
+                    <SignatureCanvas
+                      ref={(ref) => { this.sigCanvas = ref; }}
+                      backgroundColor="#ECECEC"
+                      penColor="black"
+                      clearOnResize={false}
                     />
                   </FormControl>
-                  <div className={classes.inlineChecks}>
-                    <legend>Allergy Information</legend>
-                    <FormControlLabel
-                      control={(
-                        <Checkbox
-                          checked={gluten}
-                          id="gluten"
-                          value={gluten}
-                          onClick={e => this.updateAllergens(e)}
-                          checkedIcon={<Check className={classes.checkedIcon} />}
-                          icon={<Check className={classes.uncheckedIcon} />}
-                          classes={{ checked: classes.checked }}
-                        />
-                    )}
-                      classes={{ label: classes.label }}
-                      label="Gluten"
-                    />
-                    <FormControlLabel
-                      control={(
-                        <Checkbox
-                          checked={sesameSeeds}
-                          id="sesameSeeds"
-                          value={sesameSeeds}
-                          onClick={e => this.updateAllergens(e)}
-                          checkedIcon={<Check className={classes.checkedIcon} />}
-                          icon={<Check className={classes.uncheckedIcon} />}
-                          classes={{ checked: classes.checked }}
-                        />
-                    )}
-                      classes={{ label: classes.label }}
-                      label="Sesame Seeds"
-                    />
-                    <FormControlLabel
-                      control={(
-                        <Checkbox
-                          checked={molluscs}
-                          id="molluscs"
-                          value={molluscs}
-                          onClick={e => this.updateAllergens(e)}
-                          checkedIcon={<Check className={classes.checkedIcon} />}
-                          icon={<Check className={classes.uncheckedIcon} />}
-                          classes={{ checked: classes.checked }}
-                        />
-                    )}
-                      classes={{ label: classes.label }}
-                      label="Molluscs"
-                    />
-                    <FormControlLabel
-                      control={(
-                        <Checkbox
-                          checked={fish}
-                          id="fish"
-                          value={fish}
-                          onClick={e => this.updateAllergens(e)}
-                          checkedIcon={<Check className={classes.checkedIcon} />}
-                          icon={<Check className={classes.uncheckedIcon} />}
-                          classes={{ checked: classes.checked }}
-                        />
-                    )}
-                      classes={{ label: classes.label }}
-                      label="Fish"
-                    />
-                    <FormControlLabel
-                      control={(
-                        <Checkbox
-                          checked={soybeans}
-                          id="soybeans"
-                          value={soybeans}
-                          onClick={e => this.updateAllergens(e)}
-                          checkedIcon={<Check className={classes.checkedIcon} />}
-                          icon={<Check className={classes.uncheckedIcon} />}
-                          classes={{ checked: classes.checked }}
-                        />
-                    )}
-                      classes={{ label: classes.label }}
-                      label="Soybeans"
-                    />
-                    <FormControlLabel
-                      control={(
-                        <Checkbox
-                          checked={peanuts}
-                          id="peanuts"
-                          value={peanuts}
-                          onClick={e => this.updateAllergens(e)}
-                          checkedIcon={<Check className={classes.checkedIcon} />}
-                          icon={<Check className={classes.uncheckedIcon} />}
-                          classes={{ checked: classes.checked }}
-                        />
-                    )}
-                      classes={{ label: classes.label }}
-                      label="Peanuts"
-                    />
-                    <FormControlLabel
-                      control={(
-                        <Checkbox
-                          checked={milk}
-                          id="milk"
-                          value={milk}
-                          onClick={e => this.updateAllergens(e)}
-                          checkedIcon={<Check className={classes.checkedIcon} />}
-                          icon={<Check className={classes.uncheckedIcon} />}
-                          classes={{ checked: classes.checked }}
-                        />
-                    )}
-                      classes={{ label: classes.label }}
-                      label="Milk"
-                    />
-                    <FormControlLabel
-                      control={(
-                        <Checkbox
-                          checked={sulphurDioxideAndSulphites}
-                          id="sulphurDioxideAndSulphites"
-                          value={sulphurDioxideAndSulphites}
-                          onClick={e => this.updateAllergens(e)}
-                          checkedIcon={<Check className={classes.checkedIcon} />}
-                          icon={<Check className={classes.uncheckedIcon} />}
-                          classes={{ checked: classes.checked }}
-                        />
-                    )}
-                      classes={{ label: classes.label }}
-                      label="Sulphur Dioxide And Sulphites"
-                    />
-                    <FormControlLabel
-                      control={(
-                        <Checkbox
-                          checked={crustaceans}
-                          id="crustaceans"
-                          value={crustaceans}
-                          onClick={e => this.updateAllergens(e)}
-                          checkedIcon={<Check className={classes.checkedIcon} />}
-                          icon={<Check className={classes.uncheckedIcon} />}
-                          classes={{ checked: classes.checked }}
-                        />
-                    )}
-                      classes={{ label: classes.label }}
-                      label="Crustaceans"
-                    />
-                    <FormControlLabel
-                      control={(
-                        <Checkbox
-                          checked={eggs}
-                          id="eggs"
-                          value={eggs}
-                          onClick={e => this.updateAllergens(e)}
-                          checkedIcon={<Check className={classes.checkedIcon} />}
-                          icon={<Check className={classes.uncheckedIcon} />}
-                          classes={{ checked: classes.checked }}
-                        />
-                    )}
-                      classes={{ label: classes.label }}
-                      label="Eggs"
-                    />
-                    <FormControlLabel
-                      control={(
-                        <Checkbox
-                          checked={lupin}
-                          id="lupin"
-                          value={lupin}
-                          onClick={e => this.updateAllergens(e)}
-                          checkedIcon={<Check className={classes.checkedIcon} />}
-                          icon={<Check className={classes.uncheckedIcon} />}
-                          classes={{ checked: classes.checked }}
-                        />
-                    )}
-                      classes={{ label: classes.label }}
-                      label="Lupin"
-                    />
-                    <FormControlLabel
-                      control={(
-                        <Checkbox
-                          checked={nuts}
-                          id="nuts"
-                          value={nuts}
-                          onClick={e => this.updateAllergens(e)}
-                          checkedIcon={<Check className={classes.checkedIcon} />}
-                          icon={<Check className={classes.uncheckedIcon} />}
-                          classes={{ checked: classes.checked }}
-                        />
-                    )}
-                      classes={{ label: classes.label }}
-                      label="Nuts"
-                    />
-                    <FormControlLabel
-                      control={(
-                        <Checkbox
-                          checked={mustard}
-                          id="mustard"
-                          value={mustard}
-                          onClick={e => this.updateAllergens(e)}
-                          checkedIcon={<Check className={classes.checkedIcon} />}
-                          icon={<Check className={classes.uncheckedIcon} />}
-                          classes={{ checked: classes.checked }}
-                        />
-                    )}
-                      classes={{ label: classes.label }}
-                      label="Mustard"
-                    />
-                    <FormControlLabel
-                      control={(
-                        <Checkbox
-                          checked={celery}
-                          id="celery"
-                          value={celery}
-                          onClick={e => this.updateAllergens(e)}
-                          checkedIcon={<Check className={classes.checkedIcon} />}
-                          icon={<Check className={classes.uncheckedIcon} />}
-                          classes={{ checked: classes.checked }}
-                        />
-                    )}
-                      classes={{ label: classes.label }}
-                      label="Celery"
-                    />
-                    <Button loading={updating} onClick={() => this.updateFoodItem()} color="rose" className={classes.updateProfileButton}>
-                        Save
-                    </Button>
-                  </div>
+                  <Button loading={updating} onClick={() => this.update()} color="rose" className={classes.updateProfileButton}>
+                    Save
+                  </Button>
+                  <Button onClick={() => this.back()} color="info" className={classes.updateProfileButton}>
+                    Cancel
+                  </Button>
                 </div>
                 )}
                 <LoadingTable visible={loading} color="red" />
@@ -435,11 +177,12 @@ class Update extends React.Component {
 }
 
 Update.propTypes = {
+  history: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
   item: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
   updating: PropTypes.bool.isRequired,
-  updateFoodItem: PropTypes.func.isRequired,
+  updateFastCooling: PropTypes.func.isRequired,
 };
 
 export default withStyles(extendedFormsStyle)(Update);
