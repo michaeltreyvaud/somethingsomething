@@ -54,6 +54,7 @@ class AppRouter extends Component {
       listFoodItems, listSuppliers,
       listFridgeLogs, listFreezerLogs,
       listMedicalLogs, listTrainingLogs,
+      listHotHoldings, listFastCoolings,
     } = this.props;
     //  TODO: Load all app view items
     listTeams();
@@ -66,6 +67,8 @@ class AppRouter extends Component {
     listFreezerLogs();
     listMedicalLogs();
     listTrainingLogs();
+    listHotHoldings();
+    listFastCoolings();
   }
 
   render() {
@@ -98,6 +101,8 @@ AppRouter.propTypes = {
   listFreezerLogs: PropTypes.func.isRequired,
   listMedicalLogs: PropTypes.func.isRequired,
   listTrainingLogs: PropTypes.func.isRequired,
+  listHotHoldings: PropTypes.func.isRequired,
+  listFastCoolings: PropTypes.func.isRequired,
 };
 
 export default AppRouter;

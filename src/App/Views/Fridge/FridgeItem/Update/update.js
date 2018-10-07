@@ -65,6 +65,11 @@ class Update extends React.Component {
     return updateFridge(this.state);
   }
 
+  back() {
+    const { history } = this.props;
+    history.push('/dashboard/fridge/item');
+  }
+
   render() {
     const {
       classes, loading, updating, item,
@@ -101,7 +106,10 @@ class Update extends React.Component {
                       onChange={e => this.updateValue(e)}
                     />
                     <Button loading={updating} onClick={() => this.updateFridge()} color="rose" className={classes.updateProfileButton}>
-                        Save
+                      Save
+                    </Button>
+                    <Button onClick={() => this.back()} color="info" className={classes.updateProfileButton}>
+                      Back
                     </Button>
                   </div>
                 )}
