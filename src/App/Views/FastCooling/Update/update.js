@@ -109,8 +109,11 @@ class Update extends Component {
       classes, loading, item, updating,
     } = this.props;
     if (!item && !loading) return (<NotFound text="Item Not Found" />);
-    const { foodItem, temperature, comments } = this.state;
+    const {
+      foodItem, temperature, comments, user,
+    } = this.state;
     const { displayName: foodItemDisplayName } = foodItem;
+    const { firstName, lastName } = user;
     return (
       <div>
         <GridContainer>
@@ -149,6 +152,12 @@ class Update extends Component {
                     formControlProps={{ fullWidth: true }}
                     inputProps={{ multiline: true, rows: 3 }}
                     onChange={e => this.updateValue(e)}
+                  />
+                  <CustomInput
+                    value={`${firstName} ${lastName}`}
+                    labelText="User"
+                    formControlProps={{ fullWidth: true }}
+                    inputProps={{ disabled: true }}
                   />
                   <FormControl fullWidth className={classes.selectFormControl}>
                     <h4 className={classes.cardIconTitle}>Signature</h4>

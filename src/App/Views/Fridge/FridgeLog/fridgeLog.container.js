@@ -3,10 +3,7 @@ import FridgeLog from './fridgeLog';
 import { listFridgeLogs } from './Store/Actions';
 
 const mapStateToProps = state => ({
-  loading: state.fridge.log.index.items.loading,
-  error: state.fridge.log.index.items.error,
-  errorMessage: state.fridge.log.index.items.errorMessage,
-  success: state.fridge.log.index.items.success,
+  loading: state.fridge.log.index.loading,
   items: state.fridge.log.index.items,
 });
 
