@@ -21,7 +21,6 @@ import Button from '../../Components/CustomButtons';
 import Table from '../../Components/Table';
 import LoadingTable from '../../Components/Loading/LoadingTable';
 
-import FastCoolingCreate from './Create/create.container';
 import FastCoolingDelete from './Delete/delete.container';
 
 import style from '../../Assets/Jss/extendedTablesStyle';
@@ -30,7 +29,6 @@ class FastCooling extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayCreateModal: false,
       displayDeleteModal: false,
       selectedDeleteItem: {},
       displayErrorMessage: false,
@@ -40,24 +38,6 @@ class FastCooling extends React.Component {
   componentDidMount() {
     const { listFastCoolings } = this.props;
     listFastCoolings();
-  }
-
-  showCreateModal() {
-    const { foodItems } = this.props;
-    if (foodItems.length === 0) {
-      return this.setState({
-        displayErrorMessage: true,
-      });
-    }
-    return this.setState({
-      displayCreateModal: true,
-    });
-  }
-
-  hideCreateModal() {
-    this.setState({
-      displayCreateModal: false,
-    });
   }
 
   showDeleteModal(createdAt, index) {
@@ -81,6 +61,16 @@ class FastCooling extends React.Component {
     this.setState({
       displayErrorMessage: false,
     });
+  }
+
+  create() {
+    const { foodItems, history } = this.props;
+    if (foodItems.length === 0) {
+      return this.setState({
+        displayErrorMessage: true,
+      });
+    }
+    return history.push('/dashboard/fastcooling/create');
   }
 
   renderErrorMessage() {
@@ -151,11 +141,6 @@ class FastCooling extends React.Component {
     return (
       <div>
         {this.renderErrorMessage()}
-        <FastCoolingCreate
-          visible={displayCreateModal}
-          classes={classes}
-          close={() => this.hideCreateModal()}
-        />
         <FastCoolingDelete
           item={selectedDeleteItem}
           visible={displayDeleteModal}
@@ -172,9 +157,9 @@ class FastCooling extends React.Component {
                 <Button
                   color="info"
                   className={classes.marginRight}
-                  onClick={() => this.showCreateModal()}
+                  onClick={() => this.create()}
                 >
-                  New
+                  Create
                 </Button>
               </CardHeader>
               <CardBody>

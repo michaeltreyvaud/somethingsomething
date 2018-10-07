@@ -35,8 +35,13 @@ class Create extends Component {
       },
       image: 'https://todo.com',
       comments: '',
-      signature: 'https://todo.com',
+      signature: user.signature,
     };
+  }
+
+  componentDidMount() {
+    const { signature } = this.state;
+    this.sigCanvas.fromDataURL(signature);
   }
 
   componentWillReceiveProps(nextProps) {

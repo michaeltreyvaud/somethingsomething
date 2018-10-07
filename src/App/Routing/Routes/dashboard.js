@@ -75,6 +75,7 @@ import HotHoldingCreate from '../../Views/HotHolding/Create/create.container';
 import HotHoldingUpdate from '../../Views/HotHolding/Update/update.container';
 
 import FastCooling from '../../Views/FastCooling/fastCooling.container';
+import FastCoolingCreate from '../../Views/FastCooling/Create/create.container';
 import FastCoolingUpdate from '../../Views/FastCooling/Update/update.container';
 
 import Service from '../../Views/Service';
@@ -404,6 +405,11 @@ const dashRoutes = [
     icon: FastForward,
     component: FastCooling,
     views: [
+      {
+        path: '/dashboard/fastcooling/create',
+        name: 'Create Item',
+        component: FastCoolingCreate,
+      },
       {
         path: '/dashboard/fastcooling/:id',
         name: 'Fast Cooling Item',

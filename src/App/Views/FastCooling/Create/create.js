@@ -1,22 +1,26 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import SignatureCanvas from 'react-signature-canvas';
+import Today from '@material-ui/icons/Today';
+import withStyles from '@material-ui/core/styles/withStyles';
 
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogActions from '@material-ui/core/DialogActions';
-import Close from '@material-ui/icons/Close';
-import Slide from '@material-ui/core/Slide';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
+import GridItem from '../../../Components/Grid/GridItem';
+import Card from '../../../Components/Card/Card';
+import GridContainer from '../../../Components/Grid/GridContainer';
+import CardHeader from '../../../Components/Card/CardHeader';
+import CardBody from '../../../Components/Card/CardBody';
+import CardIcon from '../../../Components/Card/CardIcon';
+
 import ImageUpload from '../../../Components/CustomUpload/ImageUpload';
 import CustomInput from '../../../Components/CustomInput';
 import Button from '../../../Components/CustomButtons';
 
-const Transition = props => <Slide direction="down" {...props} />;
+import extendedFormsStyle from '../../../Assets/Jss/extendedFormsStyle';
 
 class Create extends Component {
   constructor(props) {
@@ -24,7 +28,6 @@ class Create extends Component {
     const { user } = props;
     this.state = {
       selectedFoodItem: -1,
-      temperature: 0,
       user: {
         email: user.email,
         firstName: user.firstName,
@@ -32,37 +35,33 @@ class Create extends Component {
       },
       image: 'https://todo.com',
       comments: '',
-      signature: 'https://todo.com',
+      signature: user.signature,
     };
+  }
+
+  componentDidMount() {
+    const { signature } = this.state;
+    this.sigCanvas.fromDataURL(signature);
   }
 
   componentWillReceiveProps(nextProps) {
     const { loading } = this.props;
     if (loading && nextProps.loading === false && nextProps.success) {
-      this.closeModal();
+      this.back();
     }
   }
 
-  closeModal() {
-    const { close } = this.props;
-    this.setState({
-      selectedFoodItem: -1,
-      temperature: 0,
-      user: {},
-      image: 'https://todo.com',
-      comments: '',
-      signature: 'https://todo.com',
-    }, () => {
-      close();
-    });
-  }
-
-  createFastCooling() {
+  create() {
     const { createFastCooling, loading } = this.props;
     if (loading) return false;
     const { state } = this;
     delete state.selectedFoodItem;
     return createFastCooling(state);
+  }
+
+  back() {
+    const { history } = this.props;
+    history.push('/dashboard/fastcooling');
   }
 
   updateValue(e) {
@@ -97,95 +96,86 @@ class Create extends Component {
   }
 
   render() {
-    const { classes, visible, loading } = this.props;
+    const { classes, loading } = this.props;
     const {
-      selectedFoodItem, temperature, selectedUser,
-      comments,
+      selectedFoodItem, temperature, comments,
     } = this.state;
     return (
-      <Dialog
-        classes={{ root: `${classes.center} ${classes.modalRoot}`, paper: classes.modal }}
-        open={visible}
-        TransitionComponent={Transition}
-        keepMounted
-        onClose={() => this.closeModal()}
-        aria-labelledby="notice-modal-slide-title"
-        aria-describedby="notice-modal-slide-description"
-      >
-        <DialogTitle
-          id="notice-modal-slide-title"
-          disableTypography
-          className={classes.modalHeader}
-        >
-          <Button
-            justIcon
-            className={classes.modalCloseButton}
-            key="close"
-            aria-label="Close"
-            color="transparent"
-            onClick={() => this.closeModal()}
-          >
-            <Close className={classes.modalClose} />
-          </Button>
-          <legend>Create Fast Cooling</legend>
-        </DialogTitle>
-        <DialogContent id="notice-modal-slide-description" className={classes.modalBody}>
-          <FormControl fullWidth className={classes.selectFormControl}>
-            <InputLabel htmlFor="simple-select" className={classes.selectLabel}>
-              Choose Food Item
-            </InputLabel>
-            <Select
-              MenuProps={{ className: classes.selectMenu }}
-              classes={{ select: classes.select }}
-              onChange={e => this.updateValue(e)}
-              value={selectedFoodItem}
-              inputProps={{ name: 'foodItem' }}
-            >
-              {this.renderFoodItems()}
-            </Select>
-          </FormControl>
-          <CustomInput
-            value={temperature}
-            onChange={e => this.updateValue(e)}
-            labelText="Capture Temperature Value"
-            id="temperature"
-            formControlProps={{ fullWidth: true }}
-            inputProps={{ type: 'number' }}
-          />
-          <ImageUpload
-            avatar
-            addButtonProps={{ color: 'rose', round: true }}
-            changeButtonProps={{ color: 'rose', round: true }}
-            removeButtonProps={{ color: 'danger', round: true }}
-          />
-          <CustomInput
-            value={comments}
-            labelText="Comments"
-            id="comments"
-            formControlProps={{ fullWidth: true }}
-            inputProps={{ multiline: true, rows: 3 }}
-            onChange={e => this.updateValue(e)}
-          />
-          <InputLabel style={{ color: '#AAAAAA' }}>Signature</InputLabel>
-        </DialogContent>
-        <DialogActions className={`${classes.modalFooter} ${classes.modalFooterCenter}`}>
-          <Button
-            loading={loading}
-            onClick={() => this.createFastCooling()}
-            color="info"
-            round
-          >
-          Save
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <div>
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={12}>
+            <Card>
+              <CardHeader color="rose" icon>
+                <CardIcon color="rose">
+                  <Today />
+                </CardIcon>
+              </CardHeader>
+              <CardBody>
+                <div>
+                  <FormControl fullWidth className={classes.selectFormControl}>
+                    <InputLabel htmlFor="simple-select" className={classes.selectLabel}>
+                      Choose Food Item
+                    </InputLabel>
+                    <Select
+                      MenuProps={{ className: classes.selectMenu }}
+                      classes={{ select: classes.select }}
+                      onChange={e => this.updateValue(e)}
+                      value={selectedFoodItem}
+                      inputProps={{ name: 'foodItem' }}
+                    >
+                      {this.renderFoodItems()}
+                    </Select>
+                  </FormControl>
+                  <CustomInput
+                    value={temperature}
+                    onChange={e => this.updateValue(e)}
+                    labelText="Capture Temperature Value"
+                    id="temperature"
+                    formControlProps={{ fullWidth: true }}
+                    inputProps={{ type: 'number' }}
+                  />
+                  <ImageUpload
+                    avatar
+                    addButtonProps={{ color: 'rose', round: true }}
+                    changeButtonProps={{ color: 'rose', round: true }}
+                    removeButtonProps={{ color: 'danger', round: true }}
+                  />
+                  <CustomInput
+                    value={comments}
+                    labelText="Comments"
+                    id="comments"
+                    formControlProps={{ fullWidth: true }}
+                    inputProps={{ multiline: true, rows: 3 }}
+                    onChange={e => this.updateValue(e)}
+                  />
+                  <FormControl fullWidth className={classes.selectFormControl}>
+                    <h4 className={classes.cardIconTitle}>Signature</h4>
+                    <SignatureCanvas
+                      ref={(ref) => { this.sigCanvas = ref; }}
+                      backgroundColor="#ECECEC"
+                      penColor="black"
+                      clearOnResize={false}
+                    />
+                  </FormControl>
+                  <Button loading={loading} onClick={() => this.create()} color="rose" className={classes.updateProfileButton}>
+                    Save
+                  </Button>
+                  <Button onClick={() => this.back()} color="info" className={classes.updateProfileButton}>
+                    Cancel
+                  </Button>
+                </div>
+              </CardBody>
+            </Card>
+          </GridItem>
+        </GridContainer>
+      </div>
     );
   }
 }
 
 Create.propTypes = {
+  history: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
-  visible: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
   success: PropTypes.bool.isRequired,
   createFastCooling: PropTypes.func.isRequired,
@@ -194,4 +184,4 @@ Create.propTypes = {
   user: PropTypes.object.isRequired,
 };
 
-export default Create;
+export default withStyles(extendedFormsStyle)(Create);
