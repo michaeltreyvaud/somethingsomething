@@ -58,6 +58,7 @@ class FridgeLog extends React.Component {
     const {
       classes, items, loading, history,
     } = this.props;
+    console.log(loading);
     const {
       displayDeleteModal, selectedDeleteItem,
     } = this.state;

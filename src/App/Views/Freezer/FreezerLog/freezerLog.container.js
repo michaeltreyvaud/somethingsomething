@@ -3,7 +3,7 @@ import FreezerLog from './freezerLog';
 import { listFreezerLogs } from './Store/Actions';
 
 const mapStateToProps = state => ({
-  loading: state.freezer.log.index.items.loading,
+  loading: state.freezer.log.index.loading,
   items: state.freezer.log.index.items,
 });
 
