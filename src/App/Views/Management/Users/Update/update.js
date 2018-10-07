@@ -105,6 +105,11 @@ class Update extends React.Component {
       </MenuItem>));
   }
 
+  back() {
+    const { history } = this.props;
+    history.push('/dashboard/management/users');
+  }
+
   render() {
     const {
       classes, loading, item, updating,
@@ -260,15 +265,18 @@ class Update extends React.Component {
                     </GridItem>
                   </GridContainer>
                   <Clearfix />
+                  <Button loading={updating} onClick={() => this.updateUser()} color="rose" className={classes.updateProfileButton}>
+                    Save
+                  </Button>
+                  <Button onClick={() => this.back()} color="info" className={classes.updateProfileButton}>
+                    Back
+                  </Button>
                 </div>)}
                 <LoadingTable visible={loading} color="red" />
               </CardBody>
             </Card>
           </GridItem>
         </GridContainer>
-        <Button loading={updating} onClick={() => this.updateUser()} color="rose" className={classes.updateProfileButton}>
-          Save
-        </Button>
       </div>
     );
   }

@@ -63,6 +63,11 @@ class Update extends React.Component {
     return updateTeam(this.state);
   }
 
+  back() {
+    const { history } = this.props;
+    history.push('/dashboard/management/teams');
+  }
+
   render() {
     const {
       classes, loading, updating, item,
@@ -99,7 +104,10 @@ class Update extends React.Component {
                       onChange={e => this.updateValue(e)}
                     />
                     <Button loading={updating} onClick={() => this.updateTeam()} color="rose" className={classes.updateProfileButton}>
-                        Save
+                      Save
+                    </Button>
+                    <Button onClick={() => this.back()} color="info" className={classes.updateProfileButton}>
+                      Back
                     </Button>
                   </div>
                 )}

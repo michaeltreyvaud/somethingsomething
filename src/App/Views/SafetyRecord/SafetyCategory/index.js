@@ -48,13 +48,13 @@ class FridgeItem extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, history } = this.props;
     const simpleButtons = [
       { color: 'success', icon: Open },
       { color: 'danger', icon: Delete },
     ].map((prop, key) => (
       <Button
-        color={prop.color}        
+        color={prop.color}
         className={classes.actionButton}
         key={key}
       >
@@ -63,9 +63,6 @@ class FridgeItem extends React.Component {
     ));
     return (
       <div>
-        <Button color="info" className={classes.marginRight} onClick={() => this.handleClickOpen('noticeModal')}>
-      New
-        </Button>
         <Dialog
           classes={{
             root: `${classes.center} ${classes.modalRoot}`,
@@ -159,6 +156,13 @@ class FridgeItem extends React.Component {
                 <CardIcon color="rose">
                   <Assignment />
                 </CardIcon>
+                <Button
+                  color="info"
+                  className={classes.marginRight}
+                  onClick={() => this.handleClickOpen('noticeModal')}
+                >
+                  Create
+                </Button>
               </CardHeader>
               <CardBody>
                 <Table

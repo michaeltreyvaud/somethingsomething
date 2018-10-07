@@ -1,20 +1,21 @@
 import React from 'react';
-// react component for creating dynamic tables
 import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
 import SweetAlert from 'react-bootstrap-sweetalert';
-// @material-ui/core components
+import Assignment from '@material-ui/icons/Assignment';
 import withStyles from '@material-ui/core/styles/withStyles';
-// @material-ui/icons
+
 import Print from '@material-ui/icons/Print';
 import Open from '@material-ui/icons/OpenInNew';
 import Delete from '@material-ui/icons/Delete';
-// core components
+
 import GridContainer from '../../../Components/Grid/GridContainer';
 import GridItem from '../../../Components/Grid/GridItem';
 import Button from '../../../Components/CustomButtons';
 import Card from '../../../Components/Card/Card';
 import CardBody from '../../../Components/Card/CardBody';
+import CardHeader from '../../../Components/Card/CardHeader';
+import CardIcon from '../../../Components/Card/CardIcon';
 import NavPills from '../../../Components/NavPills';
 import Table from '../../../Components/Table';
 
@@ -146,7 +147,7 @@ class SafetyTask extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, history } = this.props;
     const { simpleSelect } = this.state;
     const simpleButtons = [
       { color: 'warning', icon: Print },
@@ -163,12 +164,21 @@ class SafetyTask extends React.Component {
     ));
     return (
       <div>
-        <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/dashboard/safety/create')}>
-          Create
-        </Button>
         <GridContainer>
           <GridItem xs={12} sm={12} md={12}>
             <Card>
+              <CardHeader color="rose" icon>
+                <CardIcon color="rose">
+                  <Assignment />
+                </CardIcon>
+                <Button
+                  color="info"
+                  className={classes.marginRight}
+                  onClick={() => history.push('/dashboard/safety/create')}
+                >
+                  Create
+                </Button>
+              </CardHeader>
               <CardBody>
                 <NavPills
                   color="warning"
