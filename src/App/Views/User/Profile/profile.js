@@ -138,10 +138,7 @@ class Profile extends React.Component {
                     />
                   </GridItem>
                   <GridItem xs={12} sm={12} md={12}>
-                    <FormControl
-                      fullWidth
-                      className={classes.selectFormControl}
-                    >
+                    <FormControl fullWidth className={classes.selectFormControl}>
                       <h4 className={classes.cardIconTitle}>Signature</h4>
                       <SignatureCanvas
                         ref={(ref) => { this.sigCanvas = ref; }}

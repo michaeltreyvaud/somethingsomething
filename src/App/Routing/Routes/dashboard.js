@@ -71,6 +71,7 @@ import FoodItemCreate from '../../Views/FoodItem/Create/create.container';
 import FoodItemUpdate from '../../Views/FoodItem/Update/update.container';
 
 import HotHolding from '../../Views/HotHolding/hotHolding.container';
+import HotHoldingCreate from '../../Views/HotHolding/Create/create.container';
 import HotHoldingUpdate from '../../Views/HotHolding/Update/update.container';
 
 import FastCooling from '../../Views/FastCooling/fastCooling.container';
@@ -81,15 +82,15 @@ import ServiceCreate from '../../Views/Service/Create';
 
 import ColdHotLocation from '../../Views/ColdHotLocation';
 import ColdHotTransportLog from '../../Views/ColdHotTransportLog';
-import ColdHotTransportCreate from '../../Views/ColdHotTransportLog/Create'
+import ColdHotTransportCreate from '../../Views/ColdHotTransportLog/Create';
 import DeliveryRecords from '../../Views/Traceability/DeliveryRecords';
 import DeliveryRecordsCreate from '../../Views/Traceability/DeliveryRecords/Create';
 import TraceabilityLabels from '../../Views/Traceability/TraceabilityLabels';
 
-import Reports from '../../Views/Reports/';
+import Reports from '../../Views/Reports';
 import ReportsCreate from '../../Views/Reports/Create';
 
-import SafetySheet from '../../Views/SafetySheet/';
+import SafetySheet from '../../Views/SafetySheet';
 import SafetySheetCreate from '../../Views/SafetySheet/Create';
 
 import PestControl from '../../Views/PestControl';
@@ -287,15 +288,15 @@ const dashRoutes = [
       },
       {
         hidden: true,
-        path: '/dashboard/fridge/log/:id',
-        name: 'Create Fridge Log',
-        component: FridgeLogUpdate,
-      },
-      {
-        hidden: true,
         path: '/dashboard/fridge/log/create',
         name: 'Create Fridge Log',
         component: FridgeLogCreate,
+      },
+      {
+        hidden: true,
+        path: '/dashboard/fridge/log/:id',
+        name: 'Create Fridge Log',
+        component: FridgeLogUpdate,
       },
       {
         path: '/dashboard/fridge/chart',
@@ -340,15 +341,15 @@ const dashRoutes = [
       },
       {
         hidden: true,
-        path: '/dashboard/freezer/log/:id',
-        name: 'Create Freezer Log',
-        component: FreezerLogUpdate,
-      },
-      {
-        hidden: true,
         path: '/dashboard/freezer/log/create',
         name: 'Create Freezer Log',
         component: FreezerLogCreate,
+      },
+      {
+        hidden: true,
+        path: '/dashboard/freezer/log/:id',
+        name: 'Create Freezer Log',
+        component: FreezerLogUpdate,
       },
       {
         path: '/dashboard/freezer/chart',
@@ -384,6 +385,11 @@ const dashRoutes = [
     icon: Whatshot,
     component: HotHolding,
     views: [
+      {
+        path: '/dashboard/hotholding/create',
+        name: 'Create Item',
+        component: HotHoldingCreate,
+      },
       {
         path: '/dashboard/hotholding/:id',
         name: 'Hot Holding Item',
@@ -538,7 +544,7 @@ const dashRoutes = [
         name: 'Create Report Log',
         component: ReportsCreate,
       },
-    ]    
+    ],
   },
   {
     path: '/dashboard/safetysheet',
@@ -553,8 +559,8 @@ const dashRoutes = [
         name: 'Create Safety Datasheet',
         component: SafetySheetCreate,
       },
-    ]
-  },  
+    ],
+  },
   {
     path: '/dashboard/pest',
     name: 'Pest Management',
@@ -568,7 +574,7 @@ const dashRoutes = [
         name: 'Create Pest Record',
         component: PestControlCreate,
       },
-    ]
+    ],
   },
 ];
 export default dashRoutes;

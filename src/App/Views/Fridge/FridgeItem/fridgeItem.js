@@ -122,7 +122,7 @@ class FridgeItem extends React.Component {
                   className={classes.marginRight}
                   onClick={() => history.push('/dashboard/fridge/item/create')}
                 >
-                Create
+                  Create
                 </Button>
               </CardHeader>
               <CardBody>

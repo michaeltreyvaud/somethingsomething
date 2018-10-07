@@ -21,7 +21,6 @@ import Button from '../../Components/CustomButtons';
 import Table from '../../Components/Table';
 import LoadingTable from '../../Components/Loading/LoadingTable';
 
-import HotHoldingCreate from './Create/create.container';
 import HotHoldingDelete from './Delete/delete.container';
 
 import style from '../../Assets/Jss/extendedTablesStyle';
@@ -30,7 +29,6 @@ class HotHolding extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayCreateModal: false,
       displayDeleteModal: false,
       selectedDeleteItem: {},
       displayErrorMessage: false,
@@ -40,24 +38,6 @@ class HotHolding extends React.Component {
   componentDidMount() {
     const { listHotHoldings } = this.props;
     listHotHoldings();
-  }
-
-  showCreateModal() {
-    const { foodItems } = this.props;
-    if (foodItems.length === 0) {
-      return this.setState({
-        displayErrorMessage: true,
-      });
-    }
-    return this.setState({
-      displayCreateModal: true,
-    });
-  }
-
-  hideCreateModal() {
-    this.setState({
-      displayCreateModal: false,
-    });
   }
 
   showDeleteModal(createdAt, index) {
@@ -83,6 +63,16 @@ class HotHolding extends React.Component {
     });
   }
 
+  create() {
+    const { foodItems, history } = this.props;
+    if (foodItems.length === 0) {
+      return this.setState({
+        displayErrorMessage: true,
+      });
+    }
+    return history.push('/dashboard/hotholding/create');
+  }
+
   renderErrorMessage() {
     const { displayErrorMessage } = this.state;
     const { classes } = this.props;
@@ -104,7 +94,7 @@ class HotHolding extends React.Component {
       classes, items, loading, history,
     } = this.props;
     const {
-      displayCreateModal, displayDeleteModal, selectedDeleteItem,
+      displayDeleteModal, selectedDeleteItem,
     } = this.state;
     const simpleButtons = (item, index) => [
       { color: 'warning', icon: Print, tooltip: 'Print' },
@@ -151,11 +141,6 @@ class HotHolding extends React.Component {
     return (
       <div>
         {this.renderErrorMessage()}
-        <HotHoldingCreate
-          visible={displayCreateModal}
-          classes={classes}
-          close={() => this.hideCreateModal()}
-        />
         <HotHoldingDelete
           item={selectedDeleteItem}
           visible={displayDeleteModal}
@@ -172,9 +157,9 @@ class HotHolding extends React.Component {
                 <Button
                   color="info"
                   className={classes.marginRight}
-                  onClick={() => this.showCreateModal()}
+                  onClick={() => this.create()}
                 >
-                  New
+                  Create
                 </Button>
               </CardHeader>
               <CardBody>
