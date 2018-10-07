@@ -55,6 +55,7 @@ class AppRouter extends Component {
       listFridgeLogs, listFreezerLogs,
       listMedicalLogs, listTrainingLogs,
       listHotHoldings, listFastCoolings,
+      listReports, listPests, listSafetys,
     } = this.props;
     //  TODO: Load all app view items
     listTeams();
@@ -69,6 +70,9 @@ class AppRouter extends Component {
     listTrainingLogs();
     listHotHoldings();
     listFastCoolings();
+    listReports();
+    listPests();
+    listSafetys();
   }
 
   render() {

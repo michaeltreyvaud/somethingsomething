@@ -14,6 +14,9 @@ import { listMedicalLogs } from '../Views/User/MedicalLog/Store/Actions';
 import { listTrainingLogs } from '../Views/User/TrainingLog/Store/Actions';
 import { listHotHoldings } from '../Views/HotHolding/Store/Actions';
 import { listFastCoolings } from '../Views/FastCooling/Store/Actions';
+import { listReports } from '../Views/Reports/Store/Actions';
+import { listPests } from '../Views/PestControl/Store/Actions';
+import { listSafetys } from '../Views/SafetySheet/Store/Actions';
 
 const mapStateToProps = state => ({
   loading: state.routes.loading,
@@ -36,6 +39,9 @@ const mapDispatchToProps = dispatch => ({
   listTrainingLogs: () => dispatch(listTrainingLogs()),
   listHotHoldings: () => dispatch(listHotHoldings()),
   listFastCoolings: () => dispatch(listFastCoolings()),
+  listReports: () => dispatch(listReports()),
+  listPests: () => dispatch(listPests()),
+  listSafetys: () => dispatch(listSafetys()),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AppRouter));

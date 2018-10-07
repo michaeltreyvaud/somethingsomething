@@ -88,13 +88,13 @@ import DeliveryRecords from '../../Views/Traceability/DeliveryRecords';
 import DeliveryRecordsCreate from '../../Views/Traceability/DeliveryRecords/Create';
 import TraceabilityLabels from '../../Views/Traceability/TraceabilityLabels';
 
-import Reports from '../../Views/Reports';
+import Reports from '../../Views/Reports/report.container';
 import ReportsCreate from '../../Views/Reports/Create';
 
-import SafetySheet from '../../Views/SafetySheet';
+import SafetySheet from '../../Views/SafetySheet/safety.container';
 import SafetySheetCreate from '../../Views/SafetySheet/Create';
 
-import PestControl from '../../Views/PestControl';
+import PestControl from '../../Views/PestControl/pest.container';
 import PestControlCreate from '../../Views/PestControl/Create';
 
 const TODOComponent = () => (<h1>TODO</h1>);

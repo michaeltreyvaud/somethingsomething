@@ -15,6 +15,9 @@ import foodItemReducer from './Reducers/FoodItem';
 import hotHoldingReducer from './Reducers/HotHolding';
 import fastCoolingReducer from './Reducers/FastCooling';
 import userReducer from './Reducers/User';
+import reportReducer from './Reducers/Report';
+import pestReducer from './Reducers/Pest';
+import safetyReducer from './Reducers/Safety';
 
 const appReducers = combineReducers({
   routes: routingReducer,
@@ -33,6 +36,9 @@ const appReducers = combineReducers({
   hotHolding: hotHoldingReducer,
   fastCooling: fastCoolingReducer,
   user: userReducer,
+  report: reportReducer,
+  pest: pestReducer,
+  safety: safetyReducer,
 });
 
 const rootReducer = (state, action) => {
