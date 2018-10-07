@@ -5,6 +5,7 @@ import { createFoodItem } from '../Store/Actions/create';
 const mapStateToProps = state => ({
   loading: state.foodItem.create.loading,
   success: state.foodItem.create.success,
+  user: state.user.profile.index.user,
 });
 
 const mapDispatchToProps = dispatch => ({

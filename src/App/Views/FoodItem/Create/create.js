@@ -25,6 +25,7 @@ import Button from '../../../Components/CustomButtons';
 class Create extends Component {
   constructor(props) {
     super(props);
+    const { user } = props;
     this.state = {
       name: '',
       batchNumber: '',
@@ -45,6 +46,11 @@ class Create extends Component {
         nuts: false,
         mustard: false,
         celery: false,
+      },
+      user: {
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
       },
     };
   }
@@ -365,6 +371,7 @@ Create.propTypes = {
   loading: PropTypes.bool.isRequired,
   success: PropTypes.bool.isRequired,
   createFoodItem: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
 };
 
 export default withStyles(extendedFormsStyle)(Create);
