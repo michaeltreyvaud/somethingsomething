@@ -3,11 +3,7 @@ import PropTypes from 'prop-types';
 import SignatureCanvas from 'react-signature-canvas';
 import Today from '@material-ui/icons/Today';
 import withStyles from '@material-ui/core/styles/withStyles';
-
 import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 
 import Button from '../../../Components/CustomButtons';
 import CustomInput from '../../../Components/CustomInput';
@@ -101,6 +97,11 @@ class Update extends Component {
     const { loading, updating, updateFastCooling } = this.props;
     if (loading || updating) return false;
     return updateFastCooling(this.state);
+  }
+
+  back() {
+    const { history } = this.props;
+    history.push('/dashboard/fastcooling');
   }
 
   render() {
