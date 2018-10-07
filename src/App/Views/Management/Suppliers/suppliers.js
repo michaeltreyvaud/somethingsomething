@@ -18,7 +18,7 @@ import Button from '../../../Components/CustomButtons';
 import Table from '../../../Components/Table';
 import LoadingTable from '../../../Components/Loading/LoadingTable';
 
-//import SupplierCreate from './Create/create.container';
+// import SupplierCreate from './Create/create.container';
 import SupplierDelete from './Delete/delete.container';
 
 import style from '../../../Assets/Jss/style';
@@ -104,7 +104,7 @@ class SupplierList extends React.Component {
           visible={displayDeleteModal}
           classes={classes}
           close={() => this.hideDeleteModal()}
-        />        
+        />
         <GridContainer>
           <GridItem xs={12}>
             <Card>
@@ -113,7 +113,7 @@ class SupplierList extends React.Component {
                   <Assignment />
                 </CardIcon>
                 <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/dashboard/management/suppliers/create')}>
-                New
+                  Create
                 </Button>
               </CardHeader>
               <CardBody>

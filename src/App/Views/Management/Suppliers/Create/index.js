@@ -54,309 +54,195 @@ class Create extends React.Component {
     });
   }
 
+  back() {
+    const { history } = this.props;
+    history.push('/dashboard/management/suppliers');
+  }
+
   render() {
-    const { classes } = this.props;
+    const { classes, loading } = this.props;
     return (
       <div>
-      <Button color="info" onClick={() => this.props.history.push('/dashboard/management/suppliers')}>
-        Cancel
-      </Button>
-      <Button color="rose">Save</Button>
-      <GridContainer>
-        <GridItem xs={12} sm={12} md={6}>
-          <Card>
-            <CardHeader color="rose" icon>
-              <CardIcon color="rose">
-                <MailOutline />
-              </CardIcon>
-              <h4 className={classes.cardIconTitle}>Stacked Form</h4>
-            </CardHeader>
-            <CardBody>
-              <form>
-                <CustomInput
-                  labelText="Supplier Name"
-                  id="supplierName"
-                  formControlProps={{
-                    fullWidth: true,
-                  }}
-                  inputProps={{
-                    type: 'text',
-                  }}
-                />
-                <CustomInput
-                  labelText="Address"
-                  id="address"
-                  formControlProps={{
-                    fullWidth: true,
-                  }}
-                  inputProps={{
-                    multiline: true,
-                    rows: 3,
-                  }}
-                />
-                <CustomInput
-                  labelText="Phone No."
-                  id="phoneNo"
-                  formControlProps={{
-                    fullWidth: true,
-                  }}
-                />
-                <CustomInput
-                  labelText="Email"
-                  id="emailAddress"
-                  formControlProps={{
-                    fullWidth: true,
-                  }}
-                />
-                <CustomInput
-                  labelText="Technical Contact"
-                  id="techContact"
-                  formControlProps={{
-                    fullWidth: true,
-                  }}
-                />
-                <CustomInput
-                  labelText="Sales Contact"
-                  id="salesContact"
-                  formControlProps={{
-                    fullWidth: true,
-                  }}
-                />
-              </form>
-            </CardBody>
-          </Card>
-        </GridItem>
-        <GridItem xs={12} sm={12} md={6}>
-          <Card>
-            <CardBody>
-              <form>
-                <GridContainer>
-                  <GridItem xs={12} sm={4}>
-                    <FormLabel
-                      className={
-                            `${classes.labelHorizontal
-                            } ${
-                              classes.labelHorizontalRadioCheckbox}`
-                          }
-                    >
-                      <b>Does the Company operate a HACCP/Risk Management System?</b>
-                    </FormLabel>
-                  </GridItem>
-                  <GridItem xs={12} sm={4}>
-                    <div
-                      className={
-                      `${classes.checkboxAndRadio
-                      } ${
-                        classes.checkboxAndRadioHorizontal}`
-                    }
-                    >
-                      <FormControlLabel
-                        control={(
-                          <Checkbox
-                            tabIndex={-1}
-                            onClick={() => this.handleToggle(21)}
-                            checkedIcon={
-                              <Check className={classes.checkedIcon} />
-                          }
-                            icon={<Check className={classes.uncheckedIcon} />}
-                            classes={{
-                              checked: classes.checked,
-                            }}
-                          />)}
-                      />
-                    </div>
-                  </GridItem>
-                </GridContainer>
-                <GridContainer>
-                  <GridItem xs={12} sm={4}>
-                    <FormLabel
-                      className={
-                            `${classes.labelHorizontal
-                            } ${
-                              classes.labelHorizontalRadioCheckbox}`
-                          }
-                    >
-                      <b>Does the Company have a Product Recall System?</b>
-                    </FormLabel>
-                  </GridItem>
-                  <GridItem xs={12} sm={4}>
-                    <div
-                      className={
-                      `${classes.checkboxAndRadio
-                      } ${
-                        classes.checkboxAndRadioHorizontal}`
-                    }
-                    >
-                      <FormControlLabel
-                        control={(
-                          <Checkbox
-                            tabIndex={-1}
-                            onClick={() => this.handleToggle(21)}
-                            checkedIcon={
-                              <Check className={classes.checkedIcon} />
-                          }
-                            icon={<Check className={classes.uncheckedIcon} />}
-                            classes={{
-                              checked: classes.checked,
-                            }}
-                          />)}
-                      />
-                    </div>
-                  </GridItem>
-                </GridContainer>
-                <GridContainer>
-                  <GridItem xs={12} sm={4}>
-                    <FormLabel
-                      className={
-                            `${classes.labelHorizontal
-                            } ${
-                              classes.labelHorizontalRadioCheckbox}`
-                          }
-                    >
-                      <b>Does the Company operate a Quality Management System?</b>
-                    </FormLabel>
-                  </GridItem>
-                  <GridItem xs={12} sm={4}>
-                    <div
-                      className={
-                      `${classes.checkboxAndRadio
-                      } ${
-                        classes.checkboxAndRadioHorizontal}`
-                    }
-                    >
-                      <FormControlLabel
-                        control={(
-                          <Checkbox
-                            tabIndex={-1}
-                            onClick={() => this.handleToggle(21)}
-                            checkedIcon={
-                              <Check className={classes.checkedIcon} />
-                          }
-                            icon={<Check className={classes.uncheckedIcon} />}
-                            classes={{
-                              checked: classes.checked,
-                            }}
-                          />)}
-                      />
-                    </div>
-                  </GridItem>
-                </GridContainer>
-                <GridContainer>
-                  <GridItem xs={12} sm={4}>
-                    <FormLabel
-                      className={
-                            `${classes.labelHorizontal
-                            } ${
-                              classes.labelHorizontalRadioCheckbox}`
-                          }
-                    >
-                      <b>If "yes" is it documented ?</b>
-                    </FormLabel>
-                  </GridItem>
-                  <GridItem xs={12} sm={4}>
-                    <div
-                      className={
-                      `${classes.checkboxAndRadio
-                      } ${
-                        classes.checkboxAndRadioHorizontal}`
-                    }
-                    >
-                      <FormControlLabel
-                        control={(
-                          <Checkbox
-                            tabIndex={-1}
-                            onClick={() => this.handleToggle(21)}
-                            checkedIcon={
-                              <Check className={classes.checkedIcon} />
-                          }
-                            icon={<Check className={classes.uncheckedIcon} />}
-                            classes={{
-                              checked: classes.checked,
-                            }}
-                          />)}
-                      />
-                    </div>
-                  </GridItem>
-                </GridContainer>
-                <GridContainer>
-                  <GridItem xs={12} sm={4}>
-                    <FormLabel
-                      className={
-                            `${classes.labelHorizontal
-                            } ${
-                              classes.labelHorizontalRadioCheckbox}`
-                          }
-                    >
-                      <b>If "yes" is it certified ?</b>
-                    </FormLabel>
-                  </GridItem>
-                  <GridItem xs={12} sm={4}>
-                    <div
-                      className={
-                      `${classes.checkboxAndRadio
-                      } ${
-                        classes.checkboxAndRadioHorizontal}`
-                    }
-                    >
-                      <FormControlLabel
-                        control={(
-                          <Checkbox
-                            tabIndex={-1}
-                            onClick={() => this.handleToggle(21)}
-                            checkedIcon={
-                              <Check className={classes.checkedIcon} />
-                          }
-                            icon={<Check className={classes.uncheckedIcon} />}
-                            classes={{
-                              checked: classes.checked,
-                            }}
-                          />)}
-                      />
-                    </div>
-                  </GridItem>
-                </GridContainer>
-                <GridContainer>
-                  <GridItem xs={12} sm={4}>
-                    <FormLabel
-                      className={
-                            `${classes.labelHorizontal
-                            } ${
-                              classes.labelHorizontalRadioCheckbox}`
-                          }
-                    >
-                      <b>Does the Company have a 3rd party Audit Accreditation? (EFSIS or other-please indicate)?</b>
-                    </FormLabel>
-                  </GridItem>
-                  <GridItem xs={12} sm={4}>
-                    <div
-                      className={
-                      `${classes.checkboxAndRadio
-                      } ${
-                        classes.checkboxAndRadioHorizontal}`
-                    }
-                    >
-                      <FormControlLabel
-                        control={(
-                          <Checkbox
-                            tabIndex={-1}
-                            onClick={() => this.handleToggle(21)}
-                            checkedIcon={
-                              <Check className={classes.checkedIcon} />
-                          }
-                            icon={<Check className={classes.uncheckedIcon} />}
-                            classes={{
-                              checked: classes.checked,
-                            }}
-                          />)}
-                      />
-                    </div>
-                  </GridItem>
-                </GridContainer>
-              </form>
-            </CardBody>
-          </Card>
-        </GridItem>
-      </GridContainer>
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={12}>
+            <Card>
+              <CardHeader color="rose" icon>
+                <CardIcon color="rose">
+                  <MailOutline />
+                </CardIcon>
+                <h4 className={classes.cardIconTitle}>Stacked Form</h4>
+              </CardHeader>
+              <CardBody>
+                <div>
+                  <CustomInput
+                    labelText="Supplier Name"
+                    id="supplierName"
+                    formControlProps={{ fullWidth: true }}
+                    inputProps={{ type: 'text' }}
+                  />
+                  <CustomInput
+                    labelText="Address"
+                    id="address"
+                    formControlProps={{ fullWidth: true }}
+                    inputProps={{ multiline: true, rows: 3 }}
+                  />
+                  <CustomInput
+                    labelText="Phone No."
+                    id="phoneNo"
+                    formControlProps={{ fullWidth: true }}
+                  />
+                  <CustomInput
+                    labelText="Email"
+                    id="emailAddress"
+                    formControlProps={{ fullWidth: true }}
+                  />
+                  <CustomInput
+                    labelText="Technical Contact"
+                    id="techContact"
+                    formControlProps={{ fullWidth: true }}
+                  />
+                  <CustomInput
+                    labelText="Sales Contact"
+                    id="salesContact"
+                    formControlProps={{ fullWidth: true }}
+                  />
+                  <GridContainer>
+                    <GridItem xs={12} sm={4}>
+                      <FormLabel className={`${classes.labelHorizontal} ${classes.labelHorizontalRadioCheckbox}`}>
+                        <b>Does the Company operate a HACCP/Risk Management System?</b>
+                      </FormLabel>
+                    </GridItem>
+                    <GridItem xs={12} sm={4}>
+                      <div className={`${classes.checkboxAndRadio} ${classes.checkboxAndRadioHorizontal}`}>
+                        <FormControlLabel
+                          control={(
+                            <Checkbox
+                              tabIndex={-1}
+                              onClick={() => this.handleToggle(21)}
+                              checkedIcon={<Check className={classes.checkedIcon} />}
+                              icon={<Check className={classes.uncheckedIcon} />}
+                              classes={{ checked: classes.checked }}
+                            />)}
+                        />
+                      </div>
+                    </GridItem>
+                  </GridContainer>
+                  <GridContainer>
+                    <GridItem xs={12} sm={4}>
+                      <FormLabel className={`${classes.labelHorizontal} ${classes.labelHorizontalRadioCheckbox}`}>
+                        <b>Does the Company have a Product Recall System?</b>
+                      </FormLabel>
+                    </GridItem>
+                    <GridItem xs={12} sm={4}>
+                      <div className={`${classes.checkboxAndRadio} ${classes.checkboxAndRadioHorizontal}`}>
+                        <FormControlLabel
+                          control={(
+                            <Checkbox
+                              tabIndex={-1}
+                              onClick={() => this.handleToggle(21)}
+                              checkedIcon={<Check className={classes.checkedIcon} />}
+                              icon={<Check className={classes.uncheckedIcon} />}
+                              classes={{ checked: classes.checked }}
+                            />)}
+                        />
+                      </div>
+                    </GridItem>
+                  </GridContainer>
+                  <GridContainer>
+                    <GridItem xs={12} sm={4}>
+                      <FormLabel className={`${classes.labelHorizontal} ${classes.labelHorizontalRadioCheckbox}`}>
+                        <b>Does the Company operate a Quality Management System?</b>
+                      </FormLabel>
+                    </GridItem>
+                    <GridItem xs={12} sm={4}>
+                      <div className={`${classes.checkboxAndRadio} ${classes.checkboxAndRadioHorizontal}`}>
+                        <FormControlLabel
+                          control={(
+                            <Checkbox
+                              tabIndex={-1}
+                              onClick={() => this.handleToggle(21)}
+                              checkedIcon={<Check className={classes.checkedIcon} />}
+                              icon={<Check className={classes.uncheckedIcon} />}
+                              classes={{ checked: classes.checked }}
+                            />)}
+                        />
+                      </div>
+                    </GridItem>
+                  </GridContainer>
+                  <GridContainer>
+                    <GridItem xs={12} sm={4}>
+                      <FormLabel className={`${classes.labelHorizontal} ${classes.labelHorizontalRadioCheckbox}`}>
+                        <b>If yes is it documented ?</b>
+                      </FormLabel>
+                    </GridItem>
+                    <GridItem xs={12} sm={4}>
+                      <div className={`${classes.checkboxAndRadio} ${classes.checkboxAndRadioHorizontal}`}>
+                        <FormControlLabel
+                          control={(
+                            <Checkbox
+                              tabIndex={-1}
+                              onClick={() => this.handleToggle(21)}
+                              checkedIcon={<Check className={classes.checkedIcon} />}
+                              icon={<Check className={classes.uncheckedIcon} />}
+                              classes={{ checked: classes.checked }}
+                            />)}
+                        />
+                      </div>
+                    </GridItem>
+                  </GridContainer>
+                  <GridContainer>
+                    <GridItem xs={12} sm={4}>
+                      <FormLabel className={`${classes.labelHorizontal} ${classes.labelHorizontalRadioCheckbox}`}>
+                        <b>If yes is it certified ?</b>
+                      </FormLabel>
+                    </GridItem>
+                    <GridItem xs={12} sm={4}>
+                      <div className={`${classes.checkboxAndRadio} ${classes.checkboxAndRadioHorizontal}`}>
+                        <FormControlLabel
+                          control={(
+                            <Checkbox
+                              tabIndex={-1}
+                              onClick={() => this.handleToggle(21)}
+                              checkedIcon={<Check className={classes.checkedIcon} />}
+                              icon={<Check className={classes.uncheckedIcon} />}
+                              classes={{ checked: classes.checked }}
+                            />)}
+                        />
+                      </div>
+                    </GridItem>
+                  </GridContainer>
+                  <GridContainer>
+                    <GridItem xs={12} sm={4}>
+                      <FormLabel className={`${classes.labelHorizontal} ${classes.labelHorizontalRadioCheckbox}`}>
+                        <b>Does the Company have a 3rd party Audit Accreditation? (EFSIS or other-please indicate)?</b>
+                      </FormLabel>
+                    </GridItem>
+                    <GridItem xs={12} sm={4}>
+                      <div className={`${classes.checkboxAndRadio} ${classes.checkboxAndRadioHorizontal}`}>
+                        <FormControlLabel
+                          control={(
+                            <Checkbox
+                              tabIndex={-1}
+                              onClick={() => this.handleToggle(21)}
+                              checkedIcon={<Check className={classes.checkedIcon} />}
+                              icon={<Check className={classes.uncheckedIcon} />}
+                              classes={{ checked: classes.checked }}
+                            />)}
+                        />
+                      </div>
+                    </GridItem>
+                  </GridContainer>
+                  <Button loading={loading} onClick={() => this.create()} color="rose" className={classes.updateProfileButton}>
+                    Save
+                  </Button>
+                  <Button onClick={() => this.back()} color="info" className={classes.updateProfileButton}>
+                    Cancel
+                  </Button>
+                </div>
+              </CardBody>
+            </Card>
+          </GridItem>
+        </GridContainer>
       </div>
     );
   }

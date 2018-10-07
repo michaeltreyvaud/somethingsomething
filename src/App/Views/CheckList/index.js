@@ -151,7 +151,7 @@ class CheckList extends React.Component {
       { color: 'danger', icon: Delete },
     ].map((prop, key) => (
       <Button
-        color={prop.color}        
+        color={prop.color}
         className={classes.actionButton}
         key={key}
       >
@@ -161,7 +161,7 @@ class CheckList extends React.Component {
     return (
       <div>
         <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/dashboard/checklist/create')}>
-        New
+          Create
         </Button>
         <GridContainer>
           <GridItem xs={12} sm={12} md={12}>
