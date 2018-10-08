@@ -59,7 +59,7 @@ class Medical extends React.Component {
       displayDeleteModal, selectedDeleteItem,
     } = this.state;
     const simpleButtons = (item, index) => [
-      { color: 'success', icon: Open, tooltip: 'View' },
+      { color: 'success', icon: Open, tooltip: 'Edit' },
       { color: 'danger', icon: Delete, tooltip: 'Delete' },
     ].map((prop, key) => {
       let onClick;
