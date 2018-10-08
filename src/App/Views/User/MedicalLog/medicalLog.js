@@ -65,7 +65,7 @@ class Medical extends React.Component {
       let onClick;
       switch (key) {
         case 0: {
-          // onClick = () => history.push(`/dashboard/fridge/log/${item.createdAt}`);
+          onClick = () => history.push(`/dashboard/user/medical/${item.createdAt}`);
           break;
         }
         case 1: {
