@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import Open from '@material-ui/icons/OpenInNew';
@@ -9,7 +10,6 @@ import moment from 'moment';
 
 import GridContainer from '../../../Components/Grid/GridContainer';
 import Card from '../../../Components/Card/Card';
-import GridItem from '../../../Components/Grid/GridItem';
 import CardBody from '../../../Components/Card/CardBody';
 import Button from '../../../Components/CustomButtons';
 import CardHeader from '../../../Components/Card/CardHeader';
@@ -65,7 +65,7 @@ class Training extends React.Component {
       let onClick;
       switch (key) {
         case 0: {
-          // onClick = () => history.push(`/dashboard/fridge/log/${item.createdAt}`);
+          onClick = () => history.push(`/dashboard/user/training/${item.createdAt}`);
           break;
         }
         case 1: {
@@ -117,7 +117,7 @@ class Training extends React.Component {
               <Button
                 color="info"
                 className={classes.marginRight}
-                onClick={() => this.props.history.push('/dashboard/user/training/create')}
+                onClick={() => history.push('/dashboard/user/training/create')}
               >
                 Create
               </Button>
@@ -171,5 +171,13 @@ class Training extends React.Component {
     );
   }
 }
+
+Training.propTypes = {
+  history: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
+  items: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
+  listTrainingLogs: PropTypes.func.isRequired,
+};
 
 export default withStyles(style)(Training);

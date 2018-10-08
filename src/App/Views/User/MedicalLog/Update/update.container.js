@@ -1,18 +1,18 @@
 import { connect } from 'react-redux';
 import Update from './update';
-import { updateFoodItem } from '../Store/Actions/update';
+import { updateMedicalLog } from '../Store/Actions/update';
 
-const findItem = (state, createdAt) => (state.foodItem.index.items
+const findItem = (state, createdAt) => (state.user.medicalLog.index.items
   .find(item => (item.createdAt === parseInt(createdAt, 10))));
 
 const mapStateToProps = (state, ownProps) => ({
   item: findItem(state, ownProps.match.params.id),
-  loading: state.foodItem.index.loading,
-  updating: state.foodItem.update.loading,
+  loading: state.user.medicalLog.index.loading,
+  updating: state.user.medicalLog.update.loading,
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateFoodItem: foodItem => dispatch(updateFoodItem(foodItem)),
+  updateMedicalLog: item => dispatch(updateMedicalLog(item)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Update);

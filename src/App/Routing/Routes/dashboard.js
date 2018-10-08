@@ -38,9 +38,11 @@ import UserPassword from '../../Views/User/Password';
 
 import UserMedicalLog from '../../Views/User/MedicalLog/medicalLog.container';
 import UserMedicalLogCreate from '../../Views/User/MedicalLog/Create/create.container';
+import UserMedicalLogUpdate from '../../Views/User/MedicalLog/Update/update.container';
 
 import UserTrainingLog from '../../Views/User/TrainingLog/trainingLog.container';
 import UserTrainingLogCreate from '../../Views/User/TrainingLog/Create/create.container';
+import UserTrainingLogUpdate from '../../Views/User/TrainingLog/Update/update.container';
 
 import CheckList from '../../Views/CheckList';
 import CheckListCreate from '../../Views/CheckList/Create';
@@ -165,6 +167,12 @@ const dashRoutes = [
       },
       {
         hidden: true,
+        path: '/dashboard/user/medical/:id',
+        name: 'Medical Log',
+        component: UserMedicalLogUpdate,
+      },
+      {
+        hidden: true,
         path: '/dashboard/user/training',
         name: 'Training Log',
         component: UserTrainingLog,
@@ -174,6 +182,12 @@ const dashRoutes = [
         path: '/dashboard/user/training/create',
         name: 'Training Log',
         component: UserTrainingLogCreate,
+      },
+      {
+        hidden: true,
+        path: '/dashboard/user/training/:id',
+        name: 'Training Log',
+        component: UserTrainingLogUpdate,
       },
     ],
   },

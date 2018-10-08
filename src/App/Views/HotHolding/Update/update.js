@@ -84,15 +84,6 @@ class Update extends Component {
     });
   }
 
-  updateAllergens(e) {
-    const { target } = e;
-    const { allergens } = this.state;
-    allergens[target.id] = !(target.value === 'true');
-    this.setState({
-      allergens,
-    });
-  }
-
   update() {
     const { loading, updating, updateHotHolding } = this.props;
     if (loading || updating) return false;
