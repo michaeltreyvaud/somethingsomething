@@ -1,14 +1,14 @@
 import { connect } from 'react-redux';
 import Create from './create';
-import { createFoodItem } from '../Store/Actions/create';
+import { createMedicalLog } from '../Store/Actions/create';
 
 const mapStateToProps = state => ({
-  loading: state.foodItem.create.loading,
-  success: state.foodItem.create.success,
+  loading: state.user.medicalLog.create.loading,
+  success: state.user.medicalLog.create.success,
 });
 
 const mapDispatchToProps = dispatch => ({
-  createFoodItem: foodItem => dispatch(createFoodItem(foodItem)),
+  createMedicalLog: item => dispatch(createMedicalLog(item)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Create);

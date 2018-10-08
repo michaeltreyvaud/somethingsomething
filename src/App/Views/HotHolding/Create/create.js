@@ -179,7 +179,6 @@ Create.propTypes = {
   loading: PropTypes.bool.isRequired,
   success: PropTypes.bool.isRequired,
   createHotHolding: PropTypes.func.isRequired,
-  close: PropTypes.func.isRequired,
   foodItems: PropTypes.array.isRequired,
   user: PropTypes.object.isRequired,
 };
