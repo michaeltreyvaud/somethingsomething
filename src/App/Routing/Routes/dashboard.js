@@ -94,6 +94,16 @@ import DeliveryRecords from '../../Views/Traceability/DeliveryRecords';
 import DeliveryRecordsCreate from '../../Views/Traceability/DeliveryRecords/Create';
 import TraceabilityLabels from '../../Views/Traceability/TraceabilityLabels';
 
+import OilTask from '../../Views/Oil/OilTask/oilTask';
+import OilTaskCreate from '../../Views/Oil/OilTask/Create/create';
+import OilLog from '../../Views/Oil/OilLog/oilLog';
+import OilLogCreate from '../../Views/Oil/OilLog/Create/create';
+
+import CleaningTask from '../../Views/Cleaning/CleaningTask/cleaningTask';
+import CleaningTaskCreate from '../../Views/Cleaning/CleaningTask/Create/create';
+import CleaningLog from '../../Views/Cleaning/CleaningLog/cleaningLog';
+import CleaningLogCreate from '../../Views/Cleaning/CleaningLog/Create/create';
+
 import Reports from '../../Views/Reports/report.container';
 import ReportsCreate from '../../Views/Reports/Create';
 
@@ -522,12 +532,24 @@ const dashRoutes = [
       {
         path: '/dashboard/oil/task',
         name: 'Task',
-        component: TODOComponent,
+        component: OilTask,OilTaskCreate
+      },
+      {
+        hidden: true,
+        path: '/dashboard/oil/task/create',
+        name: 'Create',
+        component: OilTaskCreate,
       },
       {
         path: '/dashboard/oil/log',
         name: 'Log',
-        component: TODOComponent,
+        component: OilLog,
+      },
+      {
+        hidden: true,
+        path: '/dashboard/oil/log/create',
+        name: 'Create',
+        component: OilLogCreate,
       },
     ],
   },
@@ -546,12 +568,24 @@ const dashRoutes = [
       {
         path: '/dashboard/cleaning/task',
         name: 'Task',
-        component: TODOComponent,
+        component: CleaningTask,
+      },
+      {
+        hidden: true,
+        path: '/dashboard/cleaning/task/create',
+        name: 'Task',
+        component: CleaningTaskCreate,
       },
       {
         path: '/dashboard/cleaning/log',
         name: 'Log',
-        component: TODOComponent,
+        component: CleaningLog,
+      },
+      {
+        hidden: true,
+        path: '/dashboard/cleaning/log/create',
+        name: 'Create',
+        component: CleaningLogCreate,
       },
     ],
   },

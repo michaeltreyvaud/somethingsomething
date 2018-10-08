@@ -214,7 +214,7 @@ class FreezerTask extends React.Component {
                 htmlFor="simple-select"
                 className={classes.selectLabel}
               >
-          Location
+                Location
               </InputLabel>
               <Select
                 MenuProps={{

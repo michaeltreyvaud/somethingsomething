@@ -93,7 +93,7 @@ class TrainingLogCreate extends React.Component {
                 </FormControl>
                 <CustomInput
                       id="disabled"
-                      labelText="Type of Illness"
+                      labelText="Type of Training"
                       formControlProps={{
                         fullWidth: true
                       }}
