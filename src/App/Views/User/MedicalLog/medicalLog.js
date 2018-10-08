@@ -117,7 +117,7 @@ class Medical extends React.Component {
               <Button
                 color="info"
                 className={classes.marginRight}
-                onClick={() => console.log('TODO')}
+                onClick={() => this.props.history.push('/dashboard/user/medical/create')}
               >
                 Create
               </Button>
