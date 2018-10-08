@@ -35,10 +35,12 @@ import ManagementSuppliersCreate from '../../Views/Management/Suppliers/Create';
 
 import UserProfile from '../../Views/User/Profile/profile.container';
 import UserPassword from '../../Views/User/Password';
+
 import UserMedicalLog from '../../Views/User/MedicalLog/medicalLog.container';
-import UserMedicalLogCreate from '../../Views/User/MedicalLog/Create/create';
+import UserMedicalLogCreate from '../../Views/User/MedicalLog/Create/create.container';
+
 import UserTrainingLog from '../../Views/User/TrainingLog/trainingLog.container';
-import UserTrainingLogCreate from '../../Views/User/TrainingLog/Create/create';
+import UserTrainingLogCreate from '../../Views/User/TrainingLog/Create/create.container';
 
 import CheckList from '../../Views/CheckList';
 import CheckListCreate from '../../Views/CheckList/Create';

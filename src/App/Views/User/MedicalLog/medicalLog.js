@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import Open from '@material-ui/icons/OpenInNew';
@@ -9,7 +10,6 @@ import moment from 'moment';
 
 import GridContainer from '../../../Components/Grid/GridContainer';
 import Card from '../../../Components/Card/Card';
-import GridItem from '../../../Components/Grid/GridItem';
 import CardBody from '../../../Components/Card/CardBody';
 import Button from '../../../Components/CustomButtons';
 import CardHeader from '../../../Components/Card/CardHeader';
@@ -59,7 +59,7 @@ class Medical extends React.Component {
       displayDeleteModal, selectedDeleteItem,
     } = this.state;
     const simpleButtons = (item, index) => [
-      { color: 'success', icon: Open, tooltip: 'View' },
+      { color: 'success', icon: Open, tooltip: 'Edit' },
       { color: 'danger', icon: Delete, tooltip: 'Delete' },
     ].map((prop, key) => {
       let onClick;
@@ -117,7 +117,7 @@ class Medical extends React.Component {
               <Button
                 color="info"
                 className={classes.marginRight}
-                onClick={() => this.props.history.push('/dashboard/user/medical/create')}
+                onClick={() => history.push('/dashboard/user/medical/create')}
               >
                 Create
               </Button>
@@ -138,15 +138,21 @@ class Medical extends React.Component {
                   customCellClasses={[
                     classes.left,
                     classes.left,
+                    classes.left,
+                    classes.left,
+                    classes.left,
                     classes.right,
                   ]}
-                  customClassesForCells={[0, 1, 2]}
+                  customClassesForCells={[0, 1, 2, 3, 4, 5]}
                   customHeadCellClasses={[
                     classes.left,
                     classes.left,
+                    classes.left,
+                    classes.left,
+                    classes.left,
                     classes.right,
                   ]}
-                  customHeadClassesForCells={[0, 1, 2]}
+                  customHeadClassesForCells={[0, 1, 2, 3, 4, 5]}
                 />
               )}
               {!loading && items && items.length === 0 && (
@@ -165,5 +171,13 @@ class Medical extends React.Component {
     );
   }
 }
+
+Medical.propTypes = {
+  history: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
+  items: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
+  listMedicalLogs: PropTypes.func.isRequired,
+};
 
 export default withStyles(style)(Medical);
