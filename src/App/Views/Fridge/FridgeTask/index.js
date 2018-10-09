@@ -39,20 +39,13 @@ const y = today.getFullYear();
 const m = today.getMonth();
 const d = today.getDate();
 
-const events = [
+const stateEvents = [
   {
     title: 'All Day Event',
     allDay: true,
     start: new Date(y, m, 1),
     end: new Date(y, m, 1),
     color: 'default',
-  },
-  {
-    title: 'Meeting',
-    start: new Date(y, m, d - 1, 10, 30),
-    end: new Date(y, m, d - 1, 11, 30),
-    allDay: false,
-    color: 'green',
   },
   {
     title: 'Lunch',
@@ -93,8 +86,8 @@ class FridgeTask extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      events,
-      alert: null,
+      events: stateEvents,
+      showAlert: false,
     };
     this.hideAlert = this.hideAlert.bind(this);
   }
@@ -112,46 +105,15 @@ class FridgeTask extends React.Component {
   }
 
   selectedEvent(event) {
-    alert(event.title);
-  }
-
-  addNewEventAlert(slotInfo) {
     this.setState({
-      alert: (
-        <SweetAlert
-          input
-          showCancel
-          style={{ display: 'block', marginTop: '-100px' }}
-          title="Input something"
-          onConfirm={e => this.addNewEvent(e, slotInfo)}
-          onCancel={() => this.hideAlert()}
-          confirmBtnCssClass={
-            `${this.props.classes.button} ${this.props.classes.success}`
-          }
-          cancelBtnCssClass={
-            `${this.props.classes.button} ${this.props.classes.danger}`
-          }
-        />
-      ),
-    });
-  }
-
-  addNewEvent(e, slotInfo) {
-    const newEvents = this.state.events;
-    newEvents.push({
-      title: e,
-      start: slotInfo.start,
-      end: slotInfo.end,
-    });
-    this.setState({
-      alert: null,
-      events: newEvents,
+      showAlert: true,
+      selectedEvent: event,
     });
   }
 
   hideAlert() {
     this.setState({
-      alert: null,
+      showAlert: false,
     });
   }
 
@@ -167,8 +129,21 @@ class FridgeTask extends React.Component {
 
   render() {
     const { classes, history } = this.props;
+    const { button, success } = classes;
+    const {
+      showAlert, selectedEvent, events,
+    } = this.state;
     return (
       <div>
+        {showAlert && (
+          <SweetAlert
+            style={{ display: 'block', marginTop: '-100px' }}
+            title={selectedEvent.title}
+            onConfirm={() => this.hideAlert()}
+            onCancel={() => this.hideAlert()}
+            confirmBtnCssClass={`${button} ${success}`}
+          />
+        )}
         <Button color="info" className={classes.marginRight} onClick={() => history.push('/dashboard/fridge/task/create')}>
           Create
         </Button>
@@ -534,14 +509,21 @@ class FridgeTask extends React.Component {
             <Card>
               <CardBody calendar>
                 <BigCalendar
+                  formats={{ dayFormat: 'dd' }}
                   selectable
-                  events={this.state.events}
-                  defaultView="month"
+                  events={events}
+                  defaultView="week"
                   scrollToTime={new Date(1970, 1, 1, 6)}
                   defaultDate={new Date()}
                   onSelectEvent={event => this.selectedEvent(event)}
-                  onSelectSlot={slotInfo => this.addNewEventAlert(slotInfo)}
                   eventPropGetter={this.eventColors}
+                  components={{
+                    toolbar: () => <h1>TODO: Weekly Fridge Tasks</h1>,
+                    day: {
+                      header: () => <h1>TODO: Weekly Fridge Tasks</h1>,
+                      event: () => <h1>TODO: Weekly Fridge Tasks</h1>,
+                    },
+                  }}
                 />
               </CardBody>
             </Card>
