@@ -142,7 +142,7 @@ class FreezerLog extends React.Component {
                 {!loading && items && items.length > 0 && (
                 <Table
                   tableHead={[
-                    'Fridge',
+                    'Freezer',
                     'Operator',
                     'Temperature',
                     'Created',

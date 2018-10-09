@@ -25,7 +25,7 @@ class Create extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedFridgeItem: -1,
+      selectedFreezerItem: -1,
       selectedUser: -1,
       selectedTeam: -1,
     };
@@ -39,26 +39,26 @@ class Create extends Component {
   }
 
   create() {
-    const { createFridgeTask, loading } = this.props;
+    const { createFreezerTask, loading } = this.props;
     if (loading) return false;
     const { state } = this;
     const item = { ...state };
-    delete item.selectedFridgeItem;
+    delete item.selectedFreezerItem;
     delete item.selectedUser;
     delete item.selectedTeam;
-    return createFridgeTask(item);
+    return createFreezerTask(item);
   }
 
   updateValue(e) {
     const { target } = e;
     const { value } = target;
-    if (target.name === 'fridgeItem') {
-      const { fridgeItems } = this.props;
+    if (target.name === 'freezerItem') {
+      const { freezerItems } = this.props;
       return this.setState({
-        selectedFridgeItem: value,
-        fridgeItem: {
-          id: fridgeItems[value].id,
-          displayName: fridgeItems[value].name,
+        selectedFreezerItem: value,
+        freezerItem: {
+          id: freezerItems[value].id,
+          displayName: freezerItems[value].name,
         },
       });
     }
@@ -93,16 +93,16 @@ class Create extends Component {
 
   back() {
     const { history } = this.props;
-    history.push('/dashboard/fridge/task');
+    history.push('/dashboard/freezer/task');
   }
 
-  renderFridgeItems() {
-    const { fridgeItems, classes } = this.props;
-    return fridgeItems.map((item, index) => (
+  renderFreezerItems() {
+    const { freezerItems, classes } = this.props;
+    return freezerItems.map((item, index) => (
       <MenuItem
         key={`${item.name}${index}`}
         classes={{ root: classes.selectMenuItem, selected: classes.selectMenuItemSelected }}
-        id="fridgeItem"
+        id="freezerItem"
         value={index}
       >
         {item.name}
@@ -138,7 +138,7 @@ class Create extends Component {
   render() {
     const { classes, loading } = this.props;
     const {
-      selectedTeam, selectedFridgeItem, selectedUser,
+      selectedTeam, selectedFreezerItem, selectedUser,
       description, day, time,
     } = this.state;
     return (
@@ -155,16 +155,16 @@ class Create extends Component {
                 <div>
                   <FormControl fullWidth className={classes.selectFormControl}>
                     <InputLabel htmlFor="simple-select" className={classes.selectLabel}>
-                      Choose Fridge Item
+                      Choose Freezer Item
                     </InputLabel>
                     <Select
                       MenuProps={{ className: classes.selectMenu }}
                       classes={{ select: classes.select }}
                       onChange={e => this.updateValue(e)}
-                      value={selectedFridgeItem}
-                      inputProps={{ name: 'fridgeItem' }}
+                      value={selectedFreezerItem}
+                      inputProps={{ name: 'freezerItem' }}
                     >
-                      {this.renderFridgeItems()}
+                      {this.renderFreezerItems()}
                     </Select>
                   </FormControl>
                   <FormControl fullWidth className={classes.selectFormControl}>
@@ -294,10 +294,10 @@ Create.propTypes = {
   classes: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
   success: PropTypes.bool.isRequired,
-  fridgeItems: PropTypes.array.isRequired,
+  freezerItems: PropTypes.array.isRequired,
   teams: PropTypes.array.isRequired,
   users: PropTypes.array.isRequired,
-  createFridgeTask: PropTypes.func.isRequired,
+  createFreezerTask: PropTypes.func.isRequired,
 };
 
 export default withStyles(extendedFormsStyle)(Create);

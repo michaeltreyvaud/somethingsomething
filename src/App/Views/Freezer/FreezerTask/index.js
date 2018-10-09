@@ -1,9 +1,8 @@
 import React from 'react';
-// react component for creating dynamic tables
 import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
 import SweetAlert from 'react-bootstrap-sweetalert';
-// @material-ui/core components
+
 import withStyles from '@material-ui/core/styles/withStyles';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -167,11 +166,11 @@ class FreezerTask extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, history } = this.props;
     return (
       <div>
-        <Button color="info" className={classes.marginRight} onClick={() => this.handleClickOpen('noticeModal')}>
-    New
+        <Button color="info" className={classes.marginRight} onClick={() => history.push('/dashboard/freezer/task/create')}>
+          Create
         </Button>
         <Dialog
           classes={{

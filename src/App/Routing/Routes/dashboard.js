@@ -57,6 +57,7 @@ import FridgeItemCreate from '../../Views/Fridge/FridgeItem/Create/create.contai
 import FridgeItemUpdate from '../../Views/Fridge/FridgeItem/Update/update.container';
 
 import FridgeTask from '../../Views/Fridge/FridgeTask';
+import FridgeTaskCreate from '../../Views/Fridge/FridgeTask/Create/create.container';
 
 import FridgeLog from '../../Views/Fridge/FridgeLog/fridgeLog.container';
 import FridgeLogCreate from '../../Views/Fridge/FridgeLog/Create/create.container';
@@ -69,6 +70,7 @@ import FreezerItemCreate from '../../Views/Freezer/FreezerItem/Create/create.con
 import FreezerItemUpdate from '../../Views/Freezer/FreezerItem/Update/update.container';
 
 import FreezerTask from '../../Views/Freezer/FreezerTask';
+import FreezerTaskCreate from '../../Views/Freezer/FreezerTask/Create/create.container';
 
 import FreezerLog from '../../Views/Freezer/FreezerLog/freezerLog.container';
 import FreezerLogCreate from '../../Views/Freezer/FreezerLog/Create/create.container';
@@ -327,6 +329,12 @@ const dashRoutes = [
         component: FridgeTask,
       },
       {
+        hidden: true,
+        path: '/dashboard/fridge/task/create',
+        name: 'Create Task',
+        component: FridgeTaskCreate,
+      },
+      {
         path: '/dashboard/fridge/log',
         name: 'Fridge Log',
         component: FridgeLog,
@@ -378,6 +386,12 @@ const dashRoutes = [
         path: '/dashboard/freezer/task',
         name: 'Freezer Task',
         component: FreezerTask,
+      },
+      {
+        hidden: true,
+        path: '/dashboard/freezer/task/create',
+        name: 'Create Task',
+        component: FreezerTaskCreate,
       },
       {
         path: '/dashboard/freezer/log',
@@ -548,7 +562,8 @@ const dashRoutes = [
       {
         path: '/dashboard/oil/task',
         name: 'Task',
-        component: OilTask,OilTaskCreate
+        component: OilTask,
+        OilTaskCreate,
       },
       {
         hidden: true,
