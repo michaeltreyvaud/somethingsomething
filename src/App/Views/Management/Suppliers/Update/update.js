@@ -29,14 +29,14 @@ class Update extends React.Component {
         id, name, address, email, phoneNo, questions, salesContact, techContact,
       } = item;
       const {
-        q1, q2, q3, q4, q5, q6
+        q1, q2, q3, q4, q5, q6,
       } = questions;
       this.state = {
         id,
-        name,        
-        address, 
+        name,
+        address,
         email,
-        phoneNo, 
+        phoneNo,
         questions: {
           q1,
           q2,
@@ -75,7 +75,7 @@ class Update extends React.Component {
         id, name, address, email, phoneNo, questions, salesContact, techContact,
       } = item;
       const {
-        q1, q2, q3, q4, q5, q6
+        q1, q2, q3, q4, q5, q6,
       } = questions;
       this.setState({
         id,
@@ -111,360 +111,263 @@ class Update extends React.Component {
     this.setState({
       questions,
     });
-  }  
+  }
 
-  updateSupplier() {
+  save() {
     const { loading, updating, updateSupplier } = this.props;
     if (loading || updating) return false;
     return updateSupplier(this.state);
   }
 
+  back() {
+    const { history } = this.props;
+    history.push('/dashboard/management/suppliers');
+  }
+
   render() {
     const {
-      classes, loading, updating, item,
+      classes, loading, updating, item, history,
     } = this.props;
     if (!item && !loading) return (<NotFound text="Supplier Not Found" />);
     const {
       name, address, email, phoneNo, questions, salesContact, techContact,
     } = this.state;
     const {
-      q1, q2, q3, q4, q5, q6
+      q1, q2, q3, q4, q5, q6,
     } = questions;
     return (
       <div>
-      <Button loading={updating} onClick={() => this.updateSupplier()} color="rose" className={classes.updateProfileButton}>
-              Save
-          </Button>
-      <Button color="info" onClick={() => this.props.history.push('/dashboard/management/suppliers')}>
-        Cancel
-      </Button>      
-      <GridContainer>
-        <GridItem xs={12} sm={12} md={6}>
-          <Card>
-            <CardHeader color="rose" icon>
-              <CardIcon color="rose">
-                <MailOutline />
-              </CardIcon>
-              <h4 className={classes.cardIconTitle}>Stacked Form</h4>
-            </CardHeader>
-            <CardBody>
-              <CustomInput
-                labelText="Supplier Name"
-                id="name"
-                value={name}
-                onChange={e => this.updateValue(e)}
-                formControlProps={{
-                  fullWidth: true,
-                }}
-                inputProps={{
-                  type: 'text',
-                }}
-              />
-              <CustomInput
-                labelText="Address"
-                id="address"
-                value={address}
-                formControlProps={{
-                  fullWidth: true,
-                }}
-                inputProps={{
-                  multiline: true,
-                  rows: 3,
-                }}
-                onChange={e => this.updateValue(e)}
-              />
-              <CustomInput
-                labelText="Phone No."
-                id="phoneNo"
-                value={phoneNo}
-                formControlProps={{
-                  fullWidth: true,
-                }}
-                onChange={e => this.updateValue(e)}
-              />
-              <CustomInput
-                labelText="Email"
-                id="email"
-                onChange={e => this.updateValue(e)}
-                value={email}
-                formControlProps={{
-                  fullWidth: true,
-                }}
-              />
-              <CustomInput
-                labelText="Technical Contact"
-                id="techContact"
-                value={techContact}
-                formControlProps={{
-                  fullWidth: true,
-                }}
-                onChange={e => this.updateValue(e)}
-              />
-              <CustomInput
-                labelText="Sales Contact"
-                id="salesContact"
-                value={salesContact}
-                formControlProps={{
-                  fullWidth: true,
-                }}
-                onChange={e => this.updateValue(e)}
-              />
-            </CardBody>
-          </Card>
-        </GridItem>
-        <GridItem xs={12} sm={12} md={6}>
-          <Card>
-            <CardBody>
-                <GridContainer>
-                  <GridItem xs={12} sm={4}>
-                    <FormLabel
-                      className={
-                            `${classes.labelHorizontal
-                            } ${
-                              classes.labelHorizontalRadioCheckbox}`
-                          }
-                    >
-                      <b>Does the Company operate a HACCP/Risk Management System?</b>
-                    </FormLabel>
-                  </GridItem>
-                  <GridItem xs={12} sm={4}>
-                    <div
-                      className={
-                      `${classes.checkboxAndRadio
-                      } ${
-                        classes.checkboxAndRadioHorizontal}`
-                    }
-                    >
-                      <FormControlLabel
-                        control={(
-                          <Checkbox                            
-                            tabIndex={-1}
-                            checked={q1}
-                            id="q1"
-                            value={q1}
-                            onClick={(e) => this.updateQuestions(e)}
-                            checkedIcon={
-                              <Check className={classes.checkedIcon} />
-                          }
-                            icon={<Check className={classes.uncheckedIcon} />}
-                            classes={{
-                              checked: classes.checked,
-                            }}
-                          />)}
-                      />
-                    </div>
-                  </GridItem>
-                </GridContainer>
-                <GridContainer>
-                  <GridItem xs={12} sm={4}>
-                    <FormLabel
-                      className={
-                            `${classes.labelHorizontal
-                            } ${
-                              classes.labelHorizontalRadioCheckbox}`
-                          }
-                    >
-                      <b>Does the Company have a Product Recall System?</b>
-                    </FormLabel>
-                  </GridItem>
-                  <GridItem xs={12} sm={4}>
-                    <div
-                      className={
-                      `${classes.checkboxAndRadio
-                      } ${
-                        classes.checkboxAndRadioHorizontal}`
-                    }
-                    >
-                      <FormControlLabel
-                        control={(
-                          <Checkbox
-                            tabIndex={-1}
-                            checked={q2}
-                            id="q2"
-                            value={q2}
-                            onClick={(e) => this.updateQuestions(e)}
-                            checkedIcon={
-                              <Check className={classes.checkedIcon} />
-                          }
-                            icon={<Check className={classes.uncheckedIcon} />}
-                            classes={{
-                              checked: classes.checked,
-                            }}
-                          />)}
-                      />
-                    </div>
-                  </GridItem>
-                </GridContainer>
-                <GridContainer>
-                  <GridItem xs={12} sm={4}>
-                    <FormLabel
-                      className={
-                            `${classes.labelHorizontal
-                            } ${
-                              classes.labelHorizontalRadioCheckbox}`
-                          }
-                    >
-                      <b>Does the Company operate a Quality Management System?</b>
-                    </FormLabel>
-                  </GridItem>
-                  <GridItem xs={12} sm={4}>
-                    <div
-                      className={
-                      `${classes.checkboxAndRadio
-                      } ${
-                        classes.checkboxAndRadioHorizontal}`
-                    }
-                    >
-                      <FormControlLabel
-                        control={(
-                          <Checkbox
-                            tabIndex={-1}
-                            checked={q3}
-                            id="q3"
-                            value={q3}                            
-                            onClick={(e) => this.updateQuestions(e)}
-                            checkedIcon={
-                              <Check className={classes.checkedIcon} />
-                          }
-                            icon={<Check className={classes.uncheckedIcon} />}
-                            classes={{
-                              checked: classes.checked,
-                            }}
-                          />)}
-                      />
-                    </div>
-                  </GridItem>
-                </GridContainer>
-                <GridContainer>
-                  <GridItem xs={12} sm={4}>
-                    <FormLabel
-                      className={
-                            `${classes.labelHorizontal
-                            } ${
-                              classes.labelHorizontalRadioCheckbox}`
-                          }
-                    >
-                      <b>If "yes" is it documented ?</b>
-                    </FormLabel>
-                  </GridItem>
-                  <GridItem xs={12} sm={4}>
-                    <div
-                      className={
-                      `${classes.checkboxAndRadio
-                      } ${
-                        classes.checkboxAndRadioHorizontal}`
-                    }
-                    >
-                      <FormControlLabel
-                        control={(
-                          <Checkbox
-                            tabIndex={-1}
-                            checked={q4}
-                            id="q4"
-                            value={q4}
-                            onClick={(e) => this.updateQuestions(e)}
-                            checkedIcon={
-                              <Check className={classes.checkedIcon} />
-                          }
-                            icon={<Check className={classes.uncheckedIcon} />}
-                            classes={{
-                              checked: classes.checked,
-                            }}
-                          />)}
-                      />
-                    </div>
-                  </GridItem>
-                </GridContainer>
-                <GridContainer>
-                  <GridItem xs={12} sm={4}>
-                    <FormLabel
-                      className={
-                            `${classes.labelHorizontal
-                            } ${
-                              classes.labelHorizontalRadioCheckbox}`
-                          }
-                    >
-                      <b>If "yes" is it certified ?</b>
-                    </FormLabel>
-                  </GridItem>
-                  <GridItem xs={12} sm={4}>
-                    <div
-                      className={
-                      `${classes.checkboxAndRadio
-                      } ${
-                        classes.checkboxAndRadioHorizontal}`
-                    }
-                    >
-                      <FormControlLabel
-                        control={(
-                          <Checkbox
-                            tabIndex={-1}
-                            checked={q5}
-                            id="q5"
-                            value={q5}
-                            onClick={(e) => this.updateQuestions(e)}
-                            checkedIcon={
-                              <Check className={classes.checkedIcon} />
-                          }
-                            icon={<Check className={classes.uncheckedIcon} />}
-                            classes={{
-                              checked: classes.checked,
-                            }}
-                          />)}
-                      />
-                    </div>
-                  </GridItem>
-                </GridContainer>
-                <GridContainer>
-                  <GridItem xs={12} sm={4}>
-                    <FormLabel
-                      className={
-                            `${classes.labelHorizontal
-                            } ${
-                              classes.labelHorizontalRadioCheckbox}`
-                          }
-                    >
-                      <b>Does the Company have a 3rd party Audit Accreditation? (EFSIS or other-please indicate)?</b>
-                    </FormLabel>
-                  </GridItem>
-                  <GridItem xs={12} sm={4}>
-                    <div
-                      className={
-                      `${classes.checkboxAndRadio
-                      } ${
-                        classes.checkboxAndRadioHorizontal}`
-                    }
-                    >
-                      <FormControlLabel
-                        control={(
-                          <Checkbox
-                            tabIndex={-1}
-                            checked={q6}
-                            id="q6"
-                            value={q6}
-                            onClick={(e) => this.updateQuestions(e)}
-                            checkedIcon={
-                              <Check className={classes.checkedIcon} />
-                          }
-                            icon={<Check className={classes.uncheckedIcon} />}
-                            classes={{
-                              checked: classes.checked,
-                            }}
-                          />)}
-                      />
-                    </div>
-                  </GridItem>
-                </GridContainer>
-            </CardBody>
-          </Card>
-        </GridItem>
-      </GridContainer>
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={12}>
+            <Card>
+              <CardHeader color="rose" icon>
+                <CardIcon color="rose">
+                  <MailOutline />
+                </CardIcon>
+                <h4 className={classes.cardIconTitle}>Stacked Form</h4>
+              </CardHeader>
+              <CardBody>
+                {!loading && (
+                <div>
+                  <CustomInput
+                    labelText="Supplier Name"
+                    id="name"
+                    value={name}
+                    onChange={e => this.updateValue(e)}
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      type: 'text',
+                    }}
+                  />
+                  <CustomInput
+                    labelText="Address"
+                    id="address"
+                    value={address}
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      multiline: true,
+                      rows: 3,
+                    }}
+                    onChange={e => this.updateValue(e)}
+                  />
+                  <CustomInput
+                    labelText="Phone No."
+                    id="phoneNo"
+                    value={phoneNo}
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    onChange={e => this.updateValue(e)}
+                  />
+                  <CustomInput
+                    labelText="Email"
+                    id="email"
+                    onChange={e => this.updateValue(e)}
+                    value={email}
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                  />
+                  <CustomInput
+                    labelText="Technical Contact"
+                    id="techContact"
+                    value={techContact}
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    onChange={e => this.updateValue(e)}
+                  />
+                  <CustomInput
+                    labelText="Sales Contact"
+                    id="salesContact"
+                    value={salesContact}
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    onChange={e => this.updateValue(e)}
+                  />
+                  <GridContainer>
+                    <GridItem xs={12} sm={4}>
+                      <FormLabel className={`${classes.labelHorizontal} ${classes.labelHorizontalRadioCheckbox}`}>
+                        <b>Does the Company operate a HACCP/Risk Management System?</b>
+                      </FormLabel>
+                    </GridItem>
+                    <GridItem xs={12} sm={4}>
+                      <div className={`${classes.checkboxAndRadio} ${classes.checkboxAndRadioHorizontal}`}>
+                        <FormControlLabel
+                          control={(
+                            <Checkbox
+                              checked={q1}
+                              id="q1"
+                              value={q1}
+                              onClick={e => this.updateQuestions(e)}
+                              checkedIcon={<Check className={classes.checkedIcon} />}
+                              icon={<Check className={classes.uncheckedIcon} />}
+                              classes={{ checked: classes.checked }}
+                            />)}
+                        />
+                      </div>
+                    </GridItem>
+                  </GridContainer>
+                  <GridContainer>
+                    <GridItem xs={12} sm={4}>
+                      <FormLabel className={`${classes.labelHorizontal} ${classes.labelHorizontalRadioCheckbox}`}>
+                        <b>Does the Company have a Product Recall System?</b>
+                      </FormLabel>
+                    </GridItem>
+                    <GridItem xs={12} sm={4}>
+                      <div className={`${classes.checkboxAndRadio} ${classes.checkboxAndRadioHorizontal}`}>
+                        <FormControlLabel
+                          control={(
+                            <Checkbox
+                              checked={q2}
+                              id="q2"
+                              value={q2}
+                              onClick={e => this.updateQuestions(e)}
+                              checkedIcon={<Check className={classes.checkedIcon} />}
+                              icon={<Check className={classes.uncheckedIcon} />}
+                              classes={{ checked: classes.checked }}
+                            />)}
+                        />
+                      </div>
+                    </GridItem>
+                  </GridContainer>
+                  <GridContainer>
+                    <GridItem xs={12} sm={4}>
+                      <FormLabel className={`${classes.labelHorizontal} ${classes.labelHorizontalRadioCheckbox}`}>
+                        <b>Does the Company operate a Quality Management System?</b>
+                      </FormLabel>
+                    </GridItem>
+                    <GridItem xs={12} sm={4}>
+                      <div className={`${classes.checkboxAndRadio} ${classes.checkboxAndRadioHorizontal}`}>
+                        <FormControlLabel
+                          control={(
+                            <Checkbox
+                              checked={q3}
+                              id="q3"
+                              value={q3}
+                              onClick={e => this.updateQuestions(e)}
+                              checkedIcon={<Check className={classes.checkedIcon} />}
+                              icon={<Check className={classes.uncheckedIcon} />}
+                              classes={{ checked: classes.checked }}
+                            />)}
+                        />
+                      </div>
+                    </GridItem>
+                  </GridContainer>
+                  <GridContainer>
+                    <GridItem xs={12} sm={4}>
+                      <FormLabel className={`${classes.labelHorizontal} ${classes.labelHorizontalRadioCheckbox}`}>
+                        <b>If yes is it documented ?</b>
+                      </FormLabel>
+                    </GridItem>
+                    <GridItem xs={12} sm={4}>
+                      <div className={`${classes.checkboxAndRadio} ${classes.checkboxAndRadioHorizontal}`}>
+                        <FormControlLabel
+                          control={(
+                            <Checkbox
+                              checked={q4}
+                              id="q4"
+                              value={q4}
+                              onClick={e => this.updateQuestions(e)}
+                              checkedIcon={<Check className={classes.checkedIcon} />}
+                              icon={<Check className={classes.uncheckedIcon} />}
+                              classes={{ checked: classes.checked }}
+                            />)}
+                        />
+                      </div>
+                    </GridItem>
+                  </GridContainer>
+                  <GridContainer>
+                    <GridItem xs={12} sm={4}>
+                      <FormLabel className={`${classes.labelHorizontal} ${classes.labelHorizontalRadioCheckbox}`}>
+                        <b>If yes is it certified ?</b>
+                      </FormLabel>
+                    </GridItem>
+                    <GridItem xs={12} sm={4}>
+                      <div className={`${classes.checkboxAndRadio} ${classes.checkboxAndRadioHorizontal}`}>
+                        <FormControlLabel
+                          control={(
+                            <Checkbox
+                              checked={q5}
+                              id="q5"
+                              value={q5}
+                              onClick={e => this.updateQuestions(e)}
+                              checkedIcon={<Check className={classes.checkedIcon} />}
+                              icon={<Check className={classes.uncheckedIcon} />}
+                              classes={{ checked: classes.checked }}
+                            />)}
+                        />
+                      </div>
+                    </GridItem>
+                  </GridContainer>
+                  <GridContainer>
+                    <GridItem xs={12} sm={4}>
+                      <FormLabel className={`${classes.labelHorizontal} ${classes.labelHorizontalRadioCheckbox}`}>
+                        <b>Does the Company have a 3rd party Audit Accreditation? (EFSIS or other-please indicate)?</b>
+                      </FormLabel>
+                    </GridItem>
+                    <GridItem xs={12} sm={4}>
+                      <div className={`${classes.checkboxAndRadio} ${classes.checkboxAndRadioHorizontal}`}>
+                        <FormControlLabel
+                          control={(
+                            <Checkbox
+                              checked={q6}
+                              id="q6"
+                              value={q6}
+                              onClick={e => this.updateQuestions(e)}
+                              checkedIcon={<Check className={classes.checkedIcon} />}
+                              icon={<Check className={classes.uncheckedIcon} />}
+                              classes={{ checked: classes.checked }}
+                            />)}
+                        />
+                      </div>
+                    </GridItem>
+                  </GridContainer>
+                  <Button loading={updating} onClick={() => this.save()} color="rose" className={classes.updateProfileButton}>
+                    Save
+                  </Button>
+                  <Button onClick={() => this.back()} color="info" className={classes.updateProfileButton}>
+                    Back
+                  </Button>
+                </div>
+                )}
+                <LoadingTable visible={loading} color="red" />
+              </CardBody>
+            </Card>
+          </GridItem>
+        </GridContainer>
       </div>
     );
   }
 }
 
 Update.propTypes = {
+  history: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
   item: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,

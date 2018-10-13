@@ -1,6 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-// @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
 import MailOutline from '@material-ui/icons/MailOutline';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -22,35 +22,43 @@ class Create extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      checked: [24, 22],
-      selectedValue: null,
-      selectedEnabled: 'b',
+      questions: {
+        q1: false,
+        q2: false,
+        q3: false,
+        q4: false,
+        q5: false,
+        q6: false,
+      },
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleChangeEnabled = this.handleChangeEnabled.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({ selectedValue: event.target.value });
-  }
-
-  handleChangeEnabled(event) {
-    this.setState({ selectedEnabled: event.target.value });
-  }
-
-  handleToggle(value) {
-    const { checked } = this.state;
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
-
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
+  componentWillReceiveProps(nextProps) {
+    const { loading } = this.props;
+    if (loading && nextProps.loading === false && nextProps.success) {
+      this.back();
     }
+  }
 
+  create() {
+    const { createSupplier, loading } = this.props;
+    if (loading) return false;
+    return createSupplier(this.state);
+  }
+
+  updateValue(e) {
+    const { target } = e;
     this.setState({
-      checked: newChecked,
+      [target.id]: target.value,
+    });
+  }
+
+  updateQuestion(e) {
+    const { target } = e;
+    const { questions } = this.state;
+    questions[target.id] = !(target.value === 'true');
+    this.setState({
+      questions,
     });
   }
 
@@ -61,6 +69,11 @@ class Create extends React.Component {
 
   render() {
     const { classes, loading } = this.props;
+    const { questions } = this.state;
+    const {
+      q1, q2, q3,
+      q4, q5, q6,
+    } = questions;
     return (
       <div>
         <GridContainer>
@@ -76,35 +89,41 @@ class Create extends React.Component {
                 <div>
                   <CustomInput
                     labelText="Supplier Name"
-                    id="supplierName"
+                    id="name"
                     formControlProps={{ fullWidth: true }}
                     inputProps={{ type: 'text' }}
+                    onChange={e => this.updateValue(e)}
                   />
                   <CustomInput
                     labelText="Address"
                     id="address"
                     formControlProps={{ fullWidth: true }}
                     inputProps={{ multiline: true, rows: 3 }}
+                    onChange={e => this.updateValue(e)}
                   />
                   <CustomInput
                     labelText="Phone No."
                     id="phoneNo"
                     formControlProps={{ fullWidth: true }}
+                    onChange={e => this.updateValue(e)}
                   />
                   <CustomInput
                     labelText="Email"
-                    id="emailAddress"
+                    id="email"
                     formControlProps={{ fullWidth: true }}
+                    onChange={e => this.updateValue(e)}
                   />
                   <CustomInput
                     labelText="Technical Contact"
                     id="techContact"
                     formControlProps={{ fullWidth: true }}
+                    onChange={e => this.updateValue(e)}
                   />
                   <CustomInput
                     labelText="Sales Contact"
                     id="salesContact"
                     formControlProps={{ fullWidth: true }}
+                    onChange={e => this.updateValue(e)}
                   />
                   <GridContainer>
                     <GridItem xs={12} sm={4}>
@@ -117,8 +136,10 @@ class Create extends React.Component {
                         <FormControlLabel
                           control={(
                             <Checkbox
-                              tabIndex={-1}
-                              onClick={() => this.handleToggle(21)}
+                              checked={q1}
+                              id="q1"
+                              value={q1}
+                              onClick={e => this.updateQuestion(e)}
                               checkedIcon={<Check className={classes.checkedIcon} />}
                               icon={<Check className={classes.uncheckedIcon} />}
                               classes={{ checked: classes.checked }}
@@ -138,8 +159,10 @@ class Create extends React.Component {
                         <FormControlLabel
                           control={(
                             <Checkbox
-                              tabIndex={-1}
-                              onClick={() => this.handleToggle(21)}
+                              checked={q2}
+                              id="q2"
+                              value={q2}
+                              onClick={e => this.updateQuestion(e)}
                               checkedIcon={<Check className={classes.checkedIcon} />}
                               icon={<Check className={classes.uncheckedIcon} />}
                               classes={{ checked: classes.checked }}
@@ -159,8 +182,10 @@ class Create extends React.Component {
                         <FormControlLabel
                           control={(
                             <Checkbox
-                              tabIndex={-1}
-                              onClick={() => this.handleToggle(21)}
+                              checked={q3}
+                              id="q3"
+                              value={q3}
+                              onClick={e => this.updateQuestion(e)}
                               checkedIcon={<Check className={classes.checkedIcon} />}
                               icon={<Check className={classes.uncheckedIcon} />}
                               classes={{ checked: classes.checked }}
@@ -180,8 +205,10 @@ class Create extends React.Component {
                         <FormControlLabel
                           control={(
                             <Checkbox
-                              tabIndex={-1}
-                              onClick={() => this.handleToggle(21)}
+                              checked={q4}
+                              id="q4"
+                              value={q4}
+                              onClick={e => this.updateQuestion(e)}
                               checkedIcon={<Check className={classes.checkedIcon} />}
                               icon={<Check className={classes.uncheckedIcon} />}
                               classes={{ checked: classes.checked }}
@@ -201,8 +228,10 @@ class Create extends React.Component {
                         <FormControlLabel
                           control={(
                             <Checkbox
-                              tabIndex={-1}
-                              onClick={() => this.handleToggle(21)}
+                              checked={q5}
+                              id="q5"
+                              value={q5}
+                              onClick={e => this.updateQuestion(e)}
                               checkedIcon={<Check className={classes.checkedIcon} />}
                               icon={<Check className={classes.uncheckedIcon} />}
                               classes={{ checked: classes.checked }}
@@ -222,8 +251,10 @@ class Create extends React.Component {
                         <FormControlLabel
                           control={(
                             <Checkbox
-                              tabIndex={-1}
-                              onClick={() => this.handleToggle(21)}
+                              checked={q6}
+                              id="q6"
+                              value={q6}
+                              onClick={e => this.updateQuestion(e)}
                               checkedIcon={<Check className={classes.checkedIcon} />}
                               icon={<Check className={classes.uncheckedIcon} />}
                               classes={{ checked: classes.checked }}
@@ -247,5 +278,13 @@ class Create extends React.Component {
     );
   }
 }
+
+Create.propTypes = {
+  history: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
+  loading: PropTypes.bool.isRequired,
+  success: PropTypes.bool.isRequired,
+  createSupplier: PropTypes.func.isRequired,
+};
 
 export default withStyles(regularFormsStyle)(Create);

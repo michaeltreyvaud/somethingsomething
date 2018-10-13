@@ -144,15 +144,35 @@ class Update extends React.Component {
     });
   }
 
-  updateFoodItem() {
-    const { loading, updating, updateFoodItem } = this.props;
-    if (loading || updating) return false;
+  save() {
+    const {
+      loading, updating, duplicating, updateFoodItem,
+    } = this.props;
+    if (loading || updating || duplicating) return false;
     return updateFoodItem(this.state);
+  }
+
+  duplicate() {
+    const {
+      loading, updating, duplicating, createFoodItem,
+    } = this.props;
+    if (loading || duplicating || updating) return false;
+    const { state } = this;
+    const newItem = { ...state };
+    delete newItem.id;
+    delete newItem.createdAt;
+    return createFoodItem(newItem);
+  }
+
+  back() {
+    const { history } = this.props;
+    history.push('/dashboard/fooditem');
   }
 
   render() {
     const {
-      classes, loading, item, updating,
+      classes, loading, item,
+      updating, duplicating,
     } = this.props;
     if (!item && !loading) return (<NotFound text="Food Item Not Found" />);
     const {
@@ -418,8 +438,14 @@ class Update extends React.Component {
                       classes={{ label: classes.label }}
                       label="Celery"
                     />
-                    <Button loading={updating} onClick={() => this.updateFoodItem()} color="rose" className={classes.updateProfileButton}>
-                        Save
+                    <Button loading={loading} onClick={() => this.save()} color="rose" className={classes.updateProfileButton}>
+                      Save
+                    </Button>
+                    <Button loading={duplicating} onClick={() => this.duplicate()} color="primary" className={classes.updateProfileButton} style={{ float: 'right' }}>
+                      Duplicate
+                    </Button>
+                    <Button loading={false} onClick={() => this.back()} color="info" className={classes.updateProfileButton}>
+                      Back
                     </Button>
                   </div>
                 </div>
@@ -435,11 +461,14 @@ class Update extends React.Component {
 }
 
 Update.propTypes = {
+  history: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
   item: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
   updating: PropTypes.bool.isRequired,
   updateFoodItem: PropTypes.func.isRequired,
+  duplicating: PropTypes.bool.isRequired,
+  createFoodItem: PropTypes.func.isRequired,
 };
 
 export default withStyles(extendedFormsStyle)(Update);
