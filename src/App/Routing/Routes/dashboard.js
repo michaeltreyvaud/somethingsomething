@@ -46,6 +46,7 @@ import UserTrainingLogUpdate from '../../Views/User/TrainingLog/Update/update.co
 
 import CheckList from '../../Views/CheckList';
 import CheckListCreate from '../../Views/CheckList/Create';
+import CheckListCategory from '../../Views/CheckList/Category/';
 import SafetyTask from '../../Views/SafetyRecord/SafetyTask';
 import SafetyTaskCreate from '../../Views/SafetyRecord/SafetyTask/Create';
 //  TODO: What is this?
@@ -254,17 +255,27 @@ const dashRoutes = [
     ],
   },
   {
+    collapse: true,
     path: '/dashboard/checklist',
     name: 'Check List',
     state: 'openCheckList',
-    component: CheckList,
     icon: CheckCircle,
     views: [
+      {
+        path: '/dashboard/checklist/',
+        name: 'Check List',
+        component: CheckList,       
+      },
       {
         hidden: true,
         path: '/dashboard/checklist/create',
         name: 'Create Task',
         component: CheckListCreate,
+      },
+      {
+        path: '/dashboard/checklist/category',
+        name: 'Category',
+        component: CheckListCategory,
       },
     ],
   },
