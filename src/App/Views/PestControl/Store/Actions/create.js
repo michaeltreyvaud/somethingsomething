@@ -23,12 +23,12 @@ const createPestFail = message => ({
   payload: { message },
 });
 
-export const createPest = pest => async (dispatch) => {
+export const createPest = item => async (dispatch) => {
   try {
     //  Tell the layout we are doing something
     dispatch(dashboardLoading());
     dispatch(createPestAttempt());
-    const body = pest;
+    const body = item;
     //  TODO - fetch these
     const { REACT_APP_API_URL, REACT_APP_CREATE_PEST_PATH } = process.env;
     const response = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_CREATE_PEST_PATH}`, body);

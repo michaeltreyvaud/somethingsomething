@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-// @material-ui/core components
+
 import withStyles from '@material-ui/core/styles/withStyles';
 import SweetAlert from 'react-bootstrap-sweetalert';
 import Assignment from '@material-ui/icons/Assignment';
 import Tooltip from '@material-ui/core/Tooltip';
-// core components
+
 import Open from '@material-ui/icons/OpenInNew';
 import Delete from '@material-ui/icons/Delete';
 import GridContainer from '../../Components/Grid/GridContainer';
@@ -76,7 +76,7 @@ class Safety extends React.Component {
         confirmBtnText="Ok"
       />
     );
-  }  
+  }
 
   render() {
     const {
@@ -122,8 +122,8 @@ class Safety extends React.Component {
       );
     });
     const tableData = items.map((_item, index) => {
-      const item = [_item.title, `${_item.user.firstName} ${_item.user.lastName}`, moment(_item.createdAt).format('DD/MM/YYYY'), 
-      _item.file, _item.comments, simpleButtons(_item, index)];
+      const item = [_item.title, `${_item.user.firstName} ${_item.user.lastName}`, moment(_item.createdAt).format('DD/MM/YYYY'),
+        _item.file, _item.comments, simpleButtons(_item, index)];
       return item;
     });
     return (
@@ -134,17 +134,17 @@ class Safety extends React.Component {
           visible={displayDeleteModal}
           classes={classes}
           close={() => this.hideDeleteModal()}
-        />        
-        <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/dashboard/safetys/create')}>
-        New
+        />
+        <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/dashboard/safetysheet/create')}>
+          Create
         </Button>
         <CustomDropdown
           hoverColor="black"
           buttonText="Export"
           buttonProps={{
             minHeight: 'auto',
-            minWidth: 'auto',            
-            style: { marginBottom: '0', float: 'right', },
+            minWidth: 'auto',
+            style: { marginBottom: '0', float: 'right' },
             color: 'warning',
           }}
           dropdownHeader="Actions"
@@ -153,7 +153,7 @@ class Safety extends React.Component {
             'Export PDF',
             'Email',
           ]}
-        />        
+        />
         {this.state.alert}
         <GridContainer>
           <GridItem xs={12}>
@@ -164,7 +164,7 @@ class Safety extends React.Component {
                 </CardIcon>
               </CardHeader>
               <CardBody>
-              {!loading && items && items.length > 0 && (
+                {!loading && items && items.length > 0 && (
                 <Table
                   tableHead={[
                     'Title',
@@ -196,7 +196,7 @@ class Safety extends React.Component {
                     <h2><small>No Items to display</small></h2>
                   </div>
                 )}
-                <LoadingTable visible={loading} color="red" />                
+                <LoadingTable visible={loading} color="red" />
               </CardBody>
             </Card>
           </GridItem>

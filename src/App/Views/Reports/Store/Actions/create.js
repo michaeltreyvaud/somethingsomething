@@ -23,12 +23,12 @@ const createReportFail = message => ({
   payload: { message },
 });
 
-export const createReport = report => async (dispatch) => {
+export const createReport = item => async (dispatch) => {
   try {
     //  Tell the layout we are doing something
     dispatch(dashboardLoading());
     dispatch(createReportAttempt());
-    const body = report;
+    const body = item;
     //  TODO - fetch these
     const { REACT_APP_API_URL, REACT_APP_CREATE_REPORT_PATH } = process.env;
     const response = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_CREATE_REPORT_PATH}`, body);

@@ -111,13 +111,13 @@ import CleaningLog from '../../Views/Cleaning/CleaningLog/cleaningLog';
 import CleaningLogCreate from '../../Views/Cleaning/CleaningLog/Create/create';
 
 import Reports from '../../Views/Reports/report.container';
-import ReportsCreate from '../../Views/Reports/Create';
+import ReportsCreate from '../../Views/Reports/Create/create.container';
 
 import SafetySheet from '../../Views/SafetySheet/safety.container';
 import SafetySheetCreate from '../../Views/SafetySheet/Create';
 
 import PestControl from '../../Views/PestControl/pest.container';
-import PestControlCreate from '../../Views/PestControl/Create';
+import PestControlCreate from '../../Views/PestControl/Create/create.container';
 
 const TODOComponent = () => (<h1>TODO</h1>);
 const dashRoutes = [
