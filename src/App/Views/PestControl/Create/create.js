@@ -52,12 +52,12 @@ class Create extends Component {
   }
 
   create() {
-    const { createReport, loading } = this.props;
+    const { createPest, loading } = this.props;
     if (loading) return false;
     const { state } = this;
     const item = { ...state };
     delete item.selectedUser;
-    return createReport(item);
+    return createPest(item);
   }
 
   updateValue(e) {
@@ -81,7 +81,7 @@ class Create extends Component {
 
   back() {
     const { history } = this.props;
-    history.push('/dashboard/reports');
+    history.push('/dashboard/pest');
   }
 
   renderUsers() {
@@ -100,7 +100,7 @@ class Create extends Component {
   render() {
     const { classes, loading } = this.props;
     const {
-      type, comments, selectedUser,
+      title, comments, selectedUser,
     } = this.state;
     return (
       <div>
@@ -115,9 +115,9 @@ class Create extends Component {
               <CardBody>
                 <div>
                   <CustomInput
-                    labelText="Type"
-                    id="type"
-                    value={type}
+                    labelText="Title"
+                    id="title"
+                    value={title}
                     formControlProps={{ fullWidth: true }}
                     inputProps={{ type: 'text' }}
                     onChange={e => this.updateValue(e)}
@@ -182,7 +182,7 @@ Create.propTypes = {
   success: PropTypes.bool.isRequired,
   user: PropTypes.object.isRequired,
   users: PropTypes.array.isRequired,
-  createReport: PropTypes.func.isRequired,
+  createPest: PropTypes.func.isRequired,
 };
 
 export default withStyles(extendedFormsStyle)(Create);

@@ -23,12 +23,12 @@ const createSafetyFail = message => ({
   payload: { message },
 });
 
-export const createSafety = safety => async (dispatch) => {
+export const createSafety = item => async (dispatch) => {
   try {
     //  Tell the layout we are doing something
     dispatch(dashboardLoading());
     dispatch(createSafetyAttempt());
-    const body = safety;
+    const body = item;
     //  TODO - fetch these
     const { REACT_APP_API_URL, REACT_APP_CREATE_SAFETY_PATH } = process.env;
     const response = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_CREATE_SAFETY_PATH}`, body);

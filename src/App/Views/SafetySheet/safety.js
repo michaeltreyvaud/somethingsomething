@@ -30,7 +30,6 @@ class Safety extends React.Component {
     this.state = {
       displayDeleteModal: false,
       selectedDeleteItem: {},
-      displayErrorMessage: false,
     };
   }
 
@@ -54,28 +53,6 @@ class Safety extends React.Component {
       displayDeleteModal: false,
       selectedDeleteItem: {},
     });
-  }
-
-  closeErrorMessage() {
-    this.setState({
-      displayErrorMessage: false,
-    });
-  }
-
-  renderErrorMessage() {
-    const { displayErrorMessage } = this.state;
-    const { classes } = this.props;
-    const { success, button } = classes;
-    return (
-      <SweetAlert
-        show={displayErrorMessage}
-        warning
-        title="Please create a Food Item before adding a Hot Holding Item"
-        onConfirm={() => this.closeErrorMessage()}
-        confirmBtnCssClass={`${button} ${success}`}
-        confirmBtnText="Ok"
-      />
-    );
   }
 
   render() {
@@ -128,14 +105,13 @@ class Safety extends React.Component {
     });
     return (
       <div>
-        {this.renderErrorMessage()}
         <SafetyDelete
           item={selectedDeleteItem}
           visible={displayDeleteModal}
           classes={classes}
           close={() => this.hideDeleteModal()}
         />
-        <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/dashboard/safetysheet/create')}>
+        <Button color="info" className={classes.marginRight} onClick={() => history.push('/dashboard/safetysheet/create')}>
           Create
         </Button>
         <CustomDropdown
@@ -154,7 +130,6 @@ class Safety extends React.Component {
             'Email',
           ]}
         />
-        {this.state.alert}
         <GridContainer>
           <GridItem xs={12}>
             <Card>
@@ -175,17 +150,23 @@ class Safety extends React.Component {
                   ]}
                   tableData={tableData}
                   customCellClasses={[
-                    classes.center,
-                    classes.right,
+                    classes.left,
+                    classes.left,
+                    classes.left,
+                    classes.left,
+                    classes.left,
                     classes.right,
                   ]}
-                  customClassesForCells={[0, 4, 5]}
+                  customClassesForCells={[0, 1, 2, 3, 4, 5]}
                   customHeadCellClasses={[
-                    classes.center,
-                    classes.right,
+                    classes.left,
+                    classes.left,
+                    classes.left,
+                    classes.left,
+                    classes.left,
                     classes.right,
                   ]}
-                  customHeadClassesForCells={[0, 4, 5]}
+                  customHeadClassesForCells={[0, 1, 2, 3, 4, 5]}
                 />
                 )}
                 {!loading && items && items.length === 0 && (

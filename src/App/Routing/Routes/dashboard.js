@@ -114,7 +114,7 @@ import Reports from '../../Views/Reports/report.container';
 import ReportsCreate from '../../Views/Reports/Create/create.container';
 
 import SafetySheet from '../../Views/SafetySheet/safety.container';
-import SafetySheetCreate from '../../Views/SafetySheet/Create';
+import SafetySheetCreate from '../../Views/SafetySheet/Create/create.container';
 
 import PestControl from '../../Views/PestControl/pest.container';
 import PestControlCreate from '../../Views/PestControl/Create/create.container';

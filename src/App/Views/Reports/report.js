@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-// @material-ui/core components
+
 import withStyles from '@material-ui/core/styles/withStyles';
 import SweetAlert from 'react-bootstrap-sweetalert';
 import Assignment from '@material-ui/icons/Assignment';
 import Tooltip from '@material-ui/core/Tooltip';
-// core components
+
 import Open from '@material-ui/icons/OpenInNew';
 import Delete from '@material-ui/icons/Delete';
 import GridContainer from '../../Components/Grid/GridContainer';
@@ -30,7 +30,6 @@ class Report extends React.Component {
     this.state = {
       displayDeleteModal: false,
       selectedDeleteItem: {},
-      displayErrorMessage: false,
     };
   }
 
@@ -55,28 +54,6 @@ class Report extends React.Component {
       selectedDeleteItem: {},
     });
   }
-
-  closeErrorMessage() {
-    this.setState({
-      displayErrorMessage: false,
-    });
-  }
-
-  renderErrorMessage() {
-    const { displayErrorMessage } = this.state;
-    const { classes } = this.props;
-    const { success, button } = classes;
-    return (
-      <SweetAlert
-        show={displayErrorMessage}
-        warning
-        title="Please create a Food Item before adding a Hot Holding Item"
-        onConfirm={() => this.closeErrorMessage()}
-        confirmBtnCssClass={`${button} ${success}`}
-        confirmBtnText="Ok"
-      />
-    );
-  }  
 
   render() {
     const {
@@ -122,39 +99,18 @@ class Report extends React.Component {
       );
     });
     const tableData = items.map((_item, index) => {
-      const item = [_item.title, `${_item.user.firstName} ${_item.user.lastName}`, moment(_item.createdAt).format('DD/MM/YYYY'), 
-      _item.file, _item.comments, simpleButtons(_item, index)];
+      const item = [_item.type, `${_item.user.firstName} ${_item.user.lastName}`, moment(_item.createdAt).format('DD/MM/YYYY'),
+        _item.file, _item.comments, simpleButtons(_item, index)];
       return item;
     });
     return (
       <div>
-        {this.renderErrorMessage()}
         <ReportDelete
           item={selectedDeleteItem}
           visible={displayDeleteModal}
           classes={classes}
           close={() => this.hideDeleteModal()}
-        />        
-        <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/dashboard/reports/create')}>
-        New
-        </Button>
-        <CustomDropdown
-          hoverColor="black"
-          buttonText="Export"
-          buttonProps={{
-            minHeight: 'auto',
-            minWidth: 'auto',            
-            style: { marginBottom: '0', float: 'right', },
-            color: 'warning',
-          }}
-          dropdownHeader="Actions"
-          dropdownList={[
-            'Export CSV',
-            'Export PDF',
-            'Email',
-          ]}
-        />        
-        {this.state.alert}
+        />
         <GridContainer>
           <GridItem xs={12}>
             <Card>
@@ -162,12 +118,31 @@ class Report extends React.Component {
                 <CardIcon color="rose">
                   <Assignment />
                 </CardIcon>
+                <Button color="info" className={classes.marginRight} onClick={() => history.push('/dashboard/reports/create')}>
+                  Create
+                </Button>
+                <CustomDropdown
+                  hoverColor="black"
+                  buttonText="Export"
+                  buttonProps={{
+                    minHeight: 'auto',
+                    minWidth: 'auto',
+                    style: { marginBottom: '0', float: 'right' },
+                    color: 'warning',
+                  }}
+                  dropdownHeader="Actions"
+                  dropdownList={[
+                    'Export CSV',
+                    'Export PDF',
+                    'Email',
+                  ]}
+                />
               </CardHeader>
               <CardBody>
-              {!loading && items && items.length > 0 && (
+                {!loading && items && items.length > 0 && (
                 <Table
                   tableHead={[
-                    'Title',
+                    'Type',
                     'Operator',
                     'Date/Time',
                     'File',
@@ -175,17 +150,23 @@ class Report extends React.Component {
                   ]}
                   tableData={tableData}
                   customCellClasses={[
-                    classes.center,
-                    classes.right,
+                    classes.left,
+                    classes.left,
+                    classes.left,
+                    classes.left,
+                    classes.left,
                     classes.right,
                   ]}
-                  customClassesForCells={[0, 4, 5]}
+                  customClassesForCells={[0, 1, 2, 3, 4, 5]}
                   customHeadCellClasses={[
-                    classes.center,
-                    classes.right,
+                    classes.left,
+                    classes.left,
+                    classes.left,
+                    classes.left,
+                    classes.left,
                     classes.right,
                   ]}
-                  customHeadClassesForCells={[0, 4, 5]}
+                  customHeadClassesForCells={[0, 1, 2, 3, 4, 5]}
                 />
                 )}
                 {!loading && items && items.length === 0 && (
@@ -196,7 +177,7 @@ class Report extends React.Component {
                     <h2><small>No Items to display</small></h2>
                   </div>
                 )}
-                <LoadingTable visible={loading} color="red" />                
+                <LoadingTable visible={loading} color="red" />
               </CardBody>
             </Card>
           </GridItem>

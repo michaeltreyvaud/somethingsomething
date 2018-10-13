@@ -30,7 +30,6 @@ class Pest extends React.Component {
     this.state = {
       displayDeleteModal: false,
       selectedDeleteItem: {},
-      displayErrorMessage: false,
     };
   }
 
@@ -54,28 +53,6 @@ class Pest extends React.Component {
       displayDeleteModal: false,
       selectedDeleteItem: {},
     });
-  }
-
-  closeErrorMessage() {
-    this.setState({
-      displayErrorMessage: false,
-    });
-  }
-
-  renderErrorMessage() {
-    const { displayErrorMessage } = this.state;
-    const { classes } = this.props;
-    const { success, button } = classes;
-    return (
-      <SweetAlert
-        show={displayErrorMessage}
-        warning
-        title="Please create a Food Item before adding a Hot Holding Item"
-        onConfirm={() => this.closeErrorMessage()}
-        confirmBtnCssClass={`${button} ${success}`}
-        confirmBtnText="Ok"
-      />
-    );
   }
 
   render() {
@@ -128,33 +105,12 @@ class Pest extends React.Component {
     });
     return (
       <div>
-        {this.renderErrorMessage()}
         <PestDelete
           item={selectedDeleteItem}
           visible={displayDeleteModal}
           classes={classes}
           close={() => this.hideDeleteModal()}
         />
-        <Button color="info" className={classes.marginRight} onClick={() => this.props.history.push('/dashboard/pest/create')}>
-        New
-        </Button>
-        <CustomDropdown
-          hoverColor="black"
-          buttonText="Export"
-          buttonProps={{
-            minHeight: 'auto',
-            minWidth: 'auto',
-            style: { marginBottom: '0', float: 'right' },
-            color: 'warning',
-          }}
-          dropdownHeader="Actions"
-          dropdownList={[
-            'Export CSV',
-            'Export PDF',
-            'Email',
-          ]}
-        />
-        {this.state.alert}
         <GridContainer>
           <GridItem xs={12}>
             <Card>
@@ -162,6 +118,25 @@ class Pest extends React.Component {
                 <CardIcon color="rose">
                   <Assignment />
                 </CardIcon>
+                <Button color="info" className={classes.marginRight} onClick={() => history.push('/dashboard/pest/create')}>
+                  Create
+                </Button>
+                <CustomDropdown
+                  hoverColor="black"
+                  buttonText="Export"
+                  buttonProps={{
+                    minHeight: 'auto',
+                    minWidth: 'auto',
+                    style: { marginBottom: '0', float: 'right' },
+                    color: 'warning',
+                  }}
+                  dropdownHeader="Actions"
+                  dropdownList={[
+                    'Export CSV',
+                    'Export PDF',
+                    'Email',
+                  ]}
+                />
               </CardHeader>
               <CardBody>
                 {!loading && items && items.length > 0 && (
@@ -175,17 +150,23 @@ class Pest extends React.Component {
                   ]}
                   tableData={tableData}
                   customCellClasses={[
-                    classes.center,
-                    classes.right,
+                    classes.left,
+                    classes.left,
+                    classes.left,
+                    classes.left,
+                    classes.left,
                     classes.right,
                   ]}
-                  customClassesForCells={[0, 4, 5]}
+                  customClassesForCells={[0, 1, 2, 3, 4, 5]}
                   customHeadCellClasses={[
-                    classes.center,
-                    classes.right,
+                    classes.left,
+                    classes.left,
+                    classes.left,
+                    classes.left,
+                    classes.left,
                     classes.right,
                   ]}
-                  customHeadClassesForCells={[0, 4, 5]}
+                  customHeadClassesForCells={[0, 1, 2, 3, 4, 5]}
                 />
                 )}
                 {!loading && items && items.length === 0 && (
