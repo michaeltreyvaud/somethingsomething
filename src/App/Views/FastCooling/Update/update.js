@@ -94,8 +94,10 @@ class Update extends Component {
   }
 
   update() {
-    const { loading, updating, updateFastCooling } = this.props;
-    if (loading || updating) return false;
+    const {
+      loading, updating, duplicating, updateFastCooling,
+    } = this.props;
+    if (loading || updating || duplicating) return false;
     return updateFastCooling(this.state);
   }
 
@@ -104,9 +106,21 @@ class Update extends Component {
     history.push('/dashboard/fastcooling');
   }
 
+  duplicate() {
+    const {
+      loading, updating, duplicating, createFastCooling,
+    } = this.props;
+    if (loading || updating || duplicating) return false;
+    const { state } = this;
+    const newItem = { ...state };
+    delete newItem.createdAt;
+    return createFastCooling(newItem);
+  }
+
   render() {
     const {
-      classes, loading, item, updating,
+      classes, loading, item,
+      updating, duplicating,
     } = this.props;
     if (!item && !loading) return (<NotFound text="Item Not Found" />);
     const {
@@ -168,10 +182,13 @@ class Update extends Component {
                       clearOnResize={false}
                     />
                   </FormControl>
-                  <Button loading={updating} onClick={() => this.update()} color="rose" className={classes.updateProfileButton}>
+                  <Button loading={loading} onClick={() => this.update()} color="rose" className={classes.updateProfileButton}>
                     Save
                   </Button>
-                  <Button onClick={() => this.back()} color="info" className={classes.updateProfileButton}>
+                  <Button loading={duplicating} onClick={() => this.duplicate()} color="primary" className={classes.updateProfileButton} style={{ float: 'right' }}>
+                    Duplicate
+                  </Button>
+                  <Button loading={false} onClick={() => this.back()} color="info" className={classes.updateProfileButton}>
                     Cancel
                   </Button>
                 </div>
@@ -193,6 +210,8 @@ Update.propTypes = {
   loading: PropTypes.bool.isRequired,
   updating: PropTypes.bool.isRequired,
   updateFastCooling: PropTypes.func.isRequired,
+  duplicating: PropTypes.bool.isRequired,
+  createFastCooling: PropTypes.func.isRequired,
 };
 
 export default withStyles(extendedFormsStyle)(Update);
