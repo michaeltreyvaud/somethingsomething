@@ -132,12 +132,10 @@ class SupplierList extends React.Component {
                     classes.left,
                     classes.left,
                     classes.left,
-                    classes.left,
                     classes.right,
                   ]}
                   customClassesForCells={[0, 1, 2, 3, 4]}
                   customHeadCellClasses={[
-                    classes.left,
                     classes.left,
                     classes.left,
                     classes.left,

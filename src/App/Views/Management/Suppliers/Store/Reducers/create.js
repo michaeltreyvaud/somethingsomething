@@ -1,7 +1,7 @@
 import {
-  CREATE_FOOD_ITEM_ATTEMPT,
-  CREATE_FOOD_ITEM_SUCCESS,
-  CREATE_FOOD_ITEM_FAIL,
+  CREATE_SUPPLIER_ATTEMPT,
+  CREATE_SUPPLIER_SUCCESS,
+  CREATE_SUPPLIER_FAIL,
 } from '../ActionTypes';
 
 const initialState = {
@@ -13,7 +13,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case CREATE_FOOD_ITEM_ATTEMPT: {
+    case CREATE_SUPPLIER_ATTEMPT: {
       return {
         ...state,
         loading: true,
@@ -22,7 +22,7 @@ const reducer = (state = initialState, action) => {
         success: false,
       };
     }
-    case CREATE_FOOD_ITEM_SUCCESS: {
+    case CREATE_SUPPLIER_SUCCESS: {
       return {
         ...state,
         loading: false,
@@ -31,7 +31,7 @@ const reducer = (state = initialState, action) => {
         success: true,
       };
     }
-    case CREATE_FOOD_ITEM_FAIL: {
+    case CREATE_SUPPLIER_FAIL: {
       const { message } = action.payload;
       return {
         ...state,

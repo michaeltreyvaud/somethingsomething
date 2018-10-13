@@ -31,7 +31,7 @@ import ManagementTeamsUpdate from '../../Views/Management/Teams/Update/update.co
 
 import ManagementSuppliers from '../../Views/Management/Suppliers/suppliers.container';
 import ManagementSupplierUpdate from '../../Views/Management/Suppliers/Update/update.container';
-import ManagementSuppliersCreate from '../../Views/Management/Suppliers/Create';
+import ManagementSuppliersCreate from '../../Views/Management/Suppliers/Create/create.container';
 
 import UserProfile from '../../Views/User/Profile/profile.container';
 import UserPassword from '../../Views/User/Password';
