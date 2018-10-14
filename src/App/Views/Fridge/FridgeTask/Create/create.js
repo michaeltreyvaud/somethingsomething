@@ -204,49 +204,49 @@ class Create extends Component {
                       <MenuItem
                         classes={{ root: classes.selectMenuItem, selected: classes.selectMenuItemSelected }}
                         id="day"
-                        value="Monday"
+                        value="MONDAY"
                       >
                         Monday
                       </MenuItem>
                       <MenuItem
                         classes={{ root: classes.selectMenuItem, selected: classes.selectMenuItemSelected }}
                         id="day"
-                        value="Tuesday"
+                        value="TUESDAY"
                       >
                         Tuesday
                       </MenuItem>
                       <MenuItem
                         classes={{ root: classes.selectMenuItem, selected: classes.selectMenuItemSelected }}
                         id="day"
-                        value="Wednesday"
+                        value="WEDNESDAY"
                       >
                         Wednesday
                       </MenuItem>
                       <MenuItem
                         classes={{ root: classes.selectMenuItem, selected: classes.selectMenuItemSelected }}
                         id="day"
-                        value="Thursday"
+                        value="THURSDAY"
                       >
                         Thursday
                       </MenuItem>
                       <MenuItem
                         classes={{ root: classes.selectMenuItem, selected: classes.selectMenuItemSelected }}
                         id="day"
-                        value="Friday"
+                        value="FRIDAY"
                       >
                         Friday
                       </MenuItem>
                       <MenuItem
                         classes={{ root: classes.selectMenuItem, selected: classes.selectMenuItemSelected }}
                         id="day"
-                        value="Saturday"
+                        value="SATURDAY"
                       >
                         Saturday
                       </MenuItem>
                       <MenuItem
                         classes={{ root: classes.selectMenuItem, selected: classes.selectMenuItemSelected }}
                         id="day"
-                        value="Sunday"
+                        value="SUNDAY"
                       >
                         Sunday
                       </MenuItem>
@@ -266,28 +266,28 @@ class Create extends Component {
                       <MenuItem
                         classes={{ root: classes.selectMenuItem, selected: classes.selectMenuItemSelected }}
                         id="time"
-                        value="Morning"
+                        value="MORNING"
                       >
                         Morning
                       </MenuItem>
                       <MenuItem
                         classes={{ root: classes.selectMenuItem, selected: classes.selectMenuItemSelected }}
                         id="time"
-                        value="Afternoon"
+                        value="AFTERNOON"
                       >
                         Afternoon
                       </MenuItem>
                       <MenuItem
                         classes={{ root: classes.selectMenuItem, selected: classes.selectMenuItemSelected }}
                         id="time"
-                        value="Evening"
+                        value="EVENING"
                       >
                         Evening
                       </MenuItem>
                       <MenuItem
                         classes={{ root: classes.selectMenuItem, selected: classes.selectMenuItemSelected }}
                         id="time"
-                        value="Night"
+                        value="NIGHT"
                       >
                         Night
                       </MenuItem>

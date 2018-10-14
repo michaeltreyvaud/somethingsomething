@@ -57,7 +57,7 @@ import FridgeItem from '../../Views/Fridge/FridgeItem/fridgeItem.container';
 import FridgeItemCreate from '../../Views/Fridge/FridgeItem/Create/create.container';
 import FridgeItemUpdate from '../../Views/Fridge/FridgeItem/Update/update.container';
 
-import FridgeTask from '../../Views/Fridge/FridgeTask';
+import FridgeTask from '../../Views/Fridge/FridgeTask/fridgeTask.container';
 import FridgeTaskCreate from '../../Views/Fridge/FridgeTask/Create/create.container';
 
 import FridgeLog from '../../Views/Fridge/FridgeLog/fridgeLog.container';
@@ -70,7 +70,7 @@ import FreezerItem from '../../Views/Freezer/FreezerItem/freezerItem.container';
 import FreezerItemCreate from '../../Views/Freezer/FreezerItem/Create/create.container';
 import FreezerItemUpdate from '../../Views/Freezer/FreezerItem/Update/update.container';
 
-import FreezerTask from '../../Views/Freezer/FreezerTask';
+import FreezerTask from '../../Views/Freezer/FreezerTask/freezerTask.container';
 import FreezerTaskCreate from '../../Views/Freezer/FreezerTask/Create/create.container';
 
 import FreezerLog from '../../Views/Freezer/FreezerLog/freezerLog.container';
