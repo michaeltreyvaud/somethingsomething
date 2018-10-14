@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Datetime from 'react-datetime';
 
 import Today from '@material-ui/icons/Today';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -28,6 +27,8 @@ class Create extends Component {
       selectedFridgeItem: -1,
       selectedUser: -1,
       selectedTeam: -1,
+      day: '',
+      time: '',
     };
   }
 
@@ -82,12 +83,6 @@ class Create extends Component {
     }
     return this.setState({
       [target.id || target.name]: value,
-    });
-  }
-
-  updateTime(moment) {
-    this.setState({
-      time: moment.valueOf(),
     });
   }
 
@@ -257,13 +252,46 @@ class Create extends Component {
                       </MenuItem>
                     </Select>
                   </FormControl>
-                  <FormControl fullWidth>
-                    <Datetime
+                  <FormControl fullWidth className={classes.selectFormControl}>
+                    <InputLabel htmlFor="simple-select" className={classes.selectLabel}>
+                      Time
+                    </InputLabel>
+                    <Select
+                      MenuProps={{ className: classes.selectMenu }}
+                      classes={{ select: classes.select }}
                       value={time}
-                      onChange={e => this.updateTime(e)}
-                      dateFormat={false}
-                      inputProps={{ placeholder: 'Time' }}
-                    />
+                      onChange={e => this.updateValue(e)}
+                      inputProps={{ name: 'time' }}
+                    >
+                      <MenuItem
+                        classes={{ root: classes.selectMenuItem, selected: classes.selectMenuItemSelected }}
+                        id="time"
+                        value="Morning"
+                      >
+                        Morning
+                      </MenuItem>
+                      <MenuItem
+                        classes={{ root: classes.selectMenuItem, selected: classes.selectMenuItemSelected }}
+                        id="time"
+                        value="Afternoon"
+                      >
+                        Afternoon
+                      </MenuItem>
+                      <MenuItem
+                        classes={{ root: classes.selectMenuItem, selected: classes.selectMenuItemSelected }}
+                        id="time"
+                        value="Evening"
+                      >
+                        Evening
+                      </MenuItem>
+                      <MenuItem
+                        classes={{ root: classes.selectMenuItem, selected: classes.selectMenuItemSelected }}
+                        id="time"
+                        value="Night"
+                      >
+                        Night
+                      </MenuItem>
+                    </Select>
                   </FormControl>
                   <CustomInput
                     labelText="Description"
