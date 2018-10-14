@@ -46,7 +46,7 @@ import UserTrainingLogUpdate from '../../Views/User/TrainingLog/Update/update.co
 
 import CheckList from '../../Views/CheckList';
 import CheckListCreate from '../../Views/CheckList/Create';
-import CheckListCategory from '../../Views/CheckList/Category/';
+import CheckListCategory from '../../Views/CheckList/Category';
 import SafetyTask from '../../Views/SafetyRecord/SafetyTask';
 import SafetyTaskCreate from '../../Views/SafetyRecord/SafetyTask/Create';
 //  TODO: What is this?
@@ -113,12 +113,15 @@ import CleaningLogCreate from '../../Views/Cleaning/CleaningLog/Create/create';
 
 import Reports from '../../Views/Reports/report.container';
 import ReportsCreate from '../../Views/Reports/Create/create.container';
+import ReportsUpdate from '../../Views/Reports/Update/update.container';
 
 import SafetySheet from '../../Views/SafetySheet/safety.container';
 import SafetySheetCreate from '../../Views/SafetySheet/Create/create.container';
+import SafetySheetUpdate from '../../Views/SafetySheet/Update/update.container';
 
 import PestControl from '../../Views/PestControl/pest.container';
 import PestControlCreate from '../../Views/PestControl/Create/create.container';
+import PestControlUpdate from '../../Views/PestControl/Update/update.container';
 
 const TODOComponent = () => (<h1>TODO</h1>);
 const dashRoutes = [
@@ -264,7 +267,7 @@ const dashRoutes = [
       {
         path: '/dashboard/checklist/',
         name: 'Check List',
-        component: CheckList,       
+        component: CheckList,
       },
       {
         hidden: true,
@@ -644,6 +647,12 @@ const dashRoutes = [
         name: 'Create Report Log',
         component: ReportsCreate,
       },
+      {
+        hidden: true,
+        path: '/dashboard/reports/:id',
+        name: 'Update Report',
+        component: ReportsUpdate,
+      },
     ],
   },
   {
@@ -659,6 +668,12 @@ const dashRoutes = [
         name: 'Create Safety Datasheet',
         component: SafetySheetCreate,
       },
+      {
+        hidden: true,
+        path: '/dashboard/safetysheet/:id',
+        name: 'Update Datasheet',
+        component: SafetySheetUpdate,
+      },
     ],
   },
   {
@@ -673,6 +688,12 @@ const dashRoutes = [
         path: '/dashboard/pest/create',
         name: 'Create Pest Record',
         component: PestControlCreate,
+      },
+      {
+        hidden: true,
+        path: '/dashboard/pest/:id',
+        name: 'Update Record',
+        component: PestControlUpdate,
       },
     ],
   },

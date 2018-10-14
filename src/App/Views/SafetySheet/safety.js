@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 
 import withStyles from '@material-ui/core/styles/withStyles';
-import SweetAlert from 'react-bootstrap-sweetalert';
 import Assignment from '@material-ui/icons/Assignment';
 import Tooltip from '@material-ui/core/Tooltip';
 
@@ -69,7 +68,7 @@ class Safety extends React.Component {
       let onClick;
       switch (key) {
         case 0: {
-          onClick = () => history.push(`/dashboard/safety/${item.createdAt}`);
+          onClick = () => history.push(`/dashboard/safetysheet/${item.createdAt}`);
           break;
         }
         case 1: {

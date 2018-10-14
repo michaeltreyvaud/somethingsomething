@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import SignatureCanvas from 'react-signature-canvas';
 import Today from '@material-ui/icons/Today';
 import withStyles from '@material-ui/core/styles/withStyles';
+
 import FormControl from '@material-ui/core/FormControl';
 
-import Button from '../../../Components/CustomButtons';
-import CustomInput from '../../../Components/CustomInput';
 import GridItem from '../../../Components/Grid/GridItem';
 import Card from '../../../Components/Card/Card';
 import GridContainer from '../../../Components/Grid/GridContainer';
@@ -14,9 +13,11 @@ import CardHeader from '../../../Components/Card/CardHeader';
 import CardBody from '../../../Components/Card/CardBody';
 import CardIcon from '../../../Components/Card/CardIcon';
 import NotFound from '../../../Components/NotFound';
-import extendedFormsStyle from '../../../Assets/Jss/extendedFormsStyle';
-
 import ImageUpload from '../../../Components/CustomUpload/ImageUpload';
+import CustomInput from '../../../Components/CustomInput';
+import Button from '../../../Components/CustomButtons';
+
+import extendedFormsStyle from '../../../Assets/Jss/extendedFormsStyle';
 
 import LoadingTable from '../../../Components/Loading/LoadingTable';
 
@@ -26,25 +27,25 @@ class Update extends Component {
     const { item } = props;
     if (item) {
       const {
-        comments, createdAt, foodItem,
-        signature, temperature, user,
+        user, type, file,
+        signature, comments, createdAt,
       } = item;
       this.state = {
-        comments,
-        createdAt,
-        foodItem,
-        temperature,
         user,
+        type,
+        file,
+        comments,
         signature,
+        createdAt,
       };
     } else {
       this.state = {
-        comments: '',
-        createdAt: 0,
-        foodItem: {},
-        temperature: 0,
         user: {},
+        type: '',
+        file: '',
+        comments: '',
         signature: '',
+        createdAt: 0,
       };
     }
   }
@@ -58,16 +59,16 @@ class Update extends Component {
     const { item, updating, loading } = nextProps;
     if (item && !updating && !loading) {
       const {
-        comments, createdAt, foodItem,
-        signature, temperature, user,
+        user, type, file,
+        signature, comments, createdAt,
       } = item;
       this.setState({
-        comments,
-        createdAt,
-        foodItem,
-        temperature,
         user,
+        type,
+        file,
+        comments,
         signature,
+        createdAt,
       });
     }
   }
@@ -86,38 +87,26 @@ class Update extends Component {
 
   update() {
     const {
-      loading, updating, duplicating, updateHotHolding,
+      loading, updating, updateReport,
     } = this.props;
-    if (loading || updating || duplicating) return false;
-    return updateHotHolding(this.state);
-  }
-
-  duplicate() {
-    const {
-      loading, updating, duplicating, createHotHolding,
-    } = this.props;
-    if (loading || updating || duplicating) return false;
-    const { state } = this;
-    const newItem = { ...state };
-    delete newItem.createdAt;
-    return createHotHolding(newItem);
+    if (loading || updating) return false;
+    return updateReport(this.state);
   }
 
   back() {
     const { history } = this.props;
-    history.push('/dashboard/hotholding');
+    history.push('/dashboard/reports');
   }
 
   render() {
     const {
-      classes, loading, item,
-      updating, duplicating,
+      classes, loading,
+      updating, item,
     } = this.props;
     if (!item && !loading) return (<NotFound text="Item Not Found" />);
     const {
-      foodItem, temperature, comments, user,
+      type, comments, user,
     } = this.state;
-    const { displayName: foodItemDisplayName } = foodItem;
     const { firstName, lastName } = user;
     return (
       <div>
@@ -133,14 +122,16 @@ class Update extends Component {
                 {!loading && (
                 <div>
                   <CustomInput
-                    value={foodItemDisplayName}
-                    labelText="Food Item"
+                    labelText="Type"
+                    id="type"
+                    value={type}
                     formControlProps={{ fullWidth: true }}
-                    inputProps={{ disabled: true }}
+                    inputProps={{ type: 'text' }}
+                    onChange={e => this.updateValue(e)}
                   />
                   <CustomInput
-                    value={temperature}
-                    labelText="Temperature"
+                    value={`${firstName} ${lastName}`}
+                    labelText="User"
                     formControlProps={{ fullWidth: true }}
                     inputProps={{ disabled: true }}
                   />
@@ -158,12 +149,6 @@ class Update extends Component {
                     inputProps={{ multiline: true, rows: 3 }}
                     onChange={e => this.updateValue(e)}
                   />
-                  <CustomInput
-                    value={`${firstName} ${lastName}`}
-                    labelText="User"
-                    formControlProps={{ fullWidth: true }}
-                    inputProps={{ disabled: true }}
-                  />
                   <FormControl fullWidth className={classes.selectFormControl}>
                     <h4 className={classes.cardIconTitle}>Signature</h4>
                     <SignatureCanvas
@@ -175,9 +160,6 @@ class Update extends Component {
                   </FormControl>
                   <Button loading={updating} onClick={() => this.update()} color="rose" className={classes.updateProfileButton}>
                     Save
-                  </Button>
-                  <Button loading={duplicating} onClick={() => this.duplicate()} color="primary" className={classes.updateProfileButton} style={{ float: 'right' }}>
-                    Duplicate
                   </Button>
                   <Button loading={false} onClick={() => this.back()} color="info" className={classes.updateProfileButton}>
                     Cancel
@@ -200,9 +182,7 @@ Update.propTypes = {
   item: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
   updating: PropTypes.bool.isRequired,
-  updateHotHolding: PropTypes.func.isRequired,
-  duplicating: PropTypes.bool.isRequired,
-  createHotHolding: PropTypes.func.isRequired,
+  updateReport: PropTypes.func.isRequired,
 };
 
 export default withStyles(extendedFormsStyle)(Update);

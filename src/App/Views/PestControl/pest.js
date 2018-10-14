@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 
 import withStyles from '@material-ui/core/styles/withStyles';
-import SweetAlert from 'react-bootstrap-sweetalert';
 import Assignment from '@material-ui/icons/Assignment';
 import Tooltip from '@material-ui/core/Tooltip';
 
