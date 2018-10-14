@@ -664,7 +664,6 @@ button.rbc-input::-moz-focus-inner {
 
   .rbc-event-content{
     position: relative;
-    z-index: 2;
     white-space: nowrap;
     overflow: hidden;
     color: #fff;
@@ -673,6 +672,5 @@ button.rbc-input::-moz-focus-inner {
 }
 .rbc-day-slot .rbc-event {
      display: block !important;
-     height: unset !important;
      max-height: unset !important;
 }
