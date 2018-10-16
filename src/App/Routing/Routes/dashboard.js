@@ -45,14 +45,15 @@ import UserTrainingLogCreate from '../../Views/User/TrainingLog/Create/create.co
 import UserTrainingLogUpdate from '../../Views/User/TrainingLog/Update/update.container';
 
 import CheckList from '../../Views/CheckList';
-import CheckListCreate from '../../Views/CheckList/Create';
+import CheckListCreate from '../../Views/CheckList/Item/Create/create.container';
 
 import CheckListCategory from '../../Views/CheckList/Category/category.container';
 import CheckListCategoryCreate from '../../Views/CheckList/Category/Create/create.container';
 import CheckListCategoryUpdate from '../../Views/CheckList/Category/Update/update.container';
 
 import SafetyTask from '../../Views/SafetyRecord/SafetyTask';
-import SafetyTaskCreate from '../../Views/SafetyRecord/SafetyTask/Create';
+import SafetyTaskCreate from '../../Views/SafetyRecord/SafetyTask/Create/create.container';
+
 //  TODO: What is this?
 import SafetyLog from '../../Views/SafetyRecord/SafetyLog';
 
@@ -272,13 +273,13 @@ const dashRoutes = [
     icon: CheckCircle,
     views: [
       {
-        path: '/dashboard/checklist/items',
+        path: '/dashboard/checklist/item',
         name: 'Check List',
         component: CheckList,
       },
       {
         hidden: true,
-        path: '/dashboard/checklist/items/create',
+        path: '/dashboard/checklist/item/create',
         name: 'Create Task',
         component: CheckListCreate,
       },

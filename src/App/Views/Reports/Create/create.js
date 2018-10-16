@@ -28,11 +28,7 @@ class Create extends Component {
     const { user } = props;
     this.state = {
       selectedUser: -1,
-      user: {
-        email: user.email,
-        firstName: user.firstName,
-        lastName: user.lastName,
-      },
+      user: {},
       file: 'https://todo.com',
       comments: '',
       signature: user.signature,
