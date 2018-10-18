@@ -167,7 +167,7 @@ class FastCooling extends React.Component {
                 <Table
                   hover
                   tableHead={[
-                    'Food Item',
+                    'Name',
                     'Temperature',
                     'User',
                     'Comments',

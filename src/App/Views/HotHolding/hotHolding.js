@@ -167,7 +167,7 @@ class HotHolding extends React.Component {
                 <Table
                   hover
                   tableHead={[
-                    'Food Item',
+                    'Name',
                     'Temperature',
                     'User',
                     'Comments',
