@@ -59,6 +59,7 @@ class AppRouter extends Component {
       listHotHoldings, listFastCoolings,
       listReports, listPests, listSafetys,
       listServices, listCleaningItems, listCleaningLogs,
+      listChecklistCategory, listsafetyRecordCategoryCategory,
     } = this.props;
     //  TODO: Load all app view items
     listTeams();
@@ -79,6 +80,8 @@ class AppRouter extends Component {
     listServices();
     listCleaningItems();
     listCleaningLogs();
+    listChecklistCategory();
+    listsafetyRecordCategoryCategory();
   }
 
   render() {
@@ -113,6 +116,11 @@ AppRouter.propTypes = {
   listTrainingLogs: PropTypes.func.isRequired,
   listHotHoldings: PropTypes.func.isRequired,
   listFastCoolings: PropTypes.func.isRequired,
+  listReports: PropTypes.func.isRequired,
+  listPests: PropTypes.func.isRequired,
+  listSafetys: PropTypes.func.isRequired,
+  listChecklistCategory: PropTypes.func.isRequired,
+  listsafetyRecordCategoryCategory: PropTypes.func.isRequired,
 };
 
 export default AppRouter;

@@ -20,6 +20,8 @@ import pestReducer from './Reducers/Pest';
 import safetyReducer from './Reducers/Safety';
 import servicesReducer from './Reducers/Services';
 import cleaningItemsReducer from './Reducers/Cleaning';
+import checklistReducer from './Reducers/Checklist';
+import safetyRecordReducer from './Reducers/SafetyRecord';
 
 const appReducers = combineReducers({
   routes: routingReducer,
@@ -43,6 +45,8 @@ const appReducers = combineReducers({
   safety: safetyReducer,
   services: servicesReducer,
   cleaningItem: cleaningItemsReducer,
+  checklist: checklistReducer,
+  safetyrecord: safetyRecordReducer,
 });
 
 const rootReducer = (state, action) => {

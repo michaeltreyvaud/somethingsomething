@@ -24,7 +24,9 @@ import extendedFormsStyle from '../../../../Assets/Jss/extendedFormsStyle';
 class Create extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      team: '',
+    };
   }
 
   componentWillReceiveProps(nextProps) {

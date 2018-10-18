@@ -20,6 +20,8 @@ import { listSafetys } from '../Views/SafetySheet/Store/Actions';
 import { listServices } from '../Views/Service/Store/Actions';
 import { listCleaningItems } from '../Views/Cleaning/Cleaning/Store/Actions';
 import { listCleaningLogs } from '../Views/Cleaning/CleaningLog/Store/Actions';
+import { listChecklistCategory } from '../Views/CheckList/Category/Store/Actions';
+import { listsafetyRecordCategoryCategory } from '../Views/SafetyRecord/Category/Store/Actions';
 
 const mapStateToProps = state => ({
   loading: state.routes.loading,
@@ -48,6 +50,8 @@ const mapDispatchToProps = dispatch => ({
   listServices: () => dispatch(listServices()),
   listCleaningItems: () => dispatch(listCleaningItems()),
   listCleaningLogs: () => dispatch(listCleaningLogs()),
+  listChecklistCategory: () => dispatch(listChecklistCategory()),
+  listsafetyRecordCategoryCategory: () => dispatch(listsafetyRecordCategoryCategory()),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AppRouter));

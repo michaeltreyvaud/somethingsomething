@@ -45,13 +45,21 @@ import UserTrainingLogCreate from '../../Views/User/TrainingLog/Create/create.co
 import UserTrainingLogUpdate from '../../Views/User/TrainingLog/Update/update.container';
 
 import CheckList from '../../Views/CheckList';
-import CheckListCreate from '../../Views/CheckList/Create';
-import CheckListCategory from '../../Views/CheckList/Category';
+import CheckListCreate from '../../Views/CheckList/Item/Create/create.container';
+
+import CheckListCategory from '../../Views/CheckList/Category/category.container';
+import CheckListCategoryCreate from '../../Views/CheckList/Category/Create/create.container';
+import CheckListCategoryUpdate from '../../Views/CheckList/Category/Update/update.container';
+
 import SafetyTask from '../../Views/SafetyRecord/SafetyTask';
-import SafetyTaskCreate from '../../Views/SafetyRecord/SafetyTask/Create';
+import SafetyTaskCreate from '../../Views/SafetyRecord/SafetyTask/Create/create.container';
+
 //  TODO: What is this?
 import SafetyLog from '../../Views/SafetyRecord/SafetyLog';
-import SafetyCategory from '../../Views/SafetyRecord/SafetyCategory';
+
+import SafetyCategory from '../../Views/SafetyRecord/Category/category.container';
+import SafetyCategoryCreate from '../../Views/SafetyRecord/Category/Create/create.container';
+import SafetyCategoryUpdate from '../../Views/SafetyRecord/Category/Update/update.container';
 
 import FridgeItem from '../../Views/Fridge/FridgeItem/fridgeItem.container';
 import FridgeItemCreate from '../../Views/Fridge/FridgeItem/Create/create.container';
@@ -270,13 +278,13 @@ const dashRoutes = [
     icon: CheckCircle,
     views: [
       {
-        path: '/dashboard/checklist',
+        path: '/dashboard/checklist/item',
         name: 'Check List',
         component: CheckList,
       },
       {
         hidden: true,
-        path: '/dashboard/checklist/create',
+        path: '/dashboard/checklist/item/create',
         name: 'Create Task',
         component: CheckListCreate,
       },
@@ -284,6 +292,18 @@ const dashRoutes = [
         path: '/dashboard/checklist/category',
         name: 'Category',
         component: CheckListCategory,
+      },
+      {
+        hidden: true,
+        path: '/dashboard/checklist/category/create',
+        name: 'Create Category',
+        component: CheckListCategoryCreate,
+      },
+      {
+        hidden: true,
+        path: '/dashboard/checklist/category/:id',
+        name: 'Update Category',
+        component: CheckListCategoryUpdate,
       },
     ],
   },
@@ -314,6 +334,18 @@ const dashRoutes = [
         path: '/dashboard/safety/category',
         name: 'Safety Category',
         component: SafetyCategory,
+      },
+      {
+        hidden: true,
+        path: '/dashboard/safety/category/create',
+        name: 'Create Category',
+        component: SafetyCategoryCreate,
+      },
+      {
+        hidden: true,
+        path: '/dashboard/safety/category/:id',
+        name: 'Update Category',
+        component: SafetyCategoryUpdate,
       },
     ],
   },
