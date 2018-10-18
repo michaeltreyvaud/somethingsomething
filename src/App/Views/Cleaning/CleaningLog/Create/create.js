@@ -114,7 +114,7 @@ class Create extends Component {
                 <div>
                   <FormControl fullWidth className={classes.selectFormControl}>
                     <InputLabel htmlFor="simple-select" className={classes.selectLabel}>
-                      Choose Food Item
+                      Choose Area
                     </InputLabel>
                     <Select
                       MenuProps={{ className: classes.selectMenu }}
@@ -126,6 +126,20 @@ class Create extends Component {
                       {this.renderFoodItems()}
                     </Select>
                   </FormControl>
+                  <FormControl fullWidth className={classes.selectFormControl}>
+                    <InputLabel htmlFor="simple-select" className={classes.selectLabel}>
+                      Choose Item
+                    </InputLabel>
+                    <Select
+                      MenuProps={{ className: classes.selectMenu }}
+                      classes={{ select: classes.select }}
+                      onChange={e => this.updateValue(e)}
+                      value={selectedFoodItem}
+                      inputProps={{ name: 'cleaningItem' }}
+                    >
+                      {this.renderFoodItems()}
+                    </Select>
+                  </FormControl>                  
                   <CustomInput
                     value={temperature}
                     onChange={e => this.updateValue(e)}

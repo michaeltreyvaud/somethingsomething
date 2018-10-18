@@ -150,7 +150,7 @@ class Create extends Component {
                 <div>
                   <FormControl fullWidth className={classes.selectFormControl}>
                     <InputLabel htmlFor="simple-select" className={classes.selectLabel}>
-                      Choose Fridge Item
+                      Choose Fridge
                     </InputLabel>
                     <Select
                       MenuProps={{ className: classes.selectMenu }}

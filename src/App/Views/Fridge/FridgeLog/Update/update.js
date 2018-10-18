@@ -126,7 +126,7 @@ class Update extends React.Component {
               <CardBody>
                   <CustomInput
                     id="fridge"
-                    value={fridgeItem}
+                    value={fridgeItem.displayName}
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -146,7 +146,7 @@ class Update extends React.Component {
                   />
                     <CustomInput
                     id="user"
-                    value={user}
+                    value={`${user.firstName} ${user.lastName}`}
                     formControlProps={{
                       fullWidth: true
                     }}
