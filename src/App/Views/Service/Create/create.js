@@ -9,18 +9,18 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
-import GridItem from '../../../../Components/Grid/GridItem';
-import Card from '../../../../Components/Card/Card';
-import GridContainer from '../../../../Components/Grid/GridContainer';
-import CardHeader from '../../../../Components/Card/CardHeader';
-import CardBody from '../../../../Components/Card/CardBody';
-import CardIcon from '../../../../Components/Card/CardIcon';
+import GridItem from '../../../Components/Grid/GridItem';
+import Card from '../../../Components/Card/Card';
+import GridContainer from '../../../Components/Grid/GridContainer';
+import CardHeader from '../../../Components/Card/CardHeader';
+import CardBody from '../../../Components/Card/CardBody';
+import CardIcon from '../../../Components/Card/CardIcon';
 
-import ImageUpload from '../../../../Components/CustomUpload/ImageUpload';
-import CustomInput from '../../../../Components/CustomInput';
-import Button from '../../../../Components/CustomButtons';
+import ImageUpload from '../../../Components/CustomUpload/ImageUpload';
+import CustomInput from '../../../Components/CustomInput';
+import Button from '../../../Components/CustomButtons';
 
-import extendedFormsStyle from '../../../../Assets/Jss/extendedFormsStyle';
+import extendedFormsStyle from '../../../Assets/Jss/extendedFormsStyle';
 
 class Create extends Component {
   constructor(props) {
@@ -52,28 +52,28 @@ class Create extends Component {
   }
 
   create() {
-    const { createCleaningLog, loading } = this.props;
+    const { createServices, loading } = this.props;
     if (loading) return false;
     const { state } = this;
     delete state.selectedFoodItem;
-    return createCleaningLog(state);
+    return createServices(state);
   }
 
   back() {
     const { history } = this.props;
-    history.push('/dashboard/cleaning/log');
+    history.push('/dashboard/service');
   }
 
   updateValue(e) {
     const { target } = e;
     const { value } = target;
-    if (target.name === 'cleaningItem') {
-      const { cleaningItem } = this.props;
+    if (target.name === 'foodItem') {
+      const { foodItems } = this.props;
       return this.setState({
         selectedFoodItem: value,
-        cleaningItem: {
-          id: cleaningItem[value].createdAt,
-          displayName: cleaningItem[value].name,
+        foodItem: {
+          id: foodItems[value].createdAt,
+          displayName: foodItems[value].name,
         },
       });
     }
@@ -83,15 +83,15 @@ class Create extends Component {
   }
 
   renderFoodItems() {
-    const { cleaningItem, classes } = this.props;
-    return cleaningItem.map((cleaningItem, index) => (
+    const { foodItems, classes } = this.props;
+    return foodItems.map((foodItem, index) => (
       <MenuItem
-        key={`${cleaningItem.name}${index}`}
+        key={`${foodItem.name}${index}`}
         classes={{ root: classes.selectMenuItem, selected: classes.selectMenuItemSelected }}
-        id="cleaningItem"
+        id="foodItem"
         value={index}
       >
-        {cleaningItem.name}
+        {foodItem.name}
       </MenuItem>));
   }
 
@@ -121,7 +121,7 @@ class Create extends Component {
                       classes={{ select: classes.select }}
                       onChange={e => this.updateValue(e)}
                       value={selectedFoodItem}
-                      inputProps={{ name: 'cleaningItem' }}
+                      inputProps={{ name: 'foodItem' }}
                     >
                       {this.renderFoodItems()}
                     </Select>
@@ -178,8 +178,9 @@ Create.propTypes = {
   classes: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
   success: PropTypes.bool.isRequired,
-  createCleaningLog: PropTypes.func.isRequired,
-  cleaningItem: PropTypes.array.isRequired,
+  createServices: PropTypes.func.isRequired,
+  close: PropTypes.func.isRequired,
+  foodItems: PropTypes.array.isRequired,
   user: PropTypes.object.isRequired,
 };
 

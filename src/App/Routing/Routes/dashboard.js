@@ -91,8 +91,9 @@ import FastCooling from '../../Views/FastCooling/fastCooling.container';
 import FastCoolingCreate from '../../Views/FastCooling/Create/create.container';
 import FastCoolingUpdate from '../../Views/FastCooling/Update/update.container';
 
-import Service from '../../Views/Service';
-import ServiceCreate from '../../Views/Service/Create';
+import Service from '../../Views/Service/services.container';
+import ServiceCreate from '../../Views/Service/Create/create.container';
+import ServiceUpdate from '../../Views/Service/Update/update.container';
 
 import ColdHotLocation from '../../Views/ColdHotLocation';
 import ColdHotTransportLog from '../../Views/ColdHotTransportLog';
@@ -101,15 +102,19 @@ import DeliveryRecords from '../../Views/Traceability/DeliveryRecords';
 import DeliveryRecordsCreate from '../../Views/Traceability/DeliveryRecords/Create';
 import TraceabilityLabels from '../../Views/Traceability/TraceabilityLabels';
 
+import Oil from '../../Views/Oil/Oil/'
 import OilTask from '../../Views/Oil/OilTask/oilTask';
 import OilTaskCreate from '../../Views/Oil/OilTask/Create/create';
-import OilLog from '../../Views/Oil/OilLog/oilLog';
-import OilLogCreate from '../../Views/Oil/OilLog/Create/create';
+import OilLog from '../../Views/Oil/OilLog/oilLog.container';
+import OilLogCreate from '../../Views/Oil/OilLog/Create/create.container';
 
+import Cleaning from '../../Views/Cleaning/Cleaning/cleaningItem.container'
+import CleaningCreate from '../../Views/Cleaning/Cleaning/Create/create.container'
+import CleaningUpdate from '../../Views/Cleaning/Cleaning/Update/update.container'
 import CleaningTask from '../../Views/Cleaning/CleaningTask/cleaningTask';
 import CleaningTaskCreate from '../../Views/Cleaning/CleaningTask/Create/create';
-import CleaningLog from '../../Views/Cleaning/CleaningLog/cleaningLog';
-import CleaningLogCreate from '../../Views/Cleaning/CleaningLog/Create/create';
+import CleaningLog from '../../Views/Cleaning/CleaningLog/cleaningLog.container';
+import CleaningLogCreate from '../../Views/Cleaning/CleaningLog/Create/create.container';
 
 import Reports from '../../Views/Reports/report.container';
 import ReportsCreate from '../../Views/Reports/Create/create.container';
@@ -265,7 +270,7 @@ const dashRoutes = [
     icon: CheckCircle,
     views: [
       {
-        path: '/dashboard/checklist/',
+        path: '/dashboard/checklist',
         name: 'Check List',
         component: CheckList,
       },
@@ -502,6 +507,11 @@ const dashRoutes = [
         name: 'Capture Service Temperature',
         component: ServiceCreate,
       },
+      {
+        path: '/dashboard/service/:id',
+        name: 'Services Item',
+        component: ServiceUpdate,
+      },
     ],
   },
   {
@@ -571,7 +581,7 @@ const dashRoutes = [
       {
         path: '/dashboard/oil/location',
         name: 'Location',
-        component: TODOComponent,
+        component: Oil,
       },
       {
         path: '/dashboard/oil/task',
@@ -606,10 +616,22 @@ const dashRoutes = [
     icon: LocalDrink,
     views: [
       {
-        path: '/dashboard/cleaning/location',
+        path: '/dashboard/cleaning/item',
         name: 'Location',
-        component: TODOComponent,
+        component: Cleaning,
       },
+      {
+        hidden: true,
+        path: '/dashboard/cleaning/item/create',
+        name: 'Item Create',
+        component: CleaningCreate,
+      },
+      {
+        hidden: true,
+        path: '/dashboard/cleaning/item/:id',
+        name: 'Item Create',
+        component: CleaningUpdate,
+      },      
       {
         path: '/dashboard/cleaning/task',
         name: 'Task',

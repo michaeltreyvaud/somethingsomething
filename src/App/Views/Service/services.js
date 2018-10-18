@@ -11,21 +11,21 @@ import Delete from '@material-ui/icons/Delete';
 import Tooltip from '@material-ui/core/Tooltip';
 import SweetAlert from 'react-bootstrap-sweetalert';
 
-import GridContainer from '../../../Components/Grid/GridContainer';
-import GridItem from '../../../Components/Grid/GridItem';
-import Card from '../../../Components/Card/Card';
-import CardBody from '../../../Components/Card/CardBody';
-import CardHeader from '../../../Components/Card/CardHeader';
-import CardIcon from '../../../Components/Card/CardIcon';
-import Button from '../../../Components/CustomButtons';
-import Table from '../../../Components/Table';
-import LoadingTable from '../../../Components/Loading/LoadingTable';
+import GridContainer from '../../Components/Grid/GridContainer';
+import GridItem from '../../Components/Grid/GridItem';
+import Card from '../../Components/Card/Card';
+import CardBody from '../../Components/Card/CardBody';
+import CardHeader from '../../Components/Card/CardHeader';
+import CardIcon from '../../Components/Card/CardIcon';
+import Button from '../../Components/CustomButtons';
+import Table from '../../Components/Table';
+import LoadingTable from '../../Components/Loading/LoadingTable';
 
-import CleaningLogDelete from './Delete/delete.container';
+import ServicesDelete from './Delete/delete.container';
 
-import style from '../../../Assets/Jss/extendedTablesStyle';
+import style from '../../Assets/Jss/extendedTablesStyle';
 
-class CleaningLog extends React.Component {
+class Services extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -36,8 +36,8 @@ class CleaningLog extends React.Component {
   }
 
   componentDidMount() {
-    const { listCleaningLogs } = this.props;
-    listCleaningLogs();
+    const { listServices } = this.props;
+    listServices();
   }
 
   showDeleteModal(createdAt, index) {
@@ -64,13 +64,13 @@ class CleaningLog extends React.Component {
   }
 
   create() {
-    const { cleaningItem, history } = this.props;
-    if (cleaningItem.length === 0) {
+    const { foodItems, history } = this.props;
+    if (foodItems.length === 0) {
       return this.setState({
         displayErrorMessage: true,
       });
     }
-    return history.push('/dashboard/cleaning/log/create');
+    return history.push('/dashboard/service/create');
   }
 
   renderErrorMessage() {
@@ -81,8 +81,7 @@ class CleaningLog extends React.Component {
       <SweetAlert
         show={displayErrorMessage}
         warning
-        //TO DO UPDATE WARNING MESSAGE
-        title="Please create a Food Item before adding a Hot Holding Item"
+        title="Please create a Food Item before adding a Services Item"
         onConfirm={() => this.closeErrorMessage()}
         confirmBtnCssClass={`${button} ${success}`}
         confirmBtnText="Ok"
@@ -95,7 +94,7 @@ class CleaningLog extends React.Component {
       classes, items, loading, history,
     } = this.props;
     const {
-      displayDeleteModal, selectedDeleteItem,
+      displayCreateModal, displayDeleteModal, selectedDeleteItem,
     } = this.state;
     const simpleButtons = (item, index) => [
       { color: 'warning', icon: Print, tooltip: 'Print' },
@@ -105,7 +104,7 @@ class CleaningLog extends React.Component {
       let onClick;
       switch (key) {
         case 1: {
-          onClick = () => history.push(`/dashboard/cleaning/log/${item.createdAt}`);
+          onClick = () => history.push(`/dashboard/service/${item.createdAt}`);
           break;
         }
         case 2: {
@@ -135,14 +134,14 @@ class CleaningLog extends React.Component {
       );
     });
     const tableData = items.map((_item, index) => {
-      const item = [_item.id, _item.id, `${_item.user.firstName} ${_item.user.lastName}`, _item.status, moment(_item.createdAt).format('DD/MM/YYYY'),
-      _item.image, _item.comments, simpleButtons(_item, index)];
+      const item = [_item.foodItem.displayName, _item.temperature, `${_item.user.firstName} ${_item.user.lastName}`,
+        _item.comments, moment(_item.createdAt).format('DD/MM/YYYY'), simpleButtons(_item, index)];
       return item;
     });
     return (
       <div>
         {this.renderErrorMessage()}
-        <CleaningLogDelete
+        <ServicesDelete
           item={selectedDeleteItem}
           visible={displayDeleteModal}
           classes={classes}
@@ -168,13 +167,11 @@ class CleaningLog extends React.Component {
                 <Table
                   hover
                   tableHead={[
-                    'Area',
-                    'Item',
+                    'Food Item',
+                    'Temperature',
                     'User',
-                    'Status',
-                    'Created',
-                    'Image',
                     'Comments',
+                    'Created',
                   ]}
                   tableData={tableData}
                   customCellClasses={[
@@ -215,13 +212,13 @@ class CleaningLog extends React.Component {
   }
 }
 
-CleaningLog.propTypes = {
+Services.propTypes = {
   history: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
   items: PropTypes.array.isRequired,
-  cleaningItem: PropTypes.array.isRequired,
+  foodItems: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
-  listCleaningLogs: PropTypes.func.isRequired,
+  listServices: PropTypes.func.isRequired,
 };
 
-export default withRouter(withStyles(style)(CleaningLog));
+export default withRouter(withStyles(style)(Services));

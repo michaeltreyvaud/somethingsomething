@@ -1,7 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Assignment from '@material-ui/icons/Assignment';
 import { withRouter } from 'react-router';
+import moment from 'moment';
 
 import Print from '@material-ui/icons/Print';
 import Open from '@material-ui/icons/OpenInNew';
@@ -19,9 +21,11 @@ import Button from '../../../Components/CustomButtons';
 import Table from '../../../Components/Table';
 import LoadingTable from '../../../Components/Loading/LoadingTable';
 
+import CleaningLogDelete from './Delete/delete.container';
+
 import style from '../../../Assets/Jss/extendedTablesStyle';
 
-class OilLog extends React.Component {
+class CleaningLog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,6 +33,11 @@ class OilLog extends React.Component {
       selectedDeleteItem: {},
       displayErrorMessage: false,
     };
+  }
+
+  componentDidMount() {
+    const { listCleaningLogs } = this.props;
+    listCleaningLogs();
   }
 
   showDeleteModal(createdAt, index) {
@@ -54,6 +63,16 @@ class OilLog extends React.Component {
     });
   }
 
+  create() {
+    const { cleaningItem, history } = this.props;
+    if (cleaningItem.length === 0) {
+      return this.setState({
+        displayErrorMessage: true,
+      });
+    }
+    return history.push('/dashboard/cleaning/log/create');
+  }
+
   renderErrorMessage() {
     const { displayErrorMessage } = this.state;
     const { classes } = this.props;
@@ -62,6 +81,7 @@ class OilLog extends React.Component {
       <SweetAlert
         show={displayErrorMessage}
         warning
+        //TO DO UPDATE WARNING MESSAGE
         title="Please create a Food Item before adding a Hot Holding Item"
         onConfirm={() => this.closeErrorMessage()}
         confirmBtnCssClass={`${button} ${success}`}
@@ -72,8 +92,11 @@ class OilLog extends React.Component {
 
   render() {
     const {
-      classes, loading, history,
+      classes, items, loading, history,
     } = this.props;
+    const {
+      displayDeleteModal, selectedDeleteItem,
+    } = this.state;
     const simpleButtons = (item, index) => [
       { color: 'warning', icon: Print, tooltip: 'Print' },
       { color: 'success', icon: Open, tooltip: 'Edit' },
@@ -82,7 +105,7 @@ class OilLog extends React.Component {
       let onClick;
       switch (key) {
         case 1: {
-          onClick = () => history.push(`/dashboard/oil/log/${item.createdAt}`);
+          onClick = () => history.push(`/dashboard/cleaning/log/${item.createdAt}`);
           break;
         }
         case 2: {
@@ -111,9 +134,20 @@ class OilLog extends React.Component {
         </Tooltip>
       );
     });
+    const tableData = items.map((_item, index) => {
+      const item = [_item.id, _item.id, `${_item.user.firstName} ${_item.user.lastName}`, _item.status, moment(_item.createdAt).format('DD/MM/YYYY'),
+      _item.image, _item.comments, simpleButtons(_item, index)];
+      return item;
+    });
     return (
       <div>
         {this.renderErrorMessage()}
+        <CleaningLogDelete
+          item={selectedDeleteItem}
+          visible={displayDeleteModal}
+          classes={classes}
+          close={() => this.hideDeleteModal()}
+        />
         <GridContainer>
           <GridItem xs={12}>
             <Card>
@@ -124,25 +158,25 @@ class OilLog extends React.Component {
                 <Button
                   color="info"
                   className={classes.marginRight}
-                  onClick={() => this.props.history.push('/dashboard/oil/log/create')}
+                  onClick={() => this.create()}
                 >
                   Create
                 </Button>
               </CardHeader>
               <CardBody>
+                {!loading && items && items.length > 0 && (
                 <Table
                   hover
                   tableHead={[
-                    'Location',
+                    'Area',
                     'Item',
                     'User',
+                    'Status',
+                    'Created',
                     'Image',
                     'Comments',
-                    'Created',
                   ]}
-                  tableData={[
-                      ['tableData', 'tableData', 'tableData','tableData','tableData','Created']
-                  ]}
+                  tableData={tableData}
                   customCellClasses={[
                     classes.left,
                     classes.left,
@@ -162,6 +196,15 @@ class OilLog extends React.Component {
                   ]}
                   customHeadClassesForCells={[0, 1, 2, 3, 4, 5]}
                 />
+                )}
+                {!loading && items && items.length === 0 && (
+                  <div style={{
+                    display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'center',
+                  }}
+                  >
+                    <h2><small>No Items to display</small></h2>
+                  </div>
+                )}
                 <LoadingTable visible={loading} color="red" />
               </CardBody>
             </Card>
@@ -172,4 +215,13 @@ class OilLog extends React.Component {
   }
 }
 
-export default withRouter(withStyles(style)(OilLog));
+CleaningLog.propTypes = {
+  history: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
+  items: PropTypes.array.isRequired,
+  cleaningItem: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
+  listCleaningLogs: PropTypes.func.isRequired,
+};
+
+export default withRouter(withStyles(style)(CleaningLog));

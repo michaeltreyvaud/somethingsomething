@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
 import coreRoutes from './Routes';
+import { listServices } from '../Views/Service/Store/Actions';
+import { listCleaningLogs } from '../Views/Cleaning/CleaningLog/Store/Actions';
 
 const noMatch = () => (<h1>No Match</h1>);
 const Loading = () => (<h1>TODO App loading</h1>);
@@ -56,6 +58,7 @@ class AppRouter extends Component {
       listMedicalLogs, listTrainingLogs,
       listHotHoldings, listFastCoolings,
       listReports, listPests, listSafetys,
+      listServices, listCleaningItems, listCleaningLogs,
     } = this.props;
     //  TODO: Load all app view items
     listTeams();
@@ -73,6 +76,9 @@ class AppRouter extends Component {
     listReports();
     listPests();
     listSafetys();
+    listServices();
+    listCleaningItems();
+    listCleaningLogs();
   }
 
   render() {

@@ -84,37 +84,28 @@ class Update extends Component {
     });
   }
 
-  updateAllergens(e) {
-    const { target } = e;
-    const { allergens } = this.state;
-    allergens[target.id] = !(target.value === 'true');
-    this.setState({
-      allergens,
-    });
-  }
-
   update() {
     const {
-      loading, updating, duplicating, updateFastCooling,
+      loading, updating, duplicating, updateCleaningLog,
     } = this.props;
     if (loading || updating || duplicating) return false;
-    return updateFastCooling(this.state);
-  }
-
-  back() {
-    const { history } = this.props;
-    history.push('/dashboard/fastcooling');
+    return updateCleaningLog(this.state);
   }
 
   duplicate() {
     const {
-      loading, updating, duplicating, createFastCooling,
+      loading, updating, duplicating, createCleaningLog,
     } = this.props;
     if (loading || updating || duplicating) return false;
     const { state } = this;
     const newItem = { ...state };
     delete newItem.createdAt;
-    return createFastCooling(newItem);
+    return createCleaningLog(newItem);
+  }
+
+  back() {
+    const { history } = this.props;
+    history.push('/dashboard/cleaning/log');
   }
 
   render() {
@@ -209,9 +200,9 @@ Update.propTypes = {
   item: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
   updating: PropTypes.bool.isRequired,
-  updateFastCooling: PropTypes.func.isRequired,
+  updateCleaningLog: PropTypes.func.isRequired,
   duplicating: PropTypes.bool.isRequired,
-  createFastCooling: PropTypes.func.isRequired,
+  createCleaningLog: PropTypes.func.isRequired,
 };
 
 export default withStyles(extendedFormsStyle)(Update);

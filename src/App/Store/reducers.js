@@ -18,6 +18,8 @@ import userReducer from './Reducers/User';
 import reportReducer from './Reducers/Report';
 import pestReducer from './Reducers/Pest';
 import safetyReducer from './Reducers/Safety';
+import servicesReducer from './Reducers/Services';
+import cleaningItemsReducer from './Reducers/Cleaning';
 
 const appReducers = combineReducers({
   routes: routingReducer,
@@ -39,6 +41,8 @@ const appReducers = combineReducers({
   report: reportReducer,
   pest: pestReducer,
   safety: safetyReducer,
+  services: servicesReducer,
+  cleaningItem: cleaningItemsReducer,
 });
 
 const rootReducer = (state, action) => {

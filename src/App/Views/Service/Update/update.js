@@ -95,26 +95,26 @@ class Update extends Component {
 
   update() {
     const {
-      loading, updating, duplicating, updateFastCooling,
+      loading, updating, duplicating, updateServices,
     } = this.props;
     if (loading || updating || duplicating) return false;
-    return updateFastCooling(this.state);
+    return updateServices(this.state);
   }
 
   back() {
     const { history } = this.props;
-    history.push('/dashboard/fastcooling');
+    history.push('/dashboard/service');
   }
 
   duplicate() {
     const {
-      loading, updating, duplicating, createFastCooling,
+      loading, updating, duplicating, createServices,
     } = this.props;
     if (loading || updating || duplicating) return false;
     const { state } = this;
     const newItem = { ...state };
     delete newItem.createdAt;
-    return createFastCooling(newItem);
+    return createServices(newItem);
   }
 
   render() {
@@ -209,9 +209,9 @@ Update.propTypes = {
   item: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
   updating: PropTypes.bool.isRequired,
-  updateFastCooling: PropTypes.func.isRequired,
+  updateServices: PropTypes.func.isRequired,
   duplicating: PropTypes.bool.isRequired,
-  createFastCooling: PropTypes.func.isRequired,
+  createServices: PropTypes.func.isRequired,
 };
 
 export default withStyles(extendedFormsStyle)(Update);

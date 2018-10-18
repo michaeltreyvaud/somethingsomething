@@ -17,6 +17,9 @@ import { listFastCoolings } from '../Views/FastCooling/Store/Actions';
 import { listReports } from '../Views/Reports/Store/Actions';
 import { listPests } from '../Views/PestControl/Store/Actions';
 import { listSafetys } from '../Views/SafetySheet/Store/Actions';
+import { listServices } from '../Views/Service/Store/Actions';
+import { listCleaningItems } from '../Views/Cleaning/Cleaning/Store/Actions';
+import { listCleaningLogs } from '../Views/Cleaning/CleaningLog/Store/Actions';
 
 const mapStateToProps = state => ({
   loading: state.routes.loading,
@@ -42,6 +45,9 @@ const mapDispatchToProps = dispatch => ({
   listReports: () => dispatch(listReports()),
   listPests: () => dispatch(listPests()),
   listSafetys: () => dispatch(listSafetys()),
+  listServices: () => dispatch(listServices()),
+  listCleaningItems: () => dispatch(listCleaningItems()),
+  listCleaningLogs: () => dispatch(listCleaningLogs()),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AppRouter));

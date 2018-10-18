@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import SignatureCanvas from 'react-signature-canvas';
 import Today from '@material-ui/icons/Today';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -6,6 +7,8 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+
 import GridItem from '../../../../Components/Grid/GridItem';
 import Card from '../../../../Components/Card/Card';
 import GridContainer from '../../../../Components/Grid/GridContainer';
@@ -22,13 +25,81 @@ import extendedFormsStyle from '../../../../Assets/Jss/extendedFormsStyle';
 class Create extends Component {
   constructor(props) {
     super(props);
+    const { user } = props;
     this.state = {
-
+      selectedFoodItem: -1,
+      user: {
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+      },
+      image: 'https://todo.com',
+      comments: '',
+      signature: user.signature,
     };
+  }
+
+  componentDidMount() {
+    const { signature } = this.state;
+    this.sigCanvas.fromDataURL(signature);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { loading } = this.props;
+    if (loading && nextProps.loading === false && nextProps.success) {
+      this.back();
+    }
+  }
+
+  create() {
+    const { createCleaningLog, loading } = this.props;
+    if (loading) return false;
+    const { state } = this;
+    delete state.selectedFoodItem;
+    return createCleaningLog(state);
+  }
+
+  back() {
+    const { history } = this.props;
+    history.push('/dashboard/cleaning/log');
+  }
+
+  updateValue(e) {
+    const { target } = e;
+    const { value } = target;
+    if (target.name === 'cleaningItem') {
+      const { cleaningItem } = this.props;
+      return this.setState({
+        selectedFoodItem: value,
+        cleaningItem: {
+          id: cleaningItem[value].createdAt,
+          displayName: cleaningItem[value].name,
+        },
+      });
+    }
+    return this.setState({
+      [target.id || target.name]: value,
+    });
+  }
+
+  renderFoodItems() {
+    const { cleaningItem, classes } = this.props;
+    return cleaningItem.map((cleaningItem, index) => (
+      <MenuItem
+        key={`${cleaningItem.name}${index}`}
+        classes={{ root: classes.selectMenuItem, selected: classes.selectMenuItemSelected }}
+        id="cleaningItem"
+        value={index}
+      >
+        {cleaningItem.name}
+      </MenuItem>));
   }
 
   render() {
     const { classes, loading } = this.props;
+    const {
+      selectedFoodItem, temperature, comments,
+    } = this.state;
     return (
       <div>
         <GridContainer>
@@ -43,28 +114,26 @@ class Create extends Component {
                 <div>
                   <FormControl fullWidth className={classes.selectFormControl}>
                     <InputLabel htmlFor="simple-select" className={classes.selectLabel}>
-                      Choose Location
+                      Choose Food Item
                     </InputLabel>
                     <Select
                       MenuProps={{ className: classes.selectMenu }}
                       classes={{ select: classes.select }}
                       onChange={e => this.updateValue(e)}
-                      value='dan'
+                      value={selectedFoodItem}
+                      inputProps={{ name: 'cleaningItem' }}
                     >
+                      {this.renderFoodItems()}
                     </Select>
                   </FormControl>
-                  <FormControl fullWidth className={classes.selectFormControl}>
-                    <InputLabel htmlFor="simple-select" className={classes.selectLabel}>
-                      Choose Item
-                    </InputLabel>
-                    <Select
-                      MenuProps={{ className: classes.selectMenu }}
-                      classes={{ select: classes.select }}
-                      onChange={e => this.updateValue(e)}
-                      value='dan'
-                    >
-                    </Select>
-                  </FormControl>                  
+                  <CustomInput
+                    value={temperature}
+                    onChange={e => this.updateValue(e)}
+                    labelText="Capture Temperature Value"
+                    id="temperature"
+                    formControlProps={{ fullWidth: true }}
+                    inputProps={{ type: 'number' }}
+                  />
                   <ImageUpload
                     avatar
                     addButtonProps={{ color: 'rose', round: true }}
@@ -72,7 +141,7 @@ class Create extends Component {
                     removeButtonProps={{ color: 'danger', round: true }}
                   />
                   <CustomInput
-                    value='comments'
+                    value={comments}
                     labelText="Comments"
                     id="comments"
                     formControlProps={{ fullWidth: true }}
@@ -103,5 +172,15 @@ class Create extends Component {
     );
   }
 }
+
+Create.propTypes = {
+  history: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
+  loading: PropTypes.bool.isRequired,
+  success: PropTypes.bool.isRequired,
+  createCleaningLog: PropTypes.func.isRequired,
+  cleaningItem: PropTypes.array.isRequired,
+  user: PropTypes.object.isRequired,
+};
 
 export default withStyles(extendedFormsStyle)(Create);

@@ -9,7 +9,6 @@ import Print from '@material-ui/icons/Print';
 import Open from '@material-ui/icons/OpenInNew';
 import Delete from '@material-ui/icons/Delete';
 import Tooltip from '@material-ui/core/Tooltip';
-import SweetAlert from 'react-bootstrap-sweetalert';
 
 import GridContainer from '../../../Components/Grid/GridContainer';
 import GridItem from '../../../Components/Grid/GridItem';
@@ -21,23 +20,22 @@ import Button from '../../../Components/CustomButtons';
 import Table from '../../../Components/Table';
 import LoadingTable from '../../../Components/Loading/LoadingTable';
 
-import CleaningLogDelete from './Delete/delete.container';
+import CleaningItemDelete from './Delete/delete.container';
 
 import style from '../../../Assets/Jss/extendedTablesStyle';
 
-class CleaningLog extends React.Component {
+class CleaningItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       displayDeleteModal: false,
       selectedDeleteItem: {},
-      displayErrorMessage: false,
     };
   }
 
   componentDidMount() {
-    const { listCleaningLogs } = this.props;
-    listCleaningLogs();
+    const { listCleaningItems } = this.props;
+    listCleaningItems();
   }
 
   showDeleteModal(createdAt, index) {
@@ -57,39 +55,6 @@ class CleaningLog extends React.Component {
     });
   }
 
-  closeErrorMessage() {
-    this.setState({
-      displayErrorMessage: false,
-    });
-  }
-
-  create() {
-    const { cleaningItem, history } = this.props;
-    if (cleaningItem.length === 0) {
-      return this.setState({
-        displayErrorMessage: true,
-      });
-    }
-    return history.push('/dashboard/cleaning/log/create');
-  }
-
-  renderErrorMessage() {
-    const { displayErrorMessage } = this.state;
-    const { classes } = this.props;
-    const { success, button } = classes;
-    return (
-      <SweetAlert
-        show={displayErrorMessage}
-        warning
-        //TO DO UPDATE WARNING MESSAGE
-        title="Please create a Food Item before adding a Hot Holding Item"
-        onConfirm={() => this.closeErrorMessage()}
-        confirmBtnCssClass={`${button} ${success}`}
-        confirmBtnText="Ok"
-      />
-    );
-  }
-
   render() {
     const {
       classes, items, loading, history,
@@ -105,7 +70,7 @@ class CleaningLog extends React.Component {
       let onClick;
       switch (key) {
         case 1: {
-          onClick = () => history.push(`/dashboard/cleaning/log/${item.createdAt}`);
+          onClick = () => history.push(`/dashboard/cleaning/item/${item.createdAt}`);
           break;
         }
         case 2: {
@@ -135,14 +100,12 @@ class CleaningLog extends React.Component {
       );
     });
     const tableData = items.map((_item, index) => {
-      const item = [_item.id, _item.id, `${_item.user.firstName} ${_item.user.lastName}`, _item.status, moment(_item.createdAt).format('DD/MM/YYYY'),
-      _item.image, _item.comments, simpleButtons(_item, index)];
+      const item = [_item.areaName, _item.areaItem, moment(_item.createdAt).format('DD/MM/YYYY'), simpleButtons(_item, index)];
       return item;
     });
     return (
       <div>
-        {this.renderErrorMessage()}
-        <CleaningLogDelete
+        <CleaningItemDelete
           item={selectedDeleteItem}
           visible={displayDeleteModal}
           classes={classes}
@@ -158,7 +121,7 @@ class CleaningLog extends React.Component {
                 <Button
                   color="info"
                   className={classes.marginRight}
-                  onClick={() => this.create()}
+                  onClick={() => history.push('/dashboard/cleaning/item/create')}
                 >
                   Create
                 </Button>
@@ -168,13 +131,10 @@ class CleaningLog extends React.Component {
                 <Table
                   hover
                   tableHead={[
-                    'Area',
-                    'Item',
-                    'User',
-                    'Status',
+                    'Name',
+                    'Items',
                     'Created',
-                    'Image',
-                    'Comments',
+                    'Actions',
                   ]}
                   tableData={tableData}
                   customCellClasses={[
@@ -215,13 +175,12 @@ class CleaningLog extends React.Component {
   }
 }
 
-CleaningLog.propTypes = {
+CleaningItem.propTypes = {
   history: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
   items: PropTypes.array.isRequired,
-  cleaningItem: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
-  listCleaningLogs: PropTypes.func.isRequired,
+  listCleaningItems: PropTypes.func.isRequired,
 };
 
-export default withRouter(withStyles(style)(CleaningLog));
+export default withRouter(withStyles(style)(CleaningItem));
