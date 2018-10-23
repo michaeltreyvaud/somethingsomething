@@ -103,9 +103,10 @@ import Service from '../../Views/Service/services.container';
 import ServiceCreate from '../../Views/Service/Create/create.container';
 import ServiceUpdate from '../../Views/Service/Update/update.container';
 
-import ColdHotLocation from '../../Views/ColdHotLocation';
-import ColdHotTransportLog from '../../Views/ColdHotTransportLog';
-import ColdHotTransportCreate from '../../Views/ColdHotTransportLog/Create';
+import ColdHotLocation from '../../Views/Transport/TransportLocation';
+import ColdHotTransportLog from '../../Views/Transport/TransportLog';
+import ColdHotTransportCreate from '../../Views/Transport/TransportLog/Create';
+
 import DeliveryRecords from '../../Views/Traceability/DeliveryRecords';
 import DeliveryRecordsCreate from '../../Views/Traceability/DeliveryRecords/Create';
 import TraceabilityLabels from '../../Views/Traceability/TraceabilityLabels';

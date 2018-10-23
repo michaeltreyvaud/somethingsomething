@@ -132,16 +132,6 @@ class DeliveryRecordCreate extends React.Component {
                       type: "number"
                     }}
                   />
-                    <CustomInput
-                    id="disabled"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      placeholder: "Bob Bobson",
-                      disabled: true
-                    }}
-                  />
                   <ImageUpload
                       addButtonProps={{
                         color: "rose",

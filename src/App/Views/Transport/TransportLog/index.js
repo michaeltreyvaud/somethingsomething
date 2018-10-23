@@ -7,18 +7,18 @@ import Assignment from '@material-ui/icons/Assignment';
 import Print from '@material-ui/icons/Print';
 import Open from '@material-ui/icons/OpenInNew';
 import Delete from '@material-ui/icons/Delete';
-import GridContainer from '../../Components/Grid/GridContainer';
-import GridItem from '../../Components/Grid/GridItem';
-import Card from '../../Components/Card/Card';
-import CardBody from '../../Components/Card/CardBody';
-import CardHeader from '../../Components/Card/CardHeader';
-import CardIcon from '../../Components/Card/CardIcon';
-import Button from '../../Components/CustomButtons';
-import Table from '../../Components/Table';
-import CustomDropdown from '../../Components/CustomDropdown';
+import GridContainer from '../../../Components/Grid/GridContainer';
+import GridItem from '../../../Components/Grid/GridItem';
+import Card from '../../../Components/Card/Card';
+import CardBody from '../../../Components/Card/CardBody';
+import CardHeader from '../../../Components/Card/CardHeader';
+import CardIcon from '../../../Components/Card/CardIcon';
+import Button from '../../../Components/CustomButtons';
+import Table from '../../../Components/Table';
+import CustomDropdown from '../../../Components/CustomDropdown';
 
-import style from '../../Assets/Jss/style';
-import extendedTablesStyle from '../../Assets/Jss/extendedTablesStyle';
+import style from '../../../Assets/Jss/style';
+import extendedTablesStyle from '../../../Assets/Jss/extendedTablesStyle';
 
 class ColdHotTransportLog extends React.Component {
   constructor(props) {
