@@ -103,9 +103,9 @@ import Service from '../../Views/Service/services.container';
 import ServiceCreate from '../../Views/Service/Create/create.container';
 import ServiceUpdate from '../../Views/Service/Update/update.container';
 
-import ColdHotLocation from '../../Views/Transport/TransportLocation';
-import ColdHotTransportLog from '../../Views/Transport/TransportLog';
-import ColdHotTransportCreate from '../../Views/Transport/TransportLog/Create';
+// import ColdHotLocation from '../../Views/Transport/TransportLocation';
+// import ColdHotTransportLog from '../../Views/Transport/TransportLog';
+// import ColdHotTransportCreate from '../../Views/Transport/TransportLog/Create';
 
 import DeliveryRecords from '../../Views/Traceability/DeliveryRecords';
 import DeliveryRecordsCreate from '../../Views/Traceability/DeliveryRecords/Create';
@@ -510,7 +510,7 @@ const dashRoutes = [
   },
   {
     path: '/dashboard/fastcooling',
-    name: 'Fast Cooling',
+    name: 'Cook/Chill',
     state: 'openFastCooling',
     icon: FastForward,
     component: FastCooling,
@@ -547,31 +547,31 @@ const dashRoutes = [
       },
     ],
   },
-  {
-    collapse: true,
-    path: '/dashboard/hotcold',
-    name: 'Cold/Hot Chain',
-    state: 'openColdHot',
-    icon: Voicemail,
-    views: [
-      {
-        path: '/dashboard/transport/location',
-        name: 'Location',
-        component: ColdHotLocation,
-      },
-      {
-        path: '/dashboard/transport/log',
-        name: 'Transport Log',
-        component: ColdHotTransportLog,
-      },
-      {
-        hidden: true,
-        path: '/dashboard/transport/create',
-        name: 'Create Transport Log',
-        component: ColdHotTransportCreate,
-      },
-    ],
-  },
+  // {
+  //   collapse: true,
+  //   path: '/dashboard/hotcold',
+  //   name: 'Cold/Hot Chain',
+  //   state: 'openColdHot',
+  //   icon: Voicemail,
+  //   views: [
+  //     {
+  //       path: '/dashboard/transport/location',
+  //       name: 'Location',
+  //       component: ColdHotLocation,
+  //     },
+  //     {
+  //       path: '/dashboard/transport/log',
+  //       name: 'Transport Log',
+  //       component: ColdHotTransportLog,
+  //     },
+  //     {
+  //       hidden: true,
+  //       path: '/dashboard/transport/create',
+  //       name: 'Create Transport Log',
+  //       component: ColdHotTransportCreate,
+  //     },
+  //   ],
+  // },
   {
     collapse: true,
     path: '/dashboard/traceability',
