@@ -574,7 +574,7 @@ const dashRoutes = [
   {
     collapse: true,
     path: '/dashboard/traceability',
-    name: 'Traceability/deliveries',
+    name: 'Delivery Records',
     state: 'openTrace',
     icon: DirectionsCar,
     views: [
@@ -711,7 +711,7 @@ const dashRoutes = [
   },
   {
     path: '/dashboard/safetysheet',
-    name: 'Safety Datasheet',
+    name: 'Chemical Safety',
     state: 'openSafetySheet',
     icon: Description,
     component: SafetySheet,

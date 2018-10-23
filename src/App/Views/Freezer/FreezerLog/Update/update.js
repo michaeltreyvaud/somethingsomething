@@ -20,8 +20,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import extendedFormsStyle from '../../../../Assets/Jss/extendedFormsStyle';
 import NotFound from '../../../../Components/NotFound';
 
-import LoadingTable from '../../../../Components/Loading/LoadingTable';
-
 class Update extends React.Component {
   constructor(props) {
     super(props);

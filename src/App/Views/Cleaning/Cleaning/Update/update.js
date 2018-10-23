@@ -1,12 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Datetime from 'react-datetime';
-import moment from 'moment';
-
-import Check from '@material-ui/icons/Check';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Today from '@material-ui/icons/Today';
 
