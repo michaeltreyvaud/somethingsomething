@@ -30,8 +30,9 @@ export const createHotHolding = hotHolding => async (dispatch) => {
     dispatch(createHotHoldingAttempt());
     const body = hotHolding;
     //  TODO - fetch these
-    const { REACT_APP_API_URL, REACT_APP_CREATE_HOT_HOLDING_PATH } = process.env;
-    const response = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_CREATE_HOT_HOLDING_PATH}`, body);
+    const { REACT_APP_API_URL } = process.env;
+    const url = `${REACT_APP_API_URL}/item/hotholding/create`;
+    const response = await AuthenticatedFetch(url, body);
     //  Display success message
     dispatch(showDashBoardSuccess('Item Created'));
     return dispatch(createHotHoldingSuccess(response));

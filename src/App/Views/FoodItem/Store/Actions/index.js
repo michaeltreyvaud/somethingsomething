@@ -27,8 +27,9 @@ export const listFoodItems = () => async (dispatch) => {
     dispatch(listFoodItemAttempt());
     const body = {};
     //  TODO - fetch these
-    const { REACT_APP_API_URL, REACT_APP_LIST_FOOD_ITEM_PATH } = process.env;
-    const response = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_LIST_FOOD_ITEM_PATH}`, body);
+    const { REACT_APP_API_URL } = process.env;
+    const url = `${REACT_APP_API_URL}/item/fooditem/list`;
+    const response = await AuthenticatedFetch(url, body);
     return dispatch(listFoodItemSuccess(response));
   } catch (_err) {
     if (_err.code === 401) return dispatch(sessionTimeout());

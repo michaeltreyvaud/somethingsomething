@@ -30,8 +30,9 @@ export const updateHotHolding = item => async (dispatch) => {
     dispatch(updateHotHoldingAttempt());
     const body = item;
     //  TODO - fetch these
-    const { REACT_APP_API_URL, REACT_APP_UPDATE_HOT_HOLDING_PATH } = process.env;
-    const updatedItem = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_UPDATE_HOT_HOLDING_PATH}`, body);
+    const { REACT_APP_API_URL } = process.env;
+    const url = `${REACT_APP_API_URL}/item/hotholding/update`;
+    const updatedItem = await AuthenticatedFetch(url, body);
     //  Display success message
     dispatch(showDashBoardSuccess('Item Updated'));
     return dispatch(updateHotHoldingSuccess(updatedItem));

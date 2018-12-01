@@ -30,8 +30,9 @@ export const deleteHotHolding = (createdAt, index) => async (dispatch) => {
     dispatch(deleteHotHoldingAttempt());
     const body = { createdAt };
     //  TODO - fetch these
-    const { REACT_APP_API_URL, REACT_APP_DELETE_HOT_HOLDING_PATH } = process.env;
-    await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_DELETE_HOT_HOLDING_PATH}`, body);
+    const { REACT_APP_API_URL } = process.env;
+    const url = `${REACT_APP_API_URL}/item/hotholding/delete`;
+    await AuthenticatedFetch(url, body);
     //  Display success message
     dispatch(showDashBoardSuccess('Item Deleted'));
     return dispatch(deleteHotHoldingSuccess(index));

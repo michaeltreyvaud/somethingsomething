@@ -30,8 +30,9 @@ export const createFoodItem = foodItem => async (dispatch) => {
     dispatch(createFoodItemAttempt());
     const body = foodItem;
     //  TODO - fetch these
-    const { REACT_APP_API_URL, REACT_APP_CREATE_FOOD_ITEM_PATH } = process.env;
-    const response = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_CREATE_FOOD_ITEM_PATH}`, body);
+    const { REACT_APP_API_URL } = process.env;
+    const url = `${REACT_APP_API_URL}/item/fooditem/create`;
+    const response = await AuthenticatedFetch(url, body);
     //  Display success message
     dispatch(showDashBoardSuccess('Item Created'));
     return dispatch(createFoodItemSuccess(response));
