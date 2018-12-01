@@ -31,7 +31,7 @@ export const deleteFoodItem = (createdAt, index) => async (dispatch) => {
     const body = { createdAt };
     //  TODO - fetch these
     const { REACT_APP_API_URL } = process.env;
-    const url = `${REACT_APP_API_URL}/item/fooditem/delete`;
+    const url = `${REACT_APP_API_URL}/item/food/delete`;
     await AuthenticatedFetch(url, body);
     //  Display success message
     dispatch(showDashBoardSuccess('Item Deleted'));

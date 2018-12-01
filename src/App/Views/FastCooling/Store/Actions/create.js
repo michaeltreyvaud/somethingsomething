@@ -30,8 +30,9 @@ export const createFastCooling = fastCooling => async (dispatch) => {
     dispatch(createFastCoolingAttempt());
     const body = fastCooling;
     //  TODO - fetch these
-    const { REACT_APP_API_URL, REACT_APP_CREATE_FAST_COOLING_PATH } = process.env;
-    const response = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_CREATE_FAST_COOLING_PATH}`, body);
+    const { REACT_APP_API_URL } = process.env;
+    const url = `${REACT_APP_API_URL}/item/fastcooling/create`;
+    const response = await AuthenticatedFetch(url, body);
     //  Display success message
     dispatch(showDashBoardSuccess('Item Created'));
     return dispatch(createFastCoolingSuccess(response));

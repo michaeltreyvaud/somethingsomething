@@ -31,7 +31,7 @@ export const updateFoodItem = foodItem => async (dispatch) => {
     const body = foodItem;
     //  TODO - fetch these
     const { REACT_APP_API_URL } = process.env;
-    const url = `${REACT_APP_API_URL}/item/fooditem/update`;
+    const url = `${REACT_APP_API_URL}/item/food/update`;
     const updatedItem = await AuthenticatedFetch(url, body);
     //  Display success message
     dispatch(showDashBoardSuccess('Item Updated'));

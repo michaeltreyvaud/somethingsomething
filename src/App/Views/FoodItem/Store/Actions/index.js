@@ -28,7 +28,7 @@ export const listFoodItems = () => async (dispatch) => {
     const body = {};
     //  TODO - fetch these
     const { REACT_APP_API_URL } = process.env;
-    const url = `${REACT_APP_API_URL}/item/fooditem/list`;
+    const url = `${REACT_APP_API_URL}/item/food/list`;
     const response = await AuthenticatedFetch(url, body);
     return dispatch(listFoodItemSuccess(response));
   } catch (_err) {

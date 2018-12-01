@@ -30,9 +30,9 @@ export const updateFastCooling = item => async (dispatch) => {
     dispatch(updateFastCoolingAttempt());
     const body = item;
     //  TODO - fetch these
-    const { REACT_APP_API_URL, REACT_APP_UPDATE_FAST_COOLING_PATH } = process.env;
-    const updatedItem = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_UPDATE_FAST_COOLING_PATH}`, body);
-    //  Display success message
+    const { REACT_APP_API_URL } = process.env;
+    const url = `${REACT_APP_API_URL}/item/fastcooling/update`;
+    const updatedItem = await AuthenticatedFetch(url, body);
     dispatch(showDashBoardSuccess('Item Updated'));
     return dispatch(updateFastCoolingSuccess(updatedItem));
   } catch (_err) {

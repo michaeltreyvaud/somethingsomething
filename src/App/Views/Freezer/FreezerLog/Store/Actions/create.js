@@ -30,8 +30,9 @@ export const createFreezerLog = freezerLog => async (dispatch) => {
     dispatch(createFreezerLogAttempt());
     const body = freezerLog;
     //  TODO - fetch these
-    const { REACT_APP_API_URL, REACT_APP_CREATE_FREEZER_LOG_PATH } = process.env;
-    const response = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_CREATE_FREEZER_LOG_PATH}`, body);
+    const { REACT_APP_API_URL } = process.env;
+    const url = `${REACT_APP_API_URL}/item/freezerlog/create`;
+    const response = await AuthenticatedFetch(url, body);
     //  Display success message
     dispatch(showDashBoardSuccess('Item Created'));
     return dispatch(createFreezerLogSuccess(response));

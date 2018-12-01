@@ -30,8 +30,9 @@ export const createFridge = fridgeItem => async (dispatch) => {
     dispatch(createFridgeAttempt());
     const body = fridgeItem;
     //  TODO - fetch these
-    const { REACT_APP_API_URL, REACT_APP_CREATE_FRIDGES_PATH } = process.env;
-    const response = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_CREATE_FRIDGES_PATH}`, body);
+    const { REACT_APP_API_URL } = process.env;
+    const url = `${REACT_APP_API_URL}/item/fridgeitem/create`;
+    const response = await AuthenticatedFetch(url, body);
     //  Display success message
     dispatch(showDashBoardSuccess('Item Created'));
     return dispatch(createFridgeSuccess(response));

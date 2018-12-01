@@ -30,8 +30,9 @@ export const deleteFridgeLog = (createdAt, index) => async (dispatch) => {
     dispatch(deleteFridgeLogAttempt());
     const body = { createdAt };
     //  TODO - fetch these
-    const { REACT_APP_API_URL, REACT_APP_DELETE_FRIDGE_LOG_PATH } = process.env;
-    await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_DELETE_FRIDGE_LOG_PATH}`, body);
+    const { REACT_APP_API_URL } = process.env;
+    const url = `${REACT_APP_API_URL}/item/fridgelog/delete`;
+    await AuthenticatedFetch(url, body);
     //  Display success message
     dispatch(showDashBoardSuccess('Item Deleted'));
     return dispatch(deleteFridgeLogSuccess(index));

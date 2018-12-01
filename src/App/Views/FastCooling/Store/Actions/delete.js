@@ -30,9 +30,9 @@ export const deleteFastCooling = (createdAt, index) => async (dispatch) => {
     dispatch(deleteFastCoolingAttempt());
     const body = { createdAt };
     //  TODO - fetch these
-    const { REACT_APP_API_URL, REACT_APP_DELETE_FAST_COOLING_PATH } = process.env;
-    await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_DELETE_FAST_COOLING_PATH}`, body);
-    //  Display success message
+    const { REACT_APP_API_URL } = process.env;
+    const url = `${REACT_APP_API_URL}/item/fastcooling/delete`;
+    await AuthenticatedFetch(url, body);
     dispatch(showDashBoardSuccess('Item Deleted'));
     return dispatch(deleteFastCoolingSuccess(index));
   } catch (_err) {

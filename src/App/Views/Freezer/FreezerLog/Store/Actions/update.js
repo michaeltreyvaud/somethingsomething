@@ -30,8 +30,9 @@ export const updateFreezerLog = freezerLog => async (dispatch) => {
     dispatch(updateFreezerLogAttempt());
     const body = freezerLog;
     //  TODO - fetch these
-    const { REACT_APP_API_URL, REACT_APP_UPDATE_FREEZER_LOG_PATH } = process.env;
-    const updatedItem = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_UPDATE_FREEZER_LOG_PATH}`, body);
+    const { REACT_APP_API_URL } = process.env;
+    const url = `${REACT_APP_API_URL}/item/freezerlog/update`;
+    const updatedItem = await AuthenticatedFetch(url, body);
     //  Display success message
     dispatch(showDashBoardSuccess('Item Updated'));
     return dispatch(updateFreezerLogSuccess(updatedItem));

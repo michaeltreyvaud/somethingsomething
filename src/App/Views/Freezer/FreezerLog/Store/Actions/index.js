@@ -27,8 +27,9 @@ export const listFreezerLogs = () => async (dispatch) => {
     dispatch(listFreezerLogAttempt());
     const body = {};
     //  TODO - fetch these
-    const { REACT_APP_API_URL, REACT_APP_LIST_FREEZER_LOG_PATH } = process.env;
-    const response = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_LIST_FREEZER_LOG_PATH}`, body);
+    const { REACT_APP_API_URL } = process.env;
+    const url = `${REACT_APP_API_URL}/item/freezerlog/list`;
+    const response = await AuthenticatedFetch(url, body);
     return dispatch(listFreezerLogSuccess(response));
   } catch (_err) {
     if (_err.code === 401) return dispatch(sessionTimeout());
