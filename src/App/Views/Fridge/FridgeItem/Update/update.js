@@ -21,14 +21,7 @@ class Update extends React.Component {
     super(props);
     const { item } = props;
     if (item) {
-      const {
-        name, description, id,
-      } = item;
-      this.state = {
-        name,
-        description,
-        id,
-      };
+      this.state = { ...item };
     } else {
       this.state = {
         name: '',
@@ -40,23 +33,12 @@ class Update extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     const { item, updating } = nextProps;
-    if (item && !updating) {
-      const {
-        name, description, id,
-      } = item;
-      this.setState({
-        name,
-        description,
-        id,
-      });
-    }
+    if (item && !updating) this.setState({ ...item });
   }
 
   updateValue(e) {
     const { target } = e;
-    this.setState({
-      [target.id]: target.value,
-    });
+    this.setState({ [target.id]: target.value });
   }
 
   updateFridge() {

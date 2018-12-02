@@ -30,8 +30,9 @@ export const createTeam = team => async (dispatch) => {
     dispatch(createTeamAttempt());
     const body = team;
     //  TODO - fetch these
-    const { REACT_APP_API_URL, REACT_APP_MANAGEMENT_TEAM_CREATE_PATH } = process.env;
-    const response = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_MANAGEMENT_TEAM_CREATE_PATH}`, body);
+    const { REACT_APP_API_URL } = process.env;
+    const url = `${REACT_APP_API_URL}/management/team/create`;
+    const response = await AuthenticatedFetch(url, body);
     //  Display success message
     dispatch(showDashBoardSuccess('Item Created'));
     return dispatch(createTeamSuccess(response));

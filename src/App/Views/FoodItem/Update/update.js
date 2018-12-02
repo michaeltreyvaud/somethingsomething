@@ -130,9 +130,7 @@ class Update extends React.Component {
 
   updateValue(e) {
     const { target } = e;
-    this.setState({
-      [target.id]: target.value,
-    });
+    this.setState({ [target.id]: target.value });
   }
 
   updateAllergens(e) {
@@ -438,7 +436,7 @@ class Update extends React.Component {
                       classes={{ label: classes.label }}
                       label="Celery"
                     />
-                    <Button loading={loading} onClick={() => this.save()} color="rose" className={classes.updateProfileButton}>
+                    <Button loading={updating} onClick={() => this.save()} color="rose" className={classes.updateProfileButton}>
                       Save
                     </Button>
                     <Button loading={duplicating} onClick={() => this.duplicate()} color="primary" className={classes.updateProfileButton} style={{ float: 'right' }}>

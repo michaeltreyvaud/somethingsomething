@@ -23,15 +23,15 @@ const deleteFreezerFail = message => ({
   payload: { message },
 });
 
-export const deleteFreezer = (id, index) => async (dispatch) => {
+export const deleteFreezer = (item, index) => async (dispatch) => {
   try {
     //  Tell the layout we are doing something
     dispatch(dashboardLoading());
     dispatch(deleteFreezerAttempt());
-    const body = { id };
+    const body = { ...item };
     //  TODO - fetch these
     const { REACT_APP_API_URL } = process.env;
-    const url = `${REACT_APP_API_URL}/item/freezeritem/create`;
+    const url = `${REACT_APP_API_URL}/item/freezeritem/delete`;
     await AuthenticatedFetch(url, body);
     //  Display success message
     dispatch(showDashBoardSuccess('Item Deleted'));

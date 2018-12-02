@@ -14,8 +14,8 @@ class DeleteItem extends Component {
   delete() {
     const { item, deleteFreezer, loading } = this.props;
     if (loading) return false;
-    const { itemId, index } = item;
-    return deleteFreezer(itemId, index);
+    const { item: itemToDelete, index } = item;
+    return deleteFreezer(itemToDelete, index);
   }
 
   render() {

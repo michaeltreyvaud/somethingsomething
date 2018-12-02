@@ -30,8 +30,9 @@ export const deleteUser = (userName, index) => async (dispatch) => {
     dispatch(deleteUserAttempt());
     const body = { userName };
     //  TODO - fetch these
-    const { REACT_APP_API_URL, REACT_APP_MANAGEMENT_USER_DELETE_PATH } = process.env;
-    await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_MANAGEMENT_USER_DELETE_PATH}`, body);
+    const { REACT_APP_API_URL } = process.env;
+    const url = `${REACT_APP_API_URL}/management/user/delete`;
+    await AuthenticatedFetch(url, body);
     //  Display success message
     dispatch(showDashBoardSuccess('User Deleted'));
     return dispatch(deleteUserSuccess(index));

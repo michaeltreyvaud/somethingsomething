@@ -31,7 +31,7 @@ export const updateFreezer = item => async (dispatch) => {
     const body = item;
     //  TODO - fetch these
     const { REACT_APP_API_URL } = process.env;
-    const url = `${REACT_APP_API_URL}/item/freezeritem/create`;
+    const url = `${REACT_APP_API_URL}/item/freezeritem/update`;
     const updatedItem = await AuthenticatedFetch(url, body);
     //  Display success message
     dispatch(showDashBoardSuccess('Item Updated'));

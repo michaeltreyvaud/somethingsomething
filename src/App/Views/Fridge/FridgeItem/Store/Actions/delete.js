@@ -23,12 +23,12 @@ const deleteFridgeFail = message => ({
   payload: { message },
 });
 
-export const deleteFridge = (id, index) => async (dispatch) => {
+export const deleteFridge = (item, index) => async (dispatch) => {
   try {
     //  Tell the layout we are doing something
     dispatch(dashboardLoading());
     dispatch(deleteFridgeAttempt());
-    const body = { id };
+    const body = { ...item };
     //  TODO - fetch these
     const { REACT_APP_API_URL } = process.env;
     const url = `${REACT_APP_API_URL}/item/fridgeitem/delete`;

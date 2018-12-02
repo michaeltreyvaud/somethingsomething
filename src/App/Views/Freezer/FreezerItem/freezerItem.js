@@ -37,11 +37,11 @@ class FreezerItem extends React.Component {
     listFreezers();
   }
 
-  showDeleteModal(itemId, index) {
+  showDeleteModal(item, index) {
     this.setState({
       displayDeleteModal: true,
       selectedDeleteItem: {
-        itemId,
+        item,
         index,
       },
     });
@@ -73,7 +73,7 @@ class FreezerItem extends React.Component {
           break;
         }
         case 2: {
-          onClick = () => this.showDeleteModal(item.id, index);
+          onClick = () => this.showDeleteModal(item, index);
           break;
         }
         default: {

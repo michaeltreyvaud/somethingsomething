@@ -30,8 +30,9 @@ export const updateUser = user => async (dispatch) => {
     dispatch(updateUserAttempt());
     const body = user;
     //  TODO - fetch these
-    const { REACT_APP_API_URL, REACT_APP_MANAGEMENT_USER_UPDATE_PATH } = process.env;
-    const updatedItem = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_MANAGEMENT_USER_UPDATE_PATH}`, body);
+    const { REACT_APP_API_URL } = process.env;
+    const url = `${REACT_APP_API_URL}/management/user/update`;
+    const updatedItem = await AuthenticatedFetch(url, body);
     //  Display success message
     dispatch(showDashBoardSuccess('User Updated'));
     return dispatch(updateUserSuccess(updatedItem));
