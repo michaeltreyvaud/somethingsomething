@@ -32,8 +32,9 @@ export const getCompanyInfo = () => async (dispatch) => {
     dispatch(getCompanyInfoAttempt());
     const body = {};
     //  TODO - fetch these
-    const { REACT_APP_API_URL, REACT_APP_DESCRIBE_COMPANY_PATH } = process.env;
-    const response = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_DESCRIBE_COMPANY_PATH}`, body);
+    const { REACT_APP_API_URL } = process.env;
+    const url = `${REACT_APP_API_URL}/company/settings/describe`;
+    const response = await AuthenticatedFetch(url, body);
     return dispatch(getCompanyInfoSuccess(response));
   } catch (_err) {
     if (_err.code === 401) return dispatch(sessionTimeout());
@@ -66,8 +67,9 @@ export const updateCompanyInfo = info => async (dispatch) => {
     dispatch(dashboardLoading());
     dispatch(updateCompanyInfoAttempt(info));
     //  TODO - fetch these
-    const { REACT_APP_API_URL, REACT_APP_UPDATE_COMPANY_PATH } = process.env;
-    const response = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_UPDATE_COMPANY_PATH}`, info);
+    const { REACT_APP_API_URL } = process.env;
+    const url = `${REACT_APP_API_URL}/company/settings/update`;
+    const response = await AuthenticatedFetch(url, info);
     //  Display success message
     dispatch(showDashBoardSuccess('Settings Updated'));
     return dispatch(updateCompanyInfoSuccess(response));
