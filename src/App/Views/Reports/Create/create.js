@@ -96,7 +96,7 @@ class Create extends Component {
   render() {
     const { classes, loading } = this.props;
     const {
-      type, comments, selectedUser,
+      reportType, comments, selectedUser,
     } = this.state;
     return (
       <div>
@@ -111,11 +111,11 @@ class Create extends Component {
               <CardBody>
                 <div>
                   <CustomInput
-                    labelText="Type"
-                    id="type"
-                    value={type}
+                    labelText="Report Type"
+                    id="reportType"
+                    value={reportType}
                     formControlProps={{ fullWidth: true }}
-                    inputProps={{ type: 'text' }}
+                    inputProps={{ reportType: 'text' }}
                     onChange={e => this.updateValue(e)}
                   />
                   <FormControl fullWidth className={classes.selectFormControl}>

@@ -30,8 +30,9 @@ export const updateReport = item => async (dispatch) => {
     dispatch(updateReportAttempt());
     const body = item;
     //  TODO - fetch these
-    const { REACT_APP_API_URL, REACT_APP_UPDATE_REPORT_PATH } = process.env;
-    const updatedItem = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_UPDATE_REPORT_PATH}`, body);
+    const { REACT_APP_API_URL } = process.env;
+    const url = `${REACT_APP_API_URL}/item/report/update`;
+    const updatedItem = await AuthenticatedFetch(url, body);
     //  Display success message
     dispatch(showDashBoardSuccess('Item Updated'));
     return dispatch(updateReportSuccess(updatedItem));

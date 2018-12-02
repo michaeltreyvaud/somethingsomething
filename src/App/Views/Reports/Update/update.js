@@ -27,12 +27,12 @@ class Update extends Component {
     const { item } = props;
     if (item) {
       const {
-        user, type, file,
+        user, reportType, file,
         signature, comments, createdAt,
       } = item;
       this.state = {
         user,
-        type,
+        reportType,
         file,
         comments,
         signature,
@@ -41,7 +41,7 @@ class Update extends Component {
     } else {
       this.state = {
         user: {},
-        type: '',
+        reportType: '',
         file: '',
         comments: '',
         signature: '',
@@ -59,12 +59,12 @@ class Update extends Component {
     const { item, updating, loading } = nextProps;
     if (item && !updating && !loading) {
       const {
-        user, type, file,
+        user, reportType, file,
         signature, comments, createdAt,
       } = item;
       this.setState({
         user,
-        type,
+        reportType,
         file,
         comments,
         signature,
@@ -105,7 +105,7 @@ class Update extends Component {
     } = this.props;
     if (!item && !loading) return (<NotFound text="Item Not Found" />);
     const {
-      type, comments, user,
+      reportType, comments, user,
     } = this.state;
     const { firstName, lastName } = user;
     return (
@@ -122,11 +122,11 @@ class Update extends Component {
                 {!loading && (
                 <div>
                   <CustomInput
-                    labelText="Type"
-                    id="type"
-                    value={type}
+                    labelText="Report Type"
+                    id="reportType"
+                    value={reportType}
                     formControlProps={{ fullWidth: true }}
-                    inputProps={{ type: 'text' }}
+                    inputProps={{ reportType: 'text' }}
                     onChange={e => this.updateValue(e)}
                   />
                   <CustomInput

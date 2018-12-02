@@ -30,8 +30,9 @@ export const deletePest = (createdAt, index) => async (dispatch) => {
     dispatch(deletePestAttempt());
     const body = { createdAt };
     //  TODO - fetch these
-    const { REACT_APP_API_URL, REACT_APP_DELETE_PEST_PATH } = process.env;
-    await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_DELETE_PEST_PATH}`, body);
+    const { REACT_APP_API_URL } = process.env;
+    const url = `${REACT_APP_API_URL}/item/pest/delete`;
+    await AuthenticatedFetch(url, body);
     //  Display success message
     dispatch(showDashBoardSuccess('Item Deleted'));
     return dispatch(deletePestSuccess(index));

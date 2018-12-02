@@ -98,7 +98,7 @@ class Report extends React.Component {
       );
     });
     const tableData = items.map((_item, index) => {
-      const item = [_item.type, `${_item.user.firstName} ${_item.user.lastName}`, moment(_item.createdAt).format('DD/MM/YYYY'),
+      const item = [_item.reportType, `${_item.user.firstName} ${_item.user.lastName}`, moment(_item.createdAt).format('DD/MM/YYYY'),
         _item.file, _item.comments, simpleButtons(_item, index)];
       return item;
     });
@@ -141,7 +141,7 @@ class Report extends React.Component {
                 {!loading && items && items.length > 0 && (
                 <Table
                   tableHead={[
-                    'Type',
+                    'Report Type',
                     'Operator',
                     'Date/Time',
                     'File',

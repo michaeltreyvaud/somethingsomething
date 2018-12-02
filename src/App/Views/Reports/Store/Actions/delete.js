@@ -30,8 +30,9 @@ export const deleteReport = (createdAt, index) => async (dispatch) => {
     dispatch(deleteReportAttempt());
     const body = { createdAt };
     //  TODO - fetch these
-    const { REACT_APP_API_URL, REACT_APP_DELETE_REPORT_PATH } = process.env;
-    await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_DELETE_REPORT_PATH}`, body);
+    const { REACT_APP_API_URL } = process.env;
+    const url = `${REACT_APP_API_URL}/item/report/delete`;
+    await AuthenticatedFetch(url, body);
     //  Display success message
     dispatch(showDashBoardSuccess('Item Deleted'));
     return dispatch(deleteReportSuccess(index));

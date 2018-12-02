@@ -30,8 +30,9 @@ export const createReport = item => async (dispatch) => {
     dispatch(createReportAttempt());
     const body = item;
     //  TODO - fetch these
-    const { REACT_APP_API_URL, REACT_APP_CREATE_REPORT_PATH } = process.env;
-    const response = await AuthenticatedFetch(`${REACT_APP_API_URL}${REACT_APP_CREATE_REPORT_PATH}`, body);
+    const { REACT_APP_API_URL } = process.env;
+    const url = `${REACT_APP_API_URL}/item/report/create`;
+    const response = await AuthenticatedFetch(url, body);
     //  Display success message
     dispatch(showDashBoardSuccess('Item Created'));
     return dispatch(createReportSuccess(response));
