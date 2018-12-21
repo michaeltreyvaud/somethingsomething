@@ -9,10 +9,9 @@ import {
   dangerColor,
 } from '../../Assets/Jss/material-dashboard-pro-react';
 
-const headerStyle = theme => ({
+const headerStyle = () => ({
   appBar: {
-    backgroundColor: 'transparent',
-    boxShadow: 'none',
+    backgroundColor: 'white',
     borderBottom: '0',
     marginBottom: '0',
     position: 'absolute',
@@ -21,11 +20,11 @@ const headerStyle = theme => ({
     zIndex: '1029',
     color: '#555555',
     border: '0',
-    borderRadius: '3px',
     padding: '10px 0',
     transition: 'all 150ms ease 0s',
     minHeight: '50px',
     display: 'block',
+    boxShadow: '0 1px 4px 0 rgba(0, 0, 0, 0.14)',
   },
   container: {
     ...containerFluid,

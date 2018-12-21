@@ -30,6 +30,7 @@ const Style = theme => ({
     maxHeight: '100%',
     width: '100%',
     overflowScrolling: 'touch',
+    backgroundColor: '#F5F1F7',
   },
   content: {
     marginTop: '70px',

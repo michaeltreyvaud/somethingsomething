@@ -4,7 +4,6 @@ import { Switch, Route } from 'react-router-dom';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import pagesStyle from './style';
-import bgImage from '../../Assets/Images/register.jpeg';
 import pagesRoutes from '../../Routing/Routes/auth';
 import PagesHeader from '../../Components/Header/PagesHeader';
 
@@ -20,10 +19,7 @@ class Pages extends React.Component {
       <div>
         <PagesHeader {...rest} />
         <div className={classes.wrapper} ref="wrapper">
-          <div
-            className={classes.fullPage}
-            style={{ backgroundImage: `url(${bgImage})` }}
-          >
+          <div className={classes.fullPage}>
             <Switch>
               {pagesRoutes.map((prop, key) => (
                 <Route exact path={prop.path} component={prop.component} key={key} />))}

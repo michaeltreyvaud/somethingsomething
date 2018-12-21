@@ -9,8 +9,6 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import dashboardRoutes from '../../Routing/Routes/dashboard';
 
 import appStyle from './style';
-
-import image from '../../Assets/Images/sidebar-4.jpg';
 import logo from '../../Assets/Images/logo-white.svg';
 
 import Header from '../../Components/Header';
@@ -157,7 +155,6 @@ class Dashboard extends Component {
           routes={dashboardRoutes}
           logoText="TreyBro"
           logo={logo}
-          image={image}
           handleDrawerToggle={this.handleDrawerToggle}
           open={mobileOpen}
           color="blue"

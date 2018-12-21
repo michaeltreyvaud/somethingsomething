@@ -6,6 +6,7 @@ const Style = theme => ({
     top: '0',
   },
   fullPage: {
+    backgroundColor: '#F5F1F7',
     padding: '120px 0',
     position: 'relative',
     minHeight: '100vh',
@@ -26,9 +27,6 @@ const Style = theme => ({
       bottom: '0',
       width: '100%',
       border: 'none !important',
-    },
-    '&:before': {
-      backgroundColor: 'rgba(0, 0, 0, 0.65)',
     },
     '&:before,&:after': {
       display: 'block',
