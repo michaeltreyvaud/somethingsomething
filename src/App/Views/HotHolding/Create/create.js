@@ -52,11 +52,11 @@ class Create extends Component {
   }
 
   create() {
-    const { createHotHolding, loading } = this.props;
+    const { create, loading } = this.props;
     if (loading) return false;
     const { state } = this;
     delete state.selectedFoodItem;
-    return createHotHolding(state);
+    return create(state);
   }
 
   back() {
@@ -178,7 +178,7 @@ Create.propTypes = {
   classes: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
   success: PropTypes.bool.isRequired,
-  createHotHolding: PropTypes.func.isRequired,
+  create: PropTypes.func.isRequired,
   foodItems: PropTypes.array.isRequired,
   user: PropTypes.object.isRequired,
 };

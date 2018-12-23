@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  createHotHolding: hotHolding => dispatch(createHotHolding(hotHolding)),
+  create: item => dispatch(createHotHolding(item)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Create);

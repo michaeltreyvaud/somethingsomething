@@ -1,4 +1,3 @@
-import React from 'react';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import CheckCircle from '@material-ui/icons/CheckCircle';
 import Business from '@material-ui/icons/Business';
@@ -9,9 +8,7 @@ import Whatshot from '@material-ui/icons/Whatshot';
 import Fastfood from '@material-ui/icons/Fastfood';
 import FastForward from '@material-ui/icons/FastForward';
 import RoomService from '@material-ui/icons/RoomService';
-import Voicemail from '@material-ui/icons/Voicemail';
 import DirectionsCar from '@material-ui/icons/DirectionsCar';
-import Book from '@material-ui/icons/Book';
 import Colorize from '@material-ui/icons/Colorize';
 import LocalDrink from '@material-ui/icons/LocalDrink';
 import Timeline from '@material-ui/icons/Timeline';
@@ -20,6 +17,9 @@ import BugReport from '@material-ui/icons/BugReport';
 
 import Metrics from '../../Views/Home/Metrics';
 import Company from '../../Views/Company/company.container';
+
+import Records from '../../Views/Records';
+import RecordsCreate from '../../Views/Records/Create';
 
 import ManagementUsers from '../../Views/Management/Users/users.container';
 import ManagementUsersCreate from '../../Views/Management/Users/Create/create.container';
@@ -111,15 +111,15 @@ import DeliveryRecords from '../../Views/Traceability/DeliveryRecords';
 import DeliveryRecordsCreate from '../../Views/Traceability/DeliveryRecords/Create';
 import TraceabilityLabels from '../../Views/Traceability/TraceabilityLabels';
 
-import Oil from '../../Views/Oil/Oil/'
+import Oil from '../../Views/Oil/Oil';
 import OilTask from '../../Views/Oil/OilTask/oilTask';
 import OilTaskCreate from '../../Views/Oil/OilTask/Create/create';
 import OilLog from '../../Views/Oil/OilLog/oilLog.container';
 import OilLogCreate from '../../Views/Oil/OilLog/Create/create.container';
 
-import Cleaning from '../../Views/Cleaning/Cleaning/cleaningItem.container'
-import CleaningCreate from '../../Views/Cleaning/Cleaning/Create/create.container'
-import CleaningUpdate from '../../Views/Cleaning/Cleaning/Update/update.container'
+import Cleaning from '../../Views/Cleaning/Cleaning/cleaningItem.container';
+import CleaningCreate from '../../Views/Cleaning/Cleaning/Create/create.container';
+import CleaningUpdate from '../../Views/Cleaning/Cleaning/Update/update.container';
 import CleaningTask from '../../Views/Cleaning/CleaningTask/cleaningTask';
 import CleaningTaskCreate from '../../Views/Cleaning/CleaningTask/Create/create';
 import CleaningLog from '../../Views/Cleaning/CleaningLog/cleaningLog.container';
@@ -137,8 +137,21 @@ import PestControl from '../../Views/PestControl/pest.container';
 import PestControlCreate from '../../Views/PestControl/Create/create.container';
 import PestControlUpdate from '../../Views/PestControl/Update/update.container';
 
-const TODOComponent = () => (<h1>TODO</h1>);
 const dashRoutes = [
+  {
+    path: '/dashboard/records',
+    name: 'Records',
+    icon: Assignment,
+    component: Records,
+    views: [
+      {
+        hidden: true,
+        path: '/dashboard/records/create',
+        name: 'Record',
+        component: RecordsCreate,
+      },
+    ],
+  },
   // Main Navigation
   {
     path: '/dashboard/home',
@@ -596,13 +609,6 @@ const dashRoutes = [
         component: TraceabilityLabels,
       },
     ],
-  },
-  {
-    path: '/dashboard/menus',
-    name: 'Menus',
-    state: 'openMenus',
-    icon: Book,
-    component: TODOComponent,
   },
   {
     collapse: true,

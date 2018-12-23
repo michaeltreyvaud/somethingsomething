@@ -8,6 +8,7 @@ import loginReducer from '../Views/Auth/Login/Store/Reducers';
 import forgotPasswordReducer from '../Views/ForgotPassword/Store/Reducers';
 import companyReducer from '../Views/Company/Store/Reducers';
 
+import records from './Reducers/Records';
 import freezerReducer from './Reducers/Freezer';
 import fridgeReducer from './Reducers/Fridge';
 import managementReducer from './Reducers/Management';
@@ -32,6 +33,7 @@ const appReducers = combineReducers({
     login: loginReducer,
     forgotPassword: forgotPasswordReducer,
   }),
+  records,
   company: companyReducer,
   fridge: fridgeReducer,
   freezer: freezerReducer,
