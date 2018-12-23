@@ -10,15 +10,11 @@ import { USER_AUTH_UPDATED } from '../../../../User/Profile/Store/ActionTypes';
 import { Fetch } from '../../../../../Util/fetch';
 import AuthStore from '../../../../../Util/authstore';
 
-const loginAttempt = () => ({
-  type: LOGIN_ATTEMPT,
-});
+const loginAttempt = () => ({ type: LOGIN_ATTEMPT });
 
 const loginSuccess = response => ({
   type: LOGIN_SUCCESS,
-  payload: {
-    response,
-  },
+  payload: { response },
 });
 
 const loginFail = message => ({
@@ -38,18 +34,13 @@ const handleStorage = (response) => {
 
 const userAuthUpdated = response => ({
   type: USER_AUTH_UPDATED,
-  payload: {
-    response,
-  },
+  payload: { response },
 });
 
 export const login = (email, password) => async (dispatch) => {
   try {
     dispatch(loginAttempt());
-    const body = {
-      email,
-      password,
-    };
+    const body = { email, password };
     //  TODO - fetch these
     const { REACT_APP_API_URL, REACT_APP_LOGIN_PATH } = process.env;
     const response = await Fetch(`${REACT_APP_API_URL}${REACT_APP_LOGIN_PATH}`, body);
@@ -61,15 +52,11 @@ export const login = (email, password) => async (dispatch) => {
   }
 };
 
-const challengeAttempt = () => ({
-  type: PASSWORD_CHALLENGE_ATTEMPT,
-});
+const challengeAttempt = () => ({ type: PASSWORD_CHALLENGE_ATTEMPT });
 
 const challengeSuccess = response => ({
   type: PASSWORD_CHALLENGE_SUCCESS,
-  payload: {
-    response,
-  },
+  payload: { response },
 });
 
 const challengeFail = message => ({
@@ -80,11 +67,7 @@ const challengeFail = message => ({
 export const challenge = (email, password, session) => async (dispatch) => {
   try {
     dispatch(challengeAttempt());
-    const body = {
-      email,
-      password,
-      session,
-    };
+    const body = { email, password, session };
     //  TODO - fetch these
     const { REACT_APP_API_URL, REACT_APP_PASSWORD_CHALLENGE_PATH } = process.env;
     const response = await Fetch(`${REACT_APP_API_URL}${REACT_APP_PASSWORD_CHALLENGE_PATH}`, body);

@@ -23,7 +23,6 @@ class LoginView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      cardAnimaton: 'cardHidden',
       email: '',
       password: '',
       newPassword: '',
@@ -32,37 +31,20 @@ class LoginView extends React.Component {
     };
   }
 
-  componentDidMount() {
-    this.timeOutFunction = setTimeout(() => {
-      this.setState({ cardAnimaton: '' });
-    }, 300);
-  }
-
   componentWillReceiveProps(nextProps) {
     const { history } = this.props;
     if (nextProps.success === true && nextProps.session.length === 0) {
-      this.setState({
-        displaySuccess: nextProps.success,
-      });
+      this.setState({ displaySuccess: nextProps.success });
       const successTimeout = setTimeout(() => {
         clearTimeout(successTimeout);
         history.push('/dashboard/home');
       }, 3000);
     }
-    this.setState({
-      displayError: nextProps.error,
-    });
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this.timeOutFunction);
-    this.timeOutFunction = null;
+    this.setState({ displayError: nextProps.error });
   }
 
   onChange(event) {
-    this.setState({
-      [event.target.id]: event.target.value,
-    });
+    this.setState({ [event.target.id]: event.target.value });
   }
 
   login() {
@@ -84,7 +66,7 @@ class LoginView extends React.Component {
       history,
     } = this.props;
     const {
-      cardAnimaton, email, password, displayError,
+      email, password, displayError,
       newPassword, displaySuccess,
     } = this.state;
     return (
@@ -109,20 +91,15 @@ class LoginView extends React.Component {
         <GridContainer justify="center">
           <GridItem xs={12} sm={6} md={4}>
             <form>
-              <Card login className={classes[cardAnimaton]}>
-                <CardHeader
-                  className={`${classes.cardHeader} ${classes.textCenter}`}
-                  color="rose"
-                >
+              <Card login>
+                <CardHeader className={`${classes.cardHeader} ${classes.textCenter}`} color="rose">
                   <h4 className={classes.cardTitle}>{challengeType === 'NEW_PASSWORD_REQUIRED' ? 'Update Password' : 'Login'}</h4>
                 </CardHeader>
                 <CardBody>
                   <CustomInput
                     labelText="Email"
                     id="email"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
+                    formControlProps={{ fullWidth: true }}
                     inputProps={{
                       endAdornment: (
                         <InputAdornment position="end">
@@ -137,9 +114,7 @@ class LoginView extends React.Component {
                   <CustomInput
                     labelText="Password"
                     id="password"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
+                    formControlProps={{ fullWidth: true }}
                     inputProps={{
                       endAdornment: (
                         <InputAdornment position="end">
@@ -158,9 +133,7 @@ class LoginView extends React.Component {
                   <CustomInput
                     labelText="New Password"
                     id="newPassword"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
+                    formControlProps={{ fullWidth: true }}
                     inputProps={{
                       endAdornment: (
                         <InputAdornment position="end">

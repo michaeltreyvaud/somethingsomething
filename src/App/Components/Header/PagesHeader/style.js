@@ -14,7 +14,7 @@ import {
 
 const pagesHeaderStyle = theme => ({
   appBar: {
-    backgroundColor: 'transparent',
+    backgroundColor: '#2A242F',
     boxShadow: 'none',
     borderBottom: '0',
     marginBottom: '0',
@@ -24,7 +24,6 @@ const pagesHeaderStyle = theme => ({
     zIndex: '1029',
     color: '#555555',
     border: '0',
-    borderRadius: '3px',
     padding: '10px 0',
     transition: 'all 150ms ease 0s',
     minHeight: '50px',

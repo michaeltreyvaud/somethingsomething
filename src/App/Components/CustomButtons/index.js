@@ -48,7 +48,7 @@ function RegularButton({ ...props }) {
 }
 
 RegularButton.propTypes = {
-  loading: PropTypes.bool.isRequired,
+  loading: PropTypes.bool,
   classes: PropTypes.object.isRequired,
   color: PropTypes.oneOf([
     'primary',
@@ -81,6 +81,10 @@ RegularButton.propTypes = {
   justIcon: PropTypes.bool,
   className: PropTypes.string,
   muiClasses: PropTypes.object,
+};
+
+RegularButton.defaultProps = {
+  loading: false,
 };
 
 export default withStyles(style)(RegularButton);

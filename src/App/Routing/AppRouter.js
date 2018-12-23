@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
 import coreRoutes from './Routes';
-import { listServices } from '../Views/Service/Store/Actions';
-import { listCleaningLogs } from '../Views/Cleaning/CleaningLog/Store/Actions';
+import Loading from '../Layouts/Loading';
 
-const noMatch = () => (<h1>No Match</h1>);
-const Loading = () => (<h1>TODO App loading</h1>);
+const noMatch = () => (<h1>TODO: No Match</h1>);
 
 class AppRouter extends Component {
   constructor(props) {
@@ -121,6 +119,9 @@ AppRouter.propTypes = {
   listSafetys: PropTypes.func.isRequired,
   listChecklistCategory: PropTypes.func.isRequired,
   listsafetyRecordCategoryCategory: PropTypes.func.isRequired,
+  listServices: PropTypes.func.isRequired,
+  listCleaningItems: PropTypes.func.isRequired,
+  listCleaningLogs: PropTypes.func.isRequired,
 };
 
 export default AppRouter;
