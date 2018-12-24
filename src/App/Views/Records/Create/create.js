@@ -18,6 +18,8 @@ import CardIcon from '../../../Components/Card/CardIcon';
 import extendedFormsStyle from '../../../Assets/Jss/extendedFormsStyle';
 import Button from '../../../Components/CustomButtons';
 
+import ReportTypes from './RecordTypes';
+
 class Create extends Component {
   constructor(props) {
     super(props);
@@ -29,17 +31,21 @@ class Create extends Component {
     if (loading && nextProps.loading === false && nextProps.success) this.back();
   }
 
+  setStateValue(key, value) {
+    return this.setState({ [key]: value });
+  }
+
+  back() {
+    const { history } = this.props;
+    history.push('/dashboard/records');
+  }
+
   create() {
     const { create, loading } = this.props;
     if (loading) return false;
     const { state } = this;
     delete state.selectedRecordType;
     return create(state);
-  }
-
-  back() {
-    const { history } = this.props;
-    history.push('/dashboard/records');
   }
 
   updateValue(e) {
@@ -59,6 +65,20 @@ class Create extends Component {
       >
         {item.displayName}
       </MenuItem>));
+  }
+
+  renderRecordType() {
+    const { foodItems, suppliers } = this.props;
+    const { type } = this.state;
+    if (!type) return null;
+    const childProps = {
+      ...this.state,
+      foodItems,
+      suppliers,
+      updateValue: e => this.updateValue(e),
+      setStateValue: (key, value) => this.setStateValue(key, value),
+    };
+    return React.createElement(ReportTypes[type], childProps, null);
   }
 
   render() {
@@ -88,6 +108,7 @@ class Create extends Component {
                   {this.renderRecordTypes()}
                 </Select>
               </FormControl>
+              {this.renderRecordType()}
               <Button loading={loading} onClick={() => this.create()} color="rose" className={classes.updateProfileButton}>
                 Save
               </Button>
@@ -109,6 +130,8 @@ Create.propTypes = {
   success: PropTypes.bool.isRequired,
   create: PropTypes.func.isRequired,
   recordTypes: PropTypes.array.isRequired,
+  foodItems: PropTypes.array.isRequired,
+  suppliers: PropTypes.array.isRequired,
 };
 
 export default withStyles(extendedFormsStyle)(Create);

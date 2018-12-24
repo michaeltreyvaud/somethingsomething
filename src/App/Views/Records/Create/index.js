@@ -20,12 +20,50 @@ const recordTypes = [
     displayName: 'Hot Hold',
     type: 'hotHold',
   },
+  {
+    displayName: 'General',
+    type: 'general',
+  },
+];
+
+//  TODO - fix this
+const foodItems = [
+  {
+    name: 'Food Item 1',
+    id: 'someid1',
+  },
+  {
+    name: 'Food Item 2',
+    id: 'someid2',
+  },
+  {
+    name: 'Food Item 3',
+    id: 'someid3',
+  },
+];
+
+//  TODO - fix this
+const suppliers = [
+  {
+    name: 'Supplier 1',
+    id: 'someid1',
+  },
+  {
+    name: 'Supplier 2',
+    id: 'someid2',
+  },
+  {
+    name: 'Supplier 3',
+    id: 'someid3',
+  },
 ];
 
 const mapStateToProps = state => ({
   loading: state.records.create.loading,
   success: state.records.create.success,
   recordTypes,
+  foodItems,
+  suppliers,
 });
 
 const mapDispatchToProps = dispatch => ({

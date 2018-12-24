@@ -147,7 +147,7 @@ const dashRoutes = [
       {
         hidden: true,
         path: '/dashboard/records/create',
-        name: 'Record',
+        name: 'Create Record',
         component: RecordsCreate,
       },
     ],
