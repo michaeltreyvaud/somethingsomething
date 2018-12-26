@@ -13,13 +13,16 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import CustomInput from '../../../../Components/CustomInput';
 import extendedFormsStyle from '../../../../Assets/Jss/extendedFormsStyle';
 
+//  TODO: Reset state properly
+const initialState = {
+  selectedFoodItem: '',
+  selectedSupplier: '',
+};
+
 class FoodDelivery extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      selectedFoodItem: '',
-      selectedSupplier: '',
-    };
+    this.state = initialState;
     props.setStateValue('deliveryStatus', false);
   }
 
@@ -187,7 +190,7 @@ FoodDelivery.propTypes = {
 FoodDelivery.defaultProps = {
   batchCode: '',
   comments: '',
-  temperature: 0,
+  temperature: '',
   vehicleNotes: '',
   driverName: '',
   deliveryStatus: false,

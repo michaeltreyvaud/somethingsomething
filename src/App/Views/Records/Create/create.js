@@ -20,10 +20,13 @@ import Button from '../../../Components/CustomButtons';
 
 import ReportTypes from './RecordTypes';
 
+//  TODO: Reset state properly
+const initialState = { type: '' };
+
 class Create extends Component {
   constructor(props) {
     super(props);
-    this.state = { type: '' };
+    this.state = initialState;
   }
 
   componentWillReceiveProps(nextProps) {
@@ -68,13 +71,21 @@ class Create extends Component {
   }
 
   renderRecordType() {
-    const { foodItems, suppliers } = this.props;
+    const {
+      foodItems, suppliers,
+      refrigerationTypes, fridgeItems,
+      freezerItems, chillDisplayItems,
+    } = this.props;
     const { type } = this.state;
     if (!type) return null;
     const childProps = {
       ...this.state,
       foodItems,
       suppliers,
+      refrigerationTypes,
+      fridgeItems,
+      freezerItems,
+      chillDisplayItems,
       updateValue: e => this.updateValue(e),
       setStateValue: (key, value) => this.setStateValue(key, value),
     };
@@ -101,7 +112,11 @@ class Create extends Component {
                 <Select
                   MenuProps={{ className: classes.selectMenu }}
                   classes={{ select: classes.select }}
-                  onChange={e => this.updateValue(e)}
+                  onChange={(e) => {
+                    //  Reset leftover state
+                    this.setState(initialState);
+                    this.updateValue(e);
+                  }}
                   value={type}
                   inputProps={{ name: 'type' }}
                 >
@@ -132,6 +147,10 @@ Create.propTypes = {
   recordTypes: PropTypes.array.isRequired,
   foodItems: PropTypes.array.isRequired,
   suppliers: PropTypes.array.isRequired,
+  refrigerationTypes: PropTypes.array.isRequired,
+  fridgeItems: PropTypes.array.isRequired,
+  freezerItems: PropTypes.array.isRequired,
+  chillDisplayItems: PropTypes.array.isRequired,
 };
 
 export default withStyles(extendedFormsStyle)(Create);

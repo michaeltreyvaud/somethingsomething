@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import Create from './create';
 import { create } from '../Store/Actions/create';
 
-//  TODO - fetch these
+//  TODO - fetch these, should come from discovery
 const recordTypes = [
   {
     displayName: 'Food Delivery',
@@ -23,6 +23,22 @@ const recordTypes = [
   {
     displayName: 'General',
     type: 'general',
+  },
+];
+
+//  TODO - should come from discovery
+const refrigerationTypes = [
+  {
+    displayName: 'Fridge',
+    refrigerationType: 'fridge',
+  },
+  {
+    displayName: 'Freezer',
+    refrigerationType: 'freezer',
+  },
+  {
+    displayName: 'Chill Display',
+    refrigerationType: 'chillDisplay',
   },
 ];
 
@@ -58,12 +74,64 @@ const suppliers = [
   },
 ];
 
+//  TODO: fix this
+const fridgeItems = [
+  {
+    id: 'some-id-1',
+    name: 'fridge-name-1',
+  },
+  {
+    id: 'some-id-2',
+    name: 'fridge-name-2',
+  },
+  {
+    id: 'some-id-3',
+    name: 'fridge-name-3',
+  },
+];
+
+//  TODO: fix this
+const freezerItems = [
+  {
+    id: 'some-id-1',
+    name: 'freezer-name-1',
+  },
+  {
+    id: 'some-id-2',
+    name: 'freezer-name-2',
+  },
+  {
+    id: 'some-id-3',
+    name: 'freezer-name-3',
+  },
+];
+
+//  TODO: fix this
+const chillDisplayItems = [
+  {
+    id: 'some-id-1',
+    name: 'chilldisplay-name-1',
+  },
+  {
+    id: 'some-id-2',
+    name: 'chilldisplay-name-2',
+  },
+  {
+    id: 'some-id-3',
+    name: 'chilldisplay-name-3',
+  },
+];
+
 const mapStateToProps = state => ({
   loading: state.records.create.loading,
   success: state.records.create.success,
   recordTypes,
+  refrigerationTypes,
   foodItems,
   suppliers,
+  fridgeItems,
+  freezerItems,
+  chillDisplayItems,
 });
 
 const mapDispatchToProps = dispatch => ({
