@@ -13,7 +13,6 @@ import Colorize from '@material-ui/icons/Colorize';
 import LocalDrink from '@material-ui/icons/LocalDrink';
 import Timeline from '@material-ui/icons/Timeline';
 import Description from '@material-ui/icons/Description';
-import BugReport from '@material-ui/icons/BugReport';
 
 import Metrics from '../../Views/Home/Metrics';
 import Company from '../../Views/Company/company.container';
@@ -68,10 +67,6 @@ import FridgeItemUpdate from '../../Views/Fridge/FridgeItem/Update/update.contai
 import FridgeTask from '../../Views/Fridge/FridgeTask/fridgeTask.container';
 import FridgeTaskCreate from '../../Views/Fridge/FridgeTask/Create/create.container';
 
-import FridgeLog from '../../Views/Fridge/FridgeLog/fridgeLog.container';
-import FridgeLogCreate from '../../Views/Fridge/FridgeLog/Create/create.container';
-import FridgeLogUpdate from '../../Views/Fridge/FridgeLog/Update/update.container';
-
 import FridgeChart from '../../Views/Fridge/FridgeChart';
 
 import FreezerItem from '../../Views/Freezer/FreezerItem/freezerItem.container';
@@ -80,10 +75,6 @@ import FreezerItemUpdate from '../../Views/Freezer/FreezerItem/Update/update.con
 
 import FreezerTask from '../../Views/Freezer/FreezerTask/freezerTask.container';
 import FreezerTaskCreate from '../../Views/Freezer/FreezerTask/Create/create.container';
-
-import FreezerLog from '../../Views/Freezer/FreezerLog/freezerLog.container';
-import FreezerLogCreate from '../../Views/Freezer/FreezerLog/Create/create.container';
-import FreezerLogUpdate from '../../Views/Freezer/FreezerLog/Update/update.container';
 
 import FreezerChart from '../../Views/Freezer/FreezerChart';
 
@@ -125,17 +116,9 @@ import CleaningTaskCreate from '../../Views/Cleaning/CleaningTask/Create/create'
 import CleaningLog from '../../Views/Cleaning/CleaningLog/cleaningLog.container';
 import CleaningLogCreate from '../../Views/Cleaning/CleaningLog/Create/create.container';
 
-import Reports from '../../Views/Reports/report.container';
-import ReportsCreate from '../../Views/Reports/Create/create.container';
-import ReportsUpdate from '../../Views/Reports/Update/update.container';
-
 import SafetySheet from '../../Views/SafetySheet/safety.container';
 import SafetySheetCreate from '../../Views/SafetySheet/Create/create.container';
 import SafetySheetUpdate from '../../Views/SafetySheet/Update/update.container';
-
-import PestControl from '../../Views/PestControl/pest.container';
-import PestControlCreate from '../../Views/PestControl/Create/create.container';
-import PestControlUpdate from '../../Views/PestControl/Update/update.container';
 
 const dashRoutes = [
   {
@@ -400,23 +383,6 @@ const dashRoutes = [
         component: FridgeTaskCreate,
       },
       {
-        path: '/dashboard/fridge/log',
-        name: 'Fridge Log',
-        component: FridgeLog,
-      },
-      {
-        hidden: true,
-        path: '/dashboard/fridge/log/create',
-        name: 'Create Fridge Log',
-        component: FridgeLogCreate,
-      },
-      {
-        hidden: true,
-        path: '/dashboard/fridge/log/:id',
-        name: 'Create Fridge Log',
-        component: FridgeLogUpdate,
-      },
-      {
         path: '/dashboard/fridge/chart',
         name: 'Fridge Chart',
         component: FridgeChart,
@@ -457,23 +423,6 @@ const dashRoutes = [
         path: '/dashboard/freezer/task/create',
         name: 'Create Task',
         component: FreezerTaskCreate,
-      },
-      {
-        path: '/dashboard/freezer/log',
-        name: 'Freezer Log',
-        component: FreezerLog,
-      },
-      {
-        hidden: true,
-        path: '/dashboard/freezer/log/create',
-        name: 'Create Freezer Log',
-        component: FreezerLogCreate,
-      },
-      {
-        hidden: true,
-        path: '/dashboard/freezer/log/:id',
-        name: 'Create Freezer Log',
-        component: FreezerLogUpdate,
       },
       {
         path: '/dashboard/freezer/chart',
@@ -696,27 +645,6 @@ const dashRoutes = [
     ],
   },
   {
-    path: '/dashboard/reports',
-    name: 'Reports',
-    state: 'openReports',
-    icon: Timeline,
-    component: Reports,
-    views: [
-      {
-        hidden: true,
-        path: '/dashboard/reports/create',
-        name: 'Create Report Log',
-        component: ReportsCreate,
-      },
-      {
-        hidden: true,
-        path: '/dashboard/reports/:id',
-        name: 'Update Report',
-        component: ReportsUpdate,
-      },
-    ],
-  },
-  {
     path: '/dashboard/safetysheet',
     name: 'Chemical Safety',
     state: 'openSafetySheet',
@@ -734,27 +662,6 @@ const dashRoutes = [
         path: '/dashboard/safetysheet/:id',
         name: 'Update Datasheet',
         component: SafetySheetUpdate,
-      },
-    ],
-  },
-  {
-    path: '/dashboard/pest',
-    name: 'Pest Management',
-    state: 'openPestManagement',
-    icon: BugReport,
-    component: PestControl,
-    views: [
-      {
-        hidden: true,
-        path: '/dashboard/pest/create',
-        name: 'Create Pest Record',
-        component: PestControlCreate,
-      },
-      {
-        hidden: true,
-        path: '/dashboard/pest/:id',
-        name: 'Update Record',
-        component: PestControlUpdate,
       },
     ],
   },

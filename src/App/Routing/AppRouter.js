@@ -52,10 +52,9 @@ class AppRouter extends Component {
       listTeams, listUsers,
       listFreezers, listFridges,
       listFoodItems, listSuppliers,
-      listFridgeLogs, listFreezerLogs,
       listMedicalLogs, listTrainingLogs,
       listHotHoldings, listFastCoolings,
-      listReports, listPests, listSafetys,
+      listSafetys,
       listServices, listCleaningItems, listCleaningLogs,
       listChecklistCategory, listsafetyRecordCategoryCategory,
     } = this.props;
@@ -66,14 +65,10 @@ class AppRouter extends Component {
     listFridges();
     listFoodItems();
     listSuppliers();
-    listFridgeLogs();
-    listFreezerLogs();
     listMedicalLogs();
     listTrainingLogs();
     listHotHoldings();
     listFastCoolings();
-    listReports();
-    listPests();
     listSafetys();
     listServices();
     listCleaningItems();
@@ -108,14 +103,10 @@ AppRouter.propTypes = {
   listFridges: PropTypes.func.isRequired,
   listFoodItems: PropTypes.func.isRequired,
   listSuppliers: PropTypes.func.isRequired,
-  listFridgeLogs: PropTypes.func.isRequired,
-  listFreezerLogs: PropTypes.func.isRequired,
   listMedicalLogs: PropTypes.func.isRequired,
   listTrainingLogs: PropTypes.func.isRequired,
   listHotHoldings: PropTypes.func.isRequired,
   listFastCoolings: PropTypes.func.isRequired,
-  listReports: PropTypes.func.isRequired,
-  listPests: PropTypes.func.isRequired,
   listSafetys: PropTypes.func.isRequired,
   listChecklistCategory: PropTypes.func.isRequired,
   listsafetyRecordCategoryCategory: PropTypes.func.isRequired,

@@ -16,8 +16,6 @@ import foodItemReducer from './Reducers/FoodItem';
 import hotHoldingReducer from './Reducers/HotHolding';
 import fastCoolingReducer from './Reducers/FastCooling';
 import userReducer from './Reducers/User';
-import reportReducer from './Reducers/Report';
-import pestReducer from './Reducers/Pest';
 import safetyReducer from './Reducers/Safety';
 import servicesReducer from './Reducers/Services';
 import cleaningItemsReducer from './Reducers/Cleaning';
@@ -42,8 +40,6 @@ const appReducers = combineReducers({
   hotHolding: hotHoldingReducer,
   fastCooling: fastCoolingReducer,
   user: userReducer,
-  report: reportReducer,
-  pest: pestReducer,
   safety: safetyReducer,
   services: servicesReducer,
   cleaningItem: cleaningItemsReducer,
