@@ -13,7 +13,6 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import CustomInput from '../../../../Components/CustomInput';
 import extendedFormsStyle from '../../../../Assets/Jss/extendedFormsStyle';
 
-//  TODO: Reset state properly
 const initialState = {
   selectedFoodItem: '',
   selectedSupplier: '',
@@ -23,29 +22,23 @@ class FoodDelivery extends Component {
   constructor(props) {
     super(props);
     this.state = initialState;
-    props.setStateValue('deliveryStatus', false);
-  }
-
-  setDeliveryStatus(e) {
-    const { setStateValue } = this.props;
-    const { target } = e;
-    return setStateValue('deliveryStatus', !(target.value === 'true'));
+    props.setRecordValue('accepted', false);
   }
 
   selectValue(e) {
     const { target } = e;
     const { value } = target;
     if (target.name === 'foodItem') {
-      const { foodItems, setStateValue } = this.props;
+      const { foodItems, setRecordValue } = this.props;
       this.setState({ selectedFoodItem: value });
-      return setStateValue('foodItem', {
+      return setRecordValue('foodItem', {
         id: foodItems[value].id,
         displayName: foodItems[value].name,
       });
     }
-    const { suppliers, setStateValue } = this.props;
+    const { suppliers, setRecordValue } = this.props;
     this.setState({ selectedSupplier: value });
-    return setStateValue('supplier', {
+    return setRecordValue('supplier', {
       id: suppliers[value].id,
       displayName: suppliers[value].name,
     });
@@ -78,11 +71,11 @@ class FoodDelivery extends Component {
   }
 
   render() {
+    const { classes, setRecordValue, record } = this.props;
     const {
-      classes, batchCode, updateValue, comments,
-      temperature, vehicleNotes, driverName,
-      deliveryStatus,
-    } = this.props;
+      batchCode, comments, temperature,
+      vehicleNotes, driverName, accepted,
+    } = record;
     const { selectedFoodItem, selectedSupplier } = this.state;
     return (
       <div>
@@ -100,74 +93,74 @@ class FoodDelivery extends Component {
             {this.renderFoodItems()}
           </Select>
         </FormControl>
-        <FormControl fullWidth className={classes.selectFormControl}>
-          <InputLabel htmlFor="simple-select" className={classes.selectLabel}>
-            Supplier
-          </InputLabel>
-          <Select
-            MenuProps={{ className: classes.selectMenu }}
-            classes={{ select: classes.select }}
-            onChange={e => this.selectValue(e)}
-            value={selectedSupplier}
-            inputProps={{ name: 'supplier' }}
-          >
-            {this.renderSuppliers()}
-          </Select>
-        </FormControl>
-        <CustomInput
-          value={batchCode}
-          onChange={e => updateValue(e)}
-          labelText="Batch Code"
-          id="batchCode"
-          formControlProps={{ fullWidth: true }}
-          inputProps={{ type: 'text' }}
-        />
-        <CustomInput
-          value={temperature}
-          onChange={e => updateValue(e)}
-          labelText="Temperature"
-          id="temperature"
-          formControlProps={{ fullWidth: true }}
-          inputProps={{ type: 'number' }}
-        />
-        <CustomInput
-          value={vehicleNotes}
-          onChange={e => updateValue(e)}
-          labelText="Vehicle Notes"
-          id="vehicleNotes"
-          formControlProps={{ fullWidth: true }}
-          inputProps={{ type: 'text' }}
-        />
-        <CustomInput
-          value={driverName}
-          onChange={e => updateValue(e)}
-          labelText="Driver name"
-          id="driverName"
-          formControlProps={{ fullWidth: true }}
-          inputProps={{ type: 'text' }}
-        />
-        <CustomInput
-          value={comments}
-          onChange={e => updateValue(e)}
-          labelText="Comments"
-          id="comments"
-          formControlProps={{ fullWidth: true }}
-          inputProps={{ multiline: true, rows: 3 }}
-        />
-        <FormControlLabel
-          control={(
-            <Checkbox
-              checked={deliveryStatus}
-              id="deliveryStatus"
-              value={deliveryStatus}
-              onClick={e => this.setDeliveryStatus(e)}
-              checkedIcon={<Check className={classes.checkedIcon} />}
-              icon={<Check className={classes.uncheckedIcon} />}
-              classes={{ checked: classes.checked }}
-            />)}
-          classes={{ label: classes.label }}
-          label="Accepted"
-        />
+        {selectedFoodItem !== '' && (
+          <FormControl fullWidth className={classes.selectFormControl}>
+            <InputLabel htmlFor="simple-select" className={classes.selectLabel}>
+              Supplier
+            </InputLabel>
+            <Select
+              MenuProps={{ className: classes.selectMenu }}
+              classes={{ select: classes.select }}
+              onChange={e => this.selectValue(e)}
+              value={selectedSupplier}
+              inputProps={{ name: 'supplier' }}
+            >
+              {this.renderSuppliers()}
+            </Select>
+          </FormControl>
+        )}
+        {selectedFoodItem !== '' && selectedSupplier !== '' && (
+          <div>
+            <CustomInput
+              value={batchCode}
+              labelText="Batch Code"
+              formControlProps={{ fullWidth: true }}
+              inputProps={{ type: 'text' }}
+              onChange={e => setRecordValue('batchCode', e.target.value)}
+            />
+            <CustomInput
+              value={temperature}
+              labelText="Temperature"
+              formControlProps={{ fullWidth: true }}
+              inputProps={{ type: 'number' }}
+              onChange={e => setRecordValue('temperature', e.target.value)}
+            />
+            <CustomInput
+              value={vehicleNotes}
+              labelText="Vehicle Notes"
+              formControlProps={{ fullWidth: true }}
+              inputProps={{ type: 'text' }}
+              onChange={e => setRecordValue('vehicleNotes', e.target.value)}
+            />
+            <CustomInput
+              value={driverName}
+              labelText="Driver name"
+              formControlProps={{ fullWidth: true }}
+              inputProps={{ type: 'text' }}
+              onChange={e => setRecordValue('driverName', e.target.value)}
+            />
+            <CustomInput
+              value={comments}
+              labelText="Comments"
+              formControlProps={{ fullWidth: true }}
+              inputProps={{ multiline: true, rows: 3 }}
+              onChange={e => setRecordValue('comments', e.target.value)}
+            />
+            <FormControlLabel
+              control={(
+                <Checkbox
+                  checked={accepted}
+                  value={accepted}
+                  checkedIcon={<Check className={classes.checkedIcon} />}
+                  icon={<Check className={classes.uncheckedIcon} />}
+                  classes={{ checked: classes.checked }}
+                  onClick={e => setRecordValue('accepted', !(e.target.value === 'true'))}
+                />)}
+              classes={{ label: classes.label }}
+              label="Delivery Accepted"
+            />
+          </div>
+        )}
       </div>
     );
   }
@@ -177,23 +170,8 @@ FoodDelivery.propTypes = {
   classes: PropTypes.object.isRequired,
   foodItems: PropTypes.array.isRequired,
   suppliers: PropTypes.array.isRequired,
-  setStateValue: PropTypes.func.isRequired,
-  updateValue: PropTypes.func.isRequired,
-  batchCode: PropTypes.string,
-  comments: PropTypes.string,
-  temperature: PropTypes.number,
-  vehicleNotes: PropTypes.string,
-  driverName: PropTypes.string,
-  deliveryStatus: PropTypes.bool,
-};
-
-FoodDelivery.defaultProps = {
-  batchCode: '',
-  comments: '',
-  temperature: '',
-  vehicleNotes: '',
-  driverName: '',
-  deliveryStatus: false,
+  setRecordValue: PropTypes.func.isRequired,
+  record: PropTypes.object.isRequired,
 };
 
 export default withStyles(extendedFormsStyle)(FoodDelivery);

@@ -1,23 +1,25 @@
 import {
-  CREATE_FOOD_DELIVERY_RECORD_ATTEMPT,
-  CREATE_FOOD_DELIVERY_RECORD_SUCCESS,
-  CREATE_FOOD_DELIVERY_RECORD_FAIL,
+  RECORD_CREATE_ATTEMPT,
+  RECORD_CREATE_SUCCESS,
+  RECORD_CREATE_FAIL,
+  RECORD_SET_VALUE,
+  RECORD_RESET,
 } from '../ActionTypes';
 import { sessionTimeout } from '../../../../Routing/Store/Actions';
 import { AuthenticatedFetch } from '../../../../Util/fetch';
 import { dashboardLoading, showDashBoardError, showDashBoardSuccess } from '../../../../Layouts/Dashboard/Store/Actions';
 
 const attempt = () => ({
-  type: CREATE_FOOD_DELIVERY_RECORD_ATTEMPT,
+  type: RECORD_CREATE_ATTEMPT,
 });
 
 const success = response => ({
-  type: CREATE_FOOD_DELIVERY_RECORD_SUCCESS,
+  type: RECORD_CREATE_SUCCESS,
   payload: { response },
 });
 
 const fail = message => ({
-  type: CREATE_FOOD_DELIVERY_RECORD_FAIL,
+  type: RECORD_CREATE_FAIL,
   payload: { message },
 });
 
@@ -41,3 +43,10 @@ export const create = item => async (dispatch) => {
     return dispatch(fail(_err.message));
   }
 };
+
+export const setRecordValue = (key, value) => ({
+  type: RECORD_SET_VALUE,
+  payload: { key, value },
+});
+
+export const resetRecord = () => ({ type: RECORD_RESET });

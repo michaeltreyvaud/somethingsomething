@@ -6,38 +6,31 @@ import CustomInput from '../../../../Components/CustomInput';
 import extendedFormsStyle from '../../../../Assets/Jss/extendedFormsStyle';
 
 const General = (props) => {
-  const { updateValue, name, comment } = props;
+  const { setRecordValue, record } = props;
+  const { name, comment } = record;
   return (
     <div>
       <CustomInput
         labelText="Name"
-        id="name"
         value={name}
         formControlProps={{ fullWidth: true }}
         inputProps={{ type: 'text' }}
-        onChange={e => updateValue(e)}
+        onChange={e => setRecordValue('name', e.target.value)}
       />
       <CustomInput
         value={comment}
         labelText="Comment"
-        id="comment"
         formControlProps={{ fullWidth: true }}
         inputProps={{ multiline: true, rows: 3 }}
-        onChange={e => updateValue(e)}
+        onChange={e => setRecordValue('comment', e.target.value)}
       />
     </div>
   );
 };
 
 General.propTypes = {
-  updateValue: PropTypes.func.isRequired,
-  name: PropTypes.string,
-  comment: PropTypes.string,
-};
-
-General.defaultProps = {
-  name: '',
-  comment: '',
+  setRecordValue: PropTypes.func.isRequired,
+  record: PropTypes.object.isRequired,
 };
 
 export default withStyles(extendedFormsStyle)(General);

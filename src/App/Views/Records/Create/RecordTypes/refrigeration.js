@@ -10,7 +10,6 @@ import FormControl from '@material-ui/core/FormControl';
 import CustomInput from '../../../../Components/CustomInput';
 import extendedFormsStyle from '../../../../Assets/Jss/extendedFormsStyle';
 
-//  TODO: reset state properly
 const initialState = {
   selectedRefrigerationType: '',
   selectedRefrigerationUnit: '',
@@ -25,10 +24,10 @@ class Refrigeration extends Component {
   selectValue(e) {
     const { target } = e;
     const { value } = target;
-    const { refrigerationTypes, setStateValue } = this.props;
+    const { refrigerationTypes, setRecordValue } = this.props;
     if (target.name === 'refrigerationType') {
       this.setState({ selectedRefrigerationType: value });
-      return setStateValue('refrigerationType', refrigerationTypes[value].refrigerationType);
+      return setRecordValue('refrigerationType', refrigerationTypes[value].refrigerationType);
     }
 
     const { selectedRefrigerationType } = this.state;
@@ -52,7 +51,7 @@ class Refrigeration extends Component {
       default:
     }
     this.setState({ selectedRefrigerationUnit: value });
-    return setStateValue('refrigerationUnit', selectedObject);
+    return setRecordValue('refrigerationUnit', selectedObject);
   }
 
   renderRefrigerationTypes() {
@@ -102,11 +101,8 @@ class Refrigeration extends Component {
   }
 
   render() {
-    const {
-      classes, setStateValue,
-      temperature, updateValue,
-      comments,
-    } = this.props;
+    const { classes, record, setRecordValue } = this.props;
+    const { temperature, comments } = record;
     const { selectedRefrigerationType, selectedRefrigerationUnit } = this.state;
     return (
       <div>
@@ -120,7 +116,7 @@ class Refrigeration extends Component {
             onChange={(e) => {
               //  Reset leftover data
               this.setState(initialState);
-              setStateValue('refrigerationUnit', {});
+              setRecordValue('refrigerationUnit', {});
               this.selectValue(e);
             }}
             value={selectedRefrigerationType}
@@ -146,21 +142,19 @@ class Refrigeration extends Component {
           </FormControl>)}
         {selectedRefrigerationType !== '' && selectedRefrigerationUnit !== '' && (
           <CustomInput
-            value={temperature || ''}
-            onChange={e => updateValue(e)}
+            value={temperature}
             labelText="Temperature"
-            id="temperature"
             formControlProps={{ fullWidth: true }}
             inputProps={{ type: 'number' }}
+            onChange={e => setRecordValue('temperature', e.target.value)}
           />)}
         {selectedRefrigerationType !== '' && selectedRefrigerationUnit !== '' && (
           <CustomInput
-            value={comments || ''}
-            onChange={e => updateValue(e)}
+            value={comments}
             labelText="Comments"
-            id="comments"
             formControlProps={{ fullWidth: true }}
             inputProps={{ multiline: true, rows: 3 }}
+            onChange={e => setRecordValue('comments', e.target.value)}
           />)}
       </div>
     );
@@ -173,15 +167,8 @@ Refrigeration.propTypes = {
   freezerItems: PropTypes.array.isRequired,
   chillDisplayItems: PropTypes.array.isRequired,
   refrigerationTypes: PropTypes.array.isRequired,
-  setStateValue: PropTypes.func.isRequired,
-  updateValue: PropTypes.func.isRequired,
-  comments: PropTypes.string,
-  temperature: PropTypes.number,
-};
-
-Refrigeration.defaultProps = {
-  comments: '',
-  temperature: '',
+  setRecordValue: PropTypes.func.isRequired,
+  record: PropTypes.object.isRequired,
 };
 
 export default withStyles(extendedFormsStyle)(Refrigeration);

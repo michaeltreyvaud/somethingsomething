@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Create from './create';
-import { create } from '../Store/Actions/create';
+import { create, setRecordValue, resetRecord } from '../Store/Actions/create';
 
 //  TODO - fetch these, should come from discovery
 const recordTypes = [
@@ -13,7 +13,7 @@ const recordTypes = [
     type: 'refrigeration',
   },
   {
-    displayName: 'Cooking Cooling Reheating',
+    displayName: 'Cooking/Cooling/Reheating',
     type: 'cookingCoolingReheating',
   },
   {
@@ -23,6 +23,10 @@ const recordTypes = [
   {
     displayName: 'General',
     type: 'general',
+  },
+  {
+    displayName: 'Pest',
+    type: 'pest',
   },
 ];
 
@@ -122,9 +126,26 @@ const chillDisplayItems = [
   },
 ];
 
+//  TODO: fix this
+const locations = [
+  {
+    id: 'some-id-1',
+    name: 'Location 1',
+  },
+  {
+    id: 'some-id-2',
+    name: 'Location 2',
+  },
+  {
+    id: 'some-id-3',
+    name: 'Location 3',
+  },
+];
+
 const mapStateToProps = state => ({
   loading: state.records.create.loading,
   success: state.records.create.success,
+  record: state.records.create.record,
   recordTypes,
   refrigerationTypes,
   foodItems,
@@ -132,10 +153,13 @@ const mapStateToProps = state => ({
   fridgeItems,
   freezerItems,
   chillDisplayItems,
+  locations,
 });
 
 const mapDispatchToProps = dispatch => ({
   create: item => dispatch(create(item)),
+  setRecordValue: (key, value) => dispatch(setRecordValue(key, value)),
+  resetRecord: () => dispatch(resetRecord()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Create);

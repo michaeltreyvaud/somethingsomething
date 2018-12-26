@@ -20,22 +20,23 @@ import Button from '../../../Components/CustomButtons';
 
 import ReportTypes from './RecordTypes';
 
-//  TODO: Reset state properly
-const initialState = { type: '' };
-
 class Create extends Component {
-  constructor(props) {
-    super(props);
-    this.state = initialState;
-  }
-
   componentWillReceiveProps(nextProps) {
     const { loading } = this.props;
     if (loading && nextProps.loading === false && nextProps.success) this.back();
   }
 
-  setStateValue(key, value) {
-    return this.setState({ [key]: value });
+  componentWillUnmount() {
+    const { resetRecord } = this.props;
+    resetRecord();
+  }
+
+  setRecordValue(e) {
+    const { resetRecord, setRecordValue } = this.props;
+    const { target } = e;
+    const { name, value } = target;
+    resetRecord();
+    setRecordValue(name, value);
   }
 
   back() {
@@ -44,17 +45,9 @@ class Create extends Component {
   }
 
   create() {
-    const { create, loading } = this.props;
+    const { create, loading, record } = this.props;
     if (loading) return false;
-    const { state } = this;
-    delete state.selectedRecordType;
-    return create(state);
-  }
-
-  updateValue(e) {
-    const { target } = e;
-    const { value } = target;
-    return this.setState({ [target.id || target.name]: value });
+    return create(record);
   }
 
   renderRecordTypes() {
@@ -71,30 +64,15 @@ class Create extends Component {
   }
 
   renderRecordType() {
-    const {
-      foodItems, suppliers,
-      refrigerationTypes, fridgeItems,
-      freezerItems, chillDisplayItems,
-    } = this.props;
-    const { type } = this.state;
+    const { record } = this.props;
+    const { type } = record;
     if (!type) return null;
-    const childProps = {
-      ...this.state,
-      foodItems,
-      suppliers,
-      refrigerationTypes,
-      fridgeItems,
-      freezerItems,
-      chillDisplayItems,
-      updateValue: e => this.updateValue(e),
-      setStateValue: (key, value) => this.setStateValue(key, value),
-    };
-    return React.createElement(ReportTypes[type], childProps, null);
+    return React.createElement(ReportTypes[type], this.props, null);
   }
 
   render() {
-    const { classes, loading } = this.props;
-    const { type } = this.state;
+    const { classes, loading, record } = this.props;
+    const { type } = record;
     return (
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
@@ -112,11 +90,7 @@ class Create extends Component {
                 <Select
                   MenuProps={{ className: classes.selectMenu }}
                   classes={{ select: classes.select }}
-                  onChange={(e) => {
-                    //  Reset leftover state
-                    this.setState(initialState);
-                    this.updateValue(e);
-                  }}
+                  onChange={e => this.setRecordValue(e)}
                   value={type}
                   inputProps={{ name: 'type' }}
                 >
@@ -151,6 +125,10 @@ Create.propTypes = {
   fridgeItems: PropTypes.array.isRequired,
   freezerItems: PropTypes.array.isRequired,
   chillDisplayItems: PropTypes.array.isRequired,
+  record: PropTypes.object.isRequired,
+  setRecordValue: PropTypes.func.isRequired,
+  resetRecord: PropTypes.func.isRequired,
+  locations: PropTypes.array.isRequired,
 };
 
 export default withStyles(extendedFormsStyle)(Create);
