@@ -6,9 +6,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
-import Checkbox from '@material-ui/core/Checkbox';
-import Check from '@material-ui/icons/Check';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import CustomInput from '../../../../Components/CustomInput';
 import extendedFormsStyle from '../../../../Assets/Jss/extendedFormsStyle';
@@ -31,7 +28,7 @@ class Refrigeration extends Component {
     const { refrigerationTypes, setStateValue } = this.props;
     if (target.name === 'refrigerationType') {
       this.setState({ selectedRefrigerationType: value });
-      return setStateValue('setStateValue', refrigerationTypes[value].refrigerationType);
+      return setStateValue('refrigerationType', refrigerationTypes[value].refrigerationType);
     }
 
     const { selectedRefrigerationType } = this.state;
@@ -169,5 +166,22 @@ class Refrigeration extends Component {
     );
   }
 }
+
+Refrigeration.propTypes = {
+  classes: PropTypes.object.isRequired,
+  fridgeItems: PropTypes.array.isRequired,
+  freezerItems: PropTypes.array.isRequired,
+  chillDisplayItems: PropTypes.array.isRequired,
+  refrigerationTypes: PropTypes.array.isRequired,
+  setStateValue: PropTypes.func.isRequired,
+  updateValue: PropTypes.func.isRequired,
+  comments: PropTypes.string,
+  temperature: PropTypes.number,
+};
+
+Refrigeration.defaultProps = {
+  comments: '',
+  temperature: '',
+};
 
 export default withStyles(extendedFormsStyle)(Refrigeration);
