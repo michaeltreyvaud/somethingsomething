@@ -4,15 +4,10 @@ import Business from '@material-ui/icons/Business';
 import SettingsApplications from '@material-ui/icons/SettingsApplications';
 import Assignment from '@material-ui/icons/Assignment';
 import AcUnit from '@material-ui/icons/AcUnit';
-import Whatshot from '@material-ui/icons/Whatshot';
 import Fastfood from '@material-ui/icons/Fastfood';
-import FastForward from '@material-ui/icons/FastForward';
-import RoomService from '@material-ui/icons/RoomService';
 import DirectionsCar from '@material-ui/icons/DirectionsCar';
 import Colorize from '@material-ui/icons/Colorize';
 import LocalDrink from '@material-ui/icons/LocalDrink';
-import Timeline from '@material-ui/icons/Timeline';
-import Description from '@material-ui/icons/Description';
 
 import Metrics from '../../Views/Home/Metrics';
 import Company from '../../Views/Company/company.container';
@@ -82,22 +77,6 @@ import FoodItem from '../../Views/FoodItem/foodItem.container';
 import FoodItemCreate from '../../Views/FoodItem/Create/create.container';
 import FoodItemUpdate from '../../Views/FoodItem/Update/update.container';
 
-import HotHolding from '../../Views/HotHolding/hotHolding.container';
-import HotHoldingCreate from '../../Views/HotHolding/Create/create.container';
-import HotHoldingUpdate from '../../Views/HotHolding/Update/update.container';
-
-import FastCooling from '../../Views/FastCooling/fastCooling.container';
-import FastCoolingCreate from '../../Views/FastCooling/Create/create.container';
-import FastCoolingUpdate from '../../Views/FastCooling/Update/update.container';
-
-import Service from '../../Views/Service/services.container';
-import ServiceCreate from '../../Views/Service/Create/create.container';
-import ServiceUpdate from '../../Views/Service/Update/update.container';
-
-// import ColdHotLocation from '../../Views/Transport/TransportLocation';
-// import ColdHotTransportLog from '../../Views/Transport/TransportLog';
-// import ColdHotTransportCreate from '../../Views/Transport/TransportLog/Create';
-
 import DeliveryRecords from '../../Views/Traceability/DeliveryRecords';
 import DeliveryRecordsCreate from '../../Views/Traceability/DeliveryRecords/Create';
 import TraceabilityLabels from '../../Views/Traceability/TraceabilityLabels';
@@ -115,10 +94,6 @@ import CleaningTask from '../../Views/Cleaning/CleaningTask/cleaningTask';
 import CleaningTaskCreate from '../../Views/Cleaning/CleaningTask/Create/create';
 import CleaningLog from '../../Views/Cleaning/CleaningLog/cleaningLog.container';
 import CleaningLogCreate from '../../Views/Cleaning/CleaningLog/Create/create.container';
-
-import SafetySheet from '../../Views/SafetySheet/safety.container';
-import SafetySheetCreate from '../../Views/SafetySheet/Create/create.container';
-import SafetySheetUpdate from '../../Views/SafetySheet/Update/update.container';
 
 const dashRoutes = [
   {
@@ -452,89 +427,6 @@ const dashRoutes = [
     ],
   },
   {
-    path: '/dashboard/hotholding',
-    name: 'Hot Holding',
-    state: '',
-    icon: Whatshot,
-    component: HotHolding,
-    views: [
-      {
-        path: '/dashboard/hotholding/create',
-        name: 'Create Item',
-        component: HotHoldingCreate,
-      },
-      {
-        path: '/dashboard/hotholding/:id',
-        name: 'Hot Holding Item',
-        component: HotHoldingUpdate,
-      },
-    ],
-  },
-  {
-    path: '/dashboard/fastcooling',
-    name: 'Cook/Chill',
-    state: 'openFastCooling',
-    icon: FastForward,
-    component: FastCooling,
-    views: [
-      {
-        path: '/dashboard/fastcooling/create',
-        name: 'Create Item',
-        component: FastCoolingCreate,
-      },
-      {
-        path: '/dashboard/fastcooling/:id',
-        name: 'Fast Cooling Item',
-        component: FastCoolingUpdate,
-      },
-    ],
-  },
-  {
-    path: '/dashboard/service',
-    name: 'Service',
-    state: 'openService',
-    icon: RoomService,
-    component: Service,
-    views: [
-      {
-        hidden: true,
-        path: '/dashboard/service/create',
-        name: 'Capture Service Temperature',
-        component: ServiceCreate,
-      },
-      {
-        path: '/dashboard/service/:id',
-        name: 'Services Item',
-        component: ServiceUpdate,
-      },
-    ],
-  },
-  // {
-  //   collapse: true,
-  //   path: '/dashboard/hotcold',
-  //   name: 'Cold/Hot Chain',
-  //   state: 'openColdHot',
-  //   icon: Voicemail,
-  //   views: [
-  //     {
-  //       path: '/dashboard/transport/location',
-  //       name: 'Location',
-  //       component: ColdHotLocation,
-  //     },
-  //     {
-  //       path: '/dashboard/transport/log',
-  //       name: 'Transport Log',
-  //       component: ColdHotTransportLog,
-  //     },
-  //     {
-  //       hidden: true,
-  //       path: '/dashboard/transport/create',
-  //       name: 'Create Transport Log',
-  //       component: ColdHotTransportCreate,
-  //     },
-  //   ],
-  // },
-  {
     collapse: true,
     path: '/dashboard/traceability',
     name: 'Delivery Records',
@@ -619,7 +511,7 @@ const dashRoutes = [
         path: '/dashboard/cleaning/item/:id',
         name: 'Item Create',
         component: CleaningUpdate,
-      },      
+      },
       {
         path: '/dashboard/cleaning/task',
         name: 'Task',
@@ -641,27 +533,6 @@ const dashRoutes = [
         path: '/dashboard/cleaning/log/create',
         name: 'Create',
         component: CleaningLogCreate,
-      },
-    ],
-  },
-  {
-    path: '/dashboard/safetysheet',
-    name: 'Chemical Safety',
-    state: 'openSafetySheet',
-    icon: Description,
-    component: SafetySheet,
-    views: [
-      {
-        hidden: true,
-        path: '/dashboard/safetysheet/create',
-        name: 'Create Safety Datasheet',
-        component: SafetySheetCreate,
-      },
-      {
-        hidden: true,
-        path: '/dashboard/safetysheet/:id',
-        name: 'Update Datasheet',
-        component: SafetySheetUpdate,
       },
     ],
   },

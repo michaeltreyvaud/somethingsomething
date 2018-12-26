@@ -13,11 +13,7 @@ import freezerReducer from './Reducers/Freezer';
 import fridgeReducer from './Reducers/Fridge';
 import managementReducer from './Reducers/Management';
 import foodItemReducer from './Reducers/FoodItem';
-import hotHoldingReducer from './Reducers/HotHolding';
-import fastCoolingReducer from './Reducers/FastCooling';
 import userReducer from './Reducers/User';
-import safetyReducer from './Reducers/Safety';
-import servicesReducer from './Reducers/Services';
 import cleaningItemsReducer from './Reducers/Cleaning';
 import checklistReducer from './Reducers/Checklist';
 import safetyRecordReducer from './Reducers/SafetyRecord';
@@ -37,11 +33,7 @@ const appReducers = combineReducers({
   freezer: freezerReducer,
   management: managementReducer,
   foodItem: foodItemReducer,
-  hotHolding: hotHoldingReducer,
-  fastCooling: fastCoolingReducer,
   user: userReducer,
-  safety: safetyReducer,
-  services: servicesReducer,
   cleaningItem: cleaningItemsReducer,
   checklist: checklistReducer,
   safetyrecord: safetyRecordReducer,

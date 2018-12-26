@@ -10,9 +10,9 @@ import FormControl from '@material-ui/core/FormControl';
 import CustomInput from '../../../../Components/CustomInput';
 import extendedFormsStyle from '../../../../Assets/Jss/extendedFormsStyle';
 
-const initialState = { selectedLocation: '' };
+const initialState = { selectedChemical: '' };
 
-class Pest extends Component {
+class Chemical extends Component {
   constructor(props) {
     super(props);
     this.state = initialState;
@@ -21,21 +21,21 @@ class Pest extends Component {
   selectValue(e) {
     const { target } = e;
     const { value } = target;
-    const { locations, setRecordValue } = this.props;
-    this.setState({ selectedLocation: value });
-    return setRecordValue('location', {
-      id: locations[value].id,
-      displayName: locations[value].name,
+    const { chemicalList, setRecordValue } = this.props;
+    this.setState({ selectedChemical: value });
+    return setRecordValue('chemical', {
+      id: chemicalList[value].id,
+      displayName: chemicalList[value].name,
     });
   }
 
-  renderLocations() {
-    const { locations: items, classes } = this.props;
+  renderChemicals() {
+    const { chemicalList: items, classes } = this.props;
     return items.map((item, index) => (
       <MenuItem
         key={`${item.name}${item.id}`}
         classes={{ root: classes.selectMenuItem, selected: classes.selectMenuItemSelected }}
-        id="location"
+        id="chemical"
         value={index}
       >
         {item.name}
@@ -45,24 +45,24 @@ class Pest extends Component {
   render() {
     const { classes, setRecordValue, record } = this.props;
     const { comment } = record;
-    const { selectedLocation } = this.state;
+    const { selectedChemical } = this.state;
     return (
       <div>
         <FormControl fullWidth className={classes.selectFormControl}>
           <InputLabel htmlFor="simple-select" className={classes.selectLabel}>
-            Location
+            Chemical
           </InputLabel>
           <Select
             MenuProps={{ className: classes.selectMenu }}
             classes={{ select: classes.select }}
             onChange={e => this.selectValue(e)}
-            value={selectedLocation}
-            inputProps={{ name: 'location' }}
+            value={selectedChemical}
+            inputProps={{ name: 'chemical' }}
           >
-            {this.renderLocations()}
+            {this.renderChemicals()}
           </Select>
         </FormControl>
-        {selectedLocation !== '' && (
+        {selectedChemical !== '' && (
           <CustomInput
             value={comment}
             labelText="Comment"
@@ -76,11 +76,11 @@ class Pest extends Component {
   }
 }
 
-Pest.propTypes = {
+Chemical.propTypes = {
   classes: PropTypes.object.isRequired,
   setRecordValue: PropTypes.func.isRequired,
   record: PropTypes.object.isRequired,
-  locations: PropTypes.array.isRequired,
+  chemicalList: PropTypes.array.isRequired,
 };
 
-export default withStyles(extendedFormsStyle)(Pest);
+export default withStyles(extendedFormsStyle)(Chemical);

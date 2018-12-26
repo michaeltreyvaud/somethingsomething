@@ -21,12 +21,16 @@ const recordTypes = [
     type: 'hotHold',
   },
   {
-    displayName: 'General',
-    type: 'general',
-  },
-  {
     displayName: 'Pest',
     type: 'pest',
+  },
+  {
+    displayName: 'Chemical',
+    type: 'chemical',
+  },
+  {
+    displayName: 'General',
+    type: 'general',
   },
 ];
 
@@ -142,6 +146,22 @@ const locations = [
   },
 ];
 
+//  TODO: fix this
+const chemicalList = [
+  {
+    id: 'some-id-1',
+    name: 'Chemical 1',
+  },
+  {
+    id: 'some-id-2',
+    name: 'Chemical 2',
+  },
+  {
+    id: 'some-id-3',
+    name: 'Chemical 3',
+  },
+];
+
 const mapStateToProps = state => ({
   loading: state.records.create.loading,
   success: state.records.create.success,
@@ -154,6 +174,7 @@ const mapStateToProps = state => ({
   freezerItems,
   chillDisplayItems,
   locations,
+  chemicalList,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -10,10 +10,6 @@ import { listFoodItems } from '../Views/FoodItem/Store/Actions';
 import { listSuppliers } from '../Views/Management/Suppliers/Store/Actions';
 import { listMedicalLogs } from '../Views/User/MedicalLog/Store/Actions';
 import { listTrainingLogs } from '../Views/User/TrainingLog/Store/Actions';
-import { listHotHoldings } from '../Views/HotHolding/Store/Actions';
-import { listFastCoolings } from '../Views/FastCooling/Store/Actions';
-import { listSafetys } from '../Views/SafetySheet/Store/Actions';
-import { listServices } from '../Views/Service/Store/Actions';
 import { listCleaningItems } from '../Views/Cleaning/Cleaning/Store/Actions';
 import { listCleaningLogs } from '../Views/Cleaning/CleaningLog/Store/Actions';
 import { listChecklistCategory } from '../Views/CheckList/Category/Store/Actions';
@@ -36,10 +32,6 @@ const mapDispatchToProps = dispatch => ({
   listSuppliers: () => dispatch(listSuppliers()),
   listMedicalLogs: () => dispatch(listMedicalLogs()),
   listTrainingLogs: () => dispatch(listTrainingLogs()),
-  listHotHoldings: () => dispatch(listHotHoldings()),
-  listFastCoolings: () => dispatch(listFastCoolings()),
-  listSafetys: () => dispatch(listSafetys()),
-  listServices: () => dispatch(listServices()),
   listCleaningItems: () => dispatch(listCleaningItems()),
   listCleaningLogs: () => dispatch(listCleaningLogs()),
   listChecklistCategory: () => dispatch(listChecklistCategory()),
