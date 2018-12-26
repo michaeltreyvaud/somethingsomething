@@ -36,8 +36,7 @@ class Records extends Component {
   }
 
   componentDidMount() {
-    const { listFoodItems } = this.props;
-    listFoodItems();
+    console.log('List Items here');
   }
 
   showDeleteModal(createdAt, index) {
@@ -184,7 +183,6 @@ Records.propTypes = {
   classes: PropTypes.object.isRequired,
   items: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
-  listFoodItems: PropTypes.func.isRequired,
 };
 
 export default withRouter(withStyles(style)(Records));
