@@ -4,6 +4,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Assignment from '@material-ui/icons/Assignment';
 import { withRouter } from 'react-router';
 import moment from 'moment';
+import shortid from 'shortid';
 
 import Print from '@material-ui/icons/Print';
 import Open from '@material-ui/icons/OpenInNew';
@@ -50,10 +51,7 @@ class Records extends Component {
   showDeleteModal(createdAt, index) {
     this.setState({
       displayDeleteModal: true,
-      selectedDeleteItem: {
-        createdAt,
-        index,
-      },
+      selectedDeleteItem: { createdAt, index },
     });
   }
 
@@ -64,28 +62,36 @@ class Records extends Component {
     });
   }
 
-  renderRecordTypes() {
-    const { recordTypes: items, classes } = this.props;
-    return items.map((item, index) => (
-      <MenuItem
-        key={`${item}${index}`}
-        classes={{ root: classes.selectMenuItem, selected: classes.selectMenuItemSelected }}
-        id="recordType"
-        value={item.type}
-      >
-        {item.displayName}
-      </MenuItem>));
+  formatItem(itemFormat, item) {
+    const formattedItem = [];
+    Object.keys(itemFormat).forEach((key) => {
+      let value;
+      switch (itemFormat[key].type) {
+        case 'date': {
+          value = moment(item[itemFormat[key].value]).format(itemFormat[key].format);
+          break;
+        }
+        case 'object': {
+          value = item[itemFormat[key].value][itemFormat[key].property];
+          break;
+        }
+        case 'boolean': {
+          value = item[itemFormat[key].value].toString();
+          break;
+        }
+        default: {
+          value = item[itemFormat[key].value];
+        }
+      }
+      formattedItem.push(value);
+    });
+    formattedItem.push(this.renderActions(item));
+    return formattedItem;
   }
 
-  render() {
-    const {
-      classes, items, loading, history,
-      recordType, setRecordType,
-    } = this.props;
-    const {
-      displayDeleteModal, selectedDeleteItem,
-    } = this.state;
-    const simpleButtons = (item, index) => [
+  renderActions(item) {
+    const { classes, history } = this.props;
+    const actions = [
       { color: 'warning', icon: Print, tooltip: 'Print' },
       { color: 'success', icon: Open, tooltip: 'Edit' },
       { color: 'danger', icon: Delete, tooltip: 'Delete' },
@@ -93,16 +99,14 @@ class Records extends Component {
       let onClick;
       switch (key) {
         case 1: {
-          onClick = () => history.push(`/dashboard/records/${item.createdAt}`);
+          onClick = () => history.push(`/dashboard/records/${item.id}`);
           break;
         }
         case 2: {
-          onClick = () => this.showDeleteModal(item.createdAt, index);
+          onClick = () => this.showDeleteModal(item.id);
           break;
         }
-        default: {
-          onClick = () => {};
-        }
+        default: onClick = () => {};
       }
       return (
         <Tooltip
@@ -122,11 +126,32 @@ class Records extends Component {
         </Tooltip>
       );
     });
-    const tableData = items.map((_item, index) => {
-      const item = [_item.name, _item.description, moment(_item.expiryDate).format('DD/MM/YYYY'),
-        moment(_item.createdAt).format('DD/MM/YYYY'), _item.batchNumber, simpleButtons(_item, index)];
-      return item;
-    });
+    return actions;
+  }
+
+  renderRecordTypes() {
+    const { recordTypes: items, classes } = this.props;
+    return Object.keys(items).map(key => (
+      <MenuItem
+        key={shortid.generate()}
+        classes={{ root: classes.selectMenuItem, selected: classes.selectMenuItemSelected }}
+        id="recordType"
+        value={items[key].type}
+      >
+        {items[key].displayName}
+      </MenuItem>));
+  }
+
+  render() {
+    const {
+      classes, items, loading, history,
+      recordType, setRecordType, recordTypes,
+    } = this.props;
+    const { displayDeleteModal, selectedDeleteItem } = this.state;
+    //  TODO: Get this generic
+    const headers = (recordType === '') ? [] : recordTypes[recordType].tableConfig.headers;
+    const itemFormat = (recordType === '') ? [] : recordTypes[recordType].tableConfig.itemFormat;
+    const formattedItems = items.map(item => this.formatItem(itemFormat, item));
     return (
       <div>
         <FoodItemDelete
@@ -167,14 +192,9 @@ class Records extends Component {
                 {!loading && items && items.length > 0 && (
                 <Table
                   hover
-                  tableHead={[
-                    'Name',
-                    'Description',
-                    'Expiry Date',
-                    'Created',
-                    'Batch Number',
-                  ]}
-                  tableData={tableData}
+                  tableHead={headers}
+                  tableData={formattedItems}
+                  //  TODO: generic
                   customCellClasses={[
                     classes.left,
                     classes.left,
@@ -183,7 +203,9 @@ class Records extends Component {
                     classes.left,
                     classes.right,
                   ]}
+                  //  TODO: generic
                   customClassesForCells={[0, 1, 2, 3, 4, 5]}
+                  //  TODO: generic
                   customHeadCellClasses={[
                     classes.left,
                     classes.left,
@@ -192,6 +214,7 @@ class Records extends Component {
                     classes.left,
                     classes.right,
                   ]}
+                  //  TODO: generic
                   customHeadClassesForCells={[0, 1, 2, 3, 4, 5]}
                 />
                 )}
