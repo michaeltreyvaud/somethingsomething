@@ -13,8 +13,16 @@ const recordTypes = [
     type: 'refrigeration',
   },
   {
-    displayName: 'Cooking/Cooling/Reheating',
-    type: 'cookingCoolingReheating',
+    displayName: 'Cooking',
+    type: 'cooking',
+  },
+  {
+    displayName: 'Cooling',
+    type: 'cooling',
+  },
+  {
+    displayName: 'Reheating',
+    type: 'reheating',
   },
   {
     displayName: 'Hot Hold',
