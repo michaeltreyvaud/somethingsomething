@@ -51,7 +51,11 @@ class Refrigeration extends Component {
       default:
     }
     this.setState({ selectedRefrigerationUnit: value });
-    return setRecordValue('refrigerationUnit', selectedObject);
+    return setRecordValue('refrigerationUnit', {
+      id: selectedObject.id,
+      //  TODO - fix name - should be displayName
+      displayName: selectedObject.name,
+    });
   }
 
   renderRefrigerationTypes() {
