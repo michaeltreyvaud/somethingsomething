@@ -10,6 +10,11 @@ import Open from '@material-ui/icons/OpenInNew';
 import Delete from '@material-ui/icons/Delete';
 import Tooltip from '@material-ui/core/Tooltip';
 
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+
 import GridContainer from '../../Components/Grid/GridContainer';
 import GridItem from '../../Components/Grid/GridItem';
 import Card from '../../Components/Card/Card';
@@ -26,17 +31,20 @@ import style from '../../Assets/Jss/extendedTablesStyle';
 
 const FoodItemDelete = () => (<h1>TODO</h1>);
 
+const initialState = {
+  displayDeleteModal: false,
+  selectedDeleteItem: {},
+};
+
 class Records extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      displayDeleteModal: false,
-      selectedDeleteItem: {},
-    };
+    this.state = initialState;
   }
 
   componentDidMount() {
-    console.log('List Items here');
+    const { list, recordType } = this.props;
+    list(recordType);
   }
 
   showDeleteModal(createdAt, index) {
@@ -56,9 +64,23 @@ class Records extends Component {
     });
   }
 
+  renderRecordTypes() {
+    const { recordTypes: items, classes } = this.props;
+    return items.map((item, index) => (
+      <MenuItem
+        key={`${item}${index}`}
+        classes={{ root: classes.selectMenuItem, selected: classes.selectMenuItemSelected }}
+        id="recordType"
+        value={item.type}
+      >
+        {item.displayName}
+      </MenuItem>));
+  }
+
   render() {
     const {
       classes, items, loading, history,
+      recordType, setRecordType,
     } = this.props;
     const {
       displayDeleteModal, selectedDeleteItem,
@@ -129,6 +151,19 @@ class Records extends Component {
                 </Button>
               </CardHeader>
               <CardBody>
+                <FormControl fullWidth className={classes.selectFormControl}>
+                  <InputLabel htmlFor="simple-select" className={classes.selectLabel}>
+                    Record Type
+                  </InputLabel>
+                  <Select
+                    MenuProps={{ className: classes.selectMenu }}
+                    classes={{ select: classes.select }}
+                    value={recordType}
+                    onChange={e => setRecordType(e.target.value)}
+                  >
+                    {this.renderRecordTypes()}
+                  </Select>
+                </FormControl>
                 {!loading && items && items.length > 0 && (
                 <Table
                   hover
@@ -183,6 +218,10 @@ Records.propTypes = {
   classes: PropTypes.object.isRequired,
   items: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
+  recordType: PropTypes.string.isRequired,
+  recordTypes: PropTypes.array.isRequired,
+  setRecordType: PropTypes.func.isRequired,
+  list: PropTypes.func.isRequired,
 };
 
 export default withRouter(withStyles(style)(Records));

@@ -7,7 +7,7 @@ import extendedFormsStyle from '../../../../Assets/Jss/extendedFormsStyle';
 
 const General = (props) => {
   const { setRecordValue, record } = props;
-  const { name, comment } = record;
+  const { name, comments } = record;
   return (
     <div>
       <CustomInput
@@ -18,11 +18,11 @@ const General = (props) => {
         onChange={e => setRecordValue('name', e.target.value)}
       />
       <CustomInput
-        value={comment}
-        labelText="Comment"
+        value={comments}
+        labelText="Comments"
         formControlProps={{ fullWidth: true }}
         inputProps={{ multiline: true, rows: 3 }}
-        onChange={e => setRecordValue('comment', e.target.value)}
+        onChange={e => setRecordValue('comments', e.target.value)}
       />
     </div>
   );

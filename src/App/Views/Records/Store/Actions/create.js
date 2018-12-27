@@ -2,8 +2,8 @@ import {
   RECORD_CREATE_ATTEMPT,
   RECORD_CREATE_SUCCESS,
   RECORD_CREATE_FAIL,
-  RECORD_SET_VALUE,
-  RECORD_RESET,
+  RECORD_CREATE_SET_VALUE,
+  RECORD_CREATE_RESET,
 } from '../ActionTypes';
 import { sessionTimeout } from '../../../../Routing/Store/Actions';
 import { AuthenticatedFetch } from '../../../../Util/fetch';
@@ -45,8 +45,8 @@ export const create = item => async (dispatch) => {
 };
 
 export const setRecordValue = (key, value) => ({
-  type: RECORD_SET_VALUE,
+  type: RECORD_CREATE_SET_VALUE,
   payload: { key, value },
 });
 
-export const resetRecord = () => ({ type: RECORD_RESET });
+export const resetRecord = () => ({ type: RECORD_CREATE_RESET });

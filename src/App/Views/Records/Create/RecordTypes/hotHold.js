@@ -66,12 +66,14 @@ class HotHold extends Component {
         </FormControl>
         {selectedFoodItem !== '' && (
           <div>
+            <InputLabel className={classes.label}>
+              Time Into Hot Hold
+            </InputLabel>
             <FormControl fullWidth>
               <Datetime
                 value={moment(timeIntoHold || '')}
                 dateFormat="DD/MM/YYYY"
-                timeFormat={false}
-                inputProps={{ placeholder: 'Time Into Hot Hold' }}
+                inputProps={{ placeholder: 'Select Time' }}
                 onChange={date => setRecordValue('timeIntoHold', date.valueOf())}
               />
             </FormControl>

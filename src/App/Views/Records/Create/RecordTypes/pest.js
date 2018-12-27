@@ -44,7 +44,7 @@ class Pest extends Component {
 
   render() {
     const { classes, setRecordValue, record } = this.props;
-    const { comment } = record;
+    const { comments } = record;
     const { selectedLocation } = this.state;
     return (
       <div>
@@ -64,11 +64,11 @@ class Pest extends Component {
         </FormControl>
         {selectedLocation !== '' && (
           <CustomInput
-            value={comment}
-            labelText="Comment"
+            value={comments}
+            labelText="Comments"
             formControlProps={{ fullWidth: true }}
             inputProps={{ multiline: true, rows: 3 }}
-            onChange={e => setRecordValue('comment', e.target.value)}
+            onChange={e => setRecordValue('comments', e.target.value)}
           />
         )}
       </div>
