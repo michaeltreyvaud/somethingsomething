@@ -3,6 +3,8 @@ import {
   RECORD_LIST_ATTEMPT,
   RECORD_LIST_SUCCESS,
   RECORD_LIST_FAIL,
+
+  RECORD_DELETE_SUCCESS,
 } from '../ActionTypes';
 
 const initialState = {
@@ -11,7 +13,7 @@ const initialState = {
   errorMessage: '',
   success: false,
   recordType: '',
-  items: [],
+  Items: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -19,7 +21,7 @@ const reducer = (state = initialState, action) => {
     case RECORD_LIST_SET_TYPE: {
       const { payload } = action;
       const { recordType } = payload;
-      return { ...state, recordType };
+      return { ...initialState, recordType };
     }
     case RECORD_LIST_ATTEMPT: {
       return {
@@ -28,20 +30,23 @@ const reducer = (state = initialState, action) => {
         error: false,
         errorMessage: '',
         success: false,
-        items: [],
       };
     }
     case RECORD_LIST_SUCCESS: {
       const { response } = action.payload;
-      //  TODO - store the next key etc for pagination
       const { Items } = response;
+      const reducedItems = {};
+      state.Items.reduce((map, item) => map[item.id] = item, reducedItems);  //  eslint-disable-line
+      Items.reduce((map, item) => map[item.id] = item, reducedItems);  //  eslint-disable-line
+      const combinedItemList = Object.keys(reducedItems).map(key => reducedItems[key]);
       return {
         ...state,
         loading: false,
         error: false,
         errorMessage: '',
         success: true,
-        items: Items,
+        ...response,
+        Items: combinedItemList,
       };
     }
     case RECORD_LIST_FAIL: {
@@ -52,7 +57,13 @@ const reducer = (state = initialState, action) => {
         error: true,
         errorMessage: message,
         success: false,
-        items: [],
+      };
+    }
+    case RECORD_DELETE_SUCCESS: {
+      const { id } = action.payload;
+      return {
+        ...state,
+        Items: state.Items.filter(item => item.id !== id),
       };
     }
     default: {

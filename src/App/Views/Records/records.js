@@ -26,11 +26,9 @@ import Button from '../../Components/CustomButtons';
 import Table from '../../Components/Table';
 import LoadingTable from '../../Components/Loading/LoadingTable';
 
-//import FoodItemDelete from './Delete/delete.container';
+import FoodItemDelete from './Delete';
 
 import style from '../../Assets/Jss/extendedTablesStyle';
-
-const FoodItemDelete = () => (<h1>TODO</h1>);
 
 const initialState = {
   displayDeleteModal: false,
@@ -48,10 +46,10 @@ class Records extends Component {
     list(recordType);
   }
 
-  showDeleteModal(createdAt, index) {
+  showDeleteModal(item) {
     this.setState({
       displayDeleteModal: true,
-      selectedDeleteItem: { createdAt, index },
+      selectedDeleteItem: item,
     });
   }
 
@@ -60,6 +58,11 @@ class Records extends Component {
       displayDeleteModal: false,
       selectedDeleteItem: {},
     });
+  }
+
+  showMore() {
+    const { listMore, recordType, next } = this.props;
+    return listMore(recordType, next);
   }
 
   formatItem(itemFormat, item) {
@@ -103,7 +106,7 @@ class Records extends Component {
           break;
         }
         case 2: {
-          onClick = () => this.showDeleteModal(item.id);
+          onClick = () => this.showDeleteModal(item);
           break;
         }
         default: onClick = () => {};
@@ -146,6 +149,7 @@ class Records extends Component {
     const {
       classes, items, loading, history,
       recordType, setRecordType, recordTypes,
+      next,
     } = this.props;
     const { displayDeleteModal, selectedDeleteItem } = this.state;
     //  TODO: Get this generic
@@ -227,6 +231,10 @@ class Records extends Component {
                   </div>
                 )}
                 <LoadingTable visible={loading} color="red" />
+                {next && (
+                  <Button loading={loading} onClick={() => this.showMore()} color="rose" className={classes.updateProfileButton}>
+                    View More
+                  </Button>)}
               </CardBody>
             </Card>
           </GridItem>
@@ -245,6 +253,8 @@ Records.propTypes = {
   recordTypes: PropTypes.array.isRequired,
   setRecordType: PropTypes.func.isRequired,
   list: PropTypes.func.isRequired,
+  listMore: PropTypes.func.isRequired,
+  next: PropTypes.any.isRequired,
 };
 
 export default withRouter(withStyles(style)(Records));

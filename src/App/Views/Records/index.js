@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Records from './records';
-import { list, setRecordType } from './Store/Actions';
+import { list, listMore, setRecordType } from './Store/Actions';
 
 //  TODO - fetch these, should come from discovery
 const recordTypes = {
@@ -234,13 +234,15 @@ const recordTypes = {
 
 const mapStateToProps = state => ({
   loading: state.records.index.loading,
-  items: state.records.index.items,
+  items: state.records.index.Items,
   recordType: state.records.index.recordType,
   recordTypes,
+  next: state.records.index.LastEvaluatedKey,
 });
 
 const mapDispatchToProps = dispatch => ({
   list: recordType => dispatch(list(recordType)),
+  listMore: (recordType, next) => dispatch(listMore(recordType, next)),
   setRecordType: recordType => dispatch(setRecordType(recordType)),
 });
 

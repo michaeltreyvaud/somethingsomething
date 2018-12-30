@@ -24,13 +24,13 @@ const fail = message => ({
   payload: { message },
 });
 
-export const list = recordType => async (dispatch) => {
+export const list = (recordType, options) => async (dispatch) => {
   try {
     if (!recordType || recordType === '') return dispatch(success());
     //  Tell the layout we are doing something
     dispatch(dashboardLoading());
     dispatch(attempt());
-    const body = {};
+    const body = { ...options };
     //  TODO - fetch these
     const { REACT_APP_API_URL } = process.env;
     const url = `${REACT_APP_API_URL}/item/${recordType}/list`;
@@ -43,6 +43,8 @@ export const list = recordType => async (dispatch) => {
     return dispatch(fail(_err.message));
   }
 };
+
+export const listMore = (recordType, next) => async dispatch => dispatch(list(recordType, { from: next }));
 
 const selectedRecordType = recordType => ({
   type: RECORD_LIST_SET_TYPE,
