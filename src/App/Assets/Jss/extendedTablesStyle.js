@@ -1,7 +1,7 @@
 import { cardTitle } from './material-dashboard-pro-react';
 import buttonGroupStyle from './buttonGroupStyle';
 import customCheckboxRadioSwitch from './customCheckboxRadioSwitch';
-import buttonStyle from "./buttonStyle";
+import buttonStyle from './buttonStyle';
 
 const extendedTablesStyle = {
   ...customCheckboxRadioSwitch,
@@ -84,7 +84,7 @@ const extendedTablesStyle = {
     marginTop: '15px',
     marginBottom: '0px',
   },
-  ...buttonStyle
+  ...buttonStyle,
 };
 
 export default extendedTablesStyle;

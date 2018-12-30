@@ -5,7 +5,7 @@
 import { cardTitle } from './material-dashboard-pro-react';
 import customSelectStyle from './customSelectStyle';
 import customCheckboxRadioSwitch from './customCheckboxRadioSwitch';
-import buttonStyle from "./buttonStyle";
+import buttonStyle from './buttonStyle';
 
 const extendedFormsStyle = {
   ...customCheckboxRadioSwitch,
@@ -42,7 +42,7 @@ const extendedFormsStyle = {
     top: '-1px',
     position: 'relative',
   },
-  ...buttonStyle
+  ...buttonStyle,
 };
 
 export default extendedFormsStyle;

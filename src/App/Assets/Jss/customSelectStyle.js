@@ -1,10 +1,8 @@
 import {
   primaryColor,
   primaryBoxShadow,
-} from './material-dashboard-pro-react';
-import {
   defaultFont,
-} from '../../Assets/Jss/material-dashboard-pro-react';
+} from './material-dashboard-pro-react';
 
 const customSelectStyle = {
   select: {

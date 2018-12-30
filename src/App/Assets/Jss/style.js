@@ -1,7 +1,7 @@
 import { cardTitle } from './material-dashboard-pro-react';
 import customSelectStyle from './customSelectStyle';
 import customCheckboxRadioSwitch from './customCheckboxRadioSwitch';
-import buttonStyle from "./buttonStyle";
+import buttonStyle from './buttonStyle';
 
 const extendedFormsStyle = {
   ...customCheckboxRadioSwitch,
@@ -41,7 +41,7 @@ const extendedFormsStyle = {
     fontWeight: '400',
     display: 'inline-flex',
   },
-  ...buttonStyle
+  ...buttonStyle,
 };
 
 export default extendedFormsStyle;
