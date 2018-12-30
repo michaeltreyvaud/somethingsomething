@@ -1,12 +1,9 @@
-import LoginPage from '../../Views/Auth/Login/login.container';
-import ForgotPasswordPage from '../../Views/ForgotPassword/forgot.container';
-
 const Routes = [{
   path: '/auth/login',
-  component: LoginPage,
+  component: 'Login',
 }, {
   path: '/auth/forgot',
-  component: ForgotPasswordPage,
+  component: 'ForgotPassword',
 }];
 
 export default Routes;

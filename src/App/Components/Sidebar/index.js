@@ -12,9 +12,9 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Hidden from '@material-ui/core/Hidden';
 import Collapse from '@material-ui/core/Collapse';
-import Icon from '@material-ui/core/Icon';
 
 import HeaderLinks from '../Header/HeaderLinks';
+import Icons from '../../Util/icons';
 
 import style from './style';
 
@@ -65,6 +65,7 @@ class Sidebar extends React.Component {
       miniActive: true,
     };
     this.activeRoute.bind(this);
+    this.iconProps = {};
   }
 
   activeRoute(routeName) {
@@ -82,6 +83,10 @@ class Sidebar extends React.Component {
   openCollapse(collapse) {
     const st = { [collapse]: !this.state[collapse] };
     this.setState(st);
+  }
+
+  renderIcon(icon) {
+    return React.createElement(Icons[icon], this.iconProps, null);
   }
 
   render() {
@@ -129,7 +134,7 @@ class Sidebar extends React.Component {
                   onClick={() => this.openCollapse(prop.state)}
                 >
                   <ListItemIcon className={itemIcon}>
-                    {typeof prop.icon === 'string' ? (<Icon>{prop.icon}</Icon>) : (<prop.icon />)}
+                    {this.renderIcon(prop.icon)}
                   </ListItemIcon>
                   <ListItemText
                     primary={prop.name}
@@ -182,7 +187,7 @@ class Sidebar extends React.Component {
             <ListItem key={key} className={classes.item}>
               <NavLink to={prop.path} className={navLinkClasses}>
                 <ListItemIcon className={itemIcon}>
-                  {typeof prop.icon === 'string' ? (<Icon>{prop.icon}</Icon>) : (<prop.icon />)}
+                  {this.renderIcon(prop.icon)}
                 </ListItemIcon>
                 <ListItemText
                   primary={prop.name}

@@ -6,6 +6,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import pagesStyle from './style';
 import pagesRoutes from '../../Routing/Routes/auth';
 import PagesHeader from '../../Components/Header/PagesHeader';
+import Views from '../../Views';
 
 const noMatch = () => (<h1>Another no match</h1>);
 class Pages extends React.Component {
@@ -22,7 +23,7 @@ class Pages extends React.Component {
           <div className={classes.fullPage}>
             <Switch>
               {pagesRoutes.map((prop, key) => (
-                <Route exact path={prop.path} component={prop.component} key={key} />))}
+                <Route exact path={prop.path} component={Views[prop.component]} key={key} />))}
               <Route component={noMatch} />
             </Switch>
           </div>

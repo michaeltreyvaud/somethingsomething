@@ -16,24 +16,20 @@ import Footer from '../../Components/Footer';
 import Sidebar from '../../Components/Sidebar';
 import Snackbar from '../../Components/Snackbar/Snackbar';
 
+import Views from '../../Views';
+
 const TODO = () => (<h1>TODO</h1>);
 
 const switchRoutes = (
   <Switch>
     {dashboardRoutes.map((prop, key) => {
-      if (prop.collapse) {
-        return prop.views.map((_prop, _key) => (
-          <Route exact path={_prop.path} component={_prop.component} key={_key} />
-        ));
-      }
+      if (prop.collapse) return prop.views.map((_prop, _key) => (<Route exact path={_prop.path} component={Views[_prop.component]} key={_key} />));
       if (!prop.collapse && prop.views) {
-        const mapping = prop.views.map((_prop, _key) => (
-          <Route exact path={_prop.path} component={_prop.component} key={_key} />
-        ));
-        mapping.push(<Route exact path={prop.path} component={prop.component} key={key} />);
+        const mapping = prop.views.map((_prop, _key) => (<Route exact path={_prop.path} component={Views[_prop.component]} key={_key} />));
+        mapping.push(<Route exact path={prop.path} component={Views[prop.component]} key={key} />);
         return mapping;
       }
-      return <Route exact path={prop.path} component={prop.component} key={key} />;
+      return <Route exact path={prop.path} component={Views[prop.component]} key={key} />;
     })}
     <Route component={TODO} />
   </Switch>
@@ -41,13 +37,15 @@ const switchRoutes = (
 
 let ps;
 
+const initialState = {
+  mobileOpen: false,
+  miniActive: false,
+};
+
 class Dashboard extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      mobileOpen: false,
-      miniActive: false,
-    };
+    this.state = initialState;
     this.resizeFunction = this.resizeFunction.bind(this);
     const { isAuthenticated, history } = props;
     if (!isAuthenticated) history.push('/auth/login');
@@ -77,20 +75,11 @@ class Dashboard extends Component {
   }
 
   componentDidUpdate(e) {
-    if (e.history.location.pathname !== e.location.pathname) {
-      this.refs.mainPanel.scrollTop = 0;
-      //  wtf is this bollox?
-      // const { mobileOpen } = this.state;
-      // if (mobileOpen) {
-      //   this.setState({ mobileOpen: false });
-      // }
-    }
+    if (e.history.location.pathname !== e.location.pathname)  this.refs.mainPanel.scrollTop = 0;
   }
 
   componentWillUnmount() {
-    if (navigator.platform.indexOf('Win') > -1) {
-      ps.destroy();
-    }
+    if (navigator.platform.indexOf('Win') > -1) ps.destroy();
     window.removeEventListener('resize', this.resizeFunction);
   }
 
@@ -105,9 +94,7 @@ class Dashboard extends Component {
   }
 
   resizeFunction() {
-    if (window.innerWidth >= 960) {
-      this.setState({ mobileOpen: false });
-    }
+    if (window.innerWidth >= 960) this.setState({ mobileOpen: false });
   }
 
   hideSuccessMessage() {
@@ -171,7 +158,9 @@ class Dashboard extends Component {
             {...rest}
           />
           <div className={classes.content}>
-            <div className={classes.container}>{switchRoutes}</div>
+            <div className={classes.container}>
+              {switchRoutes}
+            </div>
           </div>
           <Footer fluid />
         </div>
