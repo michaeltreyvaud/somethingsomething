@@ -1,5 +1,6 @@
 import Records from './Records';
 import RecordsCreate from './Records/Create';
+import RecordsUpdate from './Records/Update';
 
 import Metrics from './Home/Metrics';
 import Company from './Company';
@@ -92,6 +93,7 @@ export default {
   Company,
   Records,
   RecordsCreate,
+  RecordsUpdate,
   ManagementUsers,
   ManagementUsersCreate,
   ManagementUsersUpdate,

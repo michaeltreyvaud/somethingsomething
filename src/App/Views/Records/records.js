@@ -102,7 +102,7 @@ class Records extends Component {
       let onClick;
       switch (key) {
         case 1: {
-          onClick = () => history.push(`/dashboard/records/${item.id}`);
+          onClick = () => history.push(`/dashboard/records/${item.type}/${item.createdAt}`);
           break;
         }
         case 2: {

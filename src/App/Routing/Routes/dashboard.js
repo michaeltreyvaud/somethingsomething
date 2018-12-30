@@ -11,6 +11,12 @@ const dashRoutes = [
         name: 'Create Record',
         component: 'RecordsCreate',
       },
+      {
+        hidden: true,
+        path: '/dashboard/records/:type/:createdAt',
+        name: 'Update Record',
+        component: 'RecordsUpdate',
+      },
     ],
   },
   // Main Navigation

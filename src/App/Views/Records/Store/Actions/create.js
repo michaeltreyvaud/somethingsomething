@@ -29,9 +29,10 @@ export const create = item => async (dispatch) => {
     dispatch(dashboardLoading());
     dispatch(attempt());
     const body = item;
+    const { type } = body;
     //  TODO - fetch these
     const { REACT_APP_API_URL } = process.env;
-    const url = `${REACT_APP_API_URL}/item/fooddelivery/create`;
+    const url = `${REACT_APP_API_URL}/item/${type}/create`;
     const response = await AuthenticatedFetch(url, body);
     //  Display success message
     dispatch(showDashBoardSuccess('Item Created'));
