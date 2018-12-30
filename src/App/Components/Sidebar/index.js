@@ -108,7 +108,7 @@ class Sidebar extends React.Component {
           if (prop.hidden) return null;
           if (prop.redirect) return null;
           if (prop.collapse) {
-            const navLinkClasses = `${classes.itemLink} ${cx({ [` ${classes.collapseActive}`]: this.activeRoute(prop.path) })}`;
+            let navLinkClasses = `${classes.itemLink} ${cx({ [` ${classes.collapseActive}`]: this.activeRoute(prop.path) })}`;
             const itemText = `${classes.itemText
             } ${
               cx({
@@ -148,10 +148,8 @@ class Sidebar extends React.Component {
                     {prop.views.map((_prop, _key) => {
                       if (_prop.hidden) return null;
                       if (_prop.redirect) return null;
-                      const navLinkClasses = `${classes.collapseItemLink
-                      } ${cx({ [` ${classes[color]}`]: this.activeRoute(_prop.path) })}`;
-                      const collapseItemMini = `${classes.collapseItemMini
-                      } ${cx({ [classes.collapseItemMiniRTL]: rtlActive })}`;
+                      navLinkClasses = `${classes.collapseItemLink} ${cx({ [` ${classes[color]}`]: this.activeRoute(_prop.path) })}`;
+                      const collapseItemMini = `${classes.collapseItemMini} ${cx({ [classes.collapseItemMiniRTL]: rtlActive })}`;
                       return (
                         <ListItem key={_key} className={classes.collapseItem}>
                           <NavLink to={_prop.path} className={navLinkClasses}>
@@ -172,17 +170,14 @@ class Sidebar extends React.Component {
               </ListItem>
             );
           }
-          const navLinkClasses = `${classes.itemLink
-          } ${cx({ [` ${classes[color]}`]: this.activeRoute(prop.path) })}`;
-          const itemText = `${classes.itemText
-          } ${
+          const navLinkClasses = `${classes.itemLink} ${cx({ [` ${classes[color]}`]: this.activeRoute(prop.path) })}`;
+          const itemText = `${classes.itemText} ${
             cx({
               [classes.itemTextMini]: propsMiniActive && stateMiniActive,
               [classes.itemTextMiniRTL]: rtlActive && propsMiniActive && stateMiniActive,
               [classes.itemTextRTL]: rtlActive,
             })}`;
-          const itemIcon = `${classes.itemIcon
-          } ${cx({ [classes.itemIconRTL]: rtlActive })}`;
+          const itemIcon = `${classes.itemIcon} ${cx({ [classes.itemIconRTL]: rtlActive })}`;
           return (
             <ListItem key={key} className={classes.item}>
               <NavLink to={prop.path} className={navLinkClasses}>
@@ -208,10 +203,8 @@ class Sidebar extends React.Component {
         [classes.logoNormalSidebarMiniRTL]: rtlActive && propsMiniActive && stateMiniActive,
         [classes.logoNormalRTL]: rtlActive,
       })}`;
-    const logoMini = `${classes.logoMini
-    } ${cx({ [classes.logoMiniRTL]: rtlActive })}`;
-    const logoClasses = `${classes.logo
-    } ${cx({[classes.whiteAfter]: bgColor === 'white' })}`;
+    const logoMini = `${classes.logoMini} ${cx({ [classes.logoMiniRTL]: rtlActive })}`;
+    const logoClasses = `${classes.logo} ${cx({ [classes.whiteAfter]: bgColor === 'white' })}`;
     const brand = (
       <div className={logoClasses}>
         <a href="#" className={logoMini}>
@@ -222,14 +215,12 @@ class Sidebar extends React.Component {
         </a>
       </div>
     );
-    const drawerPaper = `${classes.drawerPaper
-    } ${
+    const drawerPaper = `${classes.drawerPaper} ${
       cx({
         [classes.drawerPaperMini]: propsMiniActive && stateMiniActive,
         [classes.drawerPaperRTL]: rtlActive,
       })}`;
-    const sidebarWrapper = `${classes.sidebarWrapper
-    } ${
+    const sidebarWrapper = `${classes.sidebarWrapper} ${
       cx({
         [classes.drawerPaperMini]: propsMiniActive && stateMiniActive,
         [classes.sidebarWrapperWithPerfectScrollbar]:
@@ -267,21 +258,14 @@ class Sidebar extends React.Component {
             anchor={rtlActive ? 'right' : 'left'}
             variant="permanent"
             open
-            classes={{
-              paper: `${drawerPaper} ${classes[`${bgColor}Background`]}`,
-            }}
+            classes={{ paper: `${drawerPaper} ${classes[`${bgColor}Background`]}` }}
           >
             {brand}
             <SidebarWrapper
               className={sidebarWrapper}
               links={links}
             />
-            {image !== undefined ? (
-              <div
-                className={classes.background}
-                style={{ backgroundImage: `url(${image})` }}
-              />
-            ) : null}
+            {image !== undefined ? (<div className={classes.background} style={{ backgroundImage: `url(${image})` }} />) : null}
           </Drawer>
         </Hidden>
       </div>
