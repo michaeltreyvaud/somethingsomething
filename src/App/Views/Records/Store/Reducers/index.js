@@ -14,6 +14,7 @@ const initialState = {
   success: false,
   recordType: '',
   Items: [],
+  LastEvaluatedKey: undefined,
 };
 
 const reducer = (state = initialState, action) => {
@@ -34,19 +35,20 @@ const reducer = (state = initialState, action) => {
     }
     case RECORD_LIST_SUCCESS: {
       const { response } = action.payload;
-      const { Items } = response;
-      const reducedItems = {};
-      state.Items.reduce((map, item) => map[item.id] = item, reducedItems);  //  eslint-disable-line
-      Items.reduce((map, item) => map[item.id] = item, reducedItems);  //  eslint-disable-line
-      const combinedItemList = Object.keys(reducedItems).map(key => reducedItems[key]);
+      const { Items, LastEvaluatedKey } = response;
+      //  Convert existing and new results to object
+      //  Any conflicts will be overwritten with new values
+      const reducedItems = Items.reduce((map, item) => ({ ...map, [item.id]: item }),
+        state.Items.reduce((map, item) => ({ ...map, [item.id]: item }), {}));
+      const combinedItems = Object.keys(reducedItems).map(key => reducedItems[key]);
       return {
         ...state,
         loading: false,
         error: false,
         errorMessage: '',
         success: true,
-        ...response,
-        Items: combinedItemList,
+        Items: combinedItems,
+        LastEvaluatedKey,
       };
     }
     case RECORD_LIST_FAIL: {
