@@ -28,7 +28,13 @@ import LoadingTable from '../../Components/Loading/LoadingTable';
 
 import FoodItemDelete from './Delete';
 
-import style from '../../Assets/Jss/extendedTablesStyle';
+import extendedTablesStyle from '../../Assets/Jss/extendedTablesStyle';
+import extendedFormsStyle from '../../Assets/Jss/extendedFormsStyle';
+
+const combinedStyle = {
+  ...extendedTablesStyle,
+  ...extendedFormsStyle,
+};
 
 const initialState = {
   displayDeleteModal: false,
@@ -257,4 +263,4 @@ Records.propTypes = {
   next: PropTypes.any.isRequired,
 };
 
-export default withRouter(withStyles(style)(Records));
+export default withRouter(withStyles(combinedStyle)(Records));
